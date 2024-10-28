@@ -1,68 +1,98 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<link href="Css/AgregarCli.css" type="text/Css" rel="stylesheet"/>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+    <link href="Css/AgregarCli.css" type="text/css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alta de Cliente</title>
 </head>
 <body>
-	<nav>
-        <img src="img/png_logo.png" class="img_logo" alt="Logo UTN">
-        <h1>REGISTAR CLIENTE</h1>
+    <nav class="navbar">
+        <button class="hamburger" onclick="toggleSidebar()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </button>
+        <a href="Login.jsp">
+            <img src="img/png_logo.png" class="img_logo" alt="Logo UTN">
+        </a>
+        <span class="username">USUARIO XXXX</span>
     </nav>
-        <div class="container">
-        <h2>ALTA DE CLIENTE</h2>
-        <form action="login.jsp" method="post">
-            <label for="usuario">D.N.I</label>
-            <input type="text" id="DNI" name="DNI" placeholder="DNI" required >
-            
-            <label for="CUIL">CUIL</label>
-            <input type="CUIL" id="CUIL" name="CUIL" placeholder="CUIL" required >
-            
-            <label for="Nombre">Nombre</label>
-            <input type="text" id="Nombre" name="Nombre" placeholder="Nombre" required >
-            
-            <label for="Apellido">Apellido</label>
-            <input type="text" id="Apellido" name="Apellido" placeholder="Apellido" required >
 
-            <label for="genero">Género:</label>
-            <select id="genero" name="genero" required>
-            <option value="" disabled selected>Seleccione su género</option>
-            </select>
-            
-            <label for="Nacionalidad">Nacionalidad:</label>
-            <input type="text" id="Nacionalidad" name="Nacionalidad" placeholder="Nacionalidad" required >
-            
-            <label for="Fecha">Fecha de Nacimiento</label>
-            <input type="text" id="Fecha" name="Fecha" placeholder="AAAA/MM/DD" required >
-            
-            <label for="Dirección">Dirección</label>
-            <input type="text" id="Dirección" name="Dirección" placeholder="Dirección" required >
-            
-            <label for="Provincia">Provincia</label>
-            <select id="Provincia" name="Provincia" required>
-            <option value="" disabled selected>Seleccione su Provincia</option>
-            </select>
-            <label for="Localidad">Localidad</label>
-            <select id="Localidad" name="Localidad" required>
-            <option value="" disabled selected>Seleccione su Localidad</option>
-           </select>
-             <label for="Mail">Mail</label>
-            <input type="text" id="Mail" name="Mail" placeholder="Mail" required >
-            
- 			<label for="Telefono">Teléfono</label>
-            <input type="text" id="Teléfono" name="Teléfono" placeholder="Teléfono" required >
-            
-            <label for="Telefono2">Teléfono2</label>
-            <input type="text" id="Teléfono2" name="Teléfono2" placeholder="Teléfono2" required >
-            
-            <label for="Telefono"></label>
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <ul>
+                <li><a href="#">Clientes</a></li>
+                <li><a href="#">Cuentas</a></li>
+                <li><a href="#">Transacciones</a></li>
+                <li><a href="#">Reportes</a></li>
+                <li><a href="#">Ajustes</a></li>
+            </ul>
+        </aside>
 
-  <button type="submit">CANCELAR</button>  <button type="submit">ACEPTAR</button>
-        </form>
+        <div class="content">
+            <div class="form-card">
+                <h2>Alta de Cliente</h2>
+                <form>
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni" placeholder="DNI" required>
 
+                    <label for="cuil">CUIL</label>
+                    <input type="text" id="cuil" name="cuil" placeholder="CUIL" required>
+
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+
+                                <label for="genero">Género:</label>
+		            <select id="genero" name="genero" required>
+		            <option value="" disabled selected>Seleccione su género</option>
+		            </select>
+
+                    <label for="nacionalidad">Nacionalidad</label>
+                    <select id="nacionalidad" name="nacionalidad" required>
+
+                    </select>
+
+                    <label for="fecha-nacimiento">Fecha de Nacimiento</label>
+                    <input type="text" id="fecha-nacimiento" name="fecha-nacimiento" placeholder="YYYY/MM/DD" required>
+
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion" placeholder="Dirección" required>
+
+                    <label for="numero">Número</label>
+                    <input type="text" id="numero" name="numero" placeholder="Número" required>
+
+                    <label for="provincia">Provincia</label>
+                    <select id="provincia" name="provincia" required>
+                  
+                    </select>
+
+                    <label for="localidad">Localidad</label>
+                    <input type="text" id="localidad" name="localidad" placeholder="Localidad" required>
+
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
+
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" placeholder="Correo Electrónico" required>
+
+                    <div class="button-group">
+                        <button type="button" class="cancel-button">Cancelar</button>
+                        <button type="submit" class="submit-button">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
