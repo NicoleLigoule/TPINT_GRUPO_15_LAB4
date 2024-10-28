@@ -7,9 +7,8 @@
 
 body {
     background-color: #f5f5f5;
-    max-width: 800px; 
-    margin: 0 auto;
-    padding-top: 100px; 
+    margin: 0;
+    padding-top: 100px;
 }
 
 
@@ -19,24 +18,9 @@ body {
     display: flex;
     align-items: center;
     padding: 1rem;
-    justify-content: space-between;
     position: fixed;
     top: 0;
     z-index: 2;
-}
-
-.navbar .img_logo {
-    width: 60px;
-    height: 60px;
-    margin-left: auto; 
-}
-
-
-
-
-.navbar .username {
-    font-size: 1.2rem;
-    color: white;
 }
 
 .hamburger {
@@ -45,6 +29,7 @@ body {
     cursor: pointer;
     background: transparent;
     border: none;
+    margin-right: auto; 
 }
 
 .line {
@@ -54,12 +39,23 @@ body {
     margin: 3px 0;
 }
 
+.img_logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto; 
+}
+
+.username {
+    font-size: 1.2rem;
+    color: white;
+    margin-left: auto; 
+}
+
 .main-container {
     display: flex;
     justify-content: center;
     padding-top: 20px;
 }
-
 
 .sidebar {
     width: 250px; 
@@ -77,7 +73,6 @@ body {
 .sidebar.active {
     transform: translateX(0); 
 }
-
 
 .sidebar ul {
     list-style-type: none;
@@ -105,6 +100,7 @@ body {
     justify-content: center;
     padding: 20px;
 }
+
 .form-card {
     background-color: #fff;
     padding: 20px;
@@ -115,6 +111,7 @@ body {
     text-align: center;
     margin-top: 20px;
 }
+
 h2 {
     color: #333;
     margin-bottom: 20px;
