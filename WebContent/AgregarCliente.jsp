@@ -3,78 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link href="Css/AgregarCli.css" type="text/Css" rel="stylesheet"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<style>
-body {
-        background-color: #f5f5f5;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding-top: 60px; 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        box-sizing: border-box;
-    }
-    nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: #d69ecf;
-        padding: 15px 0;
-        text-align: center;
-        color: #d69ecf;
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-    }
-
-    nav img {
-        vertical-align: middle;
-        width: 40px;
-        height: auto;
-        margin-right: 10px;
-
-    }
-    .img_logo{
-     width: 60px;
-     height: 60px;
-  }
-      nav h1 {
-        display: inline;
-        font-size: 18px;
-        color: white;
-        margin: 0;
-    }
-    .container {
-        
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        width: 550px;
-        text-align: center;
-    }
-        label {
-        font-size: 14px;
-        color: #333;
-        text-align: left;
-        display: block;
-        margin-top: 10px;
-    }
-  button {
-        background-color: #333;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        width: 40%;
-        margin-top: 15px;
-    }
-   
-</style>
 </head>
 <body>
 	<nav>
@@ -105,7 +36,7 @@ body {
             <input type="text" id="Nacionalidad" name="Nacionalidad" placeholder="Nacionalidad" required >
             
             <label for="Fecha">Fecha de Nacimiento</label>
-            <input type="text" id="Fecha" name="Fecha" placeholder="DD/MM/AA" required >
+            <input type="text" id="Fecha" name="Fecha" placeholder="AAAA/MM/DD" required >
             
             <label for="Dirección">Dirección</label>
             <input type="text" id="Dirección" name="Dirección" placeholder="Dirección" required >

@@ -5,23 +5,26 @@
 <link href="Css/Login.css" type="text/Css" rel="stylesheet"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Nombre del Banco</title>
-<style>
-    
-</style>
+
 </head>
 <body>
     <nav>
-        <img src="img/png_logo.png" class="img_logo" alt="Logo UTN">
-        <h1>BANCO UTN</h1>
+        <div class="nav-content">
+            <a href="#Login.jsp">
+            	<img src="img/png_logo.png" class="img_logo" alt="Logo UTN">
+            </a>
+            
+            <h1>BANCO UTN</h1>
+        </div>
     </nav>
     <div class="container">
         <h2>Iniciar Sesión</h2>
         <form action="login.jsp" method="post">
             <label for="usuario">Usuario</label>
-            <input type="text" id="usuario" name="usuario" placeholder="Usuario" required >
+            <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
             
             <label for="contrasena">Contraseña</label>
-            <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required >
+            <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
             
             <button type="submit">Ingresar</button>
         </form>
@@ -31,4 +34,5 @@
         </div>
     </div>
 </body>
+
 </html>
