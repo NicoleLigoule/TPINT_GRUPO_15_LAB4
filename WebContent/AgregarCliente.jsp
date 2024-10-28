@@ -46,13 +46,14 @@
                     <label for="apellido">Apellido</label>
                     <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
 
-                                <label for="genero">Género:</label>
+                    <label for="genero">Género:</label>
 		            <select id="genero" name="genero" required>
 		            <option value="" disabled selected>Seleccione su género</option>
 		            </select>
 
                     <label for="nacionalidad">Nacionalidad</label>
                     <select id="nacionalidad" name="nacionalidad" required>
+                    <option value="" disabled selected>Seleccione su Nacionalidad</option>
 
                     </select>
 
@@ -67,11 +68,13 @@
 
                     <label for="provincia">Provincia</label>
                     <select id="provincia" name="provincia" required>
-                  
+                  	<option value="" disabled selected>Seleccione su Provincia</option>
                     </select>
 
                     <label for="localidad">Localidad</label>
-                    <input type="text" id="localidad" name="localidad" placeholder="Localidad" required>
+                    <select id="localidad"  name="localidad"  required>
+                    <option value="" disabled selected>Seleccione su Localidad</option>
+                    </select>
 
                     <label for="telefono">Teléfono</label>
                     <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
