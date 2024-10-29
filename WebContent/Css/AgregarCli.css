@@ -65,7 +65,7 @@ body {
     position: fixed;
     top: 80px; 
     left: 0;
-    transition: transform 0.3s ease;
+    transition: transform 1s ease;
     transform: translateX(-100%); 
     z-index: 1;
 }
