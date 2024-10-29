@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link href="Css/EditarCli.css" type="text/css" rel="stylesheet"/>
+    <link href="Css/AgregarCli.css" type="text/css" rel="stylesheet"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Editar Cliente</title>
 </head>
@@ -23,11 +23,40 @@
     <div class="main-container">
         <aside class="sidebar" id="sidebar">
             <ul>
-                <li><a href="#">Clientes</a></li>
-                <li><a href="#">Cuentas</a></li>
-                <li><a href="#">Transacciones</a></li>
-                <li><a href="#">Reportes</a></li>
-                <li><a href="#">Ajustes</a></li>
+                <li class="menu-item">
+                  <a href="#" onclick="toggleSubmenu(event)">Clientes</a>
+                    <ul class="submenu">
+                        <li> <a href="AgregarCliente.jsp">Agregar Cliente</a></li>
+                        <li> <a href="EliminarCliente.jsp">Baja Cliente</a></li>
+                        <li> <a href="#">Editar Cliente</a></li>
+                        <li> <a href="ListarCliente.jsp">Listar Cliente</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#" onclick="toggleSubmenu(event)">Cuentas</a>
+                    <ul class="submenu">
+                        <li> <a href="AgregarCuenta.jsp">Agregar Cuenta</a></li>
+                        <li> <a href="#">Baja Cuenta</a></li>
+                        <li> <a href="#">Editar Cuenta</a></li>
+                        <li> <a href="#">Listar Cuenta</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#" onclick="toggleSubmenu(event)">Transacciones</a>
+                    <!-- <ul class="submenu">
+                        <li> <a href="#">Registrar Transacción</a></li>
+                        <li> <a href="#">Ver Historial</a></li>
+                    </ul>
+                     -->
+                </li>
+                <li class="menu-item">
+                    <a href="#" onclick="toggleSubmenu(event)">Reportes</a>
+                    <!-- <ul class="submenu">
+                        <li> <a href="#">Reporte de Clientes</a></li>
+                        <li> <a href="#">Reporte de Cuentas</a></li>
+                    </ul>
+                     -->
+                </li>
             </ul>
         </aside>
 
@@ -92,11 +121,6 @@
         </div>
     </div>
 
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        }
-    </script>
+<script src="JS/MenuAdm.js"></script>
 </body>
 </html>
