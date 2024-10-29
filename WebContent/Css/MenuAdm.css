@@ -1,0 +1,133 @@
+@charset "ISO-8859-1";
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding-top: 80px; 
+}
+
+.navbar {
+    width: 100%;
+    background-color: #d6a6d6;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+nav h1 {
+	font-size: 18px;
+    color: #03000c;
+    margin: 0;
+    flex-grow: 1; 
+    text-align: center; 
+}
+
+.img_logo {
+    width: 60px;
+    height: 60px;
+    margin-right: auto;
+}
+
+.username {
+    font-size: 1.2rem;
+    color: white;
+    margin-left: auto;
+}
+
+.main-container {
+    display: flex;
+    padding-top: 20px; 
+}
+
+.sidebar {
+    width: 250px; 
+    background-color: #bb78bb;
+    padding: 20px;
+    height: calc(100vh - 80px); 
+    position: fixed;
+    top: 80px; 
+    left: 0;
+    overflow-y: auto; 
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding-left: 15px;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #333;
+    display: block;
+    padding: 8px;
+}
+
+.sidebar ul li a:hover {
+    color: #f8e3f4;
+}
+
+.submenu {
+    list-style-type: none;
+    padding-left: 20px;
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 1s ease; 
+}
+
+.menu-item.active .submenu {
+    max-height: 500px; 
+}
+
+.submenu li {
+    font-size: 1rem;
+    color: #555;
+    padding-left: 15px; 
+}
+
+.submenu li a {
+    color: #555;
+    text-decoration: none;
+}
+
+.submenu li a:hover {
+    color: #f8e3f4;
+}
+
+.content {
+    margin-left: 250px; 
+    width: calc(100% - 250px); 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    padding: 20px;
+    min-height: calc(100vh - 80px); 
+}
+
+.form-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
