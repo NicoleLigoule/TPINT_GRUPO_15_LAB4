@@ -1,3 +1,4 @@
+@charset "ISO-8859-1";
 * {
     box-sizing: border-box;
     margin: 0;
@@ -176,5 +177,3 @@ select {
     background-color: #d6a6d6;
     color: white;
 }
-
-
