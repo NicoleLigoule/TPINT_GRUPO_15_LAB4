@@ -33,13 +33,13 @@
 
         <div class="content">
             <div class="form-card">
-                <h2>Alta de Cliente</h2>
+                <h2>Editar de Cliente</h2>
                 <form>
                     <label for="dni">DNI</label>
-                    <input type="text" id="dni" name="dni" placeholder="DNI" required>
+                     <label for="dniCli">XXXXXXX</label>
 
                     <label for="cuil">CUIL</label>
-                    <input type="text" id="cuil" name="cuil" placeholder="CUIL" required>
+                    <label for="cuilCli">XXXXXXXX</label>
 
                     <label for="nombre">Nombre</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
@@ -85,7 +85,7 @@
 
                     <div class="button-group">
                         <button type="button" class="cancel-button">Cancelar</button>
-                        <button type="submit" class="submit-button">Agregar</button>
+                        <button type="submit" class="submit-button">Guardar</button>
                     </div>
                 </form>
             </div>
