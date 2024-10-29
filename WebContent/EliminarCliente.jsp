@@ -24,7 +24,16 @@
     <div class="main-container">
         <aside class="sidebar" id="sidebar">
             <ul>
-                <li><a href="#">Clientes</a></li>
+				<li class="menu-item">
+                  <a href="#" onclick="toggleSubmenu(event)">Clientes</a>
+                    <ul class="submenu">
+                        <li> <a href="AgregarCliente.jsp">Agregar Cliente</a></li>
+                        <li> <a href="EliminarCliente.jsp">Baja Cliente</a></li>
+                        <li> <a href="#">Editar Cliente</a></li>
+                        <li> <a href="ListarCliente.jsp">Listar Cliente</a></li>
+                    </ul>
+                </li>
+                
                 <li><a href="#">Cuentas</a></li>
                 <li><a href="#">Transacciones</a></li>
                 <li><a href="#">Reportes</a></li>

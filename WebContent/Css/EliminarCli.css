@@ -11,6 +11,9 @@ body {
     padding-top: 100px;
 }
 
+.sidebar ul li a:hover {
+    color: #f8e3f4;
+}
 
 .navbar {
     width: 100%;
@@ -89,9 +92,7 @@ body {
     color: #333;
 }
 
-.sidebar ul li a:hover {
-    color: #97037e;
-}
+
 
 .content {
     margin-left: 0; 
