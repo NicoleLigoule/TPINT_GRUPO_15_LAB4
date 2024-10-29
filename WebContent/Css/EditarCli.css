@@ -1,0 +1,179 @@
+@charset "ISO-8859-1";
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding-top: 100px;
+}
+
+
+.navbar {
+    width: 100%;
+    background-color: #d6a6d6;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    margin-right: auto; 
+}
+
+.line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+}
+
+.img_logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto; 
+}
+
+.username {
+    font-size: 1.2rem;
+    color: white;
+    margin-left: auto; 
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.sidebar {
+    width: 250px; 
+    background-color: #d6a6d6;
+    padding: 20px;
+    height: 100vh; 
+    position: fixed;
+    top: 80px; 
+    left: 0;
+    transition: transform 1s ease;
+    transform: translateX(-100%); 
+    z-index: 1;
+}
+
+.sidebar.active {
+    transform: translateX(0); 
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.sidebar ul li a:hover {
+    color: #d6a6d6;
+}
+
+.content {
+    margin-left: 0; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.form-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 20px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-size: 14px;
+    color: #666;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="date"],
+select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.radio-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.radio-group label {
+    font-size: 14px;
+    color: #333;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.cancel-button,
+.submit-button {
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: #a80000;
+    color: white;
+}
+
+.submit-button {
+    background-color: #d6a6d6;
+    color: white;
+}
