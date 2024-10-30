@@ -61,10 +61,13 @@
                 </li>
             </ul>
         </aside>
+ 
+
+ <div class="Mastercontainer">
 
         <div class="content">
             <div class="form-card">
-                <h2>Editar Cuentas</h2>
+                <h2>Buscar Cuentas Del Cliente</h2>
                 <br>
                 <h3>Datos de la Cuenta</h3>
                 <form>
@@ -73,7 +76,13 @@
                     <div class="button-group">
                         <button type="submit" class="submit-button">Buscar</button>
                     </div>
-
+				</form>
+				 </div>
+				 </div>
+ 	 <div class="content">
+            <div class="form-card">
+				<form>
+				<h2>Editar Cuenta Seleccionada</h2>
                     <label for="NC">NUMERO DE CUENTA</label>
                     <select id="NroDeCuenta"  name="NroDeCuenta"  required>
                     <option value="" disabled selected>Seleccione la cuenta</option>
@@ -97,6 +106,7 @@
             </div>
         </div>
     </div>
+</div>
 
 <script src="JS/MenuAdm.js"></script>
 </body>
