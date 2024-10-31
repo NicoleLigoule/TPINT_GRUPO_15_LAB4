@@ -1,3 +1,4 @@
+@charset "ISO-8859-1";
 * {
     box-sizing: border-box;
     margin: 0;
@@ -11,9 +12,6 @@ body {
     padding-top: 100px;
 }
 
-.sidebar ul li a:hover {
-    color: #f8e3f4;
-}
 
 .navbar {
     width: 100%;
@@ -58,7 +56,6 @@ body {
     display: flex;
     padding-top: 20px;
 }
-
 
 .sidebar {
     width: 250px; 
@@ -163,6 +160,9 @@ label {
 }
 
 input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="date"],
 select {
     padding: 10px;
     border: 1px solid #ddd;
@@ -171,7 +171,11 @@ select {
     width: 100%;
 }
 
-
+.radio-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 
 .radio-group label {
     font-size: 14px;
@@ -185,6 +189,7 @@ select {
     margin-top: 20px;
 }
 
+.cancel-button,
 .submit-button {
     padding: 10px;
     border-radius: 4px;
@@ -192,10 +197,12 @@ select {
     cursor: pointer;
 }
 
-
+.cancel-button {
+    background-color: #a80000;
+    color: white;
+}
 
 .submit-button {
     background-color: #d6a6d6;
     color: white;
 }
-

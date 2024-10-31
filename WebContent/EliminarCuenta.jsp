@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link href="Css/AgregarCli.css" type="text/css" rel="stylesheet"/>
+    <link href="Css/EliminarCun.css" type="text/css" rel="stylesheet"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baja de Cuentas</title>
