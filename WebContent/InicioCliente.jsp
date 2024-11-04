@@ -11,89 +11,50 @@
 </head>
 <body>
  <nav class="navbar">
-        <button class="hamburger" onclick="toggleSidebar()">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </button>
+
         <a href="Login.jsp">
             <img src="img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
+        <h1>MENU PRINCIPAL</h1>
         <span class="username">USUARIO XXXX</span>
     </nav>
 
     <div class="main-container">
-        <aside class="sidebar" id="sidebar">
+         <aside class="sidebar" id="sidebar">
             <ul>
                 <li class="menu-item">
-                  <a href="#" onclick="toggleSubmenu(event)">Clientes</a>
-                    <ul class="submenu">
-                        <li> <a href="AgregarCliente.jsp">Agregar Cliente</a></li>
-                        <li> <a href="EliminarCliente.jsp">Baja Cliente</a></li>
-                        <li> <a href="EditarCliente.jsp">Editar Cliente</a></li>
-                        <li> <a href="ListarCliente.jsp">Listar Cliente</a></li>
-                    </ul>
+                    <a href="#" onclick="toggleSubmenu(event)">Transferencias</a>
+                   
                 </li>
                 <li class="menu-item">
-                    <a href="#" onclick="toggleSubmenu(event)">Cuentas</a>
-                    <ul class="submenu">
-                        <li> <a href="AgregarCuenta.jsp">Agregar Cuenta</a></li>
-                        <li> <a href="EliminarCuenta.jsp">Baja Cuenta</a></li>
-                        <li> <a href="EditarCuenta.jsp">Editar Cuenta</a></li>
-                        <li> <a href="ListarCuenta.jsp">Listar Cuenta</a></li>
-                    </ul>
+                    <a href="#" onclick="toggleSubmenu(event)">Solicitudes de préstamos</a>
+                    
                 </li>
-                                <li class="menu-item">
-                    <a href="#" onclick="toggleSubmenu(event)">Transacciones</a>
-                    <!-- <ul class="submenu">
-                        <li> <a href="#">Registrar Transacción</a></li>
-                        <li> <a href="#">Ver Historial</a></li>
-                    </ul>
-                     -->
+                <li class="menu-item">
+                    <a href="#" onclick="toggleSubmenu(event)">Pago de préstamos</a>
                 </li>
-                                <li class="menu-item">
-                    <a href="#" onclick="toggleSubmenu(event)">Reportes</a>
-                    <!-- <ul class="submenu">
-                        <li> <a href="#">Reporte de Clientes</a></li>
-                        <li> <a href="#">Reporte de Cuentas</a></li>
-                    </ul>
-                     -->
+                <li class="menu-item">
+                    <a href="#" onclick="toggleSubmenu(event)">Información personal</a>
                 </li>
             </ul>
         </aside>
- 
 
- <div class="Mastercontainer">
-
-        <div class="content">
-        <a href="EditarCliente.jsp" class="Content-cuenta">
-            <div class="form-card">
-                
-                <form>
-
-					<label for="NC">NUMERO DE CUENTA:XXXX</label>
-					<label for="TC">  TIPO DE CUENTA</label>
-					 <br>
-					<label for="TC">SALDO:XXX$</label>
-                    
-				</form>
-				 </div>
-				 </a>
-				 </div>
- 	 <div class="content">
-		<a href="EditarCliente.jsp" class="Content-cuenta">
-		            <div class="form-card">
-		                
-		                <form>
-		
-							<label for="NC">NUMERO DE CUENTA:XXXX</label>
-							<label for="TC">  TIPO DE CUENTA</label>
-							 <br>
-							<label for="TC">SALDO:XXX$</label>
-		                    
-						</form>
-						 </div>
-						 </a>
+ <div class="main-container">
+    <div class="center-content">
+        <div class="form-card">
+            <form>
+                <label for="NC">NUMERO DE CUENTA: XXXX</label>
+                <label for="TC">TIPO DE CUENTA</label>
+                <label for="TC">SALDO: XXX$</label>
+            </form>
+        </div>
+        
+        <div class="form-card">
+            <form>
+                <label for="NC">NUMERO DE CUENTA: XXXX</label>
+                <label for="TC">TIPO DE CUENTA</label>
+                <label for="TC">SALDO: XXX$</label>
+            </form>
         </div>
     </div>
 </div>
