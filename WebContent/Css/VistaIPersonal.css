@@ -1,0 +1,152 @@
+@charset "ISO-8859-1";
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding-top: 100px;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #d6a6d6;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    margin-right: auto; 
+}
+
+.line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+}
+
+.img_logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto; 
+}
+
+.username {
+    font-size: 1.2rem;
+    color: white;
+    margin-left: auto; 
+}
+
+.main-container {
+    display: flex;
+    padding-top: 60px;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #d69ecf;
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+    top: 60px;
+    left: -250px;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 20px 0 0 0; 
+    margin: 0;
+}
+
+.menu-item {
+    padding: 10px 20px;
+}
+
+.menu-item > a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+}
+
+.menu-item > a:hover {
+    background-color: #BB8FCE;
+    color: #fff;
+}
+
+.submenu {
+    display: none;
+    list-style: none;
+    padding-left: 20px;
+}
+
+.menu-item.active .submenu {
+    display: block;
+}
+
+.submenu li a {
+    padding: 8px 20px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    font-weight: normal;
+}
+
+.submenu li a:hover {
+    background-color: #C39BD3;
+    color: #fff;
+}
+
+.content {
+    margin-left: 270px; /* Mueve el contenido hacia la derecha para evitar que el sidebar lo tape */
+    padding-top: 20px;
+    width: calc(100% - 270px);
+}
+
+.main-title {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.info-container {
+    display: flex;
+    gap: 20px;
+}
+
+.personal-info, .account-info {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+.personal-info h2, .account-info h2 {
+    font-size: 1.5em;
+    color: #666;
+    margin-bottom: 15px;
+}
