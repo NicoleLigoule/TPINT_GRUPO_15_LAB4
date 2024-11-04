@@ -1,0 +1,179 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding-top: 100px;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #d6a6d6;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    margin-right: auto; 
+}
+
+.line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+}
+
+.img_logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto; 
+}
+
+.username {
+    font-size: 1.2rem;
+    color: white;
+    margin-left: auto; 
+}
+
+.main-container {
+    display: flex;
+    padding-top: 20px;
+}
+
+.sidebar {
+    width: 250px; 
+    background-color: #d6a6d6;
+    padding: 20px;
+    height: 100vh; 
+    position: fixed;
+    top: 80px; 
+    left: 0;
+    transition: transform 1s ease;
+    transform: translateX(-100%); 
+    z-index: 1;
+}
+
+.sidebar.active {
+    transform: translateX(0); 
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 15px;
+}
+
+.sidebar ul li {
+    margin: 8px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #333;
+    display: block;
+    padding: 4px;
+}
+
+.sidebar ul li a:hover {
+    color: #f8e3f4;
+}
+
+.submenu {
+    list-style-type: none;
+    padding-left: 20px;
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 0.3s ease; 
+}
+
+.menu-item.active .submenu {
+    max-height: 500px; 
+}
+
+.submenu li {
+    font-size: 1rem;
+    color: #555;
+    padding-left: 15px; 
+}
+
+.submenu li a {
+    color: #555;
+    text-decoration: none;
+}
+
+.submenu li a:hover {
+    color: #f8e3f4;
+}
+
+.content {
+    margin-left: 0; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.form-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.loan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.loan-table th,
+.loan-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.loan-table th {
+    background-color: #d6a6d6;
+    color: white;
+}
+
+.loan-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.pay-button {
+    padding: 8px 12px;
+    background-color: #d6a6d6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pay-button:hover {
+    background-color: #b07bb0;
+}
