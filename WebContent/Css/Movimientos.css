@@ -1,0 +1,208 @@
+@charset "ISO-8859-1";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding-top: 100px;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #d6a6d6;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    margin-right: auto; 
+}
+
+.line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+}
+
+.img_logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto; 
+}
+
+.username {
+    font-size: 1.2rem;
+    color: white;
+    margin-left: auto; 
+}
+
+.main-container {
+    display: flex;
+    padding-top: 60px;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #d69ecf;
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+    top: 60px;
+    left: -250px;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 20px 0 0 0; 
+    margin: 0;
+}
+
+.menu-item {
+    padding: 10px 20px;
+}
+
+.menu-item > a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+}
+
+.menu-item > a:hover {
+    background-color: #BB8FCE;
+    color: #fff;
+}
+
+.submenu {
+    display: none;
+    list-style: none;
+    padding-left: 20px;
+}
+
+.menu-item.active .submenu {
+    display: block;
+}
+
+.submenu li a {
+    padding: 8px 20px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    font-weight: normal;
+}
+
+.submenu li a:hover {
+    background-color: #C39BD3;
+    color: #fff;
+}
+
+
+.content {
+    margin-left: 550px;
+     margin-right: 550px;
+    padding-top: 20px;
+    width: calc(100% - 270px);
+}
+
+
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filters input, .filters select, .filters button {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.movements-list h3 {
+    margin-top: 20px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.movement-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.movement-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #eee;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.movement-details {
+    flex: 1;
+}
+
+.movement-amount-negative {
+    font-weight: bold;
+    color: #d32f2f; /* rojo para egresos */
+    margin-left: 10px;
+}
+
+.movement-amount-positive {
+    font-weight: bold;
+    color: #388e3c; /* verde para ingresos */
+    margin-left: 10px;
+}
+
+
+.movement-time {
+    color: #777;
+    font-size: 0.9em;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a, .pagination span {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #0078d4;
+    cursor: pointer;
+}
+
+.pagination a:hover {
+    background-color: #0078d4;
+    color: white;
+}
