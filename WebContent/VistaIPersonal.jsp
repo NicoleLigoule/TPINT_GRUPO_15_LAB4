@@ -43,7 +43,6 @@
         </aside>
 
         <section class="content">
-            <!-- Título principal encima de la información del usuario -->
             <h1 class="main-title">Información Personal</h1>
             <div class="info-container">
                 <div class="personal-info">
@@ -59,6 +58,7 @@
                     <p><strong>Número de Cuenta:</strong> 1234567890</p>
                     <p><strong>Saldo:</strong> $2,039,000.00</p>
                 </div>
+                
                 <div class="account-info">
                     <h2>Caja de Ahorro</h2>
                     <p><strong>Número de Cuenta:</strong> 9876543210</p>
