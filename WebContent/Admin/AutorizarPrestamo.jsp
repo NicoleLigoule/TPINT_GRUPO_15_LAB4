@@ -6,11 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Prestamos</title>
-<link href="Css/AutorizPrestamos.css" type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"/>
+<link href="${pageContext.request.contextPath}/Css/AgregarCli.css" type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"/>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
 
 <style>
     table {
@@ -49,8 +50,8 @@ $(document).ready(function () {
             <div class="line"></div>
             <div class="line"></div>
         </button>
-        <a href="Login.jsp">
-            <img src="img/png_logo.png" class="img_logo" alt="Logo UTN">
+          <a href="${pageContext.request.contextPath}/Login.jsp">
+            <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
         <span class="username">USUARIO XXXX</span>
     </nav>

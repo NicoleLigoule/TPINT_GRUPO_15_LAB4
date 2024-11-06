@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link href="Css/AgregarCli.css" type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"/>
+    <link href="${pageContext.request.contextPath}/Css/EditarCun.css" type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar Clientes</title>    
+    <title>Listar Cuentas</title>    
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
@@ -48,8 +48,8 @@
             <div class="line"></div>
             <div class="line"></div>
         </button>
-        <a href="Login.jsp">
-            <img src="img/png_logo.png" class="img_logo" alt="Logo UTN">
+        <a href="${pageContext.request.contextPath}/Login.jsp">
+            <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
         <span class="username">USUARIO XXXX</span>
     </nav>

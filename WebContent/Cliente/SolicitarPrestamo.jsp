@@ -2,22 +2,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link href="Css/SolicitarPrestamo.css" type="text/css" rel="stylesheet"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitar Prestamo</title>
-</head>
+    <title>SolicitarPrestamo</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/Css/SolicitarPrestamo.css">
 <body>
-  <nav class="navbar">
+    <nav class="navbar">
         <button class="hamburger" onclick="toggleSidebar()">
             <div class="line"></div>
             <div class="line"></div>
             <div class="line"></div>
         </button>
-        <a href="Login.jsp">
-            <img src="img/png_logo.png" class="img_logo" alt="Logo UTN">
+        <a href="${pageContext.request.contextPath}/Login.jsp">
+            <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
         <span class="username">USUARIO XXXX</span>
+    </nav><span class="username">USUARIO XXXX</span>
     </nav>
 
     <div class="main-container">

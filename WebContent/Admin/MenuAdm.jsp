@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link href="Css/MenuAdm.css" type="text/css" rel="stylesheet"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Adm</title>
-</head>
+    <title>MenuAdm</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/Css/MenuAdm.css">
 <body>
     <nav class="navbar">
-        <a href="Login.jsp">
-            <img src="img/png_logo.png" class="img_logo" alt="Logo UTN">
+        <button class="hamburger" onclick="toggleSidebar()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </button>
+        <a href="${pageContext.request.contextPath}/Login.jsp">
+            <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
-        <h1>BANCO UTN</h1>
         <span class="username">USUARIO XXXX</span>
     </nav>
 

@@ -3,20 +3,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="Css/ModificarContraseniaCli.css" type="text/Css" rel="stylesheet"/>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Nombre del Banco</title>
-
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModificarContrasenia</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/Css/ModificarContraseniaCli.css">
 <body>
-    <nav>
-        <div class="nav-content">
-            <a href="#Login.jsp">
-            	<img src="img/png_logo.png" class="img_logo" alt="Logo UTN">
-            </a>
-            
-            <span class="username">USUARIO XXXX</span>
-        </div>
+    <nav class="navbar">
+        <button class="hamburger" onclick="toggleSidebar()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </button>
+        <a href="${pageContext.request.contextPath}/Login.jsp">
+            <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
+        </a>
+        <span class="username">USUARIO XXXX</span>
     </nav>
     <div class="container">
         <h2>Cambiar Contraseña</h2>
