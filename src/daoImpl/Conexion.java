@@ -1,4 +1,4 @@
-package repositorio;
+package daoImpl;
 
 public class Conexion {
 
