@@ -1,3 +1,6 @@
+<%@page import="entidades.TipoDeCuenta"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -70,11 +73,28 @@
                     <input type="text" id="cuil" name="cuil" placeholder="CUIL" >     
                     
                     <br>
+                    <% 
+	ArrayList<TipoDeCuenta> listaSeguros = null;
+	if(request.getAttribute("listaTCuentas")!=null)
+	{
+		listaSeguros = (ArrayList<TipoDeCuenta>) request.getAttribute("listaTCuentas");
+	}
+
+ %>
                     <h3>Datos Bancarios</h3>               
 
                     <label for="tipoDeCuenta">Tipo de Cuenta</label>
                     <select id="tipoDeCuenta"  name="tipoDeCuenta"  required>
                     <option value="" disabled selected>Seleccione un tipo de cuenta</option>
+                       <% 
+        if (listaSeguros != null) {
+            for (TipoDeCuenta cuenta : listaSeguros) { 
+    %>
+                <option value="<%= cuenta.getIdTipoDeCuenta() %>"><%= cuenta.getNombreTipo() %></option>
+    <% 
+            }
+        }
+    %>
                     </select>
 
                     
