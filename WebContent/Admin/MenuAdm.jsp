@@ -68,5 +68,6 @@
     </div>
 
     <script src="JS/MenuAdm.js"></script>
+    
 </body>
 </html>

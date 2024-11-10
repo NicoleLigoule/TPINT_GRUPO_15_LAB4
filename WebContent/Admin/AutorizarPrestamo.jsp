@@ -135,6 +135,18 @@ $(document).ready(function () {
 
 <script src="JS/MenuAdm.js"></script>
 <script>
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+}
+
+
+function toggleSubmenu(event) {
+    const menuItem = event.currentTarget.parentElement; 
+    menuItem.classList.toggle('active'); 
+}
+
     function seleccionarFila(boton) {
         const fila = boton.closest('tr'); 
         fila.style.backgroundColor = "#d1e7dd"; 

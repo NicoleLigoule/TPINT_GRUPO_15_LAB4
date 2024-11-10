@@ -75,7 +75,17 @@
 
     <script src="JS/MenuAdm.js"></script>
     <script>
-        // Script para mostrar la fecha del sistema en el campo de fecha deshabilitado
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('active');
+    }
+
+
+    function toggleSubmenu(event) {
+        const menuItem = event.currentTarget.parentElement; 
+        menuItem.classList.toggle('active'); 
+    }
         window.onload = function() {
             const fechaElement = document.getElementById('fecha_peticion');
             const fechaActual = new Date().toLocaleDateString();

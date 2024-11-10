@@ -38,16 +38,19 @@
     <a href="InicioCliente.jsp" class="btn">Volver al Menú</a>
 </div>
      <script src="JS/MenuAdm.js"></script>
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        }
+   <script>
 
-        function toggleSubmenu(event) {
-            const menuItem = event.target.parentElement;
-            menuItem.classList.toggle('active');
-        }
-    </script>
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+}
+
+
+function toggleSubmenu(event) {
+    const menuItem = event.currentTarget.parentElement; 
+    menuItem.classList.toggle('active'); 
+}
+
+</script>
 </body>
 </html>

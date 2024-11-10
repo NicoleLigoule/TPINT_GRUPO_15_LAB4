@@ -65,7 +65,7 @@ body {
     position: fixed;
     top: 60px;
     left: -250px;
-    transition: left 0.3s ease;
+    transition: left 1s ease;
     overflow-y: auto;
     z-index: 1;
 }
