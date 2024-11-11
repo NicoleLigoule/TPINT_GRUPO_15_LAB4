@@ -54,6 +54,28 @@ public class LocalidadDaoImpl implements LocalidadDao {
     }
 
     @Override
+    public List<Localidad> obtenerLocalidadesPorProvincia(int idProvincia) {
+        cn = new Conexion();
+        cn.Open();
+        List<Localidad> lista = new ArrayList<>();
+        String query = "SELECT * FROM localidades WHERE id_provincia = " + idProvincia;
+        try {
+            ResultSet rs = cn.query(query);
+            while (rs.next()) {
+                Localidad localidad = new Localidad();
+                localidad.setId_localidad(rs.getInt("id"));
+                localidad.setNombreLoca(rs.getString("nombre"));
+                lista.add(localidad);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+        return lista;
+    }
+    
+    @Override
     public boolean insertar(Localidad localidad) {
         boolean estado = true;
         cn = new Conexion();

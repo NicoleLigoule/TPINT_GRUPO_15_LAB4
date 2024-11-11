@@ -9,4 +9,5 @@ public interface LocalidadDao {
     public boolean insertar(Localidad localidad);
     public boolean editar(Localidad localidad);
     public boolean borrar(int idLocalidad);
+	List<Localidad> obtenerLocalidadesPorProvincia(int idProvincia);
 }
