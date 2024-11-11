@@ -33,8 +33,8 @@
                 <li class="menu-item">
                     <a href="#" onclick="toggleSubmenu(event)">Cuentas</a>
                     <ul class="submenu">
-                        <li> <a href="AgregarCuenta.jsp">Agregar Cuenta</a></li>
-                        <li> <a href="servletSolicitarCuenta?Param=1">Agregar Cuenta</a></li>
+                       <li> <a href="${pageContext.request.contextPath}/servletsSolicitarCuenta?Param=1">Agregar Cuenta</a></li>
+
                         <li> <a href="#">Baja Cuenta</a></li>
                         <li> <a href="#">Editar Cuenta</a></li>
                         <li> <a href="#">Listar Cuenta</a></li>
@@ -58,7 +58,7 @@
                      -->
                 </li>
                 <!-- ESTO LO HICE PARA QUE FUNCIONE, falta arreglar el menu hamburguer para q pueda llamar al servlet desde aca -->
-				<a href="../servletsSolicitarCuenta?Param=1">servlet</a>
+				<!-- <a href="${pageContext.request.contextPath}/servletsSolicitarCuenta?Param=1"">servlet</a> -->
             </ul>
         </aside>
         <div class="content">
@@ -70,5 +70,6 @@
     </div>
 
     <script src="JS/MenuAdm.js"></script>
+    
 </body>
 </html>

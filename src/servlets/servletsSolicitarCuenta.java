@@ -24,7 +24,7 @@ public class servletsSolicitarCuenta extends HttpServlet {
                 ArrayList<TipoDeCuenta> listaSeg = lista.TipoDecuenta();
                 if (listaSeg != null && !listaSeg.isEmpty()) {
                     request.setAttribute("listaTCuentas", listaSeg);
-                    RequestDispatcher rd = request.getRequestDispatcher("Admin/AgregarCuenta.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("AgregarCuenta.jsp");
                     rd.forward(request, response);
                 } else {
                     response.getWriter().println("No se encontraron tipos de cuenta.");
