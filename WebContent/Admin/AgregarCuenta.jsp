@@ -64,7 +64,7 @@
                 <h2>Alta de Cuentas</h2>
                 <br>
                 <h3>Datos del socio</h3>
-                <form>
+                <form action="..src/servlets/servletsSolicitarCuenta" method="get">
                     <label for="dni">DNI Cliente</label>
                     <input type="text" id="dni" name="dni" placeholder="DNI" >
 
@@ -73,26 +73,26 @@
 
                     <br>
                     <% 
-	ArrayList<TipoDeCuenta> listaSeguros = null;
-	if(request.getAttribute("listaTCuentas")!=null)
-	{
-		listaSeguros = (ArrayList<TipoDeCuenta>) request.getAttribute("listaTCuentas");
-	}
- %>
+						ArrayList<TipoDeCuenta> listaSeguros = null;
+						if(request.getAttribute("listaTCuentas")!=null)
+						{
+							listaSeguros = (ArrayList<TipoDeCuenta>) request.getAttribute("listaTCuentas");
+						}
+					 %>
                     <h3>Datos Bancarios</h3>               
 
                     <label for="tipoDeCuenta">Tipo de Cuenta</label>
                     <select id="tipoDeCuenta"  name="tipoDeCuenta"  required>
                     <option value="" disabled selected>Seleccione un tipo de cuenta</option>
                        <% 
-        if (listaSeguros != null) {
-            for (TipoDeCuenta cuenta : listaSeguros) { 
-    %>
-                <option value="<%= cuenta.getIdTipoDeCuenta() %>"><%= cuenta.getNombreTipo() %></option>
-    <% 
-            }
-        }
-    %>
+					        if (listaSeguros != null) {
+					            for (TipoDeCuenta cuenta : listaSeguros) { 
+					    %>
+					                <option value="<%= cuenta.getIdTipoDeCuenta() %>"><%= cuenta.getNombreTipo() %></option>
+					    <% 
+					            }
+					        }
+					    %>
                     </select>
 
 

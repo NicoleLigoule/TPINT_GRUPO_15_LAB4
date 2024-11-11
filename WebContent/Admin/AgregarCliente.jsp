@@ -18,11 +18,12 @@
         <span class="username">USUARIO XXXX</span>
     </nav>
 
+   
     <div class="main-container">
-        <aside class="sidebar" id="sidebar">
+        <aside class="sidebar">
             <ul>
                 <li class="menu-item">
-                  <a href="#" onclick="toggleSubmenu(event)">Clientes</a>
+                    <a href="#" onclick="toggleSubmenu(event)">Clientes</a>
                     <ul class="submenu">
                         <li> <a href="AgregarCliente.jsp">Agregar Cliente</a></li>
                         <li> <a href="EliminarCliente.jsp">Baja Cliente</a></li>
@@ -39,7 +40,7 @@
                         <li> <a href="#">Listar Cuenta</a></li>
                     </ul>
                 </li>
-                                <li class="menu-item">
+                <li class="menu-item">
                     <a href="#" onclick="toggleSubmenu(event)">Transacciones</a>
                     <!-- <ul class="submenu">
                         <li> <a href="#">Registrar Transacción</a></li>
@@ -47,7 +48,7 @@
                     </ul>
                      -->
                 </li>
-                                <li class="menu-item">
+                <li class="menu-item">
                     <a href="#" onclick="toggleSubmenu(event)">Reportes</a>
                     <!-- <ul class="submenu">
                         <li> <a href="#">Reporte de Clientes</a></li>
@@ -55,8 +56,10 @@
                     </ul>
                      -->
                 </li>
+
             </ul>
         </aside>
+        
 
         <div class="content">
             <div class="form-card">

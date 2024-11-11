@@ -12,11 +12,12 @@ import negocio.DDL;
 /**
  * Servlet implementation class servletsSolicitarCuenta
  */
-@WebServlet("/Admin/servletsSolicitarCuenta")
+@WebServlet("/servletsSolicitarCuenta")
 public class servletsSolicitarCuenta extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	System.out.print("LLEGA AL SERVLET");
         if (request.getParameter("Param") != null) {
             DDL lista = new DDL();
             try {

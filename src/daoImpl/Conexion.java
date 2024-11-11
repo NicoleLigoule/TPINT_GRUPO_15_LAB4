@@ -12,6 +12,12 @@ public class Conexion {
     private Connection connection;
 
     private Conexion() {
+    	  try {
+              Class.forName("com.mysql.jdbc.Driver");
+            //  this.connection = DriverManager.getConnection(host + dbName, user, pass);
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
         try {
             // Establece la conexión a la base de datos
             this.connection = DriverManager.getConnection(URL, USER, PASSWORD);
