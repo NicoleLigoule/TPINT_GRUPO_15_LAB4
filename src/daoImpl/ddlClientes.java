@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import entidades.Nacionalidad;
+import entidades.Sexo;
 
 
 public class ddlClientes {
@@ -38,4 +39,31 @@ public class ddlClientes {
 		return new Nacionalidad(id,Descripcion);
 
 	}
+	
+	private static final String readallSexo = "SELECT ID_sexo_se, Descripcion FROM bancoutn.sexo;";
+
+	public ArrayList<Sexo> readallSexo() {
+	    PreparedStatement statement;
+	    ResultSet resultSet;
+	    ArrayList<Sexo> item = new ArrayList<Sexo>();
+	    Conexion conexion = Conexion.getConexion();
+	    try {
+	        statement = conexion.getSQLConexion().prepareStatement(readallSexo);
+	        resultSet = statement.executeQuery();
+	        while(resultSet.next()) {
+	            item.add(getSexo(resultSet)); 
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return item;
+	}
+
+
+	private Sexo getSexo(ResultSet resultSet) throws SQLException {
+	    int id = resultSet.getInt("ID_sexo_se"); 
+	    String descripcion = resultSet.getString("Descripcion");
+	    return new Sexo(id, descripcion); 
+	}
+
 }

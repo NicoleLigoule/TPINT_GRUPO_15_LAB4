@@ -1,4 +1,5 @@
 <%@page import="entidades.Nacionalidad"%>
+<%@ page import="entidades.Sexo" %> 
 <%@page import="java.util.ArrayList"%>
 
 <!DOCTYPE html>
@@ -79,11 +80,30 @@
 
                     <label for="apellido">Apellido</label>
                     <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+                    
+				    <% 
+						ArrayList<Sexo> listaSexo = null;
+                    	if(request.getAttribute("listaSexo") != null)
 
+						{
+							listaSexo = (ArrayList<Sexo>) request.getAttribute("listaSexo");
+						}
+					 %>
                     <label for="genero">Género:</label>
 		            <select id="genero" name="genero" required>
 		            <option value="" disabled selected>Seleccione su género</option>
+		            <% 
+					        if (listaSexo != null) {
+					            for (Sexo sex: listaSexo) { 
+					    %>
+					                <option value="<%= sex.getId_sexo() %>"><%= sex.getDescripcion() %></option>
+
+					    <% 
+					            }
+					        }
+					    %>
 		            </select>
+		            
                     <% 
 						ArrayList<Nacionalidad> listaSeguros = null;
 						if(request.getAttribute("listaNacionalidad")!=null)

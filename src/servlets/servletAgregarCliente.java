@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Nacionalidad;
+import entidades.Sexo;
 import negocio.DDL;
 
 /**
@@ -31,21 +32,31 @@ public class servletAgregarCliente extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("Param") != null) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("Param") != null) {
             DDL lista = new DDL();
             try {
-                ArrayList<Nacionalidad> listaSeg = lista.Nacionalidad();
-                if (listaSeg != null && !listaSeg.isEmpty()) {
-                    request.setAttribute("listaNacionalidad", listaSeg);
-                    RequestDispatcher rd = request.getRequestDispatcher("AgregarCliente.jsp");
-                    rd.forward(request, response);
+
+                ArrayList<Nacionalidad> listaNacionalidades = lista.Nacionalidad();
+                if (listaNacionalidades != null && !listaNacionalidades.isEmpty()) {
+                    request.setAttribute("listaNacionalidad", listaNacionalidades);
                 } else {
-                    response.getWriter().println("No se encontraron tipos de cuenta.");
+                    response.getWriter().println("No se encontraron nacionalidades.");
                 }
+
+                ArrayList<Sexo> listaSexos = lista.Sexo(); 
+                if (listaSexos != null && !listaSexos.isEmpty()) {
+                    request.setAttribute("listaSexo", listaSexos);
+                } else {
+                    response.getWriter().println("No se encontraron sexos.");
+                }
+
+                RequestDispatcher rd = request.getRequestDispatcher("AgregarCliente.jsp");
+                rd.forward(request, response);
+
             } catch (Exception e) {
                 e.printStackTrace();
-                response.getWriter().println("Error al obtener los tipos de cuenta: " + e.getMessage());
+                response.getWriter().println("Error al obtener los datos: " + e.getMessage());
             }
         }
     }

@@ -1,6 +1,7 @@
 package negocio;
 import java.util.ArrayList;
 import entidades.Nacionalidad;
+import entidades.Sexo;
 import entidades.TipoDeCuenta;
 import daoImpl.CuentaDaoImpl;
 import daoImpl.ddlClientes;
@@ -18,4 +19,12 @@ public class DDL {
 		 ArrayList<Nacionalidad> nac = nacionalidad.readallNacionalidad(); 
 		 return nac;
 	 }
+	 
+	 public ArrayList<Sexo> Sexo(){
+		 ddlClientes Sexo = new ddlClientes();
+		 
+		 ArrayList<Sexo> sex = Sexo.readallSexo(); 
+		 return sex;
+	 }
+	 
 }
