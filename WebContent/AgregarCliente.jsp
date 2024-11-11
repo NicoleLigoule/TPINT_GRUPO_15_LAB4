@@ -20,7 +20,7 @@
 
    
     <div class="main-container">
-        <aside class="sidebar">
+        <aside id="sidebar" class="sidebar">
             <ul>
                 <li class="menu-item">
                     <a href="#" onclick="toggleSubmenu(event)">Clientes</a>
