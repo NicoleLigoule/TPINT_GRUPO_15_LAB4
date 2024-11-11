@@ -24,7 +24,7 @@
                 <li class="menu-item">
                     <a href="#" onclick="toggleSubmenu(event)">Clientes</a>
                     <ul class="submenu">
-                        <li> <a href="AgregarCliente.jsp">Agregar Cliente</a></li>
+                        <li> <a href="${pageContext.request.contextPath}/servletAgregarCliente?Param=1">Agregar Cliente</a></li>
                         <li> <a href="EliminarCliente.jsp">Baja Cliente</a></li>
                         <li> <a href="#">Editar Cliente</a></li>
                         <li> <a href="ListarCliente.jsp">Listar Cliente</a></li>

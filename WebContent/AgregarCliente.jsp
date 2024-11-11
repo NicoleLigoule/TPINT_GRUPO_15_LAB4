@@ -1,3 +1,6 @@
+<%@page import="entidades.Nacionalidad"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -81,11 +84,25 @@
 		            <select id="genero" name="genero" required>
 		            <option value="" disabled selected>Seleccione su género</option>
 		            </select>
-
+                    <% 
+						ArrayList<Nacionalidad> listaSeguros = null;
+						if(request.getAttribute("listaNacionalidad")!=null)
+						{
+							listaSeguros = (ArrayList<Nacionalidad>) request.getAttribute("listaNacionalidad");
+						}
+					 %>
                     <label for="nacionalidad">Nacionalidad</label>
                     <select id="nacionalidad" name="nacionalidad" required>
                     <option value="" disabled selected>Seleccione su Nacionalidad</option>
-
+<% 
+					        if (listaSeguros != null) {
+					            for (Nacionalidad nac : listaSeguros) { 
+					    %>
+					                <option value="<%= nac.getIdNacionalidadNc() %>"><%= nac.getDescripcionNc() %></option>
+					    <% 
+					            }
+					        }
+					    %>
                     </select>
 
                     <label for="fecha-nacimiento">Fecha de Nacimiento</label>
