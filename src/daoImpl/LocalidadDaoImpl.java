@@ -15,13 +15,13 @@ public class LocalidadDaoImpl implements LocalidadDao {
         cn = new Conexion();
         cn.Open();
         List<Localidad> lista = new ArrayList<>();
-        String query = "SELECT * FROM localidades";
+        String query = "SELECT * FROM Localidad";
         try {
             ResultSet rs = cn.query(query);
             while (rs.next()) {
                 Localidad localidad = new Localidad();
-                localidad.setId_localidad(rs.getInt("id"));
-                localidad.setNombreLoca(rs.getString("nombre"));
+                localidad.setId_localidad(rs.getInt("ID_Localidad_Lca"));
+                localidad.setNombreLoca(rs.getString("Nombre_Loc_Lca"));
                 lista.add(localidad);
             }
         } catch (Exception e) {
@@ -37,13 +37,13 @@ public class LocalidadDaoImpl implements LocalidadDao {
         cn = new Conexion();
         cn.Open();
         Localidad localidad = null;
-        String query = "SELECT * FROM localidades WHERE id = " + id;
+        String query = "SELECT * FROM Localidad WHERE ID_Localidad_Lca = " + id;
         try {
             ResultSet rs = cn.query(query);
             if (rs.next()) {
                 localidad = new Localidad();
-                localidad.setId_localidad(rs.getInt("id"));
-                localidad.setNombreLoca(rs.getString("nombre"));
+                localidad.setId_localidad(rs.getInt("ID_Localidad_Lca"));
+                localidad.setNombreLoca(rs.getString("Nombre_Loc_Lca"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,13 +58,13 @@ public class LocalidadDaoImpl implements LocalidadDao {
         cn = new Conexion();
         cn.Open();
         List<Localidad> lista = new ArrayList<>();
-        String query = "SELECT * FROM localidades WHERE id_provincia = " + idProvincia;
+        String query = "SELECT * FROM Localidad WHERE ID_Localidad_Lca = " + idProvincia;
         try {
             ResultSet rs = cn.query(query);
             while (rs.next()) {
                 Localidad localidad = new Localidad();
-                localidad.setId_localidad(rs.getInt("id"));
-                localidad.setNombreLoca(rs.getString("nombre"));
+                localidad.setId_localidad(rs.getInt("ID_Localidad_Lca"));
+                localidad.setNombreLoca(rs.getString("Nombre_Loc_Lca"));
                 lista.add(localidad);
             }
         } catch (Exception e) {
@@ -80,7 +80,7 @@ public class LocalidadDaoImpl implements LocalidadDao {
         boolean estado = true;
         cn = new Conexion();
         cn.Open();
-        String query = "INSERT INTO localidades (nombre) VALUES ('" + localidad.getNombreLoca() + "')";
+        String query = "INSERT INTO Localidad (Nombre_Loc_Lca) VALUES ('" + localidad.getNombreLoca() + "')";
         try {
             estado = cn.execute(query);
         } catch (Exception e) {
@@ -97,7 +97,7 @@ public class LocalidadDaoImpl implements LocalidadDao {
         boolean estado = true;
         cn = new Conexion();
         cn.Open();
-        String query = "UPDATE localidades SET nombre = '" + localidad.getNombreLoca() + "' WHERE id = " + localidad.getId_localidad();
+        String query = "UPDATE Localidad SET Nombre_Loc_Lca = '" + localidad.getNombreLoca() + "' WHERE ID_Localidad_Lca = " + localidad.getId_localidad();
         try {
             estado = cn.execute(query);
         } catch (Exception e) {
@@ -114,7 +114,7 @@ public class LocalidadDaoImpl implements LocalidadDao {
         boolean estado = true;
         cn = new Conexion();
         cn.Open();
-        String query = "DELETE FROM localidades WHERE id = " + id;
+        String query = "DELETE FROM Localidad WHERE ID_Localidad_Lca = " + id;
         try {
             estado = cn.execute(query);
         } catch (Exception e) {

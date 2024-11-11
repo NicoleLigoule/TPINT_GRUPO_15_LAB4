@@ -15,13 +15,13 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
         cn = new Conexion();
         cn.Open();
         List<Provincia> lista = new ArrayList<>();
-        String query = "SELECT * FROM provincias";
+        String query = "SELECT * FROM Provincia";
         try {
             ResultSet rs = cn.query(query);
             while (rs.next()) {
                 Provincia provincia = new Provincia();
-                provincia.setId_provincia(rs.getInt("id"));
-                provincia.setNombre(rs.getString("nombre"));
+                provincia.setId_provincia(rs.getInt("ID_Provincia_Prv"));
+                provincia.setNombre(rs.getString("Nombre_Prov_Prv"));
                 lista.add(provincia);
             }
         } catch (Exception e) {
@@ -37,13 +37,13 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
         cn = new Conexion();
         cn.Open();
         Provincia provincia = null;
-        String query = "SELECT * FROM provincias WHERE id = " + id;
+        String query = "SELECT * FROM Provincia WHERE ID_Provincia_Prv = " + id;
         try {
             ResultSet rs = cn.query(query);
             if (rs.next()) {
                 provincia = new Provincia();
-                provincia.setId_provincia(rs.getInt("id"));
-                provincia.setNombre(rs.getString("nombre"));
+                provincia.setId_provincia(rs.getInt("ID_Provincia_Prv"));
+                provincia.setNombre(rs.getString("Nombre_Prov_Prv"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,7 +58,7 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
         boolean estado = true;
         cn = new Conexion();
         cn.Open();
-        String query = "INSERT INTO provincias (nombre) VALUES ('" + provincia.getNombre() + "')";
+        String query = "INSERT INTO Provincia (Nombre_Prov_Prv) VALUES ('" + provincia.getNombre() + "')";
         try {
             estado = cn.execute(query);
         } catch (Exception e) {
@@ -75,7 +75,7 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
         boolean estado = true;
         cn = new Conexion();
         cn.Open();
-        String query = "UPDATE provincias SET nombre = '" + provincia.getNombre() + "' WHERE id = " + provincia.getId_provincia();
+        String query = "UPDATE Provincia SET Nombre_Prov_Prv = '" + provincia.getNombre() + "' WHERE ID_Provincia_Prv = " + provincia.getId_provincia();
         try {
             estado = cn.execute(query);
         } catch (Exception e) {
@@ -92,7 +92,7 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
         boolean estado = true;
         cn = new Conexion();
         cn.Open();
-        String query = "DELETE FROM provincias WHERE id = " + id;
+        String query = "DELETE FROM Provincia WHERE ID_Provincia_Prv = " + id;
         try {
             estado = cn.execute(query);
         } catch (Exception e) {
