@@ -1,94 +1,106 @@
 package daoImpl;
 
-import dao.ProvinciaDao;
-import entidades.Provincia;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import dao.ProvinciaDao;
+import entidades.Provincia;
 
 public class ProvinciaDaoImpl implements ProvinciaDao {
-
-    private Connection connection;
-
-    public ProvinciaDaoImpl(Connection connection) {
-        this.connection = connection;
-    }
+    
+    private Conexion cn;
 
     @Override
     public List<Provincia> obtenerTodas() {
-        List<Provincia> provincias = new ArrayList<>();
-        String query = "SELECT ID_Provincia_Prv, Nombre_Prov_Prv FROM Provincia";
-        try (PreparedStatement ps = connection.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+        cn = new Conexion();
+        cn.Open();
+        List<Provincia> lista = new ArrayList<>();
+        String query = "SELECT * FROM provincias";
+        try {
+            ResultSet rs = cn.query(query);
             while (rs.next()) {
-                Provincia provincia = new Provincia(
-                    rs.getInt("ID_Provincia_Prv"),
-                    rs.getString("Nombre_Prov_Prv")
-                );
-                provincias.add(provincia);
+                Provincia provincia = new Provincia();
+                provincia.setId_provincia(rs.getInt("id"));
+                provincia.setNombre(rs.getString("nombre"));
+                lista.add(provincia);
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            cn.close();
         }
-        return provincias;
+        return lista;
     }
 
     @Override
-    public Provincia obtenerUna(int idProvincia) {
+    public Provincia obtenerUna(int id) {
+        cn = new Conexion();
+        cn.Open();
         Provincia provincia = null;
-        String query = "SELECT ID_Provincia_Prv, Nombre_Prov_Prv FROM Provincia WHERE ID_Provincia_Prv = ?";
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, idProvincia);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    provincia = new Provincia(
-                        rs.getInt("ID_Provincia_Prv"),
-                        rs.getString("Nombre_Prov_Prv")
-                    );
-                }
+        String query = "SELECT * FROM provincias WHERE id = " + id;
+        try {
+            ResultSet rs = cn.query(query);
+            if (rs.next()) {
+                provincia = new Provincia();
+                provincia.setId_provincia(rs.getInt("id"));
+                provincia.setNombre(rs.getString("nombre"));
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            cn.close();
         }
         return provincia;
     }
 
     @Override
     public boolean insertar(Provincia provincia) {
-        String query = "INSERT INTO Provincia (Nombre_Prov_Prv) VALUES (?)";
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, provincia.getNombre());
-            return ps.executeUpdate() > 0;
+        boolean estado = true;
+        cn = new Conexion();
+        cn.Open();
+        String query = "INSERT INTO provincias (nombre) VALUES ('" + provincia.getNombre() + "')";
+        try {
+            estado = cn.execute(query);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            estado = false;
+        } finally {
+            cn.close();
         }
+        return estado;
     }
 
     @Override
     public boolean editar(Provincia provincia) {
-        String query = "UPDATE Provincia SET Nombre_Prov_Prv = ? WHERE ID_Provincia_Prv = ?";
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, provincia.getNombre());
-            ps.setInt(2, provincia.getId_provincia());
-            return ps.executeUpdate() > 0;
+        boolean estado = true;
+        cn = new Conexion();
+        cn.Open();
+        String query = "UPDATE provincias SET nombre = '" + provincia.getNombre() + "' WHERE id = " + provincia.getId_provincia();
+        try {
+            estado = cn.execute(query);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            estado = false;
+        } finally {
+            cn.close();
         }
+        return estado;
     }
 
     @Override
-    public boolean borrar(int idProvincia) {
-        String query = "DELETE FROM Provincia WHERE ID_Provincia_Prv = ?";
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, idProvincia);
-            return ps.executeUpdate() > 0;
+    public boolean borrar(int id) {
+        boolean estado = true;
+        cn = new Conexion();
+        cn.Open();
+        String query = "DELETE FROM provincias WHERE id = " + id;
+        try {
+            estado = cn.execute(query);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            estado = false;
+        } finally {
+            cn.close();
         }
+        return estado;
     }
 }
