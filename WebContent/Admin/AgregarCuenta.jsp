@@ -1,6 +1,5 @@
 <%@page import="entidades.TipoDeCuenta"%>
 <%@page import="java.util.ArrayList"%>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -71,7 +70,7 @@
 
                     <label for="cuil">CUIL Cliente</label>
                     <input type="text" id="cuil" name="cuil" placeholder="CUIL" >     
-                    
+
                     <br>
                     <% 
 	ArrayList<TipoDeCuenta> listaSeguros = null;
@@ -79,7 +78,6 @@
 	{
 		listaSeguros = (ArrayList<TipoDeCuenta>) request.getAttribute("listaTCuentas");
 	}
-
  %>
                     <h3>Datos Bancarios</h3>               
 
@@ -97,7 +95,7 @@
     %>
                     </select>
 
-                    
+
 
                     <div class="button-group">
                         <button type="button" class="cancel-button">Volver</button>
@@ -110,4 +108,3 @@
 
 <script src="JS/MenuAdm.js"></script>
 </body>
-</html>

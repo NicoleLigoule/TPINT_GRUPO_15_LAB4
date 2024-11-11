@@ -4,13 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import entidades.TipoDeCuenta;
-
-
 public class CuentaDaoImpl {
-	private static final String readallTSeguros = "SELECT Id_Tipo_Cuenta, Nombre_Tipo FROM bancoutn.tipocuenta;";
-	public ArrayList<TipoDeCuenta> readAllTiposDCuentas()
+	private static final String readallTipoDeCuentas = "SELECT Id_Tipo_Cuenta, Nombre_Tipo FROM bancoutn.tipocuenta";
+	public ArrayList<TipoDeCuenta> readallTipoDeCuentas()
 	{
 		PreparedStatement statement;
 		ResultSet resultSet;
@@ -18,7 +15,7 @@ public class CuentaDaoImpl {
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
-			statement = conexion.getSQLConexion().prepareStatement(readallTSeguros);
+			statement = conexion.getSQLConexion().prepareStatement(readallTipoDeCuentas);
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
