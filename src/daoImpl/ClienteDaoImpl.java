@@ -129,9 +129,39 @@ public class ClienteDaoImpl implements ClienteDao {
         }
         return estado;
     }
+    
+    @Override
+    public boolean borrarCuil(String cuil) {
+        boolean estado = true;
+        cn = new Conexion();
+        cn.Open();
+        String query = "UPDATE Cliente SET estado_Cli = 0 WHERE cuil_Cli = ?";
+        try {
+            PreparedStatement statement = cn.getSQLConexion().prepareStatement(query);
+            statement.setString(1, cuil);
+            estado = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            estado = false;
+        } finally {
+            cn.close();
+        }
+        return estado;
+    }
+    
+    public boolean eliminarCliente(String cuilCli) {
+        if (cuilCli == null || cuilCli.isEmpty()) {
+            System.out.println("Error: CUIL inválido.");
+            return false;
+        }
+    ClienteDaoImpl clienteDao = new ClienteDaoImpl();
+    boolean borrarCuilCliente = clienteDao.borrarCuil(cuilCli);
+    return borrarCuilCliente;
+	}
+
 
     /*  Esta parte es del PR de Clau, TO-DO: Modificarlo para que implemente las clases del dao "borrar" */
-  private static final String bajaDeCliente = "UPDATE cliente SET estado_Cli = 0 WHERE cuil_Cli = ?";
+ /* private static final String bajaDeCliente = "UPDATE cliente SET estado_Cli = 0 WHERE cuil_Cli = ?";
 
     public Boolean bajaDeCliente(String cuilCli) {
         PreparedStatement statement;
@@ -148,6 +178,6 @@ public class ClienteDaoImpl implements ClienteDao {
         }
         
         return rowsUpdated > 0; // Retorna true si al menos una fila fue actualizada
-    }
+    }*/
     
 }
