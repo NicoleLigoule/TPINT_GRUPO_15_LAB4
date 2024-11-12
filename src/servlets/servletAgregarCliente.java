@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import abml.abmlCliente;
+import entidades.Cliente;
 import entidades.Nacionalidad;
 import entidades.Sexo;
 import negocio.DDL;
@@ -33,7 +37,9 @@ public class servletAgregarCliente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("Param") != null) {
+    	
+    	
+    	if (request.getParameter("Param") != null) {
             DDL lista = new DDL();
             try {
 
@@ -66,8 +72,47 @@ public class servletAgregarCliente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		if(request.getParameter("submit-button")!=null) {
+			Cliente c = new Cliente();
+			c.setDni(Integer.parseInt(request.getParameter("dni")));
+			c.setCuil(request.getParameter("cuil"));
+			c.setNombre(request.getParameter("nombre"));
+			c.setApellido(request.getParameter("apellido"));
+			c.setId_sexo(Integer.parseInt(request.getParameter("genero")));
+			c.setId_nacionalidad(request.getParameter("nacionalidad"));
+            String fechaStr = request.getParameter("fecha-nacimiento");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDate fechaNacimiento = LocalDate.parse(fechaStr, formatter);
+            c.setFechaNacimiento(fechaNacimiento);
+            c.setId_localidad(Integer.parseInt(request.getParameter("localidad")));
+            c.setId_provincia(Integer.parseInt(request.getParameter("provincia")));
+			c.setId_nacionalidad(request.getParameter("nacionalidad"));
+            c.setDireccion(request.getParameter("direccion"));
+            c.setTelefono(request.getParameter("telefono"));
+            c.setCorreo(request.getParameter("email"));
+            
+            
 
+            
+            abmlCliente abmlcliente = new abmlCliente();
+
+            boolean insert = abmlcliente.agregarCliente(c);
+            if(insert) {
+            	request.setAttribute("Correcto", "Se ha generado el Cliente correctamente.");
+            }else {
+            	request.setAttribute("Error", "Error al agregar Cliente.");
+            }
+            request.getRequestDispatcher("/AgregarCliente.jsp").forward(request, response);
+
+            System.out.println("Datos recibidos en servletCliente: DNI = " + request.getParameter("dni"));
+            System.out.println("CUIL: " + request.getParameter("cuil"));
+            System.out.println("Nombre: " + request.getParameter("nombre"));
+            System.out.println("Apellido: " + request.getParameter("apellido"));
+            System.out.println("Localidad: " + request.getParameter("localidad"));
+            System.out.println("Provincia: " + request.getParameter("provincia"));
+            System.out.println("Direccion: " + request.getParameter("direccion"));
+            System.out.println("Telefono: " + request.getParameter("telefono"));
+            System.out.println("email: " + request.getParameter("email"));
+		}
+	}
 }

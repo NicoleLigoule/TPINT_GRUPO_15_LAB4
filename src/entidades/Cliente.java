@@ -12,6 +12,7 @@ public class Cliente {
 	private LocalDate fechaNacimiento;
 	private String direccion;
 	private int id_localidad;
+	private int id_provincia;
 	private String correo;
 	private String telefono;
 	private boolean estado;
@@ -21,7 +22,7 @@ public class Cliente {
 	}
 	
 	public Cliente(String cuil, int dni, String nombre, String apellido, int id_sexo, String id_nacionalidad,
-			LocalDate fechaNacimiento, String direccion, int id_localidad, String correo, String telefono, boolean estado) {
+			LocalDate fechaNacimiento, String direccion, int id_localidad, int id_provincia, String correo, String telefono, boolean estado) {
 		super();
 		this.cuil = cuil;
 		this.dni = dni;
@@ -32,6 +33,7 @@ public class Cliente {
 		this.fechaNacimiento = fechaNacimiento;
 		this.direccion = direccion;
 		this.id_localidad = id_localidad;
+		this.id_provincia = id_provincia;
 		this.correo = correo;
 		this.telefono = telefono;
 		this.estado = estado;
@@ -105,8 +107,8 @@ public class Cliente {
 		return id_localidad;
 	}
 
-	public void setId_localidad(int id_localidad) {
-		this.id_localidad = id_localidad;
+	public void setId_localidad(int localidad) {
+		this.id_localidad = localidad;
 	}
 
 	public String getCorreo() {
@@ -125,6 +127,14 @@ public class Cliente {
 		this.telefono = telefono;
 	}
 
+	public int getId_provincia() {
+		return id_provincia;
+	}
+
+	public void setId_provincia(int id_provincia) {
+		this.id_provincia = id_provincia;
+	}
+
 	public boolean isEstado() {
 		return estado;
 	}
@@ -141,9 +151,5 @@ public class Cliente {
 				+ telefono + ", estado=" + estado + "]";
 	}
 
-	
-	
-	
-	
-	
+
 }

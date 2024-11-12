@@ -57,13 +57,11 @@
                     </ul>
                      -->
                 </li>
-                <!-- ESTO LO HICE PARA QUE FUNCIONE, falta arreglar el menu hamburguer para q pueda llamar al servlet desde aca -->
-				<!-- <a href="${pageContext.request.contextPath}/servletsSolicitarCuenta?Param=1"">servlet</a> -->
             </ul>
         </aside>
         <div class="content">
             <div class="form-card">
-                <h2>Este es el menú de los usuarios administardores</h2>
+                <h2>Este es el menú de los usuarios administradores</h2>
             </div>
 		</div>
 

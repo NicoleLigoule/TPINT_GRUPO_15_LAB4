@@ -67,8 +67,8 @@
 
         <div class="content">
             <div class="form-card">
-                <h2>Alta de Cliente</h2>
-                <form>
+                <h2>Agregar Cliente</h2>
+                <form action="servletAgregarCliente" method="post">
                     <label for="dni">DNI</label>
                     <input type="text" id="dni" name="dni" placeholder="DNI" required>
 
@@ -134,15 +134,20 @@
                     <label for="numero">Número</label>
                     <input type="text" id="numero" name="numero" placeholder="Número" required>
 
-                    <label for="provincia">Provincia</label>
-                    <select id="provincia" name="provincia" required>
-                  	<option value="" disabled selected>Seleccione su Provincia</option>
-                    </select>
+                  <label for="provincia">Provincia</label>
+					<select id="provincia" name="provincia" required>
+					    <option value="" disabled selected>Seleccione su Provincia</option>
+					    <option value="1">Buenos Aires</option>
+					    <option value="2">Córdoba</option>
+					</select>
+					
+					<label for="localidad">Localidad</label>
+					<select id="localidad" name="localidad" required>
+					    <option value="" disabled selected>Seleccione su Localidad</option>
+					    <option value="1">La Plata</option>
+					    <option value="2">Mar del Plata</option>
+					</select>
 
-                    <label for="localidad">Localidad</label>
-                    <select id="localidad"  name="localidad"  required>
-                    <option value="" disabled selected>Seleccione su Localidad</option>
-                    </select>
 
                     <label for="telefono">Teléfono</label>
                     <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
@@ -152,7 +157,7 @@
 
                     <div class="button-group">
                         <button type="button" class="cancel-button">Cancelar</button>
-                        <button type="submit" class="submit-button">Agregar</button>
+                        <button type="submit" class="submit-button" name="submit-button">Agregar</button>
                     </div>
                 </form>
             </div>
