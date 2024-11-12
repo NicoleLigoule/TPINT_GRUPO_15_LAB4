@@ -61,15 +61,24 @@
         <div class="content">
             <div class="form-card">
                 <h2>BAJA CLIENTE</h2>
-                <form>
+                <form action="servletEliminarCliente" method="get">
                     <label for="cuil">Ingresar C.U.I.L</label>
                     <input type="text" id="cuil" name="cuil" placeholder="C.U.I.L" required>
                     <div class="button-group">
-                        <button type="submit" class="submit-button">Dar Baja</button>
+                        <button type="submit" name="btnBaja" class="submit-button">Dar Baja</button>
                     </div>
-                </form>
+                </form>                
             </div>
         </div>
+    </div>
+    <div style="text-align: center; font-size: 18px; padding: 10px; margin-top: 20px;" >
+        <%
+            String mensaje = "";
+            if (request.getAttribute("mensaje") != null) {
+                mensaje = (String) request.getAttribute("mensaje");
+            }
+        %>
+        <%= mensaje %>
     </div>
 
 <script src="JS/MenuAdm.js"></script>

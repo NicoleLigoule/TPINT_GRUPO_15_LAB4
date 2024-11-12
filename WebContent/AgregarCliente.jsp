@@ -1,6 +1,11 @@
 <%@page import="entidades.Nacionalidad"%>
-<%@ page import="entidades.Sexo" %> 
+<%@page import="entidades.Sexo" %> 
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="daoImpl.LocalidadDaoImpl"%>
+<%@page import="daoImpl.ProvinciaDaoImpl"%>
+<%@page import="entidades.Provincia"%>
+<%@page import="entidades.Localidad"%>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -8,7 +13,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta de Cliente</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/Css/AgregarCli.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/AgregarCli.css">
+</head>
 <body>
     <nav class="navbar">
         <button class="hamburger" onclick="toggleSidebar()">
@@ -22,7 +28,6 @@
         <span class="username">USUARIO XXXX</span>
     </nav>
 
-   
     <div class="main-container">
         <aside id="sidebar" class="sidebar">
             <ul>
@@ -46,115 +51,113 @@
                 </li>
                 <li class="menu-item">
                     <a href="#" onclick="toggleSubmenu(event)">Transacciones</a>
-                    <!-- <ul class="submenu">
-                        <li> <a href="#">Registrar Transacción</a></li>
-                        <li> <a href="#">Ver Historial</a></li>
-                    </ul>
-                     -->
                 </li>
                 <li class="menu-item">
                     <a href="#" onclick="toggleSubmenu(event)">Reportes</a>
-                    <!-- <ul class="submenu">
-                        <li> <a href="#">Reporte de Clientes</a></li>
-                        <li> <a href="#">Reporte de Cuentas</a></li>
-                    </ul>
-                     -->
                 </li>
-
             </ul>
         </aside>
-        
 
         <div class="content">
             <div class="form-card">
-                <h2>Agregar Cliente</h2>
-                <form action="servletAgregarCliente" method="post">
+                <h2>Alta de Cliente</h2>
+                <form action="servletAgregarCliente" method="GET">
+                    <!-- Retaining values for other fields -->
                     <label for="dni">DNI</label>
-                    <input type="text" id="dni" name="dni" placeholder="DNI" required>
+                    <input type="text" id="dni" name="dni" placeholder="DNI" value="<%= request.getParameter("dni") != null ? request.getParameter("dni") : "" %>" required>
 
                     <label for="cuil">CUIL</label>
-                    <input type="text" id="cuil" name="cuil" placeholder="CUIL" required>
+                    <input type="text" id="cuil" name="cuil" placeholder="CUIL" value="<%= request.getParameter("cuil") != null ? request.getParameter("cuil") : "" %>" required>
 
                     <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre" value="<%= request.getParameter("nombre") != null ? request.getParameter("nombre") : "" %>" required>
 
                     <label for="apellido">Apellido</label>
-                    <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
-                    
-				    <% 
-						ArrayList<Sexo> listaSexo = null;
-                    	if(request.getAttribute("listaSexo") != null)
+                    <input type="text" id="apellido" name="apellido" placeholder="Apellido" value="<%= request.getParameter("apellido") != null ? request.getParameter("apellido") : "" %>" required>
 
-						{
-							listaSexo = (ArrayList<Sexo>) request.getAttribute("listaSexo");
-						}
-					 %>
-                    <label for="genero">Género:</label>
-		            <select id="genero" name="genero" required>
-		            <option value="" disabled selected>Seleccione su género</option>
-		            <% 
-					        if (listaSexo != null) {
-					            for (Sexo sex: listaSexo) { 
-					    %>
-					                <option value="<%= sex.getId_sexo() %>"><%= sex.getDescripcion() %></option>
-
-					    <% 
-					            }
-					        }
-					    %>
-		            </select>
-		            
                     <% 
-						ArrayList<Nacionalidad> listaSeguros = null;
-						if(request.getAttribute("listaNacionalidad")!=null)
-						{
-							listaSeguros = (ArrayList<Nacionalidad>) request.getAttribute("listaNacionalidad");
-						}
-					 %>
+                    // Sexo dropdown population
+                    ArrayList<Sexo> listaSexo = (ArrayList<Sexo>) request.getAttribute("listaSexo");
+                    %>
+                    <label for="genero">Género:</label>
+                    <select id="genero" name="genero" required>
+                        <option value="" disabled selected>Seleccione su género</option>
+                        <% 
+                        if (listaSexo != null) {
+                            for (Sexo sex : listaSexo) { 
+                        %>
+                            <option value="<%= sex.getId_sexo() %>" <%= Integer.toString(sex.getId_sexo()).equals(request.getParameter("genero")) ? "selected" : "" %>><%= sex.getDescripcion() %></option>
+                        <% 
+                            }
+                        }
+                        %>
+                    </select>
+
+                    <% 
+                    // Nacionalidad dropdown population
+                    ArrayList<Nacionalidad> listaSeguros = (ArrayList<Nacionalidad>) request.getAttribute("listaNacionalidad");
+                    %>
                     <label for="nacionalidad">Nacionalidad</label>
                     <select id="nacionalidad" name="nacionalidad" required>
-                    <option value="" disabled selected>Seleccione su Nacionalidad</option>
-<% 
-					        if (listaSeguros != null) {
-					            for (Nacionalidad nac : listaSeguros) { 
-					    %>
-					                <option value="<%= nac.getIdNacionalidadNc() %>"><%= nac.getDescripcionNc() %></option>
-					    <% 
-					            }
-					        }
-					    %>
+                        <option value="" disabled selected>Seleccione su Nacionalidad</option>
+                        <% 
+                        if (listaSeguros != null) {
+                            for (Nacionalidad nac : listaSeguros) { 
+                        %>
+                            <option value="<%= nac.getIdNacionalidadNc() %>" <%= nac.getIdNacionalidadNc().equals(request.getParameter("nacionalidad")) ? "selected" : "" %>><%= nac.getDescripcionNc() %></option>
+                        <% 
+                            }
+                        }
+                        %>
+
                     </select>
 
                     <label for="fecha-nacimiento">Fecha de Nacimiento</label>
-                    <input type="text" id="fecha-nacimiento" name="fecha-nacimiento" placeholder="YYYY/MM/DD" required>
+                    <input type="text" id="fecha-nacimiento" name="fecha-nacimiento" placeholder="YYYY/MM/DD" value="<%= request.getParameter("fecha-nacimiento") != null ? request.getParameter("fecha-nacimiento") : "" %>" required>
 
                     <label for="direccion">Dirección</label>
-                    <input type="text" id="direccion" name="direccion" placeholder="Dirección" required>
+                    <input type="text" id="direccion" name="direccion" placeholder="Dirección" value="<%= request.getParameter("direccion") != null ? request.getParameter("direccion") : "" %>" required>
 
                     <label for="numero">Número</label>
-                    <input type="text" id="numero" name="numero" placeholder="Número" required>
-
-                  <label for="provincia">Provincia</label>
-					<select id="provincia" name="provincia" required>
-					    <option value="" disabled selected>Seleccione su Provincia</option>
-					    <option value="1">Buenos Aires</option>
-					    <option value="2">Córdoba</option>
-					</select>
-					
-					<label for="localidad">Localidad</label>
-					<select id="localidad" name="localidad" required>
-					    <option value="" disabled selected>Seleccione su Localidad</option>
-					    <option value="1">La Plata</option>
-					    <option value="2">Mar del Plata</option>
-					</select>
-
+                    <input type="text" id="numero" name="numero" placeholder="Número" value="<%= request.getParameter("numero") != null ? request.getParameter("numero") : "" %>" required>
 
                     <label for="telefono">Teléfono</label>
-                    <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" value="<%= request.getParameter("telefono") != null ? request.getParameter("telefono") : "" %>" required>
 
                     <label for="email">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" placeholder="Correo Electrónico" required>
+                    <input type="email" id="email" name="email" placeholder="Correo Electrónico" value="<%= request.getParameter("email") != null ? request.getParameter("email") : "" %>" required>
 
+                    <label for="provincia">Provincia</label>
+                    <select id="provincia" name="provincia" onchange="this.form.submit();" required>
+                        <option value="" disabled selected>Seleccione su Provincia</option>
+                        <% 
+                        ArrayList<Provincia> listaProvincias = (ArrayList<Provincia>) request.getAttribute("listaProvincias");
+                        String selectedProvincia = request.getParameter("provincia");
+                        if (listaProvincias != null) {
+                            for (Provincia prov : listaProvincias) { 
+                        %>
+                            <option value="<%= prov.getId_provincia() %>" <%= Integer.toString(prov.getId_provincia()).equals(selectedProvincia) ? "selected" : "" %>><%= prov.getNombre() %></option>
+                        <% 
+                            }
+                        }
+                        %>
+                    </select>
+
+                    <label for="localidad">Localidad</label>
+                    <select id="localidad" name="localidad" required>
+                        <option value="" disabled selected>Seleccione su Localidad</option>
+                        <% 
+                        ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocalidad");
+                        String selectedLocalidad = request.getParameter("localidad");
+                        if (listaLocalidad != null) {
+                            for (Localidad loc : listaLocalidad) {
+                        %>
+                            <option value="<%= loc.getId_localidad() %>" <%= Integer.toString(loc.getId_localidad()).equals(selectedLocalidad) ? "selected" : "" %>><%= loc.getNombreLoca() %></option>
+                        <% 
+                            }
+                        }
+                        %>
+                    </select>
                     <div class="button-group">
                         <button type="button" class="cancel-button">Cancelar</button>
                         <button type="submit" class="submit-button" name="submit-button">Agregar</button>

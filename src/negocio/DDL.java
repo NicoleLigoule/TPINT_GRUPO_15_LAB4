@@ -1,10 +1,17 @@
 package negocio;
 import java.util.ArrayList;
+
 import entidades.Nacionalidad;
 import entidades.Sexo;
 import entidades.TipoDeCuenta;
+import entidades.Provincia;
+import entidades.Localidad;
+
 import daoImpl.CuentaDaoImpl;
 import daoImpl.ddlClientes;
+import daoImpl.ProvinciaDaoImpl;
+import daoImpl.LocalidadDaoImpl;
+
 public class DDL {
 	
 	 public ArrayList<TipoDeCuenta> TipoDecuenta(){
@@ -27,4 +34,17 @@ public class DDL {
 		 return sex;
 	 }
 	 
+	 public ArrayList<Provincia> Provincia(){
+		 ProvinciaDaoImpl Prov = new ProvinciaDaoImpl();
+		 
+		 ArrayList<Provincia> prov = (ArrayList<entidades.Provincia>) Prov.obtenerTodas(); 
+		 return prov;
+	 }
+	 
+	 public ArrayList<Localidad> Localidad(int idProvincia){
+		 LocalidadDaoImpl Loc = new LocalidadDaoImpl();
+		 
+		 ArrayList<Localidad> loc = (ArrayList<entidades.Localidad>) Loc.obtenerLocalidadesPorProvincia(idProvincia); 
+		 return loc;
+	 }
 }

@@ -7,6 +7,8 @@ import java.util.List;
 import daoImpl.Conexion;
 import dao.ClienteDao;
 import entidades.Cliente;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class ClienteDaoImpl implements ClienteDao {
 
@@ -127,4 +129,55 @@ public class ClienteDaoImpl implements ClienteDao {
         }
         return estado;
     }
+    
+    @Override
+    public boolean borrarCuil(String cuil) {
+        boolean estado = true;
+        cn = new Conexion();
+        cn.Open();
+        String query = "UPDATE Cliente SET estado_Cli = 0 WHERE cuil_Cli = ?";
+        try {
+            PreparedStatement statement = cn.getSQLConexion().prepareStatement(query);
+            statement.setString(1, cuil);
+            estado = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            estado = false;
+        } finally {
+            cn.close();
+        }
+        return estado;
+    }
+    
+    public boolean eliminarCliente(String cuilCli) {
+        if (cuilCli == null || cuilCli.isEmpty()) {
+            System.out.println("Error: CUIL inválido.");
+            return false;
+        }
+    ClienteDaoImpl clienteDao = new ClienteDaoImpl();
+    boolean borrarCuilCliente = clienteDao.borrarCuil(cuilCli);
+    return borrarCuilCliente;
+	}
+
+
+    /*  Esta parte es del PR de Clau, TO-DO: Modificarlo para que implemente las clases del dao "borrar" */
+ /* private static final String bajaDeCliente = "UPDATE cliente SET estado_Cli = 0 WHERE cuil_Cli = ?";
+
+    public Boolean bajaDeCliente(String cuilCli) {
+        PreparedStatement statement;
+        int rowsUpdated = 0;
+
+        Conexion conexion = Conexion.getConexion();
+        try {
+            statement = conexion.getSQLConexion().prepareStatement(bajaDeCliente);
+            statement.setString(1, cuilCli);  // Asigna el valor de cuil_Cli como parï¿½metro
+            rowsUpdated = statement.executeUpdate(); // Ejecuta la actualizaciï¿½n
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Retorna false en caso de error
+        }
+        
+        return rowsUpdated > 0; // Retorna true si al menos una fila fue actualizada
+    }*/
+    
 }
