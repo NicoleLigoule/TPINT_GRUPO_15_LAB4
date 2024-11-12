@@ -134,7 +134,7 @@
                 <td><%= cuenta.getIdTipoCuenta() %></td>
                 <td><%= cuenta.getCbuCu() %></td> 
                 <td><%= cuenta.getSaldoCu() %></td>
-                <td><%= cuenta.isEstadoCu()? "Activo" : "Inactivo" %></td>
+                <td><%= cuenta.isEstadoCu()? "Activa" : "Inactiva" %></td>
             </tr>
 			<% } %>
         </tbody>
