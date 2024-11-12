@@ -1,3 +1,6 @@
+<%@ page import="java.util.List" %>
+<%@ page import="entidades.Cuenta" %>
+
 <!--<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>-->
 <!DOCTYPE html>
@@ -99,6 +102,11 @@
            
            <div>
            		<h2>Listado de Cuentas</h2>
+    <%
+        
+        List<Cuenta> listaCuenta = (List<Cuenta>) request.getAttribute("listaCuenta");
+        if (listaCuenta != null && !listaCuenta.isEmpty()) {
+    %>
            		<br>
            		
            <!-- TABLA EJEMPLO -->
@@ -116,36 +124,26 @@
             </tr>
         </thead>
         <tbody>
+        	<% 
+               for (Cuenta cuenta : listaCuenta) {
+             %>
             <tr>
-                <td>123456789</td>
-                <td>20-12345678-9</td>
-                <td>2021-05-14</td>
-                <td>1</td>
-                <td>1234567890123456789012</td>
-                <td>50000.00</td>
-                <td>Activo</td>
+				<td><%= cuenta.getNumeroDeCuentaCu() %></td>
+                <td><%= cuenta.getCuilCliCu() %></td>
+                <td><%= cuenta.getFechaCreacionCu() %></td>
+                <td><%= cuenta.getIdTipoCuenta() %></td>
+                <td><%= cuenta.getCbuCu() %></td> 
+                <td><%= cuenta.getSaldoCu() %></td>
+                <td><%= cuenta.isEstadoCu()? "Activo" : "Inactivo" %></td>
             </tr>
-            <tr>
-                <td>234567890</td>
-                <td>27-23456789-0</td>
-                <td>2020-09-21</td>
-                <td>2</td>
-                <td>2345678901234567890123</td>
-                <td>75000.00</td>
-                <td>Activo</td>
-            </tr>
-            <tr>
-                <td>345678901</td>
-                <td>23-34567890-1</td>
-                <td>2019-02-11</td>
-                <td>3</td>
-                <td>3456789012345678901234</td>
-                <td>120000.00</td>
-                <td>Inactivo</td>
-            </tr>
-            <!-- Agrega más filas según sea necesario -->
+			<% } %>
         </tbody>
     </table>
+    <% 
+        } else {
+            out.println("<p>No se encontraron Cuentas.</p>");
+        }
+    %>
 </div>
 
 
