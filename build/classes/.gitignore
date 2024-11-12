@@ -1,6 +1,6 @@
 /abml/
+/dao/
+/daoImpl/
+/entidades/
 /negocio/
 /servlets/
-/daoImpl/
-/dao/
-/entidades/

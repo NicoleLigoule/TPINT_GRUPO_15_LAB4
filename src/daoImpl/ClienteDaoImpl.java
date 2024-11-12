@@ -47,6 +47,36 @@ public class ClienteDaoImpl implements ClienteDao {
         }
         return lista;
     }
+    public ArrayList<Cliente> obtenerTodosarray() {
+        cn = new Conexion();
+        cn.Open();
+        ArrayList<Cliente> lista = new ArrayList<>();
+        String query = "SELECT * FROM Cliente";
+        try {
+            ResultSet rs = cn.query(query);
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setCuil(rs.getString("cuil_Cli"));
+                cliente.setDni(rs.getInt("dni_Cli"));
+                cliente.setNombre(rs.getString("nombre_Clii"));
+                cliente.setApellido(rs.getString("apellido_Cli"));
+                cliente.setId_sexo(rs.getInt("ID_sexo_Cli"));
+                cliente.setId_nacionalidad(rs.getString("ID_Nacionalidad_Cli"));
+                cliente.setFechaNacimiento(rs.getObject("fecha_nacimiento_Cli", LocalDate.class));
+                cliente.setDireccion(rs.getString("direccion_Cli"));
+                cliente.setId_localidad(rs.getInt("ID_Localidad_cli"));
+                cliente.setCorreo(rs.getString("correo_electronico_Cli"));
+                cliente.setTelefono(rs.getString("telefono_Cli"));
+                cliente.setEstado(rs.getBoolean("estado_Cli"));
+                lista.add(cliente);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+        return lista;
+    }
 
     @Override
     public Cliente obtenerUno(int dni) {

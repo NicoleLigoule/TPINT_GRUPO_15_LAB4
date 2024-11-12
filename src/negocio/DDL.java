@@ -6,14 +6,22 @@ import entidades.Sexo;
 import entidades.TipoDeCuenta;
 import entidades.Provincia;
 import entidades.Localidad;
+import entidades.Cliente;
 
 import daoImpl.CuentaDaoImpl;
+import daoImpl.ClienteDaoImpl;
 import daoImpl.ddlClientes;
 import daoImpl.ProvinciaDaoImpl;
 import daoImpl.LocalidadDaoImpl;
 
 public class DDL {
 	
+	 public ArrayList<Cliente> ClienteList(){
+		 ClienteDaoImpl Cuenta= new ClienteDaoImpl();
+		 
+		 ArrayList<Cliente> Tipos = Cuenta.obtenerTodosarray() ; 
+		 return Tipos;
+	 }
 	 public ArrayList<TipoDeCuenta> TipoDecuenta(){
 		 CuentaDaoImpl Cuenta= new CuentaDaoImpl();
 		 
