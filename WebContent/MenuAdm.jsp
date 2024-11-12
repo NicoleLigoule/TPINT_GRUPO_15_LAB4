@@ -37,7 +37,7 @@
 
                         <li> <a href="#">Baja Cuenta</a></li>
                         <li> <a href="#">Editar Cuenta</a></li>
-                        <li> <a href="#">Listar Cuenta</a></li>
+                        <li> <a href="ListarCuenta.jsp">Listar Cuenta</a></li>
                     </ul>
                 </li>
                 <li class="menu-item">
