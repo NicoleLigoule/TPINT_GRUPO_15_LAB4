@@ -27,7 +27,7 @@
                         <li> <a href="${pageContext.request.contextPath}/servletAgregarCliente?Param=1">Agregar Cliente</a></li>
                         <li> <a href="EliminarCliente.jsp">Baja Cliente</a></li>
                         <li> <a href="#">Editar Cliente</a></li>
-                        <li> <a href="ListarCliente.jsp">Listar Cliente</a></li>
+                       <li> <a href="${pageContext.request.contextPath}/servletListarCliente?Param=1">Listar Cliente</a></li>
                     </ul>
                 </li>
                 <li class="menu-item">
