@@ -22,7 +22,7 @@
         <aside class="sidebar">
             <ul>
                 <li class="menu-item">
-                    <a href="${pageContext.request.contextPath}/servletAgregarCliente?Param=1" onclick="toggleSubmenu(event)">Clientes</a>
+                    <a href="#" onclick="toggleSubmenu(event)">Clientes</a>
                     <ul class="submenu">
                         <li> <a href="${pageContext.request.contextPath}/servletAgregarCliente?Param=1">Agregar Cliente</a></li>
                         <li> <a href="EliminarCliente.jsp">Baja Cliente</a></li>
