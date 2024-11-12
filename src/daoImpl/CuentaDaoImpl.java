@@ -51,16 +51,16 @@ public class CuentaDaoImpl implements CuentaDao {
         cn.Open();
         List<Cuenta> lista = new ArrayList<>();
         try {
-            ResultSet rs = cn.query("SELECT * FROM Cuenta WHERE Estado = 1");
+            ResultSet rs = cn.query("SELECT * FROM Cuenta WHERE Estado_Cu = 1");
             while (rs.next()) {
                 Cuenta cuenta = new Cuenta();
-                cuenta.setNumeroDeCuentaCu(rs.getInt("Numero"));
-                cuenta.setCuilCliCu(rs.getString("ClienteCUIL"));
-                cuenta.setFechaCreacionCu(rs.getDate("FechaCreacion").toLocalDate());
-                cuenta.setIdTipoCuenta(rs.getInt("TipoCuentaID"));
-                cuenta.setCbuCu(rs.getString("CBU"));
-                cuenta.setSaldoCu(rs.getBigDecimal("Saldo"));
-                cuenta.setEstadoCu(rs.getBoolean("Estado"));
+                cuenta.setNumeroDeCuentaCu(rs.getInt("Numero_de_Cuenta_Cu"));
+                cuenta.setCuilCliCu(rs.getString("Cuil_Cli_Cu"));
+                cuenta.setFechaCreacionCu(rs.getDate("Fecha_Creacion_Cu").toLocalDate());
+                cuenta.setIdTipoCuenta(rs.getInt("Id_Tipo_Cuenta"));
+                cuenta.setCbuCu(rs.getString("CBU_Cu"));
+                cuenta.setSaldoCu(rs.getBigDecimal("Saldo_Cu"));
+                cuenta.setEstadoCu(rs.getBoolean("Estado_Cu"));
                 lista.add(cuenta);
             }
         } catch (Exception e) {
@@ -77,16 +77,16 @@ public class CuentaDaoImpl implements CuentaDao {
         cn.Open();
         Cuenta cuenta = null;
         try {
-            ResultSet rs = cn.query("SELECT * FROM Cuenta WHERE Estado = 1 AND Numero = " + numeroCuenta);
+            ResultSet rs = cn.query("SELECT * FROM Cuenta WHERE Estado_Cu = 1 AND Numero_de_Cuenta_Cu = " + numeroCuenta);
             if (rs.next()) {
                 cuenta = new Cuenta();
-                cuenta.setNumeroDeCuentaCu(rs.getInt("Numero"));
-                cuenta.setCuilCliCu(rs.getString("ClienteCUIL"));
-                cuenta.setFechaCreacionCu(rs.getDate("FechaCreacion").toLocalDate());
-                cuenta.setIdTipoCuenta(rs.getInt("TipoCuentaID"));
-                cuenta.setCbuCu(rs.getString("CBU"));
-                cuenta.setSaldoCu(rs.getBigDecimal("Saldo"));
-                cuenta.setEstadoCu(rs.getBoolean("Estado"));
+                cuenta.setNumeroDeCuentaCu(rs.getInt("Numero_de_Cuenta_Cu"));
+                cuenta.setCuilCliCu(rs.getString("Cuil_Cli_Cu"));
+                cuenta.setFechaCreacionCu(rs.getDate("Fecha_Creacion_Cu").toLocalDate());
+                cuenta.setIdTipoCuenta(rs.getInt("Id_Tipo_Cuenta"));
+                cuenta.setCbuCu(rs.getString("CBU_Cu"));
+                cuenta.setSaldoCu(rs.getBigDecimal("Saldo_Cu"));
+                cuenta.setEstadoCu(rs.getBoolean("Estado_Cu"));
          
             }
         } catch (Exception e) {
@@ -102,7 +102,7 @@ public class CuentaDaoImpl implements CuentaDao {
         cn = new Conexion();
         cn.Open();
         boolean estado = true;
-        String query = "INSERT INTO Cuenta (ClienteCUIL, FechaCreacion, TipoCuentaID, CBU, Saldo, Estado) VALUES ('" +
+        String query = "INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu) VALUES ('" +
                 cuenta.getCuilCliCu() + "', '" +
                 cuenta.getFechaCreacionCu() + "', " +
                 cuenta.getIdTipoCuenta() + ", '" +
@@ -125,13 +125,13 @@ public class CuentaDaoImpl implements CuentaDao {
         cn = new Conexion();
         cn.Open();
         boolean estado = true;
-        String query = "UPDATE Cuenta SET ClienteCUIL = '" + cuenta.getCuilCliCu() +
-                "', FechaCreacion = '" + cuenta.getFechaCreacionCu() +
-                "', TipoCuentaID = " + cuenta.getIdTipoCuenta() +
-                ", CBU = '" + cuenta.getCbuCu() +
-                "', Saldo = " + cuenta.getSaldoCu() +
-                ", Estado = " + (cuenta.isEstadoCu() ? 1 : 0) +
-                " WHERE Numero = " + cuenta.getNumeroDeCuentaCu();
+        String query = "UPDATE Cuenta SET Cuil_Cli_Cu = '" + cuenta.getCuilCliCu() +
+                "', Fecha_Creacion_Cu = '" + cuenta.getFechaCreacionCu() +
+                "', Id_Tipo_Cuenta = " + cuenta.getIdTipoCuenta() +
+                ", CBU_Cu = '" + cuenta.getCbuCu() +
+                "', Saldo_Cu = " + cuenta.getSaldoCu() +
+                ", Estado_Cu = " + (cuenta.isEstadoCu() ? 1 : 0) +
+                " WHERE Numero_de_Cuenta_Cu = " + cuenta.getNumeroDeCuentaCu();
         try {
             estado = cn.execute(query);
         } catch (Exception e) {
@@ -148,7 +148,7 @@ public class CuentaDaoImpl implements CuentaDao {
         cn = new Conexion();
         cn.Open();
         boolean estado = true;
-        String query = "UPDATE Cuenta SET Estado = 0 WHERE Numero = " + numeroCuenta;
+        String query = "UPDATE Cuenta SET Estado_Cu = 0 WHERE Numero_de_Cuenta_Cu = " + numeroCuenta;
         try {
             estado = cn.execute(query);
         } catch (Exception e) {

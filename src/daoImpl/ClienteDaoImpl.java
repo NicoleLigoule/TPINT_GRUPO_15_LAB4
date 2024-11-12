@@ -19,23 +19,23 @@ public class ClienteDaoImpl implements ClienteDao {
         cn = new Conexion();
         cn.Open();
         List<Cliente> lista = new ArrayList<>();
-        String query = "SELECT * FROM clientes";
+        String query = "SELECT * FROM Cliente";
         try {
             ResultSet rs = cn.query(query);
             while (rs.next()) {
                 Cliente cliente = new Cliente();
-                cliente.setCuil(rs.getString("cuil"));
-                cliente.setDni(rs.getInt("dni"));
-                cliente.setNombre(rs.getString("nombre"));
-                cliente.setApellido(rs.getString("apellido"));
-                cliente.setId_sexo(rs.getInt("id_sexo"));
-                cliente.setId_nacionalidad(rs.getString("id_nacionalidad"));
-                cliente.setFechaNacimiento(rs.getObject("fechaNacimiento", LocalDate.class));
-                cliente.setDireccion(rs.getString("direccion"));
-                cliente.setId_localidad(rs.getInt("id_localidad"));
-                cliente.setCorreo(rs.getString("correo"));
-                cliente.setTelefono(rs.getString("telefono"));
-                cliente.setEstado(rs.getBoolean("estado"));
+                cliente.setCuil(rs.getString("cuil_Cli"));
+                cliente.setDni(rs.getInt("dni_Cli"));
+                cliente.setNombre(rs.getString("nombre_Clii"));
+                cliente.setApellido(rs.getString("apellido_Cli"));
+                cliente.setId_sexo(rs.getInt("ID_sexo_Cli"));
+                cliente.setId_nacionalidad(rs.getString("ID_Nacionalidad_Cli"));
+                cliente.setFechaNacimiento(rs.getObject("fecha_nacimiento_Cli", LocalDate.class));
+                cliente.setDireccion(rs.getString("direccion_Cli"));
+                cliente.setId_localidad(rs.getInt("ID_Localidad_cli"));
+                cliente.setCorreo(rs.getString("correo_electronico_Cli"));
+                cliente.setTelefono(rs.getString("telefono_Cli"));
+                cliente.setEstado(rs.getBoolean("estado_Cli"));
                 lista.add(cliente);
             }
         } catch (Exception e) {
@@ -51,22 +51,22 @@ public class ClienteDaoImpl implements ClienteDao {
         cn = new Conexion();
         cn.Open();
         Cliente cliente = new Cliente();
-        String query = "SELECT * FROM clientes WHERE dni = " + dni;
+        String query = "SELECT * FROM Cliente WHERE dni_Cli = " + dni;
         try {
             ResultSet rs = cn.query(query);
             if (rs.next()) {
-                cliente.setCuil(rs.getString("cuil"));
-                cliente.setDni(rs.getInt("dni"));
-                cliente.setNombre(rs.getString("nombre"));
-                cliente.setApellido(rs.getString("apellido"));
-                cliente.setId_sexo(rs.getInt("id_sexo"));
-                cliente.setId_nacionalidad(rs.getString("id_nacionalidad"));
-                cliente.setFechaNacimiento(rs.getObject("fechaNacimiento", LocalDate.class));
-                cliente.setDireccion(rs.getString("direccion"));
-                cliente.setId_localidad(rs.getInt("id_localidad"));
-                cliente.setCorreo(rs.getString("correo"));
-                cliente.setTelefono(rs.getString("telefono"));
-                cliente.setEstado(rs.getBoolean("estado"));
+                cliente.setCuil(rs.getString("cuil_Cli"));
+                cliente.setDni(rs.getInt("dni_Cli"));
+                cliente.setNombre(rs.getString("nombre_Clii"));
+                cliente.setApellido(rs.getString("apellido_Cli"));
+                cliente.setId_sexo(rs.getInt("ID_sexo_Cli"));
+                cliente.setId_nacionalidad(rs.getString("ID_Nacionalidad_Cli"));
+                cliente.setFechaNacimiento(rs.getObject("fecha_nacimiento_Cli", LocalDate.class));
+                cliente.setDireccion(rs.getString("direccion_Cli"));
+                cliente.setId_localidad(rs.getInt("ID_Localidad_cli"));
+                cliente.setCorreo(rs.getString("correo_electronico_Cli"));
+                cliente.setTelefono(rs.getString("telefono_Cli"));
+                cliente.setEstado(rs.getBoolean("estado_Cli"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,7 +81,7 @@ public class ClienteDaoImpl implements ClienteDao {
         boolean estado = true;
         cn = new Conexion();
         cn.Open();
-        String query = "INSERT INTO clientes (cuil, dni, nombre, apellido, id_sexo, id_nacionalidad, fechaNacimiento, direccion, id_localidad, correo, telefono, estado) " +
+        String query = "INSERT INTO Cliente (cuil_Cli, dni_Cli, nombre_Clii, apellido_Cli, ID_sexo_Cli, ID_Nacionalidad_Cli, fecha_nacimiento_Cli, direccion_Cli, ID_Localidad_cli, correo_electronico_Cli, telefono_Cli, estado_Cli) " +
                 "VALUES ('" + cliente.getCuil() + "', " + cliente.getDni() + ", '" + cliente.getNombre() + "', '" + cliente.getApellido() + "', " + cliente.getId_sexo() + ", '" + cliente.getId_nacionalidad() + "', '" + cliente.getFechaNacimiento() + "', '" + cliente.getDireccion() + "', " + cliente.getId_localidad() + ", '" + cliente.getCorreo() + "', '" + cliente.getTelefono() + "', " + cliente.isEstado() + ")";
         try {
             estado = cn.execute(query);
@@ -99,7 +99,7 @@ public class ClienteDaoImpl implements ClienteDao {
         boolean estado = true;
         cn = new Conexion();
         cn.Open();
-        String query = "UPDATE clientes SET cuil = '" + cliente.getCuil() + "', nombre = '" + cliente.getNombre() + "', apellido = '" + cliente.getApellido() + "', id_sexo = " + cliente.getId_sexo() + ", id_nacionalidad = '" + cliente.getId_nacionalidad() + "', fechaNacimiento = '" + cliente.getFechaNacimiento() + "', direccion = '" + cliente.getDireccion() + "', id_localidad = " + cliente.getId_localidad() + ", correo = '" + cliente.getCorreo() + "', telefono = '" + cliente.getTelefono() + "', estado = " + cliente.isEstado() + " WHERE dni = " + cliente.getDni();
+        String query = "UPDATE Cliente SET cuil_Cli = '" + cliente.getCuil() + "', nombre_Clii = '" + cliente.getNombre() + "', apellido_Cli = '" + cliente.getApellido() + "', ID_sexo_Cli = " + cliente.getId_sexo() + ", ID_Nacionalidad_Cli = '" + cliente.getId_nacionalidad() + "', fecha_nacimiento_Cli = '" + cliente.getFechaNacimiento() + "', direccion_Cli = '" + cliente.getDireccion() + "', ID_Localidad_cli = " + cliente.getId_localidad() + ", correo_electronico_Cli = '" + cliente.getCorreo() + "', telefono_Cli = '" + cliente.getTelefono() + "', estado_Cli = " + cliente.isEstado() + " WHERE dni_Cli = " + cliente.getDni();
         try {
             estado = cn.execute(query);
         } catch (Exception e) {
@@ -116,7 +116,7 @@ public class ClienteDaoImpl implements ClienteDao {
         boolean estado = true;
         cn = new Conexion();
         cn.Open();
-        String query = "UPDATE clientes SET estado = 0 WHERE dni = " + dni;
+        String query = "UPDATE Cliente SET estado_Cli = 0 WHERE dni_Cli = " + dni;
         try {
             estado = cn.execute(query);
         } catch (Exception e) {
