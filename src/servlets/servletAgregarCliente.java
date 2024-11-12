@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.Nacionalidad;
 import entidades.Sexo;
+import entidades.Provincia;
+import entidades.Localidad;
+
 import negocio.DDL;
 
 /**
@@ -33,7 +36,8 @@ public class servletAgregarCliente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("Param") != null) {
+    	System.out.print("ENTRO AL DOGET");
+        if (request.getParameter("Param") != null | request.getParameter("provincia") != null) {
             DDL lista = new DDL();
             try {
 
@@ -51,6 +55,25 @@ public class servletAgregarCliente extends HttpServlet {
                     response.getWriter().println("No se encontraron sexos.");
                 }
 
+                
+                ArrayList<Provincia> listaProvincias = lista.Provincia();
+                if (listaProvincias != null && !listaProvincias.isEmpty()) {
+                    request.setAttribute("listaProvincias", listaProvincias);
+                } else {
+                    response.getWriter().println("No se encontraron provincias.");
+                }
+                
+                if(request.getParameter("provincia") != null) {
+                	int idProvincia = Integer.parseInt(request.getParameter("provincia"));
+                    ArrayList<Localidad> listaLocalidad = lista.Localidad(idProvincia);
+                    if (listaLocalidad != null && !listaLocalidad.isEmpty()) {
+                        request.setAttribute("listaLocalidad", listaLocalidad);
+                    } else {
+                        response.getWriter().println("No se encontraron Localidad.");
+                    }
+                }               
+                
+                
                 RequestDispatcher rd = request.getRequestDispatcher("AgregarCliente.jsp");
                 rd.forward(request, response);
 
@@ -59,6 +82,7 @@ public class servletAgregarCliente extends HttpServlet {
                 response.getWriter().println("Error al obtener los datos: " + e.getMessage());
             }
         }
+        
     }
 
 
@@ -67,7 +91,13 @@ public class servletAgregarCliente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		System.out.print("ENTRO AL DOPOST");
+		if(request.getParameter("submited") != null) {
+			
+		}else {
+			doGet(request, response);
+		}
+
 	}
 
 }

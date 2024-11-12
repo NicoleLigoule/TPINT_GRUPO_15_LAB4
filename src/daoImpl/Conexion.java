@@ -14,17 +14,12 @@ public class Conexion {
     private Connection connection;
 
     Conexion() {
-    	  try {
-              Class.forName("com.mysql.jdbc.Driver");
-            
-          } catch (Exception e) {
-              e.printStackTrace();
-          }
+    	
         try {
-           
+            Class.forName("com.mysql.jdbc.Driver");
             this.connection = DriverManager.getConnection(URL, USER, PASSWORD);
             System.out.println("Conexión exitosa");
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             System.err.println("Error al establecer la conexión con la base de datos");
         }
@@ -34,8 +29,10 @@ public class Conexion {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             this.connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Conexión exitosa");
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("Error al establecer la conexión con la base de datos");
         }
         return this.connection;
     }

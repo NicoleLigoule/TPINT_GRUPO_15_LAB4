@@ -58,7 +58,7 @@ public class LocalidadDaoImpl implements LocalidadDao {
         cn = new Conexion();
         cn.Open();
         List<Localidad> lista = new ArrayList<>();
-        String query = "SELECT * FROM Localidad WHERE ID_Localidad_Lca = " + idProvincia;
+        String query = "SELECT * FROM Localidad WHERE ID_Provincia_Prv_Lca = " + idProvincia;
         try {
             ResultSet rs = cn.query(query);
             while (rs.next()) {
