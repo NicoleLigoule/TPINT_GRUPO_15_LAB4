@@ -1,5 +1,5 @@
 <%@page import="entidades.Nacionalidad"%>
-<%@ page import="entidades.Sexo" %> 
+<%@page import="entidades.Sexo" %> 
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="daoImpl.LocalidadDaoImpl"%>
@@ -109,6 +109,7 @@
                             }
                         }
                         %>
+
                     </select>
 
                     <label for="fecha-nacimiento">Fecha de Nacimiento</label>
@@ -157,10 +158,9 @@
                         }
                         %>
                     </select>
-
                     <div class="button-group">
                         <button type="button" class="cancel-button">Cancelar</button>
-                        <button type="submit" class="submit-button">Agregar</button>
+                        <button type="submit" class="submit-button" name="submit-button">Agregar</button>
                     </div>
                 </form>
             </div>
