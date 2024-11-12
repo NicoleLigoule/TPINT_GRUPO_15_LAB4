@@ -12,7 +12,6 @@ body {
     padding-top: 100px;
 }
 
-
 .navbar {
     width: 100%;
     background-color: #d6a6d6;
@@ -24,13 +23,20 @@ body {
     z-index: 2;
 }
 
-.hamburger {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    margin-right: auto; 
+/* Estilo inicial para el ícono de menú */
+.hamburger .line {
+    background-color: #a675b8; /* Color inicial */
+}
+
+/* Cambia el color cuando el botón de menú está activo o seleccionado */
+.hamburger:focus .line,
+.hamburger:active .line {
+    background-color: #7a459b; /* Color cuando está activo o seleccionado */
+}
+
+/* Evita cambios de color cuando pasas el cursor */
+.hamburger:hover .line {
+    background-color: #a675b8; /* Mismo color que el inicial */
 }
 
 .line {
@@ -58,20 +64,20 @@ body {
 }
 
 .sidebar {
-    width: 250px; 
+    width: 250px;
     background-color: #d6a6d6;
     padding: 20px;
-    height: 100vh; 
+    height: 100vh;
     position: fixed;
-    top: 80px; 
+    top: 80px;
     left: 0;
     transition: transform 1s ease;
-    transform: translateX(-100%); 
+    transform: translateX(-100%);
     z-index: 1;
 }
 
 .sidebar.active {
-    transform: translateX(0); 
+    transform: translateX(0);
 }
 
 .sidebar ul {
@@ -98,20 +104,19 @@ body {
 .submenu {
     list-style-type: none;
     padding-left: 20px;
-    max-height: 0; 
-    overflow: hidden; 
-    transition: max-height 1s ease; 
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s ease;
 }
 
 .menu-item.active .submenu {
-    max-height: 500px; 
+    max-height: 500px;
 }
-
 
 .submenu li {
     font-size: 1rem;
     color: #555;
-    padding-left: 15px; 
+    padding-left: 15px;
 }
 
 .submenu li a {
@@ -123,8 +128,15 @@ body {
     color: #f8e3f4;
 }
 
+.Mastercontainer {
+    margin-left: 20%;
+    width: 80%;
+    padding: 20px;
+    display: flex;
+}
+
 .content {
-    margin-left: 0; 
+    margin-left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -147,62 +159,80 @@ h2 {
     margin-bottom: 20px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-label {
-    font-size: 14px;
-    color: #666;
-    text-align: left;
-}
-
-input[type="text"],
-input[type="tel"],
-input[type="email"],
-input[type="date"],
-select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+table {
     width: 100%;
-}
-
-.radio-group {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.radio-group label {
+    border-collapse: collapse;
+    margin: 20px 0;
     font-size: 14px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
     color: #333;
+    font-weight: bold;
 }
 
-.button-group {
-    display: flex;
-    gap: 10px;
-    justify-content: space-around;
-    margin-top: 20px;
+tr:hover {
+    background-color: #f5f5f5;
 }
 
-.cancel-button,
-.submit-button {
-    padding: 10px;
-    border-radius: 4px;
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
 }
 
-.cancel-button {
-    background-color: #a80000;
-    color: white;
+button:hover {
+    background-color: #45a049;
 }
 
-.submit-button {
-    background-color: #d6a6d6;
-    color: white;
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+        font-size: 12px;
+    }
 }
+
+ table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+                font-size: 12px;
+            }
+        }

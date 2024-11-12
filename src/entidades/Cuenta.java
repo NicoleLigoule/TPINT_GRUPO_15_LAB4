@@ -87,6 +87,7 @@ public class Cuenta {
 	        this.estadoCu = estadoCu;
 	    }
 
+	    
 
 	    // Método toString 
 		@Override
