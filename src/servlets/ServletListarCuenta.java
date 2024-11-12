@@ -33,6 +33,7 @@ public class ServletListarCuenta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.print("LLEGA AL SERVLET");
+		System.out.print("LLEGA O NO????");
         if (request.getParameter("Param") != null) {
             abmlCuenta abmlcuenta = new abmlCuenta();
             try {

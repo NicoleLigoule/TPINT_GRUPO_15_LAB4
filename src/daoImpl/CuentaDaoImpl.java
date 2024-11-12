@@ -65,7 +65,7 @@ public class CuentaDaoImpl implements CuentaDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
+        } finally {        	
             cn.close();
         }
         return lista;
