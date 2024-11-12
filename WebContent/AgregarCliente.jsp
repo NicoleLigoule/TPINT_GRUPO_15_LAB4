@@ -118,7 +118,9 @@
 					        if (listaSeguros != null) {
 					            for (Nacionalidad nac : listaSeguros) { 
 					    %>
-					                <option value="<%= nac.getIdNacionalidadNc() %>"><%= nac.getDescripcionNc() %></option>
+					                 <option value="<%= nac.getIdNacionalidadNc() %>"><%= nac.getDescripcionNc() %></option> 
+					                
+					                
 					    <% 
 					            }
 					        }
