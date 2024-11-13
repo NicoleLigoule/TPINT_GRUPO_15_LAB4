@@ -1,3 +1,13 @@
+<%@ page import="daoImpl.ClienteCuentaDTO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entidades.Usuario" %>
+<%
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,7 +25,7 @@
         <a href="${pageContext.request.contextPath}/Login.jsp">
             <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
-        <span class="username">USUARIO XXXX</span>
+        <span class="username"><%= usuario.getUsuarioUs() %></span>
     </nav>
 
     <div class="main-container">
@@ -63,32 +73,66 @@
                 <h2>Baja de Cuentas</h2>
                 <br>
                 <h3>Datos del socio</h3>
-                <form>
-                    <label for="dni">DNI Cliente</label>
-                    <input type="text" id="dni" name="dni" placeholder="DNI" >
-
+                <!-- RESOLVER USANDO 2 FORM-->
+                
+                 <form action="servletEliminarCuenta" method="get">
                     <label for="cuil">CUIL Cliente</label>
-                    <input type="text" id="cuil" name="cuil" placeholder="CUIL" >     
-                    
+                    <input type="text" id="cuil" name="cuil" value="${param.cuil}" placeholder="CUIL" required>   
+
                     <div class="button-group">                    
-                    	<button type="submit" class="submit-button">Buscar cliente</button>             
+                        <button type="submit" name="buscarCliente" class="submit-button">Buscar cliente</button>             
                     </div>
-
-                    <label for="cuentasDelCliente">Cuentas del cliente</label>
-                    <select id="cuentasDelCliente"  name="cuentasDelCliente"  required>
-                    <option value="" disabled selected>Seleccione una cuenta a eliminar</option>
-                    </select>
-
+<!-- AQUI DEBERIA FINALIZAR PRIMER FORM -->
+                    <label for="nombre">Cliente</label>
                     
+                    <input type="text" id="nombre" name="nombre" value="${requestScope.nombreApellido}" placeholder="Nombre y Apellido" readonly>
+					<label for="cuentasDelCliente">Cuentas del cliente</label>
+<select id="cuentasDelCliente" name="cuentasDelCliente">
+    <option value="" disabled selected>Seleccione una cuenta a eliminar</option>
 
+<%
+    // Obtenemos la lista de cuentas
+    ArrayList<ClienteCuentaDTO> listaCuentas = (ArrayList<ClienteCuentaDTO>) request.getAttribute("listaCuentas");
+
+    // Verificamos que la lista no sea nula
+    if (listaCuentas != null) {
+        for (ClienteCuentaDTO cuenta : listaCuentas) {
+            
+            int numeroCuenta = cuenta.getNumeroCuenta();  
+            String descripcionCuenta = cuenta.getTipoCuenta();
+
+            
+            if (numeroCuenta != 0) {
+%>
+            <option value="<%= numeroCuenta %>"><%= numeroCuenta + " - " + descripcionCuenta %></option>
+<%
+            }
+        }
+    }
+%>
+</select>
+                    
+				
                     <div class="button-group">
                         <button type="button" class="cancel-button">Volver</button>
                         <button type="submit" class="submit-button">Solicitar baja</button>
                     </div>
+                    
+                    <div style="text-align: center; font-size: 18px; padding: 10px; margin-top: 20px;" >
+        <%
+            String mensaje = "";
+            if (request.getAttribute("mensaje") != null) {
+                mensaje = (String) request.getAttribute("mensaje");
+            }
+        %>
+        <%= mensaje %>
+    </div>
+                    
                 </form>
             </div>
         </div>
     </div>
+    
 
 <script src="JS/MenuAdm.js"></script>
 </body>

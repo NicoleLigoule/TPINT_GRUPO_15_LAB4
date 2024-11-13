@@ -9,6 +9,7 @@ import entidades.Localidad;
 import entidades.Cliente;
 
 import daoImpl.CuentaDaoImpl;
+import daoImpl.ClienteCuentaDTO;
 import daoImpl.ClienteDaoImpl;
 import daoImpl.ddlClientes;
 import daoImpl.ProvinciaDaoImpl;
@@ -55,4 +56,10 @@ public class DDL {
 		 ArrayList<Localidad> loc = (ArrayList<entidades.Localidad>) Loc.obtenerLocalidadesPorProvincia(idProvincia); 
 		 return loc;
 	 }
+	 
+	 public ArrayList<ClienteCuentaDTO> ClienteCuentas(String CUIL) {
+		    CuentaDaoImpl clienteCuenta = new CuentaDaoImpl();
+		    return new ArrayList<>(clienteCuenta.obtenerCuentasPorCuil(CUIL));
+		}
+
 }
