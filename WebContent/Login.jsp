@@ -19,7 +19,7 @@
     </nav>
     <div class="container">
         <h2>Iniciar Sesión</h2>
-        <form action="login.jsp" method="post">
+        <form action="${pageContext.request.contextPath}/ServletLoginSesion" method="post">
             <label for="usuario">Usuario</label>
             <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
             
