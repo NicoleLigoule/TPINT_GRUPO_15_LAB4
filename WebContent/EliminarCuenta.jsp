@@ -72,62 +72,70 @@
             <div class="form-card">
                 <h2>Baja de Cuentas</h2>
                 <br>
-                <h3>Datos del socio</h3>
-                <!-- RESOLVER USANDO 2 FORM-->
+                <h3>Datos del socio</h3>                
                 
-                 <form action="servletEliminarCuenta" method="get">
+                  <!-- Primer formulario: GET para buscar cliente -->
+                <form action="servletEliminarCuenta" method="get">
                     <label for="cuil">CUIL Cliente</label>
                     <input type="text" id="cuil" name="cuil" value="${param.cuil}" placeholder="CUIL" required>   
 
                     <div class="button-group">                    
                         <button type="submit" name="buscarCliente" class="submit-button">Buscar cliente</button>             
                     </div>
-<!-- AQUI DEBERIA FINALIZAR PRIMER FORM -->
+                </form>
+
+                <!-- Segundo formulario: POST para eliminar cuenta -->
+                <%
+                    String nombreApellido = (String) request.getAttribute("nombreApellido");
+                    ArrayList<ClienteCuentaDTO> listaCuentas = (ArrayList<ClienteCuentaDTO>) request.getAttribute("listaCuentas");
+                %>
+
+                <form action="servletEliminarCuenta" method="post">
                     <label for="nombre">Cliente</label>
+                    <input type="text" id="nombre" name="nombre" value="<%= nombreApellido != null ? nombreApellido : "" %>" placeholder="Nombre y Apellido" readonly>
                     
-                    <input type="text" id="nombre" name="nombre" value="${requestScope.nombreApellido}" placeholder="Nombre y Apellido" readonly>
-					<label for="cuentasDelCliente">Cuentas del cliente</label>
-<select id="cuentasDelCliente" name="cuentasDelCliente">
-    <option value="" disabled selected>Seleccione una cuenta a eliminar</option>
-
-<%
-    // Obtenemos la lista de cuentas
-    ArrayList<ClienteCuentaDTO> listaCuentas = (ArrayList<ClienteCuentaDTO>) request.getAttribute("listaCuentas");
-
-    // Verificamos que la lista no sea nula
-    if (listaCuentas != null) {
-        for (ClienteCuentaDTO cuenta : listaCuentas) {
-            
-            int numeroCuenta = cuenta.getNumeroCuenta();  
-            String descripcionCuenta = cuenta.getTipoCuenta();
-
-            
-            if (numeroCuenta != 0) {
-%>
-            <option value="<%= numeroCuenta %>"><%= numeroCuenta + " - " + descripcionCuenta %></option>
-<%
-            }
-        }
-    }
-%>
-</select>
+                    <label for="cuentasDelCliente">Cuentas del cliente</label>
+                    <select id="cuentasDelCliente" name="cuentasDelCliente" required>
+                        <option value="" disabled selected>Seleccione una cuenta a eliminar</option>
+                       <%
+                       
+                    		
+                       		if(listaCuentas != null)
+                       		{
+                       			for(ClienteCuentaDTO cuenta : listaCuentas)
+                       			{
+                       				int numeroCuenta = cuenta.getNumeroCuenta();
+                       				String descripcionCuenta = cuenta.getTipoCuenta();
+                       				
+                       				if(numeroCuenta != 0)
+                       				{
+                       				  
+                       				%>
+                       					 <option value="<%= numeroCuenta %>"><%= numeroCuenta + " - " + descripcionCuenta %></option>
+                       				<%}
+                       			}
+                       		}
+                       %>
+                    </select>
                     
-				
                     <div class="button-group">
-                        <button type="button" class="cancel-button">Volver</button>
+                        <button type="button" class="cancel-button" onclick="window.history.back();">Volver</button>
                         <button type="submit" class="submit-button">Solicitar baja</button>
                     </div>
-                    
+
                     <div style="text-align: center; font-size: 18px; padding: 10px; margin-top: 20px;" >
-        <%
-            String mensaje = "";
-            if (request.getAttribute("mensaje") != null) {
-                mensaje = (String) request.getAttribute("mensaje");
-            }
-        %>
-        <%= mensaje %>
-    </div>
+                    	
                     
+                        <%
+                        	String mensaje = "";
+                        	if(request.getAttribute("mensaje") != null)
+                        	{
+                        		mensaje = (String)request.getAttribute("mensaje");
+                        	}
+                        %>
+                        <%= mensaje %>
+                        
+                    </div>
                 </form>
             </div>
         </div>
