@@ -1,5 +1,13 @@
 <%@ page import="daoImpl.ClienteCuentaDTO" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="entidades.Usuario" %>
+<%
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +25,7 @@
         <a href="${pageContext.request.contextPath}/Login.jsp">
             <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
-        <span class="username">USUARIO XXXX</span>
+        <span class="username"><%= usuario.getUsuarioUs() %></span>
     </nav>
 
     <div class="main-container">
