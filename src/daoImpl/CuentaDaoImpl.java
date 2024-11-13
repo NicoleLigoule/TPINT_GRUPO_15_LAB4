@@ -71,6 +71,7 @@ public class CuentaDaoImpl implements CuentaDao {
         return lista;
     }
 
+    
     @Override
     public Cuenta obtenerUno(int numeroCuenta) {
         cn = new Conexion();
