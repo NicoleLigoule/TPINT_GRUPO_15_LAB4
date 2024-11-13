@@ -65,7 +65,7 @@
                 <h2>Baja de Cuentas</h2>
                 <br>
                 <h3>Datos del socio</h3>
-                <!-- DESDE AQUI PEGO CODIGO -->
+                <!-- RESOLVER USANDO 2 FORM-->
                 
                  <form action="servletEliminarCuenta" method="get">
                     <label for="cuil">CUIL Cliente</label>
