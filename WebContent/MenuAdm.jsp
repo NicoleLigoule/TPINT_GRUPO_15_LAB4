@@ -44,7 +44,7 @@
                     <ul class="submenu">
                        <li> <a href="${pageContext.request.contextPath}/servletsSolicitarCuenta?Param=1">Agregar Cuenta</a></li>
 
-                        <li> <a href="#">Baja Cuenta</a></li>
+                        <li> <a href="EliminarCuenta.jsp">Baja Cuenta</a></li>
                         <li> <a href="#">Editar Cuenta</a></li>                       
                         <li> <a href="${pageContext.request.contextPath}/ServletListarCuenta?Param=1">Listar Cuenta</a></li>
                         
