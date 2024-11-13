@@ -1,5 +1,13 @@
 <%@ page import="java.util.List" %>
 <%@ page import="entidades.Cuenta" %>
+<%@ page import="entidades.Usuario" %>
+<%
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
 
 <!--<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>-->
@@ -54,7 +62,7 @@
         <a href="${pageContext.request.contextPath}/Login.jsp">
             <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
-        <span class="username">USUARIO XXXX</span>
+        <span class="username"><%= usuario.getUsuarioUs() %></span>
     </nav>
 
     <div class="main-container">
