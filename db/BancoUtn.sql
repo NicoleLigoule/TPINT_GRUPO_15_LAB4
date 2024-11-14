@@ -175,7 +175,8 @@ INSERT INTO Localidad (ID_Provincia_Prv_Lca, Nombre_Loc_Lca) VALUES
 (5, 'San Miguel de Tucumán'),
 (5, 'Tafí del Valle');
 
-
+INSERT INTO Usuario (Cuil_us, Usuario_us, Contrasenia_us, Rol_us, Estado_us)
+VALUES ('20304050607', 'Pepe', '123', 1, 1);
 
 
 
