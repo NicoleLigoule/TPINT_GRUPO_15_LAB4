@@ -83,7 +83,7 @@
 		</aside>
 		<div class="content">
 			<div class="form-card">
-				<h2>Bienvenido al menu de los administradores</h2>
+				<h2>Bienvenido, <%= usuario.getUsuarioUs() %> al menu de los administradores</h2>
 			</div>
 		</div>
 
