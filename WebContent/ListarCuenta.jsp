@@ -148,6 +148,7 @@
        <% } %>
    </div>
 </div>
+</div>
 
     <script src="JS/MenuAdm.js"></script>
 </body>
