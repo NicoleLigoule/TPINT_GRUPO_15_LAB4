@@ -1,4 +1,4 @@
-package daoImpl;
+package entidades;
 
 public class ClienteCuentaDTO {
 	

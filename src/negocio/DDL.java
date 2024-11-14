@@ -7,9 +7,9 @@ import entidades.TipoDeCuenta;
 import entidades.Provincia;
 import entidades.Localidad;
 import entidades.Cliente;
-
+import entidades.ClienteCuentaDTO;
 import daoImpl.CuentaDaoImpl;
-import daoImpl.ClienteCuentaDTO;
+import daoImpl.ClienteCuentaDTODaoImpl;
 import daoImpl.ClienteDaoImpl;
 import daoImpl.ddlClientes;
 import daoImpl.ProvinciaDaoImpl;
@@ -58,8 +58,8 @@ public class DDL {
 	 }
 	 
 	 public ArrayList<ClienteCuentaDTO> ClienteCuentas(String CUIL) {
-		    CuentaDaoImpl clienteCuenta = new CuentaDaoImpl();
-		    return new ArrayList<>(clienteCuenta.obtenerCuentasPorCuil(CUIL));
+		    ClienteCuentaDTODaoImpl clienteCuenta = new ClienteCuentaDTODaoImpl();
+		    return new ArrayList<ClienteCuentaDTO>(clienteCuenta.obtenerCuentasPorCuil(CUIL));
 		}
 
 }

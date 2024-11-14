@@ -1,4 +1,4 @@
-<%@ page import="daoImpl.ClienteCuentaDTO" %>
+<%@ page import="entidades.ClienteCuentaDTO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entidades.Usuario" %>
 <%
@@ -8,7 +8,7 @@
         return;
     }
 %>
-<%@ page import="daoImpl.ClienteCuentaDTO" %>
+<%@ page import="entidades.ClienteCuentaDTO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entidades.Usuario" %>
 <%
