@@ -73,28 +73,52 @@
         <div class="content">
             <div class="form-card">
                 <h2>Editar de Cliente</h2>
-<%
+			<form action="servletEditarCliente" method="POST">
+			    <%
 			    ArrayList<Cliente> listaCliente = (ArrayList<Cliente>) request.getAttribute("listaCliente");
 			    %>
-			    <select id="Cliente" name="Cliente" required>
+			    <label for="Cliente">Seleccione Cliente a Editar:</label>
+			    <select id="Cliente" name="Cliente" required onchange="this.form.submit()">
 			        <option value="" disabled selected>Seleccione Cliente a Editar</option>
 			        <% 
 			        if (listaCliente != null) {
 			            for (Cliente Clie : listaCliente) { 
 			        %>
-			            <option value="<%= Clie.getCuil() %>" <%= Clie.getCuil().equals(request.getParameter("nacionalidad")) ? "selected" : "" %>><%= Clie.getCuil().toString()+" "+ Clie.getApellido() %></option>
+			            <option value="<%= Clie.getCuil().toString() %>"><%= Clie.getCuil().toString() + " " + Clie.getApellido() %></option>
 			        <% 
 			            }
 			        }
 			        %>
 			    </select>
+			</form>
 <!-- Primer formulario (GET) GUARDAMOS HASTA PROVINCIA -->
-			<form action="servletAgregarCliente" method="GET">
+			<form action="servletEditarCliente" method="GET">
+			<%
+			Cliente clienteSe=new Cliente();
+			
+			if (request.getAttribute("clienteSeleccionado") != null) {
+			    System.out.println("Estoy dentro");
+			    
+			    String cuilBuscado = (String) request.getAttribute("clienteSeleccionado");
+			    System.out.println(cuilBuscado);
+			    for (Cliente cliente : listaCliente) {
+			        
+			        if (cliente.getCuil().equals(cuilBuscado)) {
+			            System.out.println("Lo encontré");
+			            
+			            clienteSe = cliente;
+			            System.out.println(clienteSe.toString());
+			            break;
+			        }
+			    }
+			    
+			   }    else{System.out.println("no entre culiado");}
+			%>
 			    <label for="dni">DNI</label>
-			    <input type="text" id="dni" name="dni" placeholder="DNI" value="<%= request.getParameter("dni") != null ? request.getParameter("dni") : "" %>" required>
+			    <input type="text" id="dni" name="dni" placeholder="DNI" value="<%=  request.getParameter("nombre") != null ? request.getParameter("nombre") : ""%>" required>
 			
 			    <label for="cuil">CUIL</label>
-			    <input type="text" id="cuil" name="cuil" placeholder="CUIL" value="<%= request.getParameter("cuil") != null ? request.getParameter("cuil") : "" %>" required>
+			    <input type="text" id="cuil" name="cuil" placeholder="CUIL" value="<%=  request.getParameter("nombre") != null ? request.getParameter("nombre") : "" %>" required>
 			
 			    <label for="nombre">Nombre</label>
 			    <input type="text" id="nombre" name="nombre" placeholder="Nombre" value="<%= request.getParameter("nombre") != null ? request.getParameter("nombre") : "" %>" required>
@@ -117,6 +141,7 @@
 			            }
 			        }
 			        %>
+			       
 			    </select>
 			
 			    <%
@@ -170,7 +195,7 @@
 			</form>
 
 			<!-- Segundo formulario (POST) USAMOS LO QUE GUARDAMOS ANTES y le sumamos la localidad q cambia segun la provincia elegida -->
-				<form action="/servletAgregarCliente" method="POST">
+				<form action="servletEditarCliente" method="POST">
 				    <input type="hidden" name="dni" value="<%= request.getParameter("dni") %>">
 				    <input type="hidden" name="cuil" value="<%= request.getParameter("cuil") %>">
 				    <input type="hidden" name="nombre" value="<%= request.getParameter("nombre") %>">
