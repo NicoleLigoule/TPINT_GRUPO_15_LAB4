@@ -44,7 +44,7 @@
                                 <li class="menu-item">
                     <a href="#" onclick="toggleSubmenu(event)">Transacciones</a>
                     <!-- <ul class="submenu">
-                        <li> <a href="#">Registrar Transacción</a></li>
+                        <li> <a href="#">Registrar Transacciï¿½n</a></li>
                         <li> <a href="#">Ver Historial</a></li>
                     </ul>
                      -->
@@ -91,7 +91,7 @@
 			    <select id="NroDeCuenta" name="NroDeCuenta" required>
 			        <option value="" disabled selected>Seleccione la cuenta</option>
 			        <c:forEach var="cuenta" items="${cuentas}">
-			            <option value="${cuenta.numeroDeCuentaCu}">Cuenta N° ${cuenta.numeroDeCuentaCu}</option>
+			            <option value="${cuenta.numeroDeCuentaCu}">Cuenta Nï¿½ ${cuenta.numeroDeCuentaCu}</option>
 			        </c:forEach>
 			    </select>
 			
@@ -99,7 +99,7 @@
 			    <label for="tipoDeCuenta">Tipo de Cuenta</label>
 			    <select id="tipoDeCuenta" name="tipoDeCuenta" required>
 			        <option value="" disabled selected>Seleccione un tipo de cuenta</option>
-			        <!-- Cargar opciones de tipos de cuenta aquí -->
+			        <!-- Cargar opciones de tipos de cuenta aquï¿½ -->
 			    </select>
 			
 			    <div class="button-group">
@@ -109,7 +109,7 @@
 			</form>
 
 			
-			<!-- Mensaje de éxito o error -->
+			<!-- Mensaje de Exito o error -->
 			<c:if test="${not empty mensaje}">
 			    <p>${mensaje}</p>
 			</c:if>

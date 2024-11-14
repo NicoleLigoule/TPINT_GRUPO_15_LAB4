@@ -106,7 +106,7 @@ public class CuentaDaoImpl implements CuentaDao {
         
         try {
             PreparedStatement statement = cn.getSQLConexion().prepareStatement(query);
-            statement.setString(1, cuil);  // Establece el parámetro para el DNI del cliente
+            statement.setString(1, cuil);
            ResultSet rs = statement.executeQuery();
             
             while (rs.next()) {
