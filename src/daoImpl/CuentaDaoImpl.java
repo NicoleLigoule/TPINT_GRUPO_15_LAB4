@@ -96,6 +96,38 @@ public class CuentaDaoImpl implements CuentaDao {
         }
         return cuenta;
     }
+    
+    @Override
+    public List<Cuenta> obtenerCuentasPorCuil(String cuil) {
+        cn = new Conexion();
+        cn.Open();
+        List<Cuenta> lista = new ArrayList<>();
+        String query = "SELECT * FROM Cuenta WHERE Estado_Cu = 1 AND Cuil_Cli_Cu = ?";
+        
+        try {
+            PreparedStatement statement = cn.getSQLConexion().prepareStatement(query);
+            statement.setString(1, cuil);  // Establece el parámetro para el DNI del cliente
+           ResultSet rs = statement.executeQuery();
+            
+            while (rs.next()) {
+                Cuenta cuenta = new Cuenta();
+                cuenta.setNumeroDeCuentaCu(rs.getInt("Numero_de_Cuenta_Cu"));
+                cuenta.setCuilCliCu(rs.getString("Cuil_Cli_Cu"));
+                cuenta.setFechaCreacionCu(rs.getDate("Fecha_Creacion_Cu").toLocalDate());
+                cuenta.setIdTipoCuenta(rs.getInt("Id_Tipo_Cuenta"));
+                cuenta.setCbuCu(rs.getString("CBU_Cu"));
+                cuenta.setSaldoCu(rs.getBigDecimal("Saldo_Cu"));
+                cuenta.setEstadoCu(rs.getBoolean("Estado_Cu"));
+                lista.add(cuenta);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+        return lista;
+    }
+
 
     @Override
     public boolean insertar(Cuenta cuenta) {
