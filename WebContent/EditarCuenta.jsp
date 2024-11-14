@@ -52,7 +52,7 @@
                                 <li class="menu-item">
                     <a href="#" onclick="toggleSubmenu(event)">Transacciones</a>
                     <!-- <ul class="submenu">
-                        <li> <a href="#">Registrar Transacción</a></li>
+                        <li> <a href="#">Registrar Transacciï¿½n</a></li>
                         <li> <a href="#">Ver Historial</a></li>
                     </ul>
                      -->
@@ -76,18 +76,53 @@
                 <h2>Buscar Cuentas Del Cliente</h2>
                 <br>
                 <h3>Datos de la Cuenta</h3>
-                <form>
+               <!--  <form>
                     <label for="cuil">CUIL CLIENTE</label>
                     <input type="text" id="dni" name="dni" placeholder="DNI" >
                     <div class="button-group">
                         <button type="submit" class="submit-button">Buscar</button>
                     </div>
+				</form>--> 
+				<form action="${pageContext.request.contextPath}/servletEditarCuenta" method="get">
+				    <label for="cuil">CUIL CLIENTE</label>
+				    <input type="text" id="cuil" name="cuil" placeholder="CUIL">
+				    <div class="button-group">
+				        <button type="submit" class="buscarBtn">Buscar</button>
+				    </div>
 				</form>
-				 </div>
-				 </div>
+			</div>
+		</div>
  	 <div class="content">
             <div class="form-card">
-				<form>
+	         <form action="${pageContext.request.contextPath}/servletEditarCuenta" method="post">
+			    <label for="NC">NUMERO DE CUENTA</label>
+			    <select id="NroDeCuenta" name="NroDeCuenta" required>
+			        <option value="" disabled selected>Seleccione la cuenta</option>
+			        <c:forEach var="cuenta" items="${cuentas}">
+			            <option value="${cuenta.numeroDeCuentaCu}">Cuenta Nï¿½ ${cuenta.numeroDeCuentaCu}</option>
+			        </c:forEach>
+			    </select>
+			
+			    <h3>Cambiar Tipo de Cuenta</h3>
+			    <label for="tipoDeCuenta">Tipo de Cuenta</label>
+			    <select id="tipoDeCuenta" name="tipoDeCuenta" required>
+			        <option value="" disabled selected>Seleccione un tipo de cuenta</option>
+			        <!-- Cargar opciones de tipos de cuenta aquï¿½ -->
+			    </select>
+			
+			    <div class="button-group">
+			        <button type="button" class="cancel-button">Volver</button>
+			        <button type="submit" class="submit-button">Modificar</button>
+			    </div>
+			</form>
+
+			
+			<!-- Mensaje de Exito o error -->
+			<c:if test="${not empty mensaje}">
+			    <p>${mensaje}</p>
+			</c:if>
+			            
+			<!-- 	<form>
 				<h2>Editar Cuenta Seleccionada</h2>
                     <label for="NC">NUMERO DE CUENTA</label>
                     <select id="NroDeCuenta"  name="NroDeCuenta"  required>
@@ -108,7 +143,7 @@
                         <button type="button" class="cancel-button">Volver</button>
                         <button type="submit" class="submit-button">Modificar</button>
                     </div>
-                </form>
+                </form> -->
             </div>
         </div>
     </div>

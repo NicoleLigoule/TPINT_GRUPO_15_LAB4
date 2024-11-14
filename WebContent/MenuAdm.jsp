@@ -44,8 +44,11 @@
                     <ul class="submenu">
                        <li> <a href="${pageContext.request.contextPath}/servletsSolicitarCuenta?Param=1">Agregar Cuenta</a></li>
 
+
+                        <li> <a href="${pageContext.request.contextPath}/servletEditarCuenta?Param=1">Editar Cuenta</a></li>                       
+
                         <li> <a href="EliminarCuenta.jsp">Baja Cuenta</a></li>
-                        <li> <a href="#">Editar Cuenta</a></li>                       
+
                         <li> <a href="${pageContext.request.contextPath}/ServletListarCuenta?Param=1">Listar Cuenta</a></li>
                         
                     </ul>
@@ -53,7 +56,7 @@
                 <li class="menu-item">
                     <a href="#" onclick="toggleSubmenu(event)">Transacciones</a>
                     <!-- <ul class="submenu">
-                        <li> <a href="#">Registrar Transacción</a></li>
+                        <li> <a href="#">Registrar Transacciï¿½n</a></li>
                         <li> <a href="#">Ver Historial</a></li>
                     </ul>
                      -->
@@ -71,7 +74,7 @@
         </aside>
         <div class="content">
             <div class="form-card">
-                <h2>Este es el menú de los usuarios administradores</h2>
+                <h2>Este es el menï¿½ de los usuarios administradores</h2>
             </div>
 		</div>
 
