@@ -1,3 +1,13 @@
+<%@ page import="daoImpl.ClienteCuentaDTO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entidades.Usuario" %>
+<%
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,7 +25,7 @@
         <a href="${pageContext.request.contextPath}/Login.jsp">
             <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
-        <span class="username">USUARIO XXXX</span>
+        <span class="username"><%= usuario.getUsuarioUs() %></span>
     </nav>
 
     <div class="main-container">
@@ -62,33 +72,75 @@
             <div class="form-card">
                 <h2>Baja de Cuentas</h2>
                 <br>
-                <h3>Datos del socio</h3>
-                <form>
-                    <label for="dni">DNI Cliente</label>
-                    <input type="text" id="dni" name="dni" placeholder="DNI" >
-
+                <h3>Datos del socio</h3>                
+                
+                  <!-- Primer formulario: GET para buscar cliente -->
+                <form action="servletEliminarCuenta" method="get">
                     <label for="cuil">CUIL Cliente</label>
-                    <input type="text" id="cuil" name="cuil" placeholder="CUIL" >     
-                    
+                    <input type="text" id="cuil" name="cuil" value="${param.cuil}" placeholder="CUIL" required>   
+
                     <div class="button-group">                    
-                    	<button type="submit" class="submit-button">Buscar cliente</button>             
+                        <button type="submit" name="buscarCliente" class="submit-button">Buscar cliente</button>             
+                    </div>
+                </form>
+
+                <!-- Segundo formulario: POST para eliminar cuenta -->
+                <%
+                    String nombreApellido = (String) request.getAttribute("nombreApellido");
+                    ArrayList<ClienteCuentaDTO> listaCuentas = (ArrayList<ClienteCuentaDTO>) request.getAttribute("listaCuentas");
+                %>
+
+                <form action="servletEliminarCuenta" method="post">
+                    <label for="nombre">Cliente</label>
+                    <input type="text" id="nombre" name="nombre" value="<%= nombreApellido != null ? nombreApellido : "" %>" placeholder="Nombre y Apellido" readonly>
+                    
+                    <label for="cuentasDelCliente">Cuentas del cliente</label>
+                    <select id="cuentasDelCliente" name="cuentasDelCliente" required>
+                        <option value="" disabled selected>Seleccione una cuenta a eliminar</option>
+                       <%
+                       
+                    		
+                       		if(listaCuentas != null)
+                       		{
+                       			for(ClienteCuentaDTO cuenta : listaCuentas)
+                       			{
+                       				int numeroCuenta = cuenta.getNumeroCuenta();
+                       				String descripcionCuenta = cuenta.getTipoCuenta();
+                       				
+                       				if(numeroCuenta != 0)
+                       				{
+                       				  
+                       				%>
+                       					 <option value="<%= numeroCuenta %>"><%= numeroCuenta + " - " + descripcionCuenta %></option>
+                       				<%}
+                       			}
+                       		}
+                       %>
+                    </select>
+                    
+                    <div class="button-group">
+                        <button type="button" class="cancel-button" onclick="window.history.back();">Volver</button>
+                        <button type="submit" class="submit-button">Solicitar baja</button>
                     </div>
 
-                    <label for="cuentasDelCliente">Cuentas del cliente</label>
-                    <select id="cuentasDelCliente"  name="cuentasDelCliente"  required>
-                    <option value="" disabled selected>Seleccione una cuenta a eliminar</option>
-                    </select>
-
+                    <div style="text-align: center; font-size: 18px; padding: 10px; margin-top: 20px;" >
+                    	
                     
-
-                    <div class="button-group">
-                        <button type="button" class="cancel-button">Volver</button>
-                        <button type="submit" class="submit-button">Solicitar baja</button>
+                        <%
+                        	String mensaje = "";
+                        	if(request.getAttribute("mensaje") != null)
+                        	{
+                        		mensaje = (String)request.getAttribute("mensaje");
+                        	}
+                        %>
+                        <%= mensaje %>
+                        
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    
 
 <script src="JS/MenuAdm.js"></script>
 </body>

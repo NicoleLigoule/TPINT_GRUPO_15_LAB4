@@ -18,7 +18,7 @@ public class Cliente {
 	private boolean estado;
 	
 	public Cliente() {
-		
+		this.dni = 0;
 	}
 	
 	public Cliente(String cuil, int dni, String nombre, String apellido, int id_sexo, String id_nacionalidad,

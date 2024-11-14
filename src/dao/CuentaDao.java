@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import daoImpl.ClienteCuentaDTO;
 import entidades.Cuenta;
 
 public interface CuentaDao {
@@ -11,4 +12,5 @@ public interface CuentaDao {
 	public boolean editar(Cuenta cuenta);
 	public boolean borrar(int id);
 	List<Cuenta> obtenerCuentasPorCuil(String cuil);
+	public List<ClienteCuentaDTO> obtenerCuentasPorCuil(String CUIL);
 }

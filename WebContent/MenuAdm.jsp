@@ -1,3 +1,12 @@
+<%@ page import="entidades.Usuario" %>
+<%
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,7 +24,7 @@
         <a href="${pageContext.request.contextPath}/Login.jsp">
             <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
-        <span class="username">USUARIO XXXX</span>
+        <span class="username"><%= usuario.getUsuarioUs() %></span>
     </nav>
 
     <div class="main-container">
@@ -35,8 +44,11 @@
                     <ul class="submenu">
                        <li> <a href="${pageContext.request.contextPath}/servletsSolicitarCuenta?Param=1">Agregar Cuenta</a></li>
 
-                        <li> <a href="#">Baja Cuenta</a></li>
+
                         <li> <a href="${pageContext.request.contextPath}/servletEditarCuenta?Param=1">Editar Cuenta</a></li>                       
+
+                        <li> <a href="EliminarCuenta.jsp">Baja Cuenta</a></li>
+
                         <li> <a href="${pageContext.request.contextPath}/ServletListarCuenta?Param=1">Listar Cuenta</a></li>
                         
                     </ul>
@@ -44,7 +56,7 @@
                 <li class="menu-item">
                     <a href="#" onclick="toggleSubmenu(event)">Transacciones</a>
                     <!-- <ul class="submenu">
-                        <li> <a href="#">Registrar Transacción</a></li>
+                        <li> <a href="#">Registrar Transacciï¿½n</a></li>
                         <li> <a href="#">Ver Historial</a></li>
                     </ul>
                      -->
@@ -62,7 +74,7 @@
         </aside>
         <div class="content">
             <div class="form-card">
-                <h2>Este es el menú de los usuarios administradores</h2>
+                <h2>Este es el menï¿½ de los usuarios administradores</h2>
             </div>
 		</div>
 
