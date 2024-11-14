@@ -77,8 +77,11 @@
 							if (listaCliente != null) {
 								for (Cliente Clie : listaCliente) {
 						%>
-						<option value="<%=Clie.getCuil().toString()%>"><%=Clie.getCuil().toString() + " " + Clie.getApellido()%></option>
+						<option value="<%=Clie.getCuil().toString()%>"><%=Clie.getCuil().toString() + " " + Clie.getApellido()%>
+						
+
 						<%
+						
 							}
 							}
 						%>
@@ -111,16 +114,16 @@
 					%>
 					<label for="dni">DNI</label> <input type="text" id="dni" name="dni"
 						placeholder="DNI"
-						value="<%=request.getParameter("nombre") != null ? request.getParameter("nombre") : ""%>"
+						value="<%=clienteSe.getDni() != 0 ? clienteSe.getDni() : ""%>"
 						required> <label for="cuil">CUIL</label> <input
 						type="text" id="cuil" name="cuil" placeholder="CUIL"
-						value="<%=request.getParameter("nombre") != null ? request.getParameter("nombre") : ""%>"
+						value="<%=clienteSe.getCuil() != null ? clienteSe.getCuil() : ""%>"
 						required> <label for="nombre">Nombre</label> <input
 						type="text" id="nombre" name="nombre" placeholder="Nombre"
-						value="<%=request.getParameter("nombre") != null ? request.getParameter("nombre") : ""%>"
+						value="<%=clienteSe.getNombre() != null ? clienteSe.getNombre() : ""%>"
 						required> <label for="apellido">Apellido</label> <input
 						type="text" id="apellido" name="apellido" placeholder="Apellido"
-						value="<%=request.getParameter("apellido") != null ? request.getParameter("apellido") : ""%>"
+						value="<%=clienteSe.getApellido() != null ? clienteSe.getApellido() : ""%>"
 						required>
 
 					<%
@@ -134,7 +137,7 @@
 								for (Sexo sex : listaSexo) {
 						%>
 						<option value="<%=sex.getId_sexo()%>"
-							<%=Integer.toString(sex.getId_sexo()).equals(request.getParameter("genero")) ? "selected"
+							<%=Integer.toString(sex.getId_sexo()).equals(String.valueOf(clienteSe.getId_sexo())) ? "selected"
 							: ""%>><%=sex.getDescripcion()%></option>
 						<%
 							}
@@ -155,7 +158,7 @@
 								for (Nacionalidad nac : listaSeguros) {
 						%>
 						<option value="<%=nac.getIdNacionalidadNc()%>"
-							<%=nac.getIdNacionalidadNc().equals(request.getParameter("nacionalidad")) ? "selected" : ""%>><%=nac.getDescripcionNc()%></option>
+							<%=nac.getIdNacionalidadNc().equals(clienteSe.getId_nacionalidad()) ? "selected" : ""%>><%=nac.getDescripcionNc()%></option>
 						<%
 							}
 							}
@@ -163,21 +166,21 @@
 					</select> <label for="fecha-nacimiento">Fecha de Nacimiento</label> <input
 						type="text" id="fecha-nacimiento" name="fecha-nacimiento"
 						placeholder="YYYY/MM/DD"
-						value="<%=request.getParameter("fecha-nacimiento") != null ? request.getParameter("fecha-nacimiento") : ""%>"
+						value="<%=clienteSe.getFechaNacimiento() != null ? clienteSe.getFechaNacimiento() : ""%>"
 						required> <label for="direccion">Dirección</label> <input
 						type="text" id="direccion" name="direccion"
 						placeholder="Dirección"
-						value="<%=request.getParameter("direccion") != null ? request.getParameter("direccion") : ""%>"
+						value="<%=clienteSe.getDireccion() != null ? clienteSe.getDireccion() : ""%>"
 						required> <label for="numero">Número</label> <input
 						type="text" id="numero" name="numero" placeholder="Número"
-						value="<%=request.getParameter("numero") != null ? request.getParameter("numero") : ""%>"
+						value="<%=clienteSe.getTelefono() != null ? clienteSe.getTelefono() : ""%>"
 						required> <label for="telefono">Teléfono</label> <input
 						type="tel" id="telefono" name="telefono" placeholder="Teléfono"
-						value="<%=request.getParameter("telefono") != null ? request.getParameter("telefono") : ""%>"
+						value="<%=clienteSe.getTelefono() != null ? clienteSe.getTelefono() : ""%>"
 						required> <label for="email">Correo Electrónico</label> <input
 						type="email" id="email" name="email"
 						placeholder="Correo Electrónico"
-						value="<%=request.getParameter("email") != null ? request.getParameter("email") : ""%>"
+						value="<%=clienteSe.getCorreo() != null ? clienteSe.getCorreo() : ""%>"
 						required> <label for="provincia">Provincia</label> <select
 						id="provincia" name="provincia" onchange="this.form.submit();"
 						required>
