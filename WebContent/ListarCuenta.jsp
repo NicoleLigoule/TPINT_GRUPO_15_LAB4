@@ -9,15 +9,28 @@
     }
 %>
 
+<%@ page import="entidades.Usuario" %>
+<%
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link href="${pageContext.request.contextPath}/Css/EditarCun.css" type="text/css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/Css/EditarCun.css" type="text/css" rel="stylesheet"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar Cuentas</title>    
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"/>
+ 
+    <style>
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"/>
  
     <style>
@@ -46,8 +59,23 @@
 		    color: #333; 
 		}
 
+        
+        .mensaje-error {
+		    text-align: center;
+		    margin-top: 20px;
+		}
+
+		.mensaje-sin-cuentas {
+		    text-align: center; 
+		    margin-top: 10px; 
+		    font-size: 1.2em; 
+		    color: #333; 
+		}
+
     </style>
 
+    <script type="text/javascript">
+    $(document).ready(function () {
     <script type="text/javascript">
     $(document).ready(function () {
 	    $('#table_id').DataTable({
@@ -56,10 +84,12 @@
 	        }, 
 	        "aLengthMenu": [
 	            [5, 25, 50, 100, -1],
+	            [5, 25, 50, 100, -1],
 	            [5, 25, 50, 100, "Todos"]
 	        ]
 	    });
 	});
+    </script>
     </script>
 
 </head>
@@ -73,6 +103,7 @@
         <a href="${pageContext.request.contextPath}/Login.jsp">
             <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
+        <span class="username"><%= usuario.getUsuarioUs() != null ? usuario.getUsuarioUs() : "Usuario no encontrado" %></span>
         <span class="username"><%= usuario.getUsuarioUs() != null ? usuario.getUsuarioUs() : "Usuario no encontrado" %></span>
     </nav>
 
@@ -119,9 +150,9 @@
        <table id="table_id" class="display">
            <thead>
                <tr>
-                   <th>Número de Cuenta</th>
+                   <th>Nï¿½mero de Cuenta</th>
                    <th>CUIL</th>
-                   <th>Fecha de Creación</th>
+                   <th>Fecha de Creaciï¿½n</th>
                    <th>ID Tipo Cuenta</th>
                    <th>CBU</th>
                    <th>Saldo</th>
@@ -151,5 +182,7 @@
 </div>
 
     <script src="JS/MenuAdm.js"></script>
+    <script src="JS/MenuAdm.js"></script>
 </body>
 </html>
+

@@ -71,7 +71,6 @@ public class CuentaDaoImpl implements CuentaDao {
         return lista;
     }
 
-    
     @Override
     public Cuenta obtenerUno(int numeroCuenta) {
         cn = new Conexion();
@@ -207,7 +206,7 @@ public class CuentaDaoImpl implements CuentaDao {
     	    	        "Cuenta.Numero_de_Cuenta_Cu AS NumeroCuenta, " +
     	    	        "TipoCuenta.Nombre_Tipo AS TipoCuenta " +
     	    	        "FROM Cliente " +
-    	    	        "LEFT JOIN Cuenta ON Cliente.cuil_Cli = Cuenta.Cuil_Cli_Cu AND Cuenta.Estado_Cu = 1 " +
+    	    	        "LEFT JOIN Cuenta ON Cliente.cuil_Cli = Cuenta.Cuil_Cli_Cu " +
     	    	        "LEFT JOIN TipoCuenta ON Cuenta.Id_Tipo_Cuenta = TipoCuenta.Id_Tipo_Cuenta " +
     	    	        "WHERE Cliente.cuil_Cli = '" + CUIL + "'");
     	        
