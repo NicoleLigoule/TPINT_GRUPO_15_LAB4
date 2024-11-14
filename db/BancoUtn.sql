@@ -135,7 +135,30 @@ CREATE TABLE CuotasXPrestamos(
     CONSTRAINT UK_CuotasXPrestamos UNIQUE (ID_Prestamo_Pt_Cp, Fecha_vencimiento_Cp, N_Cuota)
 );
 
+DELIMITER $$
 
+CREATE TRIGGER GenerarCBU
+BEFORE INSERT ON Cuenta
+FOR EACH ROW
+BEGIN
+    DECLARE ultimoCBU BIGINT;
+
+    -- Obtener el último valor de CBU_Cu como un número entero
+    SELECT MAX(CAST(CBU_Cu AS UNSIGNED)) INTO ultimoCBU
+    FROM Cuenta;
+
+    -- Si no hay valores previos en la tabla, se inicia con el número base
+    IF ultimoCBU IS NULL THEN
+        SET ultimoCBU = 5500990000000001;
+    ELSE
+        SET ultimoCBU = ultimoCBU + 1;
+    END IF;
+
+    -- Asignar el nuevo CBU a la nueva cuenta
+    SET NEW.CBU_Cu = CAST(ultimoCBU AS CHAR(22));
+END$$
+
+DELIMITER ;
 
 use bancoutn;
 INSERT INTO Nacionalidad (Id_Nacionalidad_nc, Descripcion_nc) VALUES

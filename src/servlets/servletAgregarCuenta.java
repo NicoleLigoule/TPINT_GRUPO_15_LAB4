@@ -1,19 +1,22 @@
-	package servlets;
-	
-	import java.io.IOException;
-	import java.math.BigDecimal;
-	import java.time.LocalDate;
-	import java.time.format.DateTimeFormatter;
-	
-	import javax.servlet.RequestDispatcher;
-	import javax.servlet.ServletException;
-	import javax.servlet.annotation.WebServlet;
-	import javax.servlet.http.HttpServlet;
-	import javax.servlet.http.HttpServletRequest;
-	import javax.servlet.http.HttpServletResponse;
-	
-	import abml.abmlCuenta;
-	import entidades.Cuenta;
+package servlets;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import abml.abmlCuenta;
+import entidades.Cuenta;
+import entidades.TipoDeCuenta;
+import negocio.DDL;
 	
 	@WebServlet("/servletAgregarCuenta")
 	public class servletAgregarCuenta extends HttpServlet {
@@ -22,15 +25,37 @@
 	    public servletAgregarCuenta() {
 	        super();
 	    }
-	
-	    @Override
+
+	    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    	System.out.print("LLEGA AL SERVLET");
+	        if (request.getParameter("Param") != null) {
+	            DDL lista = new DDL();
+	            try {
+	                ArrayList<TipoDeCuenta> listaSeg = lista.TipoDecuenta();
+	                if (listaSeg != null && !listaSeg.isEmpty()) {
+	                    request.setAttribute("listaTCuentas", listaSeg);
+	                    RequestDispatcher rd = request.getRequestDispatcher("AgregarCuenta.jsp");
+	                    rd.forward(request, response);
+	                } else {
+	                    response.getWriter().println("No se encontraron tipos de cuenta.");
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	                response.getWriter().println("Error al obtener los tipos de cuenta: " + e.getMessage());
+	            }
+	        }
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
 	    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        System.out.println("ENTRO AL SERVLET");
 	
 	        if (request.getParameter("agregarBtn") != null) {
 	            Cuenta cuenta = new Cuenta();
-	            
-	            cuenta.setNumeroDeCuentaCu(1);
 	        
 	            String Cuil = request.getParameter("cuil");
 	            if (Cuil != null && !Cuil.isEmpty()) {
@@ -45,7 +70,7 @@
 	                }
 	            }
 	            //reemplazar cuando tengamos la funcion cbu automatico
-	            cuenta.setCbuCu("999");
+	            //cuenta.setCbuCu("12346789");
 	
 	            // Obtener y establecer tipo de cuenta
 	            String tipoCuenta = request.getParameter("tipoCuenta");

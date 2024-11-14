@@ -14,7 +14,7 @@ import entidades.TipoDeCuenta;
 public class CuentaDaoImpl implements CuentaDao {
 
     private Conexion cn;
-    private static final String readallTipoDeCuentas = "SELECT Id_Tipo_Cuenta, Nombre_Tipo FROM bancoutn.tipocuenta";
+    private static final String readallTipoDeCuentas = "SELECT * FROM TipoCuenta";
     
 	public ArrayList<TipoDeCuenta> readallTipoDeCuentas()
 	{
@@ -24,8 +24,8 @@ public class CuentaDaoImpl implements CuentaDao {
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
-			statement = conexion.getSQLConexion().prepareStatement(readallTipoDeCuentas);
-			resultSet = statement.executeQuery();
+			conexion.Open();			
+			resultSet = conexion.query(readallTipoDeCuentas);
 			while(resultSet.next())
 			{
 				Tipos.add(getTpoSeguros(resultSet));

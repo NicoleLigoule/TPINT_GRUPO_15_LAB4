@@ -49,7 +49,7 @@
 					onclick="toggleSubmenu(event)">Cuentas</a>
 					<ul class="submenu">
 						<li><a
-							href="${pageContext.request.contextPath}/servletsSolicitarCuenta?Param=1">Agregar
+							href="${pageContext.request.contextPath}/servletAgregarCuenta?Param=1">Agregar
 								Cuenta</a></li>
 
 

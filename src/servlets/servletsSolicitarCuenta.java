@@ -15,26 +15,11 @@ import negocio.DDL;
 @WebServlet("/servletsSolicitarCuenta")
 public class servletsSolicitarCuenta extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	System.out.print("LLEGA AL SERVLET");
-        if (request.getParameter("Param") != null) {
-            DDL lista = new DDL();
-            try {
-                ArrayList<TipoDeCuenta> listaSeg = lista.TipoDecuenta();
-                if (listaSeg != null && !listaSeg.isEmpty()) {
-                    request.setAttribute("listaTCuentas", listaSeg);
-                    RequestDispatcher rd = request.getRequestDispatcher("AgregarCuenta.jsp");
-                    rd.forward(request, response);
-                } else {
-                    response.getWriter().println("No se encontraron tipos de cuenta.");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                response.getWriter().println("Error al obtener los tipos de cuenta: " + e.getMessage());
-            }
-        }
-    }
+    
+    
+    
+    
+    
 
 
 	/**
