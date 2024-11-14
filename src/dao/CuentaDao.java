@@ -11,6 +11,9 @@ public interface CuentaDao {
 	public boolean insertar(Cuenta cuenta);
 	public boolean editar(Cuenta cuenta);
 	public boolean borrar(int id);
+
 	List<Cuenta> obtenerCuentasPorCuil(String cuil);
+
+
 	public List<ClienteCuentaDTO> obtenerCuentasPorCuil(String CUIL);
 }
