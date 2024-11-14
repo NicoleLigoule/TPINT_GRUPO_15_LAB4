@@ -6,6 +6,14 @@
 <link href="Css/Login.css" type="text/Css" rel="stylesheet" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Nombre del Banco</title>
+    <style>
+        .error-mensaje {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
 
 </head>
 <body>
@@ -20,6 +28,14 @@
 	</nav>
 	<div class="container">
 		<h2>Iniciar Sesión</h2>
+		<%
+            String errorMensaje = (String) request.getAttribute("errorMessage");
+            if (errorMensaje != null) {
+        %>
+            <p class="error-mensaje"><%= errorMensaje %></p>
+        <%
+            }
+        %>
 		<form action="${pageContext.request.contextPath}/ServletLoginSesion"
 			method="post">
 			<label for="usuario">Usuario</label> <input type="text" id="usuario"
