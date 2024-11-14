@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="entidades.Usuario" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="entidades.Usuario"%>
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     if (usuario == null) {
@@ -10,85 +11,82 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baja de cliente</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/Css/EliminarCli.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baja de cliente</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Css/EliminarCli.css">
 <body>
-    <nav class="navbar">
-        <button class="hamburger" onclick="toggleSidebar()">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </button>
-        <a href="${pageContext.request.contextPath}/Login.jsp">
-            <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
-        </a>
-        <span class="username"><%= usuario.getUsuarioUs() %></span>
-    </nav>
-    <div class="main-container">
-        <aside class="sidebar" id="sidebar">
-            <ul>
-                <li class="menu-item">
-                  <a href="#" onclick="toggleSubmenu(event)">Clientes</a>
-                    <ul class="submenu">
-                        <li> <a href="AgregarCliente.jsp">Agregar Cliente</a></li>
-                        <li> <a href="EliminarCliente.jsp">Baja Cliente</a></li>
-                        <li> <a href="EditarCliente.jsp">Editar Cliente</a></li>
-                        <li> <a href="ListarCliente.jsp">Listar Cliente</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a href="#" onclick="toggleSubmenu(event)">Cuentas</a>
-                    <ul class="submenu">
-                        <li> <a href="AgregarCuenta.jsp">Agregar Cuenta</a></li>
-                        <li> <a href="#">Baja Cuenta</a></li>
-                        <li> <a href="#">Editar Cuenta</a></li>
-                        <li> <a href="#">Listar Cuenta</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a href="#" onclick="toggleSubmenu(event)">Transacciones</a>
-                    <!-- <ul class="submenu">
+	<nav class="navbar">
+		<button class="hamburger" onclick="toggleSidebar()">
+			<div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div>
+		</button>
+		<a href="${pageContext.request.contextPath}/Login.jsp"> <img
+			src="${pageContext.request.contextPath}/img/png_logo.png"
+			class="img_logo" alt="Logo UTN">
+		</a> <span class="username"><%= usuario.getUsuarioUs() %></span>
+	</nav>
+	<div class="main-container">
+		<aside class="sidebar" id="sidebar">
+			<ul>
+				<li class="menu-item"><a href="#"
+					onclick="toggleSubmenu(event)">Clientes</a>
+					<ul class="submenu">
+						<li><a href="AgregarCliente.jsp">Agregar Cliente</a></li>
+						<li><a href="EliminarCliente.jsp">Baja Cliente</a></li>
+						<li><a href="EditarCliente.jsp">Editar Cliente</a></li>
+						<li><a href="ListarCliente.jsp">Listar Cliente</a></li>
+					</ul></li>
+				<li class="menu-item"><a href="#"
+					onclick="toggleSubmenu(event)">Cuentas</a>
+					<ul class="submenu">
+						<li><a href="AgregarCuenta.jsp">Agregar Cuenta</a></li>
+						<li><a href="#">Baja Cuenta</a></li>
+						<li><a href="#">Editar Cuenta</a></li>
+						<li><a href="#">Listar Cuenta</a></li>
+					</ul></li>
+				<li class="menu-item"><a href="#"
+					onclick="toggleSubmenu(event)">Transacciones</a> <!-- <ul class="submenu">
                         <li> <a href="#">Registrar Transacción</a></li>
                         <li> <a href="#">Ver Historial</a></li>
                     </ul>
-                     -->
-                </li>
-                <li class="menu-item">
-                    <a href="#" onclick="toggleSubmenu(event)">Reportes</a>
-                    <!-- <ul class="submenu">
+                     --></li>
+				<li class="menu-item"><a href="#"
+					onclick="toggleSubmenu(event)">Reportes</a> <!-- <ul class="submenu">
                         <li> <a href="#">Reporte de Clientes</a></li>
                         <li> <a href="#">Reporte de Cuentas</a></li>
                     </ul>
-                     -->
-                </li>
-            </ul>
-        </aside>
+                     --></li>
+			</ul>
+		</aside>
 
-        <div class="content">
-            <div class="form-card">
-                <h2>BAJA CLIENTE</h2>
-                <form action="servletEliminarCliente" method="get">
-                    <label for="cuil">Ingresar C.U.I.L</label>
-                    <input type="text" id="cuil" name="cuil" placeholder="C.U.I.L" required>
-                    <div class="button-group">
-                        <button type="submit" name="btnBaja" class="submit-button">Dar Baja</button>
-                    </div>
-                </form>                
-            </div>
-        </div>
-    </div>
-    <div style="text-align: center; font-size: 18px; padding: 10px; margin-top: 20px;" >
-        <%
+		<div class="content">
+			<div class="form-card">
+				<h2>BAJA CLIENTE</h2>
+				<form action="servletEliminarCliente" method="get">
+					<label for="cuil">Ingresar C.U.I.L</label> <input type="text"
+						id="cuil" name="cuil" placeholder="C.U.I.L" required>
+					<div class="button-group">
+						<button type="submit" name="btnBaja" class="submit-button">Dar
+							Baja</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div
+		style="text-align: center; font-size: 18px; padding: 10px; margin-top: 20px;">
+		<%
             String mensaje = "";
             if (request.getAttribute("mensaje") != null) {
                 mensaje = (String) request.getAttribute("mensaje");
             }
         %>
-        <%= mensaje %>
-    </div>
+		<%= mensaje %>
+	</div>
 
-<script src="JS/MenuAdm.js"></script>
+	<script src="JS/MenuAdm.js"></script>
 </body>
 </html>
