@@ -9,14 +9,6 @@
     }
 %>
 
-<%@ page import="entidades.Usuario" %>
-<%
-    Usuario usuario = (Usuario) session.getAttribute("usuario");
-    if (usuario == null) {
-        response.sendRedirect("Login.jsp");
-        return;
-    }
-%>
 
 <!DOCTYPE html>
 <html lang="es">

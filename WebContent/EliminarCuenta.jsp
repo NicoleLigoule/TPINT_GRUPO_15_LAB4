@@ -8,16 +8,7 @@
         return;
     }
 %>
-<%@ page import="entidades.ClienteCuentaDTO" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="entidades.Usuario" %>
-<%
-    Usuario usuario = (Usuario) session.getAttribute("usuario");
-    if (usuario == null) {
-        response.sendRedirect("Login.jsp");
-        return;
-    }
-%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -132,7 +123,7 @@
                 <!-- Segundo formulario: POST para eliminar cuenta -->
                 <%
                     String nombreApellido = (String) request.getAttribute("nombreApellido");
-                    ArrayList<ClienteCuentaDTO> listaCuentas = (ArrayList<ClienteCuentaDTO>) request.getAttribute("listaCuentas");
+                    listaCuentas = (ArrayList<ClienteCuentaDTO>) request.getAttribute("listaCuentas");
                 %>
 
                 <form action="servletEliminarCuenta" method="post">
@@ -179,19 +170,6 @@
     </div>
                     
 
-                    <div style="text-align: center; font-size: 18px; padding: 10px; margin-top: 20px;" >
-                    	
-                    
-                        <%
-                        	String mensaje = "";
-                        	if(request.getAttribute("mensaje") != null)
-                        	{
-                        		mensaje = (String)request.getAttribute("mensaje");
-                        	}
-                        %>
-                        <%= mensaje %>
-                        
-                    </div>
                 </form>
             </div>
         </div>
