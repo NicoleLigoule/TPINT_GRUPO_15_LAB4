@@ -191,16 +191,23 @@
 						required> <label for="provincia">Provincia</label> <select
 						id="provincia" name="provincia" onchange="this.form.submit();"
 						required>
+					<% 
+				    int idProvincia =0;
+				    if(request.getAttribute("idProvincia")!=null){
+				    	idProvincia = (int) request.getAttribute("idProvincia");
+				    }
+					%>
 						<option value="" disabled selected>Seleccione su
 							Provincia</option>
+						
 						<%
 							ArrayList<Provincia> listaProvincias = (ArrayList<Provincia>) request.getAttribute("listaProvincias");
-							String selectedProvincia = request.getParameter("provincia");
+												
 							if (listaProvincias != null) {
 								for (Provincia prov : listaProvincias) {
 						%>
 						<option value="<%=prov.getId_provincia()%>"
-							<%=Integer.toString(prov.getId_provincia()).equals(selectedProvincia) ? "selected" : ""%>><%=prov.getNombre()%></option>
+							<%=prov.getId_provincia() == idProvincia  ? "selected" : ""%>><%=prov.getNombre()%></option>
 						<%
 							}
 							}

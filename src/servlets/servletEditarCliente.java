@@ -142,8 +142,9 @@ public class servletEditarCliente extends HttpServlet {
                 
                 if(h != 0) {
                 	int idProvincia =h;
-                	System.out.println(idProvincia);
-                	request.setAttribute("Prov", idProvincia);
+                	   // Guardar 'h' como atributo del request
+                    request.setAttribute("idProvincia", idProvincia);
+                    
                 	
                     ArrayList<Localidad> listaLocalidad = lista.Localidad(idProvincia);
                     if (listaLocalidad != null && !listaLocalidad.isEmpty()) {
