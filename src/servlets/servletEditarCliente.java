@@ -88,14 +88,6 @@ public class servletEditarCliente extends HttpServlet {
                 response.getWriter().println("Error al obtener los datos: " + e.getMessage());
             }
         }
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
-		
 		if (request.getParameter("Cliente") != null) {
 			String cuilBuscado = request.getParameter("Cliente");
 			System.out.println(cuilBuscado);
@@ -150,6 +142,9 @@ public class servletEditarCliente extends HttpServlet {
                 
                 if(h != 0) {
                 	int idProvincia =h;
+                	System.out.println(idProvincia);
+                	request.setAttribute("Prov", idProvincia);
+                	
                     ArrayList<Localidad> listaLocalidad = lista.Localidad(idProvincia);
                     if (listaLocalidad != null && !listaLocalidad.isEmpty()) {
                         request.setAttribute("listaLocalidad", listaLocalidad);
@@ -167,6 +162,15 @@ public class servletEditarCliente extends HttpServlet {
                 response.getWriter().println("Error al obtener los datos: " + e.getMessage());
             }
 		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
+		
+
 		
 	}
 }

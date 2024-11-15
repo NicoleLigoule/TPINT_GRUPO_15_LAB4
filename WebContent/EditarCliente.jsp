@@ -7,7 +7,14 @@
 <%@page import="daoImpl.ProvinciaDaoImpl"%>
 <%@page import="entidades.Provincia"%>
 <%@page import="entidades.Localidad"%>
-
+<%@ page import="entidades.Usuario"%>
+<%
+	Usuario usuario = (Usuario) session.getAttribute("usuario");
+	if (usuario == null) {
+		response.sendRedirect("Login.jsp");
+		return;
+	}
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,7 +24,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EditarCliente</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/Css/EditarCli.css">
+	href="${pageContext.request.contextPath}/Css/AgregarCli.css">
 <body>
 	<nav class="navbar">
 	<button class="hamburger" onclick="toggleSidebar()">
@@ -28,7 +35,7 @@
 	<a href="${pageContext.request.contextPath}/Login.jsp"> <img
 		src="${pageContext.request.contextPath}/img/png_logo.png"
 		class="img_logo" alt="Logo UTN">
-	</a> <span class="username">USUARIO XXXX</span> </nav>
+	</a> <span class="username"><%=usuario.getUsuarioUs()%></span> </nav>
 
 	<div class="main-container">
 		<aside class="sidebar" id="sidebar">
@@ -65,7 +72,7 @@
 		<div class="content">
 			<div class="form-card">
 				<h2>Editar de Cliente</h2>
-				<form action="servletEditarCliente" method="POST">
+				<form action="servletEditarCliente" method="GET">
 					<%
 						ArrayList<Cliente> listaCliente = (ArrayList<Cliente>) request.getAttribute("listaCliente");
 					%>
@@ -234,12 +241,12 @@
 							Localidad</option>
 						<%
 							ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocalidad");
-							String selectedLocalidad = request.getParameter("localidad");
+							int selectedLocalidad = clienteSe.getId_localidad();
 							if (listaLocalidad != null) {
 								for (Localidad loc : listaLocalidad) {
 						%>
 						<option value="<%=loc.getId_localidad()%>"
-							<%=Integer.toString(loc.getId_localidad()).equals(selectedLocalidad) ? "selected" : ""%>><%=loc.getNombreLoca()%></option>
+							<%=loc.getId_localidad()==selectedLocalidad ? "selected" : ""%>><%=loc.getNombreLoca()%></option>
 						<%
 							}
 							}
