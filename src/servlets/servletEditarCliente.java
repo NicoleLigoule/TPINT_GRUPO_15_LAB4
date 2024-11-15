@@ -16,6 +16,7 @@ import entidades.Nacionalidad;
 import entidades.Provincia;
 import entidades.Sexo;
 import negocio.DDL;
+import negocio.NegocioClientes;
 
 /**
  * Servlet implementation class servletEditarCliente
@@ -67,7 +68,7 @@ public class servletEditarCliente extends HttpServlet {
                 } else {
                     response.getWriter().println("No se encontraron provincias.");
                 }
-                
+
                 if(request.getParameter("provincia") != null) {
                 	int idProvincia = Integer.parseInt(request.getParameter("provincia"));
                     ArrayList<Localidad> listaLocalidad = lista.Localidad(idProvincia);
@@ -130,9 +131,25 @@ public class servletEditarCliente extends HttpServlet {
                 } else {
                     response.getWriter().println("No se encontraron provincias.");
                 }
+                ///aca buscar en que provincia esta la localidad del cliente 
+                Cliente clienteSe = new Cliente();
                 
-                if(request.getParameter("provincia") != null) {
-                	int idProvincia = Integer.parseInt(request.getParameter("provincia"));
+				for (Cliente cliente : listaClientes) {
+
+					if (cliente.getCuil().equals(cuilBuscado)) {
+						System.out.println("Lo encontre en el servlets");
+
+						clienteSe = cliente;
+						System.out.println(clienteSe.getId_localidad());
+						break;
+					}
+				}
+				int h=0;
+				NegocioClientes neg= new NegocioClientes();
+				 h=neg.obtenProv(String.valueOf(clienteSe.getId_localidad()));
+                
+                if(h != 0) {
+                	int idProvincia =h;
                     ArrayList<Localidad> listaLocalidad = lista.Localidad(idProvincia);
                     if (listaLocalidad != null && !listaLocalidad.isEmpty()) {
                         request.setAttribute("listaLocalidad", listaLocalidad);

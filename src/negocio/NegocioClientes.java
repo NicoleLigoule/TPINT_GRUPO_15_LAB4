@@ -1,7 +1,7 @@
 package negocio;
 
 import daoImpl.ClienteDaoImpl;
-
+import daoImpl.ProvinciaDaoImpl;
 public class NegocioClientes {
     
     private ClienteDaoImpl clienteDao;
@@ -17,5 +17,12 @@ public class NegocioClientes {
         }
 
         return clienteDao.borrarCuil(cuilCli);
+    }
+    public int obtenProv(String lca) {
+    	ProvinciaDaoImpl dao=new ProvinciaDaoImpl();
+    	
+    	int prov= dao.ObtenerProvinciaXLocalidad(lca);
+    	return prov;
+    	
     }
 }

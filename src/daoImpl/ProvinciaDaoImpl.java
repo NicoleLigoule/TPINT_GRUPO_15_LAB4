@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import dao.ProvinciaDao;
+import entidades.Localidad;
 import entidades.Provincia;
 
 public class ProvinciaDaoImpl implements ProvinciaDao {
@@ -102,5 +103,25 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
             cn.close();
         }
         return estado;
+    }
+    public int ObtenerProvinciaXLocalidad(String localidad) {
+    	int idProv=0;
+        cn = new Conexion();
+        cn.Open();
+        String query = "SELECT ID_Provincia_Prv_Lca FROM Localidad WHERE ID_Localidad_Lca ="+localidad ;
+        try {
+            ResultSet rs = cn.query(query);
+            while (rs.next()) {
+                idProv=rs.getInt("ID_Provincia_Prv_Lca");
+               
+               
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+    	
+    	return idProv;
     }
 }
