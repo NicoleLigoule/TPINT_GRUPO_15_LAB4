@@ -73,48 +73,25 @@
 
 				<!-- Primer formulario: GET para buscar cliente -->
 				<form action="servletEliminarCuenta" method="get">
-					<label for="cuil">CUIL Cliente</label> <input type="text" id="cuil"
-						name="cuil" value="${param.cuil}" placeholder="CUIL" required>
-
-					<input type="text" id="cuil" name="cuil" value="${param.cuil}"
-						placeholder="CUIL" required>
+					<label for="cuil">CUIL Cliente</label> 
+					
+					<input type="text" id="cuil"	name="cuil" value="${param.cuil}" placeholder="CUIL" required>					
 
 					<div class="button-group">
-						<button type="submit" name="buscarCliente" class="submit-button">Buscar
-							cliente</button>
-						<button type="submit" name="buscarCliente" class="submit-button">Buscar
-							cliente</button>
+						<button type="submit" name="buscarCliente" class="submit-button">Buscar	cliente</button>						
 					</div>
-					<!-- AQUI DEBERIA FINALIZAR PRIMER FORM -->
-					<label for="nombre">Cliente</label> <input type="text" id="nombre"
-						name="nombre" value="${requestScope.nombreApellido}"
-						placeholder="Nombre y Apellido" readonly> <label
-						for="cuentasDelCliente">Cuentas del cliente</label> <select
-						id="cuentasDelCliente" name="cuentasDelCliente">
-						<option value="" disabled selected>Seleccione una cuenta
-							a eliminar</option>
+					
+					<label for="nombre">Cliente</label> <input type="text" id="nombre" name="nombre" value="${requestScope.nombreApellido}"
+						placeholder="Nombre y Apellido" readonly> 
+					
 
 						<%
 							// Obtenemos la lista de cuentas
-							ArrayList<ClienteCuentaDTO> listaCuentas = (ArrayList<ClienteCuentaDTO>) request
-									.getAttribute("listaCuentas");
+							ArrayList<ClienteCuentaDTO> listaCuentas = (ArrayList<ClienteCuentaDTO>) request.getAttribute("listaCuentas");
 
-							// Verificamos que la lista no sea nula
-							if (listaCuentas != null) {
-								for (ClienteCuentaDTO cuenta : listaCuentas) {
-
-									int numeroCuenta = cuenta.getNumeroCuenta();
-									String descripcionCuenta = cuenta.getTipoCuenta();
-
-									if (numeroCuenta != 0) {
+							
 						%>
-						<option value="<%=numeroCuenta%>"><%=numeroCuenta + " - " + descripcionCuenta%></option>
-						<%
-							}
-								}
-							}
-						%>
-					</select>
+						
 
 
 				</form>
@@ -124,14 +101,17 @@
 					String nombreApellido = (String) request.getAttribute("nombreApellido");
 					listaCuentas = (ArrayList<ClienteCuentaDTO>) request.getAttribute("listaCuentas");
 				%>
-
+				<br>
+				<br>
 				<form action="servletEliminarCuenta" method="post">
-					<label for="nombre">Cliente</label> <input type="text" id="nombre"
-						name="nombre"
+				
+					<!-- <label for="nombre">Cliente</label> <input type="text" id="nombre" name="nombre"
 						value="<%=nombreApellido != null ? nombreApellido : ""%>"
-						placeholder="Nombre y Apellido" readonly> <label
-						for="cuentasDelCliente">Cuentas del cliente</label> <select
-						id="cuentasDelCliente" name="cuentasDelCliente" required>
+						placeholder="Nombre y Apellido" readonly>  -->
+						
+						
+						
+						 <select	id="cuentasDelCliente" name="cuentasDelCliente" required> 
 						<option value="" disabled selected>Seleccione una cuenta
 							a eliminar</option>
 						<%
@@ -148,7 +128,7 @@
 								}
 							}
 						%>
-					</select>
+					</select> 
 
 					<div class="button-group">
 						<button type="button" class="cancel-button"
