@@ -16,7 +16,12 @@ public class abmlCuenta {
 	}
 	
 	public boolean agregarCuenta(Cuenta cuenta) {
-		return cuentaDao.insertar(cuenta);
+		if(cuenta.getCuilCliCu() != null) {
+			return cuentaDao.insertar(cuenta);
+		}else {
+			return cuentaDao.insertarSinCliente(cuenta);
+		}
+
 	}
 	
 	public boolean editarCuenta(Cuenta cuenta) {

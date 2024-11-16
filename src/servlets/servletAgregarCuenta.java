@@ -69,9 +69,6 @@ import negocio.DDL;
 	                    return;
 	                }
 	            }
-	            //reemplazar cuando tengamos la funcion cbu automatico
-	            //cuenta.setCbuCu("12346789");
-	
 	            // Obtener y establecer tipo de cuenta
 	            String tipoCuenta = request.getParameter("tipoCuenta");
 	            if (tipoCuenta != null && !tipoCuenta.isEmpty()) {

@@ -44,7 +44,7 @@
 
 
 					<label for="cuil">CUIL Cliente</label> <input type="text" id="cuil"
-						name="cuil" placeholder="CUIL" required> <br>
+						name="cuil" placeholder="CUIL"> <br>
 					<%
 						ArrayList<TipoDeCuenta> listaSeguros = null;
 						if (request.getAttribute("listaTCuentas") != null) {
