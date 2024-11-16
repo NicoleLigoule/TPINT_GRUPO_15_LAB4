@@ -111,10 +111,10 @@ th {
 						<th>Sexo</th>
 						<th>Nacionalidad</th>
 						<th>Fecha Nacimiento</th>
-						<th>Direcci�n</th>
+						<th>Direccion</th>
 						<th>Localidad</th>
 						<th>Correo</th>
-						<th>Tel�fono</th>
+						<th>Telefono</th>
 						<th>Estado</th>
 					</tr>
 				</thead>

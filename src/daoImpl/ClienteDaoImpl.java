@@ -21,7 +21,8 @@ public class ClienteDaoImpl implements ClienteDao {
         cn = new Conexion();
         cn.Open();
         List<Cliente> lista = new ArrayList<>();
-        String query = "SELECT * FROM Cliente";
+        String query = "SELECT c.cuil_Cli AS CUIL, c.dni_Cli AS DNI, c.nombre_Clii AS Nombre, c.apellido_Cli AS Apellido, s.Descripcion AS Sexo, c.ID_Nacionalidad_Cli AS Nacionalidad, c.fecha_nacimiento_Cli AS FechaNacimiento, c.direccion_Cli AS Direccion, l.Nombre_Loc_Lca AS Localidad, c.correo_electronico_Cli AS CorreoElectronico, c.telefono_Cli AS Telefono, c.estado_Cli AS Estado FROM Cliente c INNER JOIN Sexo s ON c.ID_sexo_Cli = s.ID_sexo_se INNER JOIN Localidad l ON c.ID_Localidad_Cli = l.ID_Localidad_Lca";
+       
         try {
             ResultSet rs = cn.query(query);
             while (rs.next()) {
@@ -38,6 +39,7 @@ public class ClienteDaoImpl implements ClienteDao {
                 cliente.setCorreo(rs.getString("correo_electronico_Cli"));
                 cliente.setTelefono(rs.getString("telefono_Cli"));
                 cliente.setEstado(rs.getBoolean("estado_Cli"));
+                System.out.println(cliente);
                 lista.add(cliente);
             }
         } catch (Exception e) {
@@ -47,11 +49,13 @@ public class ClienteDaoImpl implements ClienteDao {
         }
         return lista;
     }
+    
     public ArrayList<Cliente> obtenerTodosarray() {
         cn = new Conexion();
         cn.Open();
         ArrayList<Cliente> lista = new ArrayList<>();
-        String query = "SELECT * FROM Cliente";
+        String query = "SELECT c.cuil_Cli AS CUIL, c.dni_Cli AS DNI, c.nombre_Clii AS Nombre, c.apellido_Cli AS Apellido, s.Descripcion AS Sexo, c.ID_Nacionalidad_Cli AS Nacionalidad, c.fecha_nacimiento_Cli AS FechaNacimiento, c.direccion_Cli AS Direccion, l.Nombre_Loc_Lca AS Localidad, c.correo_electronico_Cli AS CorreoElectronico, c.telefono_Cli AS Telefono, c.estado_Cli AS Estado FROM Cliente c INNER JOIN Sexo s ON c.ID_sexo_Cli = s.ID_sexo_se INNER JOIN Localidad l ON c.ID_Localidad_Cli = l.ID_Localidad_Lca";
+        
         try {
             ResultSet rs = cn.query(query);
             while (rs.next()) {
