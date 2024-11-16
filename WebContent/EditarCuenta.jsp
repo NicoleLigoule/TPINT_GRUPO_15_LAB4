@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"
+%>
 <%@page import="entidades.Usuario"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Cuenta"%>
@@ -22,7 +23,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EditarCuenta</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/Css/EditarCun.css">
+	href="${pageContext.request.contextPath}/Css/EditarCun.css"
+>
 <body>
 	<nav class="navbar">
 	<button class="hamburger" onclick="toggleSidebar()">
@@ -32,7 +34,8 @@
 	</button>
 	<a href="${pageContext.request.contextPath}/Login.jsp"> <img
 		src="${pageContext.request.contextPath}/img/png_logo.png"
-		class="img_logo" alt="Logo UTN">
+		class="img_logo" alt="Logo UTN"
+	>
 	</a> <span class="username"><%=usuario.getUsuarioUs()%></span> </nav>
 
 	<div class="main-container">
@@ -84,9 +87,11 @@
 				</form>-->
 					<form
 						action="${pageContext.request.contextPath}/servletEditarCuenta"
-						method="get">
+						method="get"
+					>
 						<label for="cuil">CUIL CLIENTE</label> <input type="text"
-							id="cuil" name="cuil" placeholder="CUIL">
+							id="cuil" name="cuil" placeholder="CUIL"
+						>
 						<div class="button-group">
 							<button type="submit" class="buscarBtn">Buscar</button>
 						</div>
@@ -97,53 +102,55 @@
 				<div class="form-card">
 					<form
 						action="${pageContext.request.contextPath}/servletEditarCuenta"
-						method="post">
+						method="post"
+					>
 						<label for="NC">NUMERO DE CUENTA</label> <select id="NroDeCuenta"
-							name="NroDeCuenta" required>
+							name="NroDeCuenta" required
+						>
 							<option value="" disabled selected>Seleccione la cuenta</option>
-							
+
 							<%
-								if(request.getAttribute("cuentas") != null){
+								if (request.getAttribute("cuentas") != null) {
 									ArrayList<Cuenta> listaCuentas = (ArrayList<Cuenta>) request.getAttribute("cuentas");
-									
-									for(Cuenta cu : listaCuentas){
-										%>
-										
-										<option value="<%=cu.getNumeroDeCuentaCu()%>">
-										<%=cu.getNumeroDeCuentaCu()%></option>
-										
-										<%
-									}
+
+									for (Cuenta cu : listaCuentas) {
+							%>
+
+							<option value="<%=cu.getNumeroDeCuentaCu()%>">
+								<%=cu.getNumeroDeCuentaCu()%></option>
+
+							<%
+								}
 								}
 							%>
-							
-							
-							
+
+
+
 						</select>
 
 						<h3>Cambiar Tipo de Cuenta</h3>
 						<label for="tipoDeCuenta">Tipo de Cuenta</label> <select
-							id="tipoDeCuenta" name="tipoDeCuenta" required>
+							id="tipoDeCuenta" name="tipoDeCuenta" required
+						>
 							<option value="" disabled selected>Seleccione un tipo de
 								cuenta</option>
-							<!-- Cargar opciones de tipos de cuenta aqu� -->
-							
+							<!-- Cargar opciones de tipos de cuenta aqui -->
+
 							<%
-							if(request.getAttribute("tipos") != null){
-								ArrayList<TipoDeCuenta> tipos = (ArrayList<TipoDeCuenta>)request.getAttribute("tipos");
-								
-								for(TipoDeCuenta tcu : tipos){
-									
-									%>
-									<option value="<%=tcu.getIdTipoDeCuenta() %>" ><%=tcu.getNombreTipo() %></option>
-									<%
-								}
-							}
+								if (request.getAttribute("tipos") != null) {
+									ArrayList<TipoDeCuenta> tipos = (ArrayList<TipoDeCuenta>) request.getAttribute("tipos");
+
+									for (TipoDeCuenta tcu : tipos) {
 							%>
-							
-							
-							
-							
+							<option value="<%=tcu.getIdTipoDeCuenta()%>"><%=tcu.getNombreTipo()%></option>
+							<%
+								}
+								}
+							%>
+
+
+
+
 						</select>
 
 						<div class="button-group">
