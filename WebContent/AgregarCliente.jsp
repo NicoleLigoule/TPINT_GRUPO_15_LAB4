@@ -38,30 +38,7 @@
 	</nav>
 
 	<div class="main-container">
-		<aside id="sidebar" class="sidebar">
-			<ul>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Clientes</a>
-					<ul class="submenu">
-						<li><a href="AgregarCliente.jsp">Agregar Cliente</a></li>
-						<li><a href="EliminarCliente.jsp">Baja Cliente</a></li>
-						<li><a href="#">Editar Cliente</a></li>
-						<li><a href="ListarCliente.jsp">Listar Cliente</a></li>
-					</ul></li>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Cuentas</a>
-					<ul class="submenu">
-						<li><a href="AgregarCuenta.jsp">Agregar Cuenta</a></li>
-						<li><a href="#">Baja Cuenta</a></li>
-						<li><a href="#">Editar Cuenta</a></li>
-						<li><a href="#">Listar Cuenta</a></li>
-					</ul></li>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Transacciones</a></li>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Reportes</a></li>
-			</ul>
-		</aside>
+				<jsp:include page="SubMenu.jsp" />
 
 		<div class="content">
 			<div class="form-card">
