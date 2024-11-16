@@ -125,11 +125,11 @@ th {
 						<td><%= cliente.getDni() %></td>
 						<td><%= cliente.getNombre() %></td>
 						<td><%= cliente.getApellido() %></td>
-						<td><%= cliente.getId_sexo() %></td>
+						<td><%= cliente.getDescripcion_sexo() %></td>
 						<td><%= cliente.getId_nacionalidad() %></td>
 						<td><%= cliente.getFechaNacimiento() %></td>
 						<td><%= cliente.getDireccion() %></td>
-						<td><%= cliente.getId_localidad() %></td>
+						<td><%= cliente.getDescripcion_localidad() %></td>
 						<td><%= cliente.getCorreo() %></td>
 						<td><%= cliente.getTelefono() %></td>
 						<td><%= cliente.isEstado() ? "Activo" : "Inactivo" %></td>

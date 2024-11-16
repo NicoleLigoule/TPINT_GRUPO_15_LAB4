@@ -8,11 +8,14 @@ public class Cliente {
 	private String nombre;
 	private String apellido;
 	private int id_sexo;
+	private String descripcion_sexo;
 	private String id_nacionalidad;
 	private LocalDate fechaNacimiento;
 	private String direccion;
 	private int id_localidad;
+	private String descripcion_localidad;
 	private int id_provincia;
+	private String descripcion_provincia;
 	private String correo;
 	private String telefono;
 	private boolean estado;
@@ -149,6 +152,30 @@ public class Cliente {
 				+ id_sexo + ", id_nacionalidad=" + id_nacionalidad + ", fechaNacimiento=" + fechaNacimiento
 				+ ", direccion=" + direccion + ", id_localidad=" + id_localidad + ", correo=" + correo + ", telefono="
 				+ telefono + ", estado=" + estado + "]";
+	}
+
+	public String getDescripcion_sexo() {
+		return descripcion_sexo;
+	}
+
+	public void setDescripcion_sexo(String descripcion_sexo) {
+		this.descripcion_sexo = descripcion_sexo;
+	}
+
+	public String getDescripcion_localidad() {
+		return descripcion_localidad;
+	}
+
+	public void setDescripcion_localidad(String descripcion_localidad) {
+		this.descripcion_localidad = descripcion_localidad;
+	}
+
+	public String getDescripcion_provincia() {
+		return descripcion_provincia;
+	}
+
+	public void setDescripcion_provincia(String descripcion_provincia) {
+		this.descripcion_provincia = descripcion_provincia;
 	}
 
 

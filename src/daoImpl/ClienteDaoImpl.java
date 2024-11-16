@@ -21,25 +21,44 @@ public class ClienteDaoImpl implements ClienteDao {
         cn = new Conexion();
         cn.Open();
         List<Cliente> lista = new ArrayList<>();
-        String query = "SELECT c.cuil_Cli AS CUIL, c.dni_Cli AS DNI, c.nombre_Clii AS Nombre, c.apellido_Cli AS Apellido, s.Descripcion AS Sexo, c.ID_Nacionalidad_Cli AS Nacionalidad, c.fecha_nacimiento_Cli AS FechaNacimiento, c.direccion_Cli AS Direccion, l.Nombre_Loc_Lca AS Localidad, c.correo_electronico_Cli AS CorreoElectronico, c.telefono_Cli AS Telefono, c.estado_Cli AS Estado FROM Cliente c INNER JOIN Sexo s ON c.ID_sexo_Cli = s.ID_sexo_se INNER JOIN Localidad l ON c.ID_Localidad_Cli = l.ID_Localidad_Lca";
-       
+        String query = "SELECT c.cuil_Cli AS CUIL, c.dni_Cli AS DNI, c.nombre_Clii AS Nombre, c.apellido_Cli AS Apellido, "
+                + "s.Descripcion AS Sexo, c.ID_Nacionalidad_Cli AS Nacionalidad, c.fecha_nacimiento_Cli AS FechaNacimiento, "
+                + "c.direccion_Cli AS Direccion, l.Nombre_Loc_Lca AS Localidad, c.correo_electronico_Cli AS CorreoElectronico,"
+                + " c.telefono_Cli AS Telefono, c.estado_Cli AS Estado FROM Cliente c INNER JOIN Sexo s ON "
+                + "c.ID_sexo_Cli = s.ID_sexo_se INNER JOIN Localidad l ON c.ID_Localidad_Cli = l.ID_Localidad_Lca";
+        
         try {
-            ResultSet rs = cn.query(query);
+        	ResultSet rs = cn.query(query);
             while (rs.next()) {
+                System.out.println("CUIL: " + rs.getString("CUIL"));
+                System.out.println("DNI: " + rs.getInt("DNI"));
+                System.out.println("Nombre: " + rs.getString("Nombre"));
+                System.out.println("Apellido: " + rs.getString("Apellido"));
+                System.out.println("Sexo: " + rs.getString("Sexo"));
+                System.out.println("Nacionalidad: " + rs.getString("Nacionalidad"));
+                System.out.println("Fecha Nacimiento: " + rs.getObject("FechaNacimiento", LocalDate.class));
+                System.out.println("Dirección: " + rs.getString("Direccion"));
+                System.out.println("Localidad: " + rs.getString("Localidad"));
+                System.out.println("Correo: " + rs.getString("CorreoElectronico"));
+                System.out.println("Teléfono: " + rs.getString("Telefono"));
+                System.out.println("Estado: " + rs.getBoolean("Estado"));
+                System.out.println("---------------------------------------------------");
+
                 Cliente cliente = new Cliente();
-                cliente.setCuil(rs.getString("cuil_Cli"));
-                cliente.setDni(rs.getInt("dni_Cli"));
-                cliente.setNombre(rs.getString("nombre_Clii"));
-                cliente.setApellido(rs.getString("apellido_Cli"));
-                cliente.setId_sexo(rs.getInt("ID_sexo_Cli"));
-                cliente.setId_nacionalidad(rs.getString("ID_Nacionalidad_Cli"));
-                cliente.setFechaNacimiento(rs.getObject("fecha_nacimiento_Cli", LocalDate.class));
-                cliente.setDireccion(rs.getString("direccion_Cli"));
-                cliente.setId_localidad(rs.getInt("ID_Localidad_cli"));
-                cliente.setCorreo(rs.getString("correo_electronico_Cli"));
-                cliente.setTelefono(rs.getString("telefono_Cli"));
-                cliente.setEstado(rs.getBoolean("estado_Cli"));
-                System.out.println(cliente);
+                cliente.setCuil(rs.getString("CUIL"));
+                cliente.setDni(rs.getInt("DNI"));
+                cliente.setNombre(rs.getString("Nombre"));
+                cliente.setApellido(rs.getString("Apellido"));
+                cliente.setId_sexo(0); // No necesitas el ID si solo vas a usar el texto "Sexo"
+                cliente.setDescripcion_sexo(rs.getString("Sexo")); // Asigna directamente la descripción del sexo
+                cliente.setId_nacionalidad(rs.getString("Nacionalidad"));
+                cliente.setFechaNacimiento(rs.getObject("FechaNacimiento", LocalDate.class));
+                cliente.setDireccion(rs.getString("Direccion"));
+                cliente.setId_localidad(0); // Similar, si solo necesitas la localidad por nombre
+                cliente.setDescripcion_localidad(rs.getString("Localidad")); // Usa el nombre directamente
+                cliente.setCorreo(rs.getString("CorreoElectronico"));
+                cliente.setTelefono(rs.getString("Telefono"));
+                cliente.setEstado(rs.getBoolean("Estado"));
                 lista.add(cliente);
             }
         } catch (Exception e) {
