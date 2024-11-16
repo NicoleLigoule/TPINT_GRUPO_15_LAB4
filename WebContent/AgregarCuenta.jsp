@@ -95,6 +95,31 @@
 							onclick="window.history.back()">Volver</button>
 						<button type="submit" class="submit-button" name="agregarBtn">Agregar</button>
 					</div>
+					<!-- mensaje de que cargó bien y limpia, sino msj cargó mal -->
+					<%
+						String status = request.getParameter("status");
+						String mensajeExito = "Se ha generado la cuenta correctamente.";
+						String mensajeError = (String) request.getAttribute("Error");
+					%>
+					<%
+						if ("success".equals(status)) {
+					%>
+					<div class="alert alert-success">
+						<%=mensajeExito%>
+					</div>
+					<%
+						}
+					%>
+
+					<%
+						if (mensajeError != null) {
+					%>
+					<div class="alert alert-danger">
+						<%=mensajeError%>
+					</div>
+					<%
+						}
+					%>
 				</form>
 			</div>
 		</div>

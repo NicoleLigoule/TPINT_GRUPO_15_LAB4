@@ -51,14 +51,38 @@
 				        <input type="text" id="numeroCuenta" name="numeroCuenta" placeholder="Ingrese el número de cuenta" required>
 				        
 				        <label for="cuilCliente">Número de Cliente:</label>
-				        <input type="text" id="cuilCliente" name="cuilCliente" placeholder="Ingrese el cuil del cliente" required>
+				        <input type="text" id="cuilCliente" name="cuilCliente" placeholder="Ingrese el cuil del Cliente A AGREGAR CUENTA" required>
 				        
 				        <div class="button-group">
 				            <button type="button" >Cancelar</button>
 				            <button type="submit">Enviar</button>
 				        </div>
 				    </form>
-					
+					<!-- mensaje de que cargó bien y limpia, sino msj cargó mal -->
+					<%
+						String status = request.getParameter("status");
+						String mensajeExito = "Se ha generado el Cliente correctamente.";
+						String mensajeError = (String) request.getAttribute("Error");
+					%>
+					<%
+						if ("success".equals(status)) {
+					%>
+					<div class="alert alert-success">
+						<%=mensajeExito%>
+					</div>
+					<%
+						}
+					%>
+
+					<%
+						if (mensajeError != null) {
+					%>
+					<div class="alert alert-danger">
+						<%=mensajeError%>
+					</div>
+					<%
+						}
+					%>
 					
 				</div>
 			</div>
