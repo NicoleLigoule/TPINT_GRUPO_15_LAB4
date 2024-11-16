@@ -1,5 +1,4 @@
 <%@page import="entidades.Nacionalidad"%>
-<%@page import="entidades.Cliente"%>
 <%@page import="entidades.Sexo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -15,122 +14,73 @@
 		return;
 	}
 %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EditarCliente</title>
+<title>Editar Cliente</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Css/AgregarCli.css">
+</head>
 <body>
 	<nav class="navbar">
-	<button class="hamburger" onclick="toggleSidebar()">
-		<div class="line"></div>
-		<div class="line"></div>
-		<div class="line"></div>
-	</button>
-	<a href="${pageContext.request.contextPath}/Login.jsp"> <img
-		src="${pageContext.request.contextPath}/img/png_logo.png"
-		class="img_logo" alt="Logo UTN">
-	</a> <span class="username"><%=usuario.getUsuarioUs()%></span> </nav>
+		<button class="hamburger" onclick="toggleSidebar()">
+			<div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div>
+		</button>
+		<a href="${pageContext.request.contextPath}/Login.jsp"> <img
+			src="${pageContext.request.contextPath}/img/png_logo.png"
+			class="img_logo" alt="Logo UTN">
+		</a> <span class="username"><%=usuario.getUsuarioUs()%></span>
+	</nav>
 
 	<div class="main-container">
-		<aside class="sidebar" id="sidebar">
-		<ul>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Clientes</a>
-				<ul class="submenu">
-					<li><a href="AgregarCliente.jsp">Agregar Cliente</a></li>
-					<li><a href="EliminarCliente.jsp">Baja Cliente</a></li>
-					<li><a href="#">Editar Cliente</a></li>
-					<li><a href="ListarCliente.jsp">Listar Cliente</a></li>
-				</ul></li>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Cuentas</a>
-				<ul class="submenu">
-					<li><a href="AgregarCuenta.jsp">Agregar Cuenta</a></li>
-					<li><a href="#">Baja Cuenta</a></li>
-					<li><a href="#">Editar Cuenta</a></li>
-					<li><a href="#">Listar Cuenta</a></li>
-				</ul></li>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Transacciones</a>
-				<!-- <ul class="submenu">
-                        <li> <a href="#">Registrar Transacción</a></li>
-                        <li> <a href="#">Ver Historial</a></li>
-                    </ul>
-                     --></li>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Reportes</a>
-				<!-- <ul class="submenu">
-                        <li> <a href="#">Reporte de Clientes</a></li>
-                        <li> <a href="#">Reporte de Cuentas</a></li>
-                    </ul>
-                     --></li>
-		</ul>
+		<aside id="sidebar" class="sidebar">
+			<ul>
+				<li class="menu-item"><a href="#"
+					onclick="toggleSubmenu(event)">Clientes</a>
+					<ul class="submenu">
+						<li><a href="AgregarCliente.jsp">Agregar Cliente</a></li>
+						<li><a href="EliminarCliente.jsp">Baja Cliente</a></li>
+						<li><a href="#">Editar Cliente</a></li>
+						<li><a href="ListarCliente.jsp">Listar Cliente</a></li>
+					</ul></li>
+				<li class="menu-item"><a href="#"
+					onclick="toggleSubmenu(event)">Cuentas</a>
+					<ul class="submenu">
+						<li><a href="AgregarCuenta.jsp">Agregar Cuenta</a></li>
+						<li><a href="#">Baja Cuenta</a></li>
+						<li><a href="#">Editar Cuenta</a></li>
+						<li><a href="#">Listar Cuenta</a></li>
+					</ul></li>
+				<li class="menu-item"><a href="#"
+					onclick="toggleSubmenu(event)">Transacciones</a></li>
+				<li class="menu-item"><a href="#"
+					onclick="toggleSubmenu(event)">Reportes</a></li>
+			</ul>
 		</aside>
 
 		<div class="content">
 			<div class="form-card">
-				<h2>Editar de Cliente</h2>
-				<form action="servletEditarCliente" method="GET">
-					<%
-						ArrayList<Cliente> listaCliente = (ArrayList<Cliente>) request.getAttribute("listaCliente");
-					%>
-					<label for="Cliente">Seleccione Cliente a Editar:</label> <select
-						id="Cliente" name="Cliente" required onchange="this.form.submit()">
-						<option value="" disabled selected>Seleccione Cliente a
-							Editar</option>
-						<%
-							if (listaCliente != null) {
-								for (Cliente Clie : listaCliente) {
-						%>
-						<option value="<%=Clie.getCuil().toString()%>"><%=Clie.getCuil().toString() + " " + Clie.getApellido()%>
-						
+				<h2>Alta de Cliente</h2>
 
-						<%
-						
-							}
-							}
-						%>
-					</select>
-				</form>
 				<!-- Primer formulario (GET) GUARDAMOS HASTA PROVINCIA -->
-				<form action="servletEditarCliente" method="GET">
-					<%
-						Cliente clienteSe = new Cliente();
-
-						if (request.getAttribute("clienteSeleccionado") != null) {
-							System.out.println("Estoy dentro");
-
-							String cuilBuscado = (String) request.getAttribute("clienteSeleccionado");
-							System.out.println(cuilBuscado);
-							for (Cliente cliente : listaCliente) {
-
-								if (cliente.getCuil().equals(cuilBuscado)) {
-									System.out.println("Lo encontré");
-
-									clienteSe = cliente;
-									System.out.println(clienteSe.toString());
-									break;
-								}
-							}
-
-						} else {
-							System.out.println("no entre culiado");
-						}
-					%>
+				<form action="servletAgregarCliente" method="GET">
 					<label for="dni">DNI</label> <input type="text" id="dni" name="dni"
 						placeholder="DNI"
-						value="<%=clienteSe.getDni() != 0 ? clienteSe.getDni() : ""%>"
+						value="<%=request.getParameter("dni") != null ? request.getParameter("dni") : ""%>"
 						required> <label for="cuil">CUIL</label> <input
 						type="text" id="cuil" name="cuil" placeholder="CUIL"
-						value="<%=clienteSe.getCuil() != null ? clienteSe.getCuil() : ""%>"
+						value="<%=request.getParameter("cuil") != null ? request.getParameter("cuil") : ""%>"
 						required> <label for="nombre">Nombre</label> <input
 						type="text" id="nombre" name="nombre" placeholder="Nombre"
-						value="<%=clienteSe.getNombre() != null ? clienteSe.getNombre() : ""%>"
+						value="<%=request.getParameter("nombre") != null ? request.getParameter("nombre") : ""%>"
 						required> <label for="apellido">Apellido</label> <input
 						type="text" id="apellido" name="apellido" placeholder="Apellido"
-						value="<%=clienteSe.getApellido() != null ? clienteSe.getApellido() : ""%>"
+						value="<%=request.getParameter("apellido") != null ? request.getParameter("apellido") : ""%>"
 						required>
 
 					<%
@@ -144,13 +94,12 @@
 								for (Sexo sex : listaSexo) {
 						%>
 						<option value="<%=sex.getId_sexo()%>"
-							<%=Integer.toString(sex.getId_sexo()).equals(String.valueOf(clienteSe.getId_sexo())) ? "selected"
+							<%=Integer.toString(sex.getId_sexo()).equals(request.getParameter("genero")) ? "selected"
 							: ""%>><%=sex.getDescripcion()%></option>
 						<%
 							}
 							}
 						%>
-
 					</select>
 
 					<%
@@ -165,7 +114,7 @@
 								for (Nacionalidad nac : listaSeguros) {
 						%>
 						<option value="<%=nac.getIdNacionalidadNc()%>"
-							<%=nac.getIdNacionalidadNc().equals(clienteSe.getId_nacionalidad()) ? "selected" : ""%>><%=nac.getDescripcionNc()%></option>
+							<%=nac.getIdNacionalidadNc().equals(request.getParameter("nacionalidad")) ? "selected" : ""%>><%=nac.getDescripcionNc()%></option>
 						<%
 							}
 							}
@@ -173,41 +122,34 @@
 					</select> <label for="fecha-nacimiento">Fecha de Nacimiento</label> <input
 						type="text" id="fecha-nacimiento" name="fecha-nacimiento"
 						placeholder="YYYY/MM/DD"
-						value="<%=clienteSe.getFechaNacimiento() != null ? clienteSe.getFechaNacimiento() : ""%>"
+						value="<%=request.getParameter("fecha-nacimiento") != null ? request.getParameter("fecha-nacimiento") : ""%>"
 						required> <label for="direccion">Dirección</label> <input
 						type="text" id="direccion" name="direccion"
 						placeholder="Dirección"
-						value="<%=clienteSe.getDireccion() != null ? clienteSe.getDireccion() : ""%>"
+						value="<%=request.getParameter("direccion") != null ? request.getParameter("direccion") : ""%>"
 						required> <label for="numero">Número</label> <input
 						type="text" id="numero" name="numero" placeholder="Número"
-						value="<%=clienteSe.getTelefono() != null ? clienteSe.getTelefono() : ""%>"
+						value="<%=request.getParameter("numero") != null ? request.getParameter("numero") : ""%>"
 						required> <label for="telefono">Teléfono</label> <input
 						type="tel" id="telefono" name="telefono" placeholder="Teléfono"
-						value="<%=clienteSe.getTelefono() != null ? clienteSe.getTelefono() : ""%>"
+						value="<%=request.getParameter("telefono") != null ? request.getParameter("telefono") : ""%>"
 						required> <label for="email">Correo Electrónico</label> <input
 						type="email" id="email" name="email"
 						placeholder="Correo Electrónico"
-						value="<%=clienteSe.getCorreo() != null ? clienteSe.getCorreo() : ""%>"
+						value="<%=request.getParameter("email") != null ? request.getParameter("email") : ""%>"
 						required> <label for="provincia">Provincia</label> <select
 						id="provincia" name="provincia" onchange="this.form.submit();"
 						required>
-					<% 
-				    int idProvincia =0;
-				    if(request.getAttribute("idProvincia")!=null){
-				    	idProvincia = (int) request.getAttribute("idProvincia");
-				    }
-					%>
 						<option value="" disabled selected>Seleccione su
 							Provincia</option>
-						
 						<%
 							ArrayList<Provincia> listaProvincias = (ArrayList<Provincia>) request.getAttribute("listaProvincias");
-												
+							String selectedProvincia = request.getParameter("provincia");
 							if (listaProvincias != null) {
 								for (Provincia prov : listaProvincias) {
 						%>
 						<option value="<%=prov.getId_provincia()%>"
-							<%=prov.getId_provincia() == idProvincia  ? "selected" : ""%>><%=prov.getNombre()%></option>
+							<%=Integer.toString(prov.getId_provincia()).equals(selectedProvincia) ? "selected" : ""%>><%=prov.getNombre()%></option>
 						<%
 							}
 							}
@@ -217,7 +159,7 @@
 				</form>
 
 				<!-- Segundo formulario (POST) USAMOS LO QUE GUARDAMOS ANTES y le sumamos la localidad q cambia segun la provincia elegida -->
-				<form action="servletEditarCliente" method="POST">
+				<form action="servletAgregarCliente" method="POST">
 					<input type="hidden" name="dni"
 						value="<%=request.getParameter("dni")%>"> <input
 						type="hidden" name="cuil"
@@ -248,12 +190,12 @@
 							Localidad</option>
 						<%
 							ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocalidad");
-							int selectedLocalidad = clienteSe.getId_localidad();
+							String selectedLocalidad = request.getParameter("localidad");
 							if (listaLocalidad != null) {
 								for (Localidad loc : listaLocalidad) {
 						%>
 						<option value="<%=loc.getId_localidad()%>"
-							<%=loc.getId_localidad()==selectedLocalidad ? "selected" : ""%>><%=loc.getNombreLoca()%></option>
+							<%=Integer.toString(loc.getId_localidad()).equals(selectedLocalidad) ? "selected" : ""%>><%=loc.getNombreLoca()%></option>
 						<%
 							}
 							}
@@ -291,6 +233,7 @@
 						}
 					%>
 				</form>
+
 			</div>
 		</div>
 	</div>

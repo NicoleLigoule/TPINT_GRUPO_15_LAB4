@@ -91,6 +91,14 @@ public class servletEditarCliente extends HttpServlet {
                 response.getWriter().println("Error al obtener los datos: " + e.getMessage());
             }
         }
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
 		if (request.getParameter("Cliente") != null) {
 			String cuilBuscado = request.getParameter("Cliente");
 			System.out.println(cuilBuscado);
@@ -166,14 +174,6 @@ public class servletEditarCliente extends HttpServlet {
                 response.getWriter().println("Error al obtener los datos: " + e.getMessage());
             }
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
-		
 		 if(request.getParameter("agregarBtn") != null) {
 	            Cliente c = new Cliente();
 	            
@@ -246,10 +246,10 @@ public class servletEditarCliente extends HttpServlet {
 	            boolean insert = abmlcliente.editarCliente(c);
 
 		            if (insert) {         
-		                response.sendRedirect("AgregarCliente.jsp?status=success");
+		                response.sendRedirect("EditarCliente.jsp?status=success");
 		            } else {
 		                request.setAttribute("Error", "Error al agregar Cliente.");
-		                RequestDispatcher rd = request.getRequestDispatcher("AgregarCliente.jsp");
+		                RequestDispatcher rd = request.getRequestDispatcher("EditarCliente.jsp");
 		                rd.forward(request, response);
 		            }   
 	        	}

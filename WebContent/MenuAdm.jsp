@@ -39,7 +39,7 @@
 								Cliente</a></li>
 						<li><a href="EliminarCliente.jsp">Baja Cliente</a></li>
 						<li><a
-							href="${pageContext.request.contextPath}/servletEditarCliente?Param=1">Editar
+							href="${pageContext.request.contextPath}/servletLIstarClientesEditar?Param=1">Editar
 								Cliente</a></li>
 						<li><a
 							href="${pageContext.request.contextPath}/servletListarCliente?Param=1">Listar
