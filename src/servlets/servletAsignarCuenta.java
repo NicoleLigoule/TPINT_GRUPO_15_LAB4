@@ -44,8 +44,9 @@ public class servletAsignarCuenta extends HttpServlet {
 		String cuilCliente = request.getParameter("cuilCliente");
 		if(request.getParameter("numeroCuenta") != null &&
 				cuilCliente != null) {
-			System.out.print("cuil y numero de cuenta obtenidos exitosamente" + cuilCliente +" | "+ numeroCuenta);
 			numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));
+			System.out.print("cuil y numero de cuenta obtenidos exitosamente" + cuilCliente +" | "+ numeroCuenta);
+			
 			Cuenta cuenta = abmlCu.obtenerCuenta(numeroCuenta);
 			cuenta.setCuilCliCu(cuilCliente);
 			

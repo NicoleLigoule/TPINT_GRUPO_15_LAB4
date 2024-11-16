@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daoImpl.ClienteCuentaDTODaoImpl;
 import entidades.ClienteCuentaDTO;
 import negocio.DDL;
 import negocio.NegocioCuentas;
@@ -77,7 +76,7 @@ public class servletEliminarCuenta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("LLEGA AL SERVLET DE CUENTA - POST -");
-		// Recupero el n�mero de cuenta
+		// Recupero el numero de cuenta
 	    String numeroCuentaStr = request.getParameter("cuentasDelCliente");
 	    String mensaje;
 	    

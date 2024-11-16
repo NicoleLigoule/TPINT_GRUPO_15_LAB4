@@ -18,7 +18,7 @@ public class CuentaDaoImpl implements CuentaDao {
     
 	public ArrayList<TipoDeCuenta> readallTipoDeCuentas()
 	{
-		PreparedStatement statement;
+		//PreparedStatement statement;
 		ResultSet resultSet;
 		ArrayList<TipoDeCuenta> Tipos = new ArrayList<TipoDeCuenta>();
 		Conexion conexion = Conexion.getConexion();
