@@ -31,9 +31,7 @@
 		</a> <span class="username"><%=usuario.getUsuarioUs()%></span>
 	</nav>
 	<div class="main-container">
-		<aside class="sidebar" id="sidebar">
-			<!-- Sidebar content -->
-		</aside>
+		<jsp:include page="SubMenu.jsp" />
 
 		<div class="content">
 			<div class="form-card">

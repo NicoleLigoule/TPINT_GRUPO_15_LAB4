@@ -38,30 +38,7 @@
 	</nav>
 
 	<div class="main-container">
-		<aside id="sidebar" class="sidebar">
-			<ul>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Clientes</a>
-					<ul class="submenu">
-						<li><a href="AgregarCliente.jsp">Agregar Cliente</a></li>
-						<li><a href="EliminarCliente.jsp">Baja Cliente</a></li>
-						<li><a href="#">Editar Cliente</a></li>
-						<li><a href="ListarCliente.jsp">Listar Cliente</a></li>
-					</ul></li>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Cuentas</a>
-					<ul class="submenu">
-						<li><a href="AgregarCuenta.jsp">Agregar Cuenta</a></li>
-						<li><a href="#">Baja Cuenta</a></li>
-						<li><a href="#">Editar Cuenta</a></li>
-						<li><a href="#">Listar Cuenta</a></li>
-					</ul></li>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Transacciones</a></li>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Reportes</a></li>
-			</ul>
-		</aside>
+		<jsp:include page="SubMenu.jsp" />
 
 		<div class="content">
 			<div class="form-card">
@@ -86,9 +63,9 @@
 					<%
 						ArrayList<Sexo> listaSexo = (ArrayList<Sexo>) request.getAttribute("listaSexo");
 					%>
-					<label for="genero">Género:</label> <select id="genero"
+					<label for="genero">Gï¿½nero:</label> <select id="genero"
 						name="genero" required>
-						<option value="" disabled selected>Seleccione su género</option>
+						<option value="" disabled selected>Seleccione su gï¿½nero</option>
 						<%
 							if (listaSexo != null) {
 								for (Sexo sex : listaSexo) {
@@ -123,19 +100,19 @@
 						type="text" id="fecha-nacimiento" name="fecha-nacimiento"
 						placeholder="YYYY/MM/DD"
 						value="<%=request.getAttribute("fecha-nacimiento") != null ? request.getAttribute("fecha-nacimiento") : ""%>"
-						required> <label for="direccion">Dirección</label> <input
+						required> <label for="direccion">Direcciï¿½n</label> <input
 						type="text" id="direccion" name="direccion"
-						placeholder="Dirección"
+						placeholder="Direcciï¿½n"
 						value="<%=request.getAttribute("direccion") != null ? request.getAttribute("direccion") : ""%>"
-						required> <label for="numero">Número</label> <input
-						type="text" id="numero" name="numero" placeholder="Número"
+						required> <label for="numero">Nï¿½mero</label> <input
+						type="text" id="numero" name="numero" placeholder="Nï¿½mero"
 						value="<%=request.getAttribute("numero") != null ? request.getAttribute("numero") : ""%>"
-						required> <label for="telefono">Teléfono</label> <input
-						type="tel" id="telefono" name="telefono" placeholder="Teléfono"
+						required> <label for="telefono">Telï¿½fono</label> <input
+						type="tel" id="telefono" name="telefono" placeholder="Telï¿½fono"
 						value="<%=request.getAttribute("telefono") != null ? request.getAttribute("telefono") : ""%>"
-						required> <label for="email">Correo Electrónico</label> <input
+						required> <label for="email">Correo Electrï¿½nico</label> <input
 						type="email" id="email" name="email"
-						placeholder="Correo Electrónico"
+						placeholder="Correo Electrï¿½nico"
 						value="<%=request.getAttribute("email") != null ? request.getAttribute("email") : ""%>"
 						required> <label for="provincia">Provincia</label> <select
 						id="provincia" name="provincia" onchange="this.form.submit();"
@@ -207,7 +184,7 @@
 						<button type="submit" class="submit-button" name="agregarBtn">Agregar</button>
 					</div>
 
-					<!-- mensaje de que cargó bien y limpia, sino msj cargó mal -->
+					<!-- mensaje de que cargï¿½ bien y limpia, sino msj cargï¿½ mal -->
 					<%
 						String status = request.getParameter("status");
 						String mensajeExito = "Se ha generado el Cliente correctamente.";

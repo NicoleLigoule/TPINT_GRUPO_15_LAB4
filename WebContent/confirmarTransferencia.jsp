@@ -29,18 +29,7 @@
 	</nav>
 
 	<div class="main-container">
-		<aside class="sidebar" id="sidebar">
-			<ul>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Transferencias</a></li>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Solicitudes de préstamos</a></li>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Pago de préstamos</a></li>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Información personal</a></li>
-			</ul>
-		</aside>
+		<jsp:include page="SubMenu.jsp" />
 
 		<div class="form-container">
 			<h2>Confirma que todo esté bien</h2>

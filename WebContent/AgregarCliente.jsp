@@ -38,7 +38,7 @@
 	</nav>
 
 	<div class="main-container">
-				<jsp:include page="SubMenu.jsp" />
+		<jsp:include page="SubMenu.jsp" />
 
 		<div class="content">
 			<div class="form-card">
