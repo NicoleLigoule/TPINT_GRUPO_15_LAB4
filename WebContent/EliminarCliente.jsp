@@ -39,8 +39,13 @@
 					<label for="cuil">Ingresar C.U.I.L</label> <input type="text"
 						id="cuil" name="cuil" placeholder="C.U.I.L" required>
 					<div class="button-group">
-						<button type="submit" name="btnBaja" class="submit-button">Dar
-							Baja</button>
+						   <button 
+				            type="submit" 
+				            name="btnBaja" 
+				            class="submit-button"
+				            onclick="return confirm('¿Estás seguro de que deseas dar de baja este cliente?');">
+				            Dar Baja
+				        </button>
 					</div>
 				</form>
 			</div>

@@ -100,10 +100,13 @@
 					</select> 
 
 					<div class="button-group">
-						<button type="button" class="cancel-button"
-							onclick="window.history.back();">Volver</button>
-						<button type="submit" class="submit-button">Solicitar
-							baja</button>
+					<button type="button" class="cancel-button" onclick="window.history.back();">Volver</button>
+				        <button 
+				            type="submit" 
+				            class="submit-button"
+				            onclick="return confirm('¿Estás seguro de que deseas eliminar esta cuenta?');">
+				            Solicitar baja
+				        </button>
 					</div>
 
 					<div
