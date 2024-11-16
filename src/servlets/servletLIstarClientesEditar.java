@@ -11,7 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Cliente;
+import entidades.Localidad;
+import entidades.Nacionalidad;
+import entidades.Provincia;
+import entidades.Sexo;
 import negocio.DDL;
+import negocio.NegocioClientes;
 
 /**
  * Servlet implementation class servletLIstarClientesEditar
@@ -61,8 +66,34 @@ public class servletLIstarClientesEditar extends HttpServlet {
 		if (request.getParameter("clienteSeleccionado") != null) {
 	           DDL lista = new DDL();
 	            
+	           
+	           
+	           
+	           
+	           
+	           
+	           
+	           
+	           
 	           try {      
+	                ArrayList<Nacionalidad> listaNacionalidades = lista.Nacionalidad();
+	                if (listaNacionalidades != null && !listaNacionalidades.isEmpty()) {
+	                    request.setAttribute("listaNacionalidad", listaNacionalidades);
+	                } else {
+	                    response.getWriter().println("No se encontraron nacionalidades.");
+	                }
+
+	                ArrayList<Sexo> listaSexos = lista.Sexo(); 
+	                if (listaSexos != null && !listaSexos.isEmpty()) {
+	                    request.setAttribute("listaSexo", listaSexos);
+	                } else {
+	                    response.getWriter().println("No se encontraron sexos.");
+	                }
+					
+                    
+	                
                ArrayList<Cliente> listaClientes = lista.ClienteList();
+               
 		       Cliente clienteSe = new Cliente();
 			System.out.println("Estoy dentro");
 	        String clienteSeleccionado = request.getParameter("clienteSeleccionado");
@@ -78,6 +109,28 @@ public class servletLIstarClientesEditar extends HttpServlet {
 					break;
 				}
 			}
+			
+			int h=0;
+			NegocioClientes neg= new NegocioClientes();
+			 h=neg.obtenProv(String.valueOf(clienteSe.getId_localidad()));
+			 int idProvincia =h;
+            if(h != 0) {
+            	
+            	   // Guardar 'h' como atributo del request
+                
+            ArrayList<Localidad> listaLocalidad = lista.Localidad(idProvincia);
+            if (listaLocalidad != null && !listaLocalidad.isEmpty()) {
+                request.setAttribute("listaLocalidad", listaLocalidad);
+            } else {
+                response.getWriter().println("No se encontraron Localidad.");
+            }}
+            ArrayList<Provincia> listaProvincias = lista.Provincia();
+            if (listaProvincias != null && !listaProvincias.isEmpty()) {
+                request.setAttribute("listaProvincias", listaProvincias);
+            } else {
+                response.getWriter().println("No se encontraron provincias.");
+            }
+			
 			request.setAttribute("dni",clienteSe.getDni());
 			request.setAttribute("cuil",clienteSe.getCuil() );
 			request.setAttribute("nombre",clienteSe.getNombre());
@@ -89,10 +142,14 @@ public class servletLIstarClientesEditar extends HttpServlet {
 			request.setAttribute("telefono",clienteSe.getTelefono());
 			request.setAttribute("email",clienteSe.getCorreo());
 			request.setAttribute("localidad",clienteSe.getId_localidad());
-			///request.setAttribute("email",clienteSe.getDni());
+			request.setAttribute("idProvincia", idProvincia);
+
+
+ 
 			RequestDispatcher rd = request.getRequestDispatcher("EditarCliente.jsp");
             rd.forward(request, response);
-
+    
+            
         } catch (Exception e) {
             e.printStackTrace();
             response.getWriter().println("Error al obtener los datos: " + e.getMessage());

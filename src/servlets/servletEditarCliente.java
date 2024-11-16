@@ -40,59 +40,53 @@ public class servletEditarCliente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("Param") != null ) {
-            DDL lista = new DDL();
-            try {
-   
-                ArrayList<Cliente> listaClientes = lista.ClienteList();
-                if (listaClientes != null && !listaClientes.isEmpty()) {
-                    request.setAttribute("listaCliente", listaClientes);
-                } else {
-                    response.getWriter().println("No se encontraron Clientes.");
-                }
-                ArrayList<Nacionalidad> listaNacionalidades = lista.Nacionalidad();
-                if (listaNacionalidades != null && !listaNacionalidades.isEmpty()) {
-                    request.setAttribute("listaNacionalidad", listaNacionalidades);
-                } else {
-                    response.getWriter().println("No se encontraron nacionalidades.");
-                }
+		 DDL lista = new DDL();
+		
+         try {
+        	  ArrayList<Nacionalidad> listaNacionalidades = lista.Nacionalidad();
+              if (listaNacionalidades != null && !listaNacionalidades.isEmpty()) {
+                  request.setAttribute("listaNacionalidad", listaNacionalidades);
+              } else {
+                  response.getWriter().println("No se encontraron nacionalidades.");
+              }
 
-                ArrayList<Sexo> listaSexos = lista.Sexo(); 
-                if (listaSexos != null && !listaSexos.isEmpty()) {
-                    request.setAttribute("listaSexo", listaSexos);
-                } else {
-                    response.getWriter().println("No se encontraron sexos.");
-                }
+              ArrayList<Sexo> listaSexos = lista.Sexo(); 
+              if (listaSexos != null && !listaSexos.isEmpty()) {
+                  request.setAttribute("listaSexo", listaSexos);
+              } else {
+                  response.getWriter().println("No se encontraron sexos.");
+              }
 
-                
-                ArrayList<Provincia> listaProvincias = lista.Provincia();
-                if (listaProvincias != null && !listaProvincias.isEmpty()) {
-                    request.setAttribute("listaProvincias", listaProvincias);
-                } else {
-                    response.getWriter().println("No se encontraron provincias.");
-                }
+              
+              ArrayList<Provincia> listaProvincias = lista.Provincia();
+              if (listaProvincias != null && !listaProvincias.isEmpty()) {
+                  request.setAttribute("listaProvincias", listaProvincias);
+              } else {
+                  response.getWriter().println("No se encontraron provincias.");
+              }
+              
+              if(request.getParameter("provincia") != null) {
+              	int idProvincia = Integer.parseInt(request.getParameter("provincia"));
+                  ArrayList<Localidad> listaLocalidad = lista.Localidad(idProvincia);
+                  if (listaLocalidad != null && !listaLocalidad.isEmpty()) {
+                      request.setAttribute("listaLocalidad", listaLocalidad);
+                  } else {
+                      response.getWriter().println("No se encontraron Localidad.");
+                  }
+              }
+             
+             
+             RequestDispatcher rd = request.getRequestDispatcher("EditarCliente.jsp");
+             rd.forward(request, response);
 
-                if(request.getParameter("provincia") != null) {
-                	int idProvincia = Integer.parseInt(request.getParameter("provincia"));
-                    ArrayList<Localidad> listaLocalidad = lista.Localidad(idProvincia);
-                    if (listaLocalidad != null && !listaLocalidad.isEmpty()) {
-                        request.setAttribute("listaLocalidad", listaLocalidad);
-                    } else {
-                        response.getWriter().println("No se encontraron Localidad.");
-                    }
-                }               
-                
-                
-                RequestDispatcher rd = request.getRequestDispatcher("EditarCliente.jsp");
-                rd.forward(request, response);
+         } catch (Exception e) {
+             e.printStackTrace();
+             response.getWriter().println("Error al obtener los datos: " + e.getMessage());
+         }
+     }
+        
 
-            } catch (Exception e) {
-                e.printStackTrace();
-                response.getWriter().println("Error al obtener los datos: " + e.getMessage());
-            }
-        }
-
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -94,7 +94,7 @@
 								for (Sexo sex : listaSexo) {
 						%>
 						<option value="<%=sex.getId_sexo()%>"
-							<%=Integer.toString(sex.getId_sexo()).equals(request.getAttribute("genero")) ? "selected"
+							<%=sex.getId_sexo()==(int)request.getAttribute("genero") ? "selected"
 							: ""%>><%=sex.getDescripcion()%></option>
 						<%
 							}
@@ -114,7 +114,7 @@
 								for (Nacionalidad nac : listaSeguros) {
 						%>
 						<option value="<%=nac.getIdNacionalidadNc()%>"
-							<%=nac.getIdNacionalidadNc()==request.getAttribute("nacionalidad") ? "selected" : ""%>><%=nac.getDescripcionNc()%></option>
+			     	<%=request.getAttribute("nacionalidad") != null && nac.getIdNacionalidadNc().equals(request.getAttribute("nacionalidad")) ? "selected" : ""%>><%=nac.getDescripcionNc()%></option>
 						<%
 							}
 							}
@@ -127,8 +127,7 @@
 						type="text" id="direccion" name="direccion"
 						placeholder="Dirección"
 						value="<%=request.getAttribute("direccion") != null ? request.getAttribute("direccion") : ""%>"
-						required> <label for="numero">Número</label> <input
-						type="text" id="numero" name="numero" placeholder="Número"
+
 						value="<%=request.getAttribute("numero") != null ? request.getAttribute("numero") : ""%>"
 						required> <label for="telefono">Teléfono</label> <input
 						type="tel" id="telefono" name="telefono" placeholder="Teléfono"
@@ -138,24 +137,29 @@
 						placeholder="Correo Electrónico"
 						value="<%=request.getAttribute("email") != null ? request.getAttribute("email") : ""%>"
 						required> <label for="provincia">Provincia</label> <select
-						id="provincia" name="provincia" onchange="this.form.submit();"
+						id="provincia" name="provincia" "
 						required>
 						<option value="" disabled selected>Seleccione su
 							Provincia</option>
 						<%
 							ArrayList<Provincia> listaProvincias = (ArrayList<Provincia>) request.getAttribute("listaProvincias");
-						///	String selectedProvincia = request.getAttribute("provincia");
+								int selectedPRov = (int) request.getAttribute("idProvincia");
 							if (listaProvincias != null) {
 								for (Provincia prov : listaProvincias) {
 						%>
 						<option value="<%=prov.getId_provincia()%>"
-							<%=prov.getId_provincia() == (int)request.getAttribute("provincia") ? "selected" : ""%>><%=prov.getNombre()%></option>
+							<%=prov.getId_provincia() == selectedPRov ? "selected" : ""%>><%=prov.getNombre()%></option>
 						<%
 							}
 							}
 						%>
-					</select> <input type="hidden" name="localidad"
-						value="<%=request.getParameter("localidad")%>">
+						<input
+						type="hidden" name="localidad"
+						value="<%=request.getAttribute("localidad")%>">
+						
+					<div class="button-group">
+						<button type="submit" class="submit-button" name="cambiarBTn">cambiar</button>
+					</div>
 				</form>
 
 				<!-- Segundo formulario (POST) USAMOS LO QUE GUARDAMOS ANTES y le sumamos la localidad q cambia segun la provincia elegida -->
@@ -183,19 +187,19 @@
 						type="hidden" name="email"
 						value="<%=request.getAttribute("email")%>"> <input
 						type="hidden" name="provincia"
-						value="<%=request.getAttribute("provincia")%>"> <label
+						value="<%=request.getAttribute("idProvincia")%>"> <label
 						for="localidad">Localidad</label> <select id="localidad"
 						name="localidad" required>
 						<option value="" disabled selected>Seleccione su
 							Localidad</option>
 						<%
 							ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocalidad");
-							int selectedLocalidad =(int) request.getAttribute("localidad");
+								int selectedLocalidad = (int) request.getAttribute("localidad");
 							if (listaLocalidad != null) {
 								for (Localidad loc : listaLocalidad) {
 						%>
 						<option value="<%=loc.getId_localidad()%>"
-							<%=loc.getId_localidad()==selectedLocalidad ? "selected" : ""%>><%=loc.getNombreLoca()%></option>
+							<%=loc.getId_localidad() == selectedLocalidad ? "selected" : ""%>><%=loc.getNombreLoca()%></option>
 						<%
 							}
 							}
