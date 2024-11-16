@@ -65,22 +65,22 @@
 
 		<div class="content">
 			<div class="form-card">
-				<h2>Alta de Cliente</h2>
+				<h2>Editar cliente </h2>
 
 				<!-- Primer formulario (GET) GUARDAMOS HASTA PROVINCIA -->
-				<form action="servletAgregarCliente" method="GET">
+				<form action="servletEditarCliente" method="GET">
 					<label for="dni">DNI</label> <input type="text" id="dni" name="dni"
 						placeholder="DNI"
-						value="<%=request.getParameter("dni") != null ? request.getParameter("dni") : ""%>"
+						value="<%=request.getAttribute("dni") != null ? request.getAttribute("dni") : ""%>"
 						required> <label for="cuil">CUIL</label> <input
 						type="text" id="cuil" name="cuil" placeholder="CUIL"
-						value="<%=request.getParameter("cuil") != null ? request.getParameter("cuil") : ""%>"
+						value="<%=request.getAttribute("cuil") != null ? request.getAttribute("cuil") : ""%>"
 						required> <label for="nombre">Nombre</label> <input
 						type="text" id="nombre" name="nombre" placeholder="Nombre"
-						value="<%=request.getParameter("nombre") != null ? request.getParameter("nombre") : ""%>"
+						value="<%=request.getAttribute("nombre") != null ? request.getAttribute("nombre") : ""%>"
 						required> <label for="apellido">Apellido</label> <input
 						type="text" id="apellido" name="apellido" placeholder="Apellido"
-						value="<%=request.getParameter("apellido") != null ? request.getParameter("apellido") : ""%>"
+						value="<%=request.getAttribute("apellido") != null ? request.getAttribute("apellido") : ""%>"
 						required>
 
 					<%
@@ -94,7 +94,7 @@
 								for (Sexo sex : listaSexo) {
 						%>
 						<option value="<%=sex.getId_sexo()%>"
-							<%=Integer.toString(sex.getId_sexo()).equals(request.getParameter("genero")) ? "selected"
+							<%=Integer.toString(sex.getId_sexo()).equals(request.getAttribute("genero")) ? "selected"
 							: ""%>><%=sex.getDescripcion()%></option>
 						<%
 							}
@@ -114,7 +114,7 @@
 								for (Nacionalidad nac : listaSeguros) {
 						%>
 						<option value="<%=nac.getIdNacionalidadNc()%>"
-							<%=nac.getIdNacionalidadNc().equals(request.getParameter("nacionalidad")) ? "selected" : ""%>><%=nac.getDescripcionNc()%></option>
+							<%=nac.getIdNacionalidadNc()==request.getAttribute("nacionalidad") ? "selected" : ""%>><%=nac.getDescripcionNc()%></option>
 						<%
 							}
 							}
@@ -122,21 +122,21 @@
 					</select> <label for="fecha-nacimiento">Fecha de Nacimiento</label> <input
 						type="text" id="fecha-nacimiento" name="fecha-nacimiento"
 						placeholder="YYYY/MM/DD"
-						value="<%=request.getParameter("fecha-nacimiento") != null ? request.getParameter("fecha-nacimiento") : ""%>"
+						value="<%=request.getAttribute("fecha-nacimiento") != null ? request.getAttribute("fecha-nacimiento") : ""%>"
 						required> <label for="direccion">Dirección</label> <input
 						type="text" id="direccion" name="direccion"
 						placeholder="Dirección"
-						value="<%=request.getParameter("direccion") != null ? request.getParameter("direccion") : ""%>"
+						value="<%=request.getAttribute("direccion") != null ? request.getAttribute("direccion") : ""%>"
 						required> <label for="numero">Número</label> <input
 						type="text" id="numero" name="numero" placeholder="Número"
-						value="<%=request.getParameter("numero") != null ? request.getParameter("numero") : ""%>"
+						value="<%=request.getAttribute("numero") != null ? request.getAttribute("numero") : ""%>"
 						required> <label for="telefono">Teléfono</label> <input
 						type="tel" id="telefono" name="telefono" placeholder="Teléfono"
-						value="<%=request.getParameter("telefono") != null ? request.getParameter("telefono") : ""%>"
+						value="<%=request.getAttribute("telefono") != null ? request.getAttribute("telefono") : ""%>"
 						required> <label for="email">Correo Electrónico</label> <input
 						type="email" id="email" name="email"
 						placeholder="Correo Electrónico"
-						value="<%=request.getParameter("email") != null ? request.getParameter("email") : ""%>"
+						value="<%=request.getAttribute("email") != null ? request.getAttribute("email") : ""%>"
 						required> <label for="provincia">Provincia</label> <select
 						id="provincia" name="provincia" onchange="this.form.submit();"
 						required>
@@ -144,12 +144,12 @@
 							Provincia</option>
 						<%
 							ArrayList<Provincia> listaProvincias = (ArrayList<Provincia>) request.getAttribute("listaProvincias");
-							String selectedProvincia = request.getParameter("provincia");
+						///	String selectedProvincia = request.getAttribute("provincia");
 							if (listaProvincias != null) {
 								for (Provincia prov : listaProvincias) {
 						%>
 						<option value="<%=prov.getId_provincia()%>"
-							<%=Integer.toString(prov.getId_provincia()).equals(selectedProvincia) ? "selected" : ""%>><%=prov.getNombre()%></option>
+							<%=prov.getId_provincia() == (int)request.getAttribute("provincia") ? "selected" : ""%>><%=prov.getNombre()%></option>
 						<%
 							}
 							}
@@ -159,43 +159,43 @@
 				</form>
 
 				<!-- Segundo formulario (POST) USAMOS LO QUE GUARDAMOS ANTES y le sumamos la localidad q cambia segun la provincia elegida -->
-				<form action="servletAgregarCliente" method="POST">
+				<form action="servletEditarCliente" method="POST">
 					<input type="hidden" name="dni"
-						value="<%=request.getParameter("dni")%>"> <input
+						value="<%=request.getAttribute("dni")%>"> <input
 						type="hidden" name="cuil"
-						value="<%=request.getParameter("cuil")%>"> <input
+						value="<%=request.getAttribute("cuil")%>"> <input
 						type="hidden" name="nombre"
-						value="<%=request.getParameter("nombre")%>"> <input
+						value="<%=request.getAttribute("nombre")%>"> <input
 						type="hidden" name="apellido"
-						value="<%=request.getParameter("apellido")%>"> <input
+						value="<%=request.getAttribute("apellido")%>"> <input
 						type="hidden" name="genero"
-						value="<%=request.getParameter("genero")%>"> <input
+						value="<%=request.getAttribute("genero")%>"> <input
 						type="hidden" name="nacionalidad"
-						value="<%=request.getParameter("nacionalidad")%>"> <input
+						value="<%=request.getAttribute("nacionalidad")%>"> <input
 						type="hidden" name="fecha-nacimiento"
-						value="<%=request.getParameter("fecha-nacimiento")%>"> <input
+						value="<%=request.getAttribute("fecha-nacimiento")%>"> <input
 						type="hidden" name="direccion"
-						value="<%=request.getParameter("direccion")%>"> <input
+						value="<%=request.getAttribute("direccion")%>"> <input
 						type="hidden" name="numero"
-						value="<%=request.getParameter("numero")%>"> <input
+						value="<%=request.getAttribute("numero")%>"> <input
 						type="hidden" name="telefono"
-						value="<%=request.getParameter("telefono")%>"> <input
+						value="<%=request.getAttribute("telefono")%>"> <input
 						type="hidden" name="email"
-						value="<%=request.getParameter("email")%>"> <input
+						value="<%=request.getAttribute("email")%>"> <input
 						type="hidden" name="provincia"
-						value="<%=request.getParameter("provincia")%>"> <label
+						value="<%=request.getAttribute("provincia")%>"> <label
 						for="localidad">Localidad</label> <select id="localidad"
 						name="localidad" required>
 						<option value="" disabled selected>Seleccione su
 							Localidad</option>
 						<%
 							ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocalidad");
-							String selectedLocalidad = request.getParameter("localidad");
+							int selectedLocalidad =(int) request.getAttribute("localidad");
 							if (listaLocalidad != null) {
 								for (Localidad loc : listaLocalidad) {
 						%>
 						<option value="<%=loc.getId_localidad()%>"
-							<%=Integer.toString(loc.getId_localidad()).equals(selectedLocalidad) ? "selected" : ""%>><%=loc.getNombreLoca()%></option>
+							<%=loc.getId_localidad()==selectedLocalidad ? "selected" : ""%>><%=loc.getNombreLoca()%></option>
 						<%
 							}
 							}

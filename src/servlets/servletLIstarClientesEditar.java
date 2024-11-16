@@ -65,12 +65,12 @@ public class servletLIstarClientesEditar extends HttpServlet {
                ArrayList<Cliente> listaClientes = lista.ClienteList();
 		       Cliente clienteSe = new Cliente();
 			System.out.println("Estoy dentro");
+	        String clienteSeleccionado = request.getParameter("clienteSeleccionado");
 
-			String cuilBuscado = (String) request.getAttribute("clienteSeleccionado");
-			System.out.println(cuilBuscado);
+			System.out.println(clienteSeleccionado);
 			for (Cliente cliente : listaClientes) {
 
-				if (cliente.getCuil().equals(cuilBuscado)) {
+				if (cliente.getCuil().equals(clienteSeleccionado)) {
 					System.out.println("Lo encontré");
 
 					clienteSe = cliente;
@@ -79,16 +79,16 @@ public class servletLIstarClientesEditar extends HttpServlet {
 				}
 			}
 			request.setAttribute("dni",clienteSe.getDni());
-			request.setAttribute("cuil",clienteSe.getDni());
-			request.setAttribute("nombre",clienteSe.getDni());
-			request.setAttribute("apellido",clienteSe.getDni());
-			request.setAttribute("genero",clienteSe.getDni());
-			request.setAttribute("nacionalidad",clienteSe.getDni());
-			request.setAttribute("fecha-nacimiento",clienteSe.getDni());
-			request.setAttribute("direccion",clienteSe.getDni());
-			request.setAttribute("telefono",clienteSe.getDni());
-			request.setAttribute("email",clienteSe.getDni());
-			request.setAttribute("localidad",clienteSe.getDni());
+			request.setAttribute("cuil",clienteSe.getCuil() );
+			request.setAttribute("nombre",clienteSe.getNombre());
+			request.setAttribute("apellido",clienteSe.getApellido());
+			request.setAttribute("genero",clienteSe.getId_sexo());
+			request.setAttribute("nacionalidad",clienteSe.getId_nacionalidad());
+			request.setAttribute("fecha-nacimiento",clienteSe.getFechaNacimiento());
+			request.setAttribute("direccion",clienteSe.getDireccion());
+			request.setAttribute("telefono",clienteSe.getTelefono());
+			request.setAttribute("email",clienteSe.getCorreo());
+			request.setAttribute("localidad",clienteSe.getId_localidad());
 			///request.setAttribute("email",clienteSe.getDni());
 			RequestDispatcher rd = request.getRequestDispatcher("EditarCliente.jsp");
             rd.forward(request, response);
