@@ -132,6 +132,36 @@ public class ClienteDaoImpl implements ClienteDao {
     }
 
     @Override
+    public Cliente obtenerUnoPorCuil(String cuil) {
+        cn = new Conexion();
+        cn.Open();
+        Cliente cliente = new Cliente();
+        String query = "SELECT * FROM Cliente WHERE cuil_Cli = '" + cuil + "'";
+        try {
+            ResultSet rs = cn.query(query);
+            if (rs.next()) {
+                cliente.setCuil(rs.getString("cuil_Cli"));
+                cliente.setDni(rs.getInt("dni_Cli"));
+                cliente.setNombre(rs.getString("nombre_Clii"));
+                cliente.setApellido(rs.getString("apellido_Cli"));
+                cliente.setId_sexo(rs.getInt("ID_sexo_Cli"));
+                cliente.setId_nacionalidad(rs.getString("ID_Nacionalidad_Cli"));
+                cliente.setFechaNacimiento(rs.getObject("fecha_nacimiento_Cli", LocalDate.class));
+                cliente.setDireccion(rs.getString("direccion_Cli"));
+                cliente.setId_localidad(rs.getInt("ID_Localidad_cli"));
+                cliente.setCorreo(rs.getString("correo_electronico_Cli"));
+                cliente.setTelefono(rs.getString("telefono_Cli"));
+                cliente.setEstado(rs.getBoolean("estado_Cli"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+        return cliente;
+    }
+    
+    @Override
     public boolean insertar(Cliente cliente) {
         boolean estado = true;
         cn = new Conexion();

@@ -41,27 +41,13 @@
 			<div class="content">
 				<div class="form-card">
 									<h2>Editar de Cliente</h2>
-				<form action="servletLIstarClientesEditar" method="POST">
-					<%
-						ArrayList<Cliente> listaCliente = (ArrayList<Cliente>) request.getAttribute("listaCliente");
-					%>
-					<label for="clienteSeleccionado">Seleccione Cliente a Editar:</label> <select
-						id="clienteSeleccionado" name="clienteSeleccionado" required onchange="this.form.submit()">
-						<option value="" disabled selected>Seleccione Cliente a
-							Editar</option>
-						<%
-							if (listaCliente != null) {
-								for (Cliente Clie : listaCliente) {
-						%>
-						<option value="<%=Clie.getCuil().toString()%>"><%=Clie.getCuil().toString() + " " + Clie.getApellido()%>
-						
-
-						<%
-						
-							}
-							}
-						%>
-					</select>
+				<form action="servletEditarCliente" method="get">
+					<label for="cuil">Ingrese CUIL del Cliente:</label>
+				    <input type="text" id="cuil" name="cuil" placeholder="CUIL" required>
+				      <div class="button-group">
+				        <button type="submit" class="submit-button">Enviar</button>
+				        <button type="reset" class="cancel-button">Cancelar</button>
+				      </div>
 				</form>
 
 
@@ -70,28 +56,6 @@
 						<p>${mensaje}</p>
 					</c:if>
 
-					<!-- 	<form>
-				<h2>Editar Cuenta Seleccionada</h2>
-                    <label for="NC">NUMERO DE CUENTA</label>
-                    <select id="NroDeCuenta"  name="NroDeCuenta"  required>
-                    <option value="" disabled selected>Seleccione la cuenta</option>
-                    </select> 
-
-                    <br>
-                    <h3>Cambiar Tipo de Cuenta</h3>               
-
-                    <label for="tipoDeCuenta">Tipo de Cuenta</label>
-                    <select id="tipoDeCuenta"  name="tipoDeCuenta"  required>
-                    <option value="" disabled selected>Seleccione un tipo de cuenta</option>
-                    </select>
-
-                    
-
-                    <div class="button-group">
-                        <button type="button" class="cancel-button">Volver</button>
-                        <button type="submit" class="submit-button">Modificar</button>
-                    </div>
-                </form> -->
 				</div>
 			</div>
 		</div>
