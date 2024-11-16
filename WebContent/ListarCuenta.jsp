@@ -119,7 +119,7 @@ th {
 				<table id="table_id" class="display">
 					<thead>
 						<tr>
-							<th>N�mero de Cuenta</th>
+							<th>Numero de Cuenta</th>
 							<th>CUIL</th>
 							<th>Fecha de Creaci�n</th>
 							<th>ID Tipo Cuenta</th>
