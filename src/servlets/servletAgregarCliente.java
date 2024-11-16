@@ -166,7 +166,7 @@ public class servletAgregarCliente extends HttpServlet {
             boolean insert = abmlcliente.agregarCliente(c);
 
 	            if (insert) {         
-	                response.sendRedirect("AgregarCliente.jsp?status=success");
+	                response.sendRedirect("servletAgregarCliente?Param=1&status=success");
 	            } else {
 	                request.setAttribute("Error", "Error al agregar Cliente.");
 	                RequestDispatcher rd = request.getRequestDispatcher("AgregarCliente.jsp");
