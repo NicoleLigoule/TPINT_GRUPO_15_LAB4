@@ -50,7 +50,7 @@
 					<label for="dni">DNI</label> <input type="text" id="dni" name="dni"
 						placeholder="DNI"
 						value="<%=Integer.toString(cliSeleccionado.getDni()) != null ? Integer.toString(cliSeleccionado.getDni()) : ""%>"
-						required> <label for="cuil">CUIL</label> <input
+						required> <input
 						type="hidden" id="cuil" name="cuil" placeholder="CUIL"
 						value="<%=cliSeleccionado.getCuil() != null ? cliSeleccionado.getCuil() : ""%>"
 						required> <label for="nombre">Nombre</label> <input
