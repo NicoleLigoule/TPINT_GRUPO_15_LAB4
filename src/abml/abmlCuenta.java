@@ -4,6 +4,7 @@ import java.util.List;
 
 import daoImpl.CuentaDaoImpl;
 import entidades.Cuenta;
+import entidades.TipoDeCuenta;
 
 public class abmlCuenta {
 	
@@ -37,5 +38,8 @@ public class abmlCuenta {
 	public List<Cuenta> obtenerCuentasPorCuil(String cuil) {
 	    return cuentaDao.obtenerCuentasPorCuil(cuil);
 	}
-
+	
+	public List<TipoDeCuenta> obtenerTiposTodos() {
+		return cuentaDao.readallTipoDeCuentas();
+	}
 }

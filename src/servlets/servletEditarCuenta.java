@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import abml.abmlCuenta;
 import entidades.Cuenta;
+import entidades.TipoDeCuenta;
 
 @WebServlet("/servletEditarCuenta")
 public class servletEditarCuenta extends HttpServlet {
@@ -40,6 +41,17 @@ public class servletEditarCuenta extends HttpServlet {
                 request.setAttribute("mensaje", "No se encontraron cuentas para el cliente con Cuil: " + cuil);
                 System.out.println("doGet - No se encontraron cuentas para el Cuil: " + cuil);
             }
+            
+            List<TipoDeCuenta> listaTipos = cuentaManager.obtenerTiposTodos();
+            
+            if(listaTipos != null && !listaTipos.isEmpty()) {
+            	request.setAttribute("tipos", listaTipos);
+            	System.out.println("doGet - Tipos de Cuentas asignadas al request");
+            }else {
+            	System.out.println("doGet - No se encontraron tipos de cuentas en la db");
+            }
+            
+            
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("EditarCuenta.jsp");
         dispatcher.forward(request, response);
