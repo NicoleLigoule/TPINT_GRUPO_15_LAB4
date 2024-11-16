@@ -28,34 +28,35 @@ public class servletEditarCuenta extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String cuil = request.getParameter("cuil");
-        System.out.println("doGet - CUIL recibido: " + cuil);
 
-        if (cuil != null && !cuil.isEmpty()) {
+        // Variable para determinar si se realizó una búsqueda
+        boolean seRealizoBusqueda = (cuil != null && !cuil.isEmpty());
+
+        if (seRealizoBusqueda) {
+            System.out.println("doGet - Búsqueda en proceso: CUIL = " + cuil);
+
+            // Buscar cuentas asociadas al CUIL
             List<Cuenta> listaCuentas = cuentaManager.obtenerCuentasPorCuil(cuil);
-            System.out.println("doGet - Cuentas obtenidas: " + (listaCuentas != null ? listaCuentas.size() : 0));
 
             if (listaCuentas != null && !listaCuentas.isEmpty()) {
                 request.setAttribute("cuentas", listaCuentas);
-                System.out.println("doGet - Cuentas asignadas al request");
+                // Mostrar mensaje indicando el CUIL ingresado
+                request.setAttribute("mensajeCuil", "Este es el CUIL que ingresaste a modificar: " + cuil);
             } else {
-                request.setAttribute("mensaje", "No se encontraron cuentas para el cliente con Cuil: " + cuil);
-                System.out.println("doGet - No se encontraron cuentas para el Cuil: " + cuil);
+                request.setAttribute("mensaje", "No se encontraron cuentas para el cliente con CUIL: " + cuil);
             }
-            
+
+            // Obtener tipos de cuenta si es necesario
             List<TipoDeCuenta> listaTipos = cuentaManager.obtenerTiposTodos();
-            
-            if(listaTipos != null && !listaTipos.isEmpty()) {
-            	request.setAttribute("tipos", listaTipos);
-            	System.out.println("doGet - Tipos de Cuentas asignadas al request");
-            }else {
-            	System.out.println("doGet - No se encontraron tipos de cuentas en la db");
+            if (listaTipos != null) {
+                request.setAttribute("tipos", listaTipos);
             }
-            
-            
+        } else {
+            System.out.println("doGet - Primera visita a la vista EditarCuenta.jsp");
         }
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("EditarCuenta.jsp");
         dispatcher.forward(request, response);
-        System.out.println("doGet - Redirigiendo a EditarCuenta.jsp");
     }
 
     @Override

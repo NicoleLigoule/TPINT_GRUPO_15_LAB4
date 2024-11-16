@@ -78,6 +78,7 @@
 					<h2>Buscar Cuentas Del Cliente</h2>
 					<br>
 					<h3>Datos de la Cuenta</h3>
+					
 					<!--  <form>
                     <label for="cuil">CUIL CLIENTE</label>
                     <input type="text" id="dni" name="dni" placeholder="DNI" >
@@ -87,15 +88,43 @@
 				</form>-->
 					<form
 						action="${pageContext.request.contextPath}/servletEditarCuenta"
-						method="get"
-					>
+						method="get">
 						<label for="cuil">CUIL CLIENTE</label> <input type="text"
-							id="cuil" name="cuil" placeholder="CUIL"
-						>
+							id="cuil" name="cuil" placeholder="CUIL">							
+
 						<div class="button-group">
 							<button type="submit" class="buscarBtn">Buscar</button>
 						</div>
+						
+						<br>
+						
+						<%
+						    // mensaje cuil
+						    String mensajeCuil = (String) request.getAttribute("mensajeCuil");
+						    if (mensajeCuil != null) {
+						%>
+						    <p><strong><%= mensajeCuil %></strong></p>
+						<%
+						    }
+						%>
+						<%
+						    // Mostrar mensaje genérico de error o éxito si corresponde
+						    String mensaje = (String) request.getAttribute("mensaje");
+						    if (mensaje != null) {
+						%>
+						    <p><strong><%= mensaje %></strong></p>
+						<%
+						    }
+						%>
+
 					</form>
+			        <%
+			            if (request.getAttribute("cbuCliente") != null) {
+			        %>
+			            <p><strong>CBU del Cliente:</strong> <%= request.getAttribute("cbuCliente") %></p>
+			        <%
+			            }
+			        %>
 				</div>
 			</div>
 			<div class="content">
@@ -105,8 +134,7 @@
 						method="post"
 					>
 						<label for="NC">NUMERO DE CUENTA</label> <select id="NroDeCuenta"
-							name="NroDeCuenta" required
-						>
+							name="NroDeCuenta" required>
 							<option value="" disabled selected>Seleccione la cuenta</option>
 
 							<%
@@ -124,14 +152,18 @@
 								}
 							%>
 
-
+						
 
 						</select>
-
+						<br>
+						<br>
 						<h3>Cambiar Tipo de Cuenta</h3>
+						<br>
 						<label for="tipoDeCuenta">Tipo de Cuenta</label> <select
 							id="tipoDeCuenta" name="tipoDeCuenta" required
 						>
+						
+						
 							<option value="" disabled selected>Seleccione un tipo de
 								cuenta</option>
 							<!-- Cargar opciones de tipos de cuenta aqui -->
@@ -147,16 +179,13 @@
 								}
 								}
 							%>
-
-
-
-
 						</select>
 
 						<div class="button-group">
 							<button type="button" class="cancel-button">Volver</button>
 							<button type="submit" class="submit-button">Modificar</button>
 						</div>
+						<br>
 					</form>
 
 

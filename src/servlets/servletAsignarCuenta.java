@@ -50,15 +50,14 @@ public class servletAsignarCuenta extends HttpServlet {
 			Cuenta cuenta = abmlCu.obtenerCuenta(numeroCuenta);
 			cuenta.setCuilCliCu(cuilCliente);
 			
-			if(abmlCu.editarCuenta(cuenta)) {
-				System.out.print("CUENTA ASIGANDA CORRECTAMENTE");
-			}else {
-				System.out.print("ERROR AL ASIGNAR CUENTA");
-			}
-		}
-		
-        RequestDispatcher rd = request.getRequestDispatcher("AsignarCuenta.jsp");
-        rd.forward(request, response);
+			if(abmlCu.editarCuenta(cuenta)) {      
+                response.sendRedirect("AsignarCuenta.jsp?status=success");
+            } else {
+                request.setAttribute("Error", "Error al agregar Cuenta a Cliente.");
+                RequestDispatcher rd = request.getRequestDispatcher("AsignarCuenta.jsp");
+                rd.forward(request, response);
+            }   
+    	}
 		
 	}
 
