@@ -31,6 +31,7 @@
 	<div class="main-container">
 
 		<jsp:include page="SubMenu.jsp" />
+
 		<div class="content">
 			<div class="form-card">
 				<h2>Bienvenido, <%= usuario.getUsuarioUs() %> al menu de los administradores</h2>

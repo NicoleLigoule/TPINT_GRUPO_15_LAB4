@@ -65,13 +65,13 @@ public class servletLIstarClientesEditar extends HttpServlet {
                ArrayList<Cliente> listaClientes = lista.ClienteList();
 		       Cliente clienteSe = new Cliente();
 			System.out.println("Estoy dentro");
-	        String clienteSeleccionado = request.getParameter("clienteSeleccionado");
 
-			System.out.println(clienteSeleccionado);
+			String cuilBuscado = (String) request.getAttribute("clienteSeleccionado");
+			System.out.println(cuilBuscado);
 			for (Cliente cliente : listaClientes) {
 
-				if (cliente.getCuil().equals(clienteSeleccionado)) {
-					System.out.println("Lo encontré");
+				if (cliente.getCuil().equals(cuilBuscado)) {
+					System.out.println("Lo encontrï¿½");
 
 					clienteSe = cliente;
 					System.out.println(clienteSe.toString());
