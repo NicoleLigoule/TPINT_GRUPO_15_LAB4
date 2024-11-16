@@ -201,7 +201,7 @@ public class servletEditarCliente extends HttpServlet {
 
 	            String fechaStr = request.getParameter("fecha-nacimiento");
 	            if (fechaStr != null && !fechaStr.isEmpty()) {
-	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	                LocalDate fechaNacimiento = LocalDate.parse(fechaStr, formatter);
 	                c.setFechaNacimiento(fechaNacimiento);
 	                System.out.println("FechaNacimiento: " + request.getParameter("fecha-nacimiento"));  

@@ -63,15 +63,15 @@
 					<%
 						ArrayList<Sexo> listaSexo = (ArrayList<Sexo>) request.getAttribute("listaSexo");
 					%>
-					<label for="genero">G�nero:</label> <select id="genero"
+					<label for="genero">Genero:</label> <select id="genero"
 						name="genero" required>
-						<option value="" disabled selected>Seleccione su g�nero</option>
+						<option value="" disabled selected>Seleccione su genero</option>
 						<%
 							if (listaSexo != null) {
 								for (Sexo sex : listaSexo) {
 						%>
 						<option value="<%=sex.getId_sexo()%>"
-							<%=Integer.toString(sex.getId_sexo()).equals(request.getAttribute("genero")) ? "selected"
+							<%=Integer.toString(sex.getId_sexo()).equals(request.getAttribute("genero").toString()) ? "selected"
 							: ""%>><%=sex.getDescripcion()%></option>
 						<%
 							}
@@ -91,7 +91,7 @@
 								for (Nacionalidad nac : listaSeguros) {
 						%>
 						<option value="<%=nac.getIdNacionalidadNc()%>"
-							<%=nac.getIdNacionalidadNc()==request.getAttribute("nacionalidad") ? "selected" : ""%>><%=nac.getDescripcionNc()%></option>
+							<%=nac.getIdNacionalidadNc().equals(request.getAttribute("nacionalidad")) ? "selected" : ""%>><%=nac.getDescripcionNc()%></option>
 						<%
 							}
 							}
@@ -99,21 +99,21 @@
 					</select> <label for="fecha-nacimiento">Fecha de Nacimiento</label> <input
 						type="text" id="fecha-nacimiento" name="fecha-nacimiento"
 						placeholder="YYYY/MM/DD"
-						value="<%=request.getParameter("fecha-nacimiento") != null ? request.getParameter("fecha-nacimiento") : ""%>"
-						required> <label for="direccion">Direcci�n</label> <input
+						value="<%=request.getAttribute("fecha-nacimiento") != null ? request.getAttribute("fecha-nacimiento") : ""%>"
+						required> <label for="direccion">Direccion</label> <input
 						type="text" id="direccion" name="direccion"
-						placeholder="Direcci�n"
-						value="<%=request.getParameter("direccion") != null ? request.getParameter("direccion") : ""%>"
-						required> <label for="numero">N�mero</label> <input
-						type="text" id="numero" name="numero" placeholder="N�mero"
-						value="<%=request.getParameter("numero") != null ? request.getParameter("numero") : ""%>"
-						required> <label for="telefono">Tel�fono</label> <input
-						type="tel" id="telefono" name="telefono" placeholder="Tel�fono"
-						value="<%=request.getParameter("telefono") != null ? request.getParameter("telefono") : ""%>"
-						required> <label for="email">Correo Electr�nico</label> <input
+						placeholder="Direccion"
+						value="<%=request.getAttribute("direccion") != null ? request.getAttribute("direccion").toString() : ""%>"
+						required> <label for="numero">Numero</label> <input
+						type="text" id="numero" name="numero" placeholder="Numero"
+						value="<%=request.getAttribute("numero") != null ? request.getAttribute("numero") : ""%>"
+						required> <label for="telefono">Telefono</label> <input
+						type="tel" id="telefono" name="telefono" placeholder="Telefono"
+						value="<%=request.getAttribute("telefono") != null ? request.getAttribute("telefono") : ""%>"
+						required> <label for="email">Correo Electronico</label> <input
 						type="email" id="email" name="email"
-						placeholder="Correo Electr�nico"
-						value="<%=request.getParameter("email") != null ? request.getParameter("email") : ""%>"
+						placeholder="Correo Electronico"
+						value="<%=request.getAttribute("email") != null ? request.getAttribute("email") : ""%>"
 						required> <label for="provincia">Provincia</label> <select
 						id="provincia" name="provincia" onchange="this.form.submit();"
 						required>
@@ -122,7 +122,7 @@
 						<%
 							ArrayList<Provincia> listaProvincias = (ArrayList<Provincia>) request.getAttribute("listaProvincias");
 						///	String selectedProvincia = request.getAttribute("provincia");
-							if (listaProvincias != null) {
+							if (listaProvincias != null && !listaProvincias.isEmpty()) {
 								for (Provincia prov : listaProvincias) {
 						%>
 						<option value="<%=prov.getId_provincia()%>"
@@ -131,8 +131,14 @@
 							}
 							}
 						%>
-					</select> <input type="hidden" name="localidad"
-						value="<%=request.getParameter("localidad")%>">
+					</select> 
+					
+					
+					
+					
+					
+					
+					
 				</form>
 
 				<!-- Segundo formulario (POST) USAMOS LO QUE GUARDAMOS ANTES y le sumamos la localidad q cambia segun la provincia elegida -->
@@ -160,25 +166,25 @@
 						type="hidden" name="email"
 						value="<%=request.getAttribute("email")%>"> <input
 						type="hidden" name="provincia"
-						value="<%=request.getAttribute("provincia")%>"> <label
-						for="localidad">Localidad</label> <select id="localidad"
-						name="localidad" required>
-						<option value="" disabled selected>Seleccione su
-							Localidad</option>
+						value="<%=request.getAttribute("provincia")%>"> 
+						
+						<label for="localidad">Localidad</label> <select
+						id="localidad" name="localidad"
+						required>
+						<option value="" disabled selected>Seleccione su Localidad</option>
 						<%
-							ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocalidad");
+							ArrayList<Localidad> listaLocalidades = (ArrayList<Localidad>) request.getAttribute("listaLocalidades");
 							
-							int selectedLocalidad =(int) request.getAttribute("localidad");
-							if (listaLocalidad != null) {
-								for (Localidad loc : listaLocalidad) {
+							if (listaLocalidades != null && !listaLocalidades.isEmpty()) {
+								for (Localidad loc : listaLocalidades) {
 						%>
 						<option value="<%=loc.getId_localidad()%>"
-							<%=loc.getId_localidad()==selectedLocalidad ? "selected" : ""%>><%=loc.getNombreLoca()%></option>
+							<%=loc.getId_localidad() == (int)request.getAttribute("localidad") ? "selected" : ""%>><%=loc.getNombreLoca()%></option>
 						<%
 							}
 							}
 						%>
-					</select>
+					</select> 
 					<!-- boton agregar, aca enviamos todo con el "agregarBtn" -->
 					<div class="button-group">
 						<button type="button" class="cancel-button">Cancelar</button>
