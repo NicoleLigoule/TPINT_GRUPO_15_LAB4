@@ -115,12 +115,18 @@ import negocio.DDL;
 	            }
 	
 	            // Obtener y establecer el estado de la cuenta
-	            String estado = request.getParameter("estado");
+	           /* String estado = request.getParameter("estado");
 	            if (estado != null) {
 	                cuenta.setEstadoCu(estado.equals("Activa"));
 	                System.out.println("Estado de la Cuenta: " + estado);
-	            }
+	            }*/
 	
+            	// Obtener y establecer el estado de la cuenta (checkbox)
+	            String estadoCheckbox = request.getParameter("estado");
+	            cuenta.setEstadoCu(estadoCheckbox != null); // true si está marcado, false si no lo está
+	            System.out.println("Estado de la Cuenta: " + (estadoCheckbox != null));
+
+	            
 	            // Llamada a la lógica de negocio para agregar cuenta
 	            abmlCuenta abmlcuenta = new abmlCuenta();
 	            boolean insert = abmlcuenta.agregarCuenta(cuenta);

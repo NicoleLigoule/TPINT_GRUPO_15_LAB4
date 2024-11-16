@@ -61,7 +61,7 @@
 					<!-- mensaje de que cargó bien y limpia, sino msj cargó mal -->
 					<%
 						String status = request.getParameter("status");
-						String mensajeExito = "Se ha generado el Cliente correctamente.";
+						String mensajeExito = "Agregaste la cuenta al cliente correctamente.";
 						String mensajeError = (String) request.getAttribute("Error");
 					%>
 					<%

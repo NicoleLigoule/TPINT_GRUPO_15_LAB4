@@ -2,6 +2,8 @@
 <%@page import="java.util.ArrayList"%>
 
 <%@ page import="entidades.Usuario"%>
+<%@ page import="entidades.Cuenta"%>
+
 <%
 	Usuario usuario = (Usuario) session.getAttribute("usuario");
 	if (usuario == null) {
@@ -35,7 +37,7 @@
 
 		<div class="content">
 			<div class="form-card">
-				<h2>Alta de Cuentas</h2>
+				<h2>Agregar Cuenta</h2>
 				<br>
 				<h3>Datos del socio</h3>
 				<form action="servletAgregarCuenta" method="post">
@@ -82,13 +84,25 @@
 						type="date" id="fechaApertura" name="fechaApertura" required>
 
 					<!-- Estado de la Cuenta -->
-					<label for="estado">Estado de la Cuenta</label> <select id="estado"
+					<!--  <label for="estado">Estado de la Cuenta</label> <select id="estado"
 						name="estado" required>
 						<option value="" disabled selected>Seleccione el estado
 							de la cuenta</option>
 						<option value="Activa">Activa</option>
 						<option value="Inactiva">Inactiva</option>
-					</select>
+					</select>-->
+					<!-- Estado de la Cuenta -->
+					
+					<%
+					    Cuenta cuenta = (Cuenta) request.getAttribute("cuenta");
+					    if (cuenta == null) {
+					        cuenta = new Cuenta();
+					    }
+					%>
+					<div style="text-align: left; margin-bottom: 10px;">
+				    <label for="estado" style="font-size: 18px;">CUENTA ACTIVA</label>
+				    <input type="checkbox" id="estado" name="estado" style="transform: scale(1.5); margin-left: 10px;" <%= cuenta.isEstadoCu() ? "checked" : "" %>>
+				</div>
 
 					<div class="button-group">
 						<button type="button" class="cancel-button"
