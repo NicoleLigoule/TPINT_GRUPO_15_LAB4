@@ -1,6 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="entidades.Usuario"%>
+<%@page import="entidades.Usuario"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Cuenta"%>
+<%@page import="entidades.TipoDeCuenta"%>
+
+
+
+
 <%
 	Usuario usuario = (Usuario) session.getAttribute("usuario");
 	if (usuario == null) {
@@ -94,10 +101,24 @@
 						<label for="NC">NUMERO DE CUENTA</label> <select id="NroDeCuenta"
 							name="NroDeCuenta" required>
 							<option value="" disabled selected>Seleccione la cuenta</option>
-							<c:forEach var="cuenta" items="${cuentas}">
-								<option value="${cuenta.numeroDeCuentaCu}">Cuenta N�
-									${cuenta.numeroDeCuentaCu}</option>
-							</c:forEach>
+							
+							<%
+								if(request.getAttribute("cuentas") != null){
+									ArrayList<Cuenta> listaCuentas = (ArrayList<Cuenta>) request.getAttribute("cuentas");
+									
+									for(Cuenta cu : listaCuentas){
+										%>
+										
+										<option value="<%=cu.getNumeroDeCuentaCu()%>">
+										<%=cu.getNumeroDeCuentaCu()%></option>
+										
+										<%
+									}
+								}
+							%>
+							
+							
+							
 						</select>
 
 						<h3>Cambiar Tipo de Cuenta</h3>
@@ -106,6 +127,23 @@
 							<option value="" disabled selected>Seleccione un tipo de
 								cuenta</option>
 							<!-- Cargar opciones de tipos de cuenta aqu� -->
+							
+							<%
+							if(request.getAttribute("tipos") != null){
+								ArrayList<TipoDeCuenta> tipos = (ArrayList<TipoDeCuenta>)request.getAttribute("tipos");
+								
+								for(TipoDeCuenta tcu : tipos){
+									
+									%>
+									<option value="<%=tcu.getIdTipoDeCuenta() %>" ><%=tcu.getNombreTipo() %></option>
+									<%
+								}
+							}
+							%>
+							
+							
+							
+							
 						</select>
 
 						<div class="button-group">

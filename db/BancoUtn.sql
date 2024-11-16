@@ -201,6 +201,18 @@ INSERT INTO Localidad (ID_Provincia_Prv_Lca, Nombre_Loc_Lca) VALUES
 INSERT INTO Usuario (Cuil_us, Usuario_us, Contrasenia_us, Rol_us, Estado_us)
 VALUES ('20304050607', 'Pepe', '123', 1, 1);
 
+INSERT INTO Cliente (
+    cuil_Cli, dni_Cli, nombre_Clii, apellido_Cli, ID_sexo_Cli, ID_Nacionalidad_Cli, 
+    fecha_nacimiento_Cli, direccion_Cli, ID_Localidad_Cli, correo_electronico_Cli, 
+    telefono_Cli, estado_Cli
+) VALUES 
+('20-12345678-9', 12345678, 'Juan', 'Pérez', 1, 'AR', '1990-05-10', 'Av. Siempre Viva 742', 1, 'juan.perez@gmail.com', '341-1234567', TRUE),
+('27-87654321-8', 87654321, 'María', 'Gómez', 2, 'BR', '1985-03-25', 'Calle Principal 123', 3, 'maria.gomez@hotmail.com', '11-87654321', FALSE),
+('30-11223344-7', 11223344, 'Carlos', 'López', 1, 'CL', '1995-08-15', 'Av. Libertador 456', 6, 'carlos.lopez@yahoo.com', '261-1122334', TRUE);
 
+INSERT INTO TipoCuenta (Nombre_Tipo) 
+VALUES 
+('Ahorro'),
+('Corriente');
 
 
