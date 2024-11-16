@@ -167,6 +167,7 @@
 							Localidad</option>
 						<%
 							ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocalidad");
+							
 							int selectedLocalidad =(int) request.getAttribute("localidad");
 							if (listaLocalidad != null) {
 								for (Localidad loc : listaLocalidad) {

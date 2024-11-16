@@ -4,7 +4,7 @@
 				<ul class="submenu">
 					<li><a href="servletAgregarCliente?Param=1">Agregar Cliente</a></li>
 					<li><a href="EliminarCliente.jsp">Baja Cliente</a></li>
-					<li><a href="EditarCliente.jsp">Editar Cliente</a></li>
+					<li><a href="servletLIstarClientesEditar?Param=1">Editar Cliente</a></li>
 					<li><a href="servletListarCliente?Param=1">Listar Cliente</a></li>
 				</ul></li>
 			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Cuentas</a>
