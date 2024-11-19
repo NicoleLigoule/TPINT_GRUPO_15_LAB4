@@ -27,7 +27,7 @@
 	</div>
 	</nav>
 	<div class="container">
-		<h2>Iniciar Sesión</h2>
+		<h2>Cambio de contraseña</h2>
 		<%
             String errorMensaje = (String) request.getAttribute("errorMessage");
             if (errorMensaje != null) {
@@ -36,19 +36,16 @@
         <%
             }
         %>
-		<form action="${pageContext.request.contextPath}/ServletLoginSesion"
+		<form action="${pageContext.request.contextPath}/ServletCambioContrasena"
 			method="post">
-			<label for="usuario">Usuario</label> <input type="text" id="usuario"
-				name="usuario" placeholder="Usuario" required> <label
-				for="contrasena">Contraseña</label> <input type="password"
+			<label for="usuario">Ingrese su contraseña</label> <input type="text" id="usuario"
+				name="usuario" placeholder="contraseña" required> <label
+				for="contrasena">Repita la contraseña</label> <input type="password"
 				id="contrasena" name="contrasena" placeholder="Contraseña" required>
 
-			<button type="submit">Ingresar</button>
+			<button type="submit">Aceptar</button>
 		</form>
-		<div class="links">
-			<a href="#">¿Olvidó su contraseña?</a> 
-			<a href="ServletRegistrarseNuevo?Param=1">¿No posee aún una cuenta?</a>
-		</div>
+
 	</div>
 </body>
 
