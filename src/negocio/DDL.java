@@ -1,5 +1,6 @@
 package negocio;
 import java.util.ArrayList;
+import java.util.List;
 
 import entidades.Nacionalidad;
 import entidades.Sexo;
@@ -8,12 +9,15 @@ import entidades.Provincia;
 import entidades.Localidad;
 import entidades.Cliente;
 import entidades.ClienteCuentaDTO;
+import entidades.Cuenta;
+import entidades.InteresesXCantidadDeMeses;
 import daoImpl.CuentaDaoImpl;
 import daoImpl.ClienteCuentaDTODaoImpl;
 import daoImpl.ClienteDaoImpl;
 import daoImpl.ddlClientes;
 import daoImpl.ProvinciaDaoImpl;
 import daoImpl.LocalidadDaoImpl;
+
 
 public class DDL {
 	
@@ -61,5 +65,16 @@ public class DDL {
 		    ClienteCuentaDTODaoImpl clienteCuenta = new ClienteCuentaDTODaoImpl();
 		    return new ArrayList<ClienteCuentaDTO>(clienteCuenta.obtenerCuentasPorCuil(CUIL));
 		}
-
+	 
+	 public List<Cuenta> obtenercuentaUsurio( String cuil) {
+		 CuentaDaoImpl	 cuentaDao = new CuentaDaoImpl();
+		 List<Cuenta> cuentas = cuentaDao.obtenerCuentasPorCuil(cuil);
+		    return  cuentas;
+		}
+	 
+	 public ArrayList<InteresesXCantidadDeMeses> obtenerIntereses() {
+		 CuentaDaoImpl	 cuentaDao = new CuentaDaoImpl();
+		 ArrayList<InteresesXCantidadDeMeses> INtereses = cuentaDao.readallIntereses();
+		    return  INtereses;
+		}
 }

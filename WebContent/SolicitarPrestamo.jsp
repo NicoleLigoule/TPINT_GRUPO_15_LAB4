@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="entidades.Cuenta"%>
+<%@ page import="entidades.InteresesXCantidadDeMeses"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
 
 <%@ page import="entidades.Usuario"%>
 <%
@@ -84,7 +86,23 @@
 					<!-- Plazo de Pago como un Dropdown (DDL) -->
 					<label for="plazo_pago">Cantidad de Cuotas</label> <select
 						id="plazo_pago" name="plazo_pago" required class="form-input">
-
+                     <option value="" disabled selected>Seleccione las Cuotas</option>
+				    <%
+				    ArrayList<InteresesXCantidadDeMeses> interes = (ArrayList<InteresesXCantidadDeMeses>) request.getAttribute("intereses");
+				        if (interes != null && !interes.isEmpty()) {
+				            for (InteresesXCantidadDeMeses intere : interes) {
+				    %>
+				                <option value="<%= intere.getPlazoDPagosEnMesesIxm() %>">
+				                    en : <%= intere.getMeses() %> cuotas
+				                </option>
+				    <%
+				            }
+				        } else {
+				    %>
+				        <option value="" disabled>No hay cuentas disponibles</option>
+				    <%
+				        }
+				    %>
 					</select>
 
 					<div class="button-group">

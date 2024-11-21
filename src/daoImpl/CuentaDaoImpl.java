@@ -1,5 +1,6 @@
 package daoImpl;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,12 +11,13 @@ import dao.CuentaDao;
 import entidades.ClienteCuentaDTO;
 import entidades.Cuenta;
 import entidades.TipoDeCuenta;
+import entidades.InteresesXCantidadDeMeses;
 
 public class CuentaDaoImpl implements CuentaDao {
 
     private Conexion cn;
     private static final String readallTipoDeCuentas = "SELECT * FROM TipoCuenta";
-    
+    private static final String readallINteresesPrestamos = "SELECT Plazo_d_Pagos_En_meses_IXM,Interes_IXM,Meses FROM bancoutn.interesxcantidaddmeses;";
 	public ArrayList<TipoDeCuenta> readallTipoDeCuentas()
 	{
 		//PreparedStatement statement;
@@ -215,8 +217,35 @@ public class CuentaDaoImpl implements CuentaDao {
         return estado;
     }
 
-	
+    public ArrayList<InteresesXCantidadDeMeses> readallIntereses()
+	{
+		//PreparedStatement statement;
+		ResultSet resultSet;
+		ArrayList<InteresesXCantidadDeMeses> Tipos = new ArrayList<InteresesXCantidadDeMeses>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			conexion.Open();			
+			resultSet = conexion.query(readallINteresesPrestamos);
+			while(resultSet.next())
+			{
+				Tipos.add(getINtereses(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return Tipos;
+	}
 
-	
-    
+	private InteresesXCantidadDeMeses getINtereses(ResultSet resultSet) throws SQLException
+	{
+		String plazoDPagosEnMesesIxm = resultSet.getString("Plazo_d_Pagos_En_meses_IXM");
+		BigDecimal interesIxm = resultSet.getBigDecimal("Interes_IXM");
+		int meses=resultSet.getInt("Meses");
+		return new InteresesXCantidadDeMeses(plazoDPagosEnMesesIxm,interesIxm,meses);
+
+	}
+;  
 }
