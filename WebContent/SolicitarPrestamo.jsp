@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="entidades.Cuenta"%>
+<%@ page import="java.util.List"%>
+
 <%@ page import="entidades.Usuario"%>
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -49,32 +52,44 @@
 		<div class="content">
 			<div class="form-card">
 				<h2>Solicitud de Préstamo</h2>
-				<form action="tu_archivo_backend.php" method="post">
-					<label for="numero_cuenta">Número de Cuenta</label> <input
-						type="text" id="numero_cuenta" name="numero_cuenta" required
-						class="form-input">
+				<form action="${pageContext.request.contextPath}/ServletSolicitarPrestamo" method="post">
 
-					<!-- Fecha de petición como input deshabilitado -->
+				<label for="cuenta_destino">Cuenta Destino</label>
+				<select id="cuenta_destino" name="cuenta_destino" required>
+				    <option value="" disabled selected>Seleccione la cuenta</option>
+				    <%
+				        List<Cuenta> cuentas = (List<Cuenta>) request.getAttribute("cuentas");
+				        if (cuentas != null && !cuentas.isEmpty()) {
+				            for (Cuenta cuenta : cuentas) {
+				    %>
+				                <option value="<%= cuenta.getNumeroDeCuentaCu() %>">
+				                    Cuenta: <%= cuenta.getNumeroDeCuentaCu() %> 
+				                </option>
+				    <%
+				            }
+				        } else {
+				    %>
+				        <option value="" disabled>No hay cuentas disponibles</option>
+				    <%
+				        }
+				    %>
+				</select>
+					
 					<label for="fecha_peticion">Fecha de Petición</label> <input
 						type="text" id="fecha_peticion" name="fecha_peticion" disabled
 						class="form-input"> <label for="importe_solicitado">Importe
-						Solicitado</label> <input type="number" id="importe_solicitado"
+						Solicitado (Sin signo $)</label> <input type="number" id="importe_solicitado"
 						name="importe_solicitado" required step="0.01" class="form-input">
 
 					<!-- Plazo de Pago como un Dropdown (DDL) -->
-					<label for="plazo_pago">Plazo de Pago (en meses)</label> <select
+					<label for="plazo_pago">Cantidad de Cuotas</label> <select
 						id="plazo_pago" name="plazo_pago" required class="form-input">
-						<option value="6">6 meses</option>
-						<option value="12">12 meses</option>
-						<option value="18">18 meses</option>
-						<option value="24">24 meses</option>
-						<option value="36">36 meses</option>
+
 					</select>
 
 					<div class="button-group">
 						<button type="reset" class="cancel-button">Cancelar</button>
-						<button type="submit" class="submit-button">Enviar
-							Solicitud</button>
+						<button type="submit" class="submit-button">Enviar Solicitud</button>
 					</div>
 				</form>
 			</div>
