@@ -160,7 +160,94 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+
+CREATE TRIGGER after_cliente_insert
+AFTER INSERT ON Cliente
+FOR EACH ROW
+BEGIN
+    DECLARE usuario_generado VARCHAR(20);
+    SET usuario_generado = CONCAT((NEW.apellido_Cli), '.UTN');
+    
+  INSERT INTO Usuario (Cuil_us, Usuario_us, Contrasenia_us, Rol_us, Estado_us)
+    VALUES (
+        NEW.cuil_Cli,                  
+        usuario_generado,              
+        NEW.dni_Cli,                   
+        0,                            
+        NEW.estado_Cli                 
+    );
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER after_cliente_update
+AFTER UPDATE ON Cliente
+FOR EACH ROW
+BEGIN
+   
+    IF OLD.estado_Cli <> NEW.estado_Cli THEN
+   
+        UPDATE Usuario
+        SET Estado_us = NEW.estado_Cli
+        WHERE Cuil_us = NEW.cuil_Cli;
+        UPDATE Cuenta
+        SET Estado_Cu = NEW.estado_Cli
+        WHERE Cuil_Cli_Cu = NEW.cuil_Cli;
+    END IF;
+END$$
+
+DELIMITER ;
+DELIMITER $$
+
+CREATE TRIGGER after_prestamo_insert
+AFTER INSERT ON Prestamo
+FOR EACH ROW
+BEGIN
+    DECLARE interes DECIMAL(5,2);
+    DECLARE meses INT;
+    DECLARE importe_c_interes DECIMAL(11,2);
+    DECLARE importe_x_cuotas DECIMAL(11,2);
+
+  
+    SELECT Interes_IXM, Meses
+    INTO interes, meses
+    FROM InteresXCantidadDMeses
+    WHERE Plazo_d_Pagos_En_meses_IXM = NEW.Plazo_Pago_Pt;
+
+
+    SET importe_c_interes = NEW.Importe_solicitado_Pt * (1 + (interes / 100));
+
+ 
+    SET importe_x_cuotas = importe_c_interes / meses;
+
+  
+    INSERT INTO DetallesXPrestamo (
+        ID_Prestamo_Pt_Dt, 
+        Importe_C_Interes_Dt, 
+        Importe_X_Cuotas_Dt, 
+        Cantidad_Cuotas_Dt
+    )
+    VALUES (
+        NEW.ID_Prestamo_Pt,  
+        importe_c_interes,   
+        importe_x_cuotas,    
+        meses               
+    );
+END$$
+
+DELIMITER ;
+
 use bancoutn;
+INSERT INTO InteresXCantidadDMeses (Plazo_d_Pagos_En_meses_IXM, Interes_IXM, Meses)
+VALUES
+('01M', 2, 1),   -- 1 mes, 
+('03M', 9, 3),   -- 3 meses
+('06M', 19, 6),   -- 6 meses, 
+('12M', 34, 9),  -- 9 meses, 
+('24M', 45, 12),  -- 12 meses
 INSERT INTO Nacionalidad (Id_Nacionalidad_nc, Descripcion_nc) VALUES
 ('AR', 'Argentina'),
 ('BR', 'Brasil'),
