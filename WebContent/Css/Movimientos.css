@@ -1,193 +1,77 @@
-@charset "ISO-8859-1";
-
-* {
-    box-sizing: border-box;
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background-color: #f5f5f5;
-    margin: 0;
-    padding-top: 100px;
 }
 
 .navbar {
-    width: 100%;
-    background-color: #d6a6d6;
     display: flex;
     align-items: center;
-    padding: 1rem;
-    position: fixed;
-    top: 0;
-    z-index: 2;
+    justify-content: space-between;
+    background-color: #0078d4;
+    padding: 10px 20px;
 }
 
 .hamburger {
-    display: flex;
-    flex-direction: column;
+    display: none;
     cursor: pointer;
-    background: transparent;
-    border: none;
-    margin-right: auto; 
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20px;
+    width: 30px;
 }
 
-.line {
-    width: 25px;
+.hamburger .line {
     height: 3px;
     background-color: white;
-    margin: 3px 0;
+    width: 100%;
 }
 
 .img_logo {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto; 
+    height: 40px;
 }
 
 .username {
-    font-size: 1.2rem;
     color: white;
-    margin-left: auto; 
+    font-size: 16px;
 }
 
 .main-container {
     display: flex;
-    padding-top: 60px;
+    padding: 20px;
 }
 
 .sidebar {
     width: 250px;
-    background-color: #d69ecf;
-    height: 100vh;
-    padding-top: 20px;
-    position: fixed;
-    top: 60px;
-    left: -250px;
-    transition: left 0.3s ease;
-    overflow-y: auto;
-    z-index: 1;
-}
-
-.sidebar.active {
-    left: 0;
+    background-color: #fff;
+    padding: 20px;
+    border-right: 2px solid #ddd;
 }
 
 .sidebar ul {
     list-style: none;
-    padding: 20px 0 0 0; 
-    margin: 0;
+    padding: 0;
 }
 
-.menu-item {
-    padding: 10px 20px;
+.sidebar ul li {
+    margin-bottom: 15px;
 }
 
-.menu-item > a {
+.sidebar ul li a {
     text-decoration: none;
     color: #333;
-    font-weight: bold;
-    display: block;
-    padding: 10px;
-}
-
-.menu-item > a:hover {
-    background-color: #BB8FCE;
-    color: #fff;
-}
-
-.submenu {
-    display: none;
-    list-style: none;
-    padding-left: 20px;
-}
-
-.menu-item.active .submenu {
+    font-size: 16px;
     display: block;
 }
-
-.submenu li a {
-    padding: 8px 20px;
-    display: block;
-    text-decoration: none;
-    color: #333;
-    font-weight: normal;
-}
-
-.submenu li a:hover {
-    background-color: #C39BD3;
-    color: #fff;
-}
-
 
 .content {
-    margin-left: 550px;
-     margin-right: 550px;
-    padding-top: 20px;
-    width: calc(100% - 270px);
+    flex-grow: 1;
+    padding: 20px;
 }
 
-
-
-.filters {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.filters input, .filters select, .filters button {
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.movements-list h3 {
-    margin-top: 20px;
-    font-size: 1.1em;
-    color: #555;
-}
-
-.movement-item {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    background-color: white;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.movement-icon {
-    width: 40px;
-    height: 40px;
-    background-color: #eee;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.movement-details {
-    flex: 1;
-}
-
-.movement-amount-negative {
-    font-weight: bold;
-    color: #d32f2f; /* rojo para egresos */
-    margin-left: 10px;
-}
-
-.movement-amount-positive {
-    font-weight: bold;
-    color: #388e3c; /* verde para ingresos */
-    margin-left: 10px;
-}
-
-
-.movement-time {
-    color: #777;
-    font-size: 0.9em;
-}
-
+/* Estilos de la paginación */
 .pagination {
     display: flex;
     justify-content: center;
@@ -205,4 +89,136 @@ body {
 .pagination a:hover {
     background-color: #0078d4;
     color: white;
+}
+
+.pagination span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilo para los movimientos */
+.movement-item {
+    border: 2px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.movement-item h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.movement-item p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.movement-item strong {
+    color: #333;
+    display: block;
+    margin-top: 10px;
+}
+
+.movement-item p strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.movement-item .movement-amount-negative {
+    color: #d32f2f;
+}
+
+.movement-item .movement-amount-positive {
+    color: #388e3c;
+}
+
+/* Estilo para los movimientos horizontales */
+.movement-item-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.movement-item-horizontal h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+.movement-item-horizontal p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+    flex: 2;
+}
+
+.movement-item-horizontal strong {
+    color: #333;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.movement-item-horizontal .movement-amount-negative {
+    color: #d32f2f;
+}
+
+.movement-item-horizontal .movement-amount-positive {
+    color: #388e3c;
+}
+
+/* Estilo de las tarjetas de los movimientos */
+.movement-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.movement-card {
+    width: 450px;
+    padding: 25px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.movement-card:hover {
+    transform: translateY(-5px);
+}
+
+.movement-card h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.movement-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 8px 0;
+}
+
+.movement-card strong {
+    color: #333;
+}
+
+.movement-card .movement-amount-negative {
+    color: #d32f2f;
+}
+
+.movement-card .movement-amount-positive {
+    color: #388e3c;
 }

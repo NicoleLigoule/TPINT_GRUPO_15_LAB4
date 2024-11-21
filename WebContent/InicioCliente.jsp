@@ -39,8 +39,9 @@
 
 			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Pago
 					de prestamos</a></li>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Informacion
-					personal</a></li>
+					<li class="menu-item"><a href="${pageContext.request.contextPath}/servletHistorialMovimiento?Param=1">Historial
+					de movimientos</a></li>
+			
 		</ul>
 		</aside>
 
