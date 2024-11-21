@@ -54,7 +54,8 @@
 		<div class="content">
 			<div class="form-card">
 				<h2>Solicitud de Préstamo</h2>
-				<form action="${pageContext.request.contextPath}/ServletSolicitarPrestamo" method="post">
+				<form action="${pageContext.request.contextPath}/ServletConfirmarPrestamo" method="post">
+
 
 				<label for="cuenta_destino">Cuenta Destino</label>
 				<select id="cuenta_destino" name="cuenta_destino" required>
@@ -106,7 +107,7 @@
 					</select>
 
 					<div class="button-group">
-						<button type="reset" class="cancel-button">Cancelar</button>
+						<button type="button" class="cancel-button" onclick="window.location.href='${pageContext.request.contextPath}/InicioCliente.jsp'">Cancelar</button>
 						<button type="submit" class="submit-button">Enviar Solicitud</button>
 					</div>
 				</form>

@@ -34,20 +34,28 @@
 			<div class="form-card">
 				<h2>Confirmar Solicitud De Prestamo</h2>
 
-				<form action="ServletRegistrarseNuevo" method="GET">
-					<label for="dni">Cuenta Destino</label> <input type="text" id="miTextbox" name="miTextbox" value="Texto de ejemplo" readonly> 
-					<label for="dni">Monto Solicitado</label> <input type="text" id="miTextbox" name="miTextbox" value="Texto de ejemplo" readonly>
-					<label for="dni">Monto Con Interes</label> <input type="text" id="miTextbox" name="miTextbox" value="Texto de ejemplo" readonly>	
-					<label for="dni">Cantidad De Cuotas</label> <input type="text" id="miTextbox" name="miTextbox" value="Texto de ejemplo" readonly>
-					<label for="dni">Monto Por Cuota</label> <input type="text" id="miTextbox" name="miTextbox" value="Texto de ejemplo" readonly>
+				<form action="ServletProcesarPrestamo" method="post">
+				    <label for="cuenta_destino">Cuenta Destino</label>
+				    <input type="text" id="cuenta_destino" name="cuenta_destino" value="<%= request.getAttribute("cuentaDestino") %>" readonly>
+				
+				    <label for="importe_solicitado">Monto Solicitado</label>
+				    <input type="text" id="importe_solicitado" name="importe_solicitado" value="<%= request.getAttribute("importeSolicitado") %>" readonly>
+				
+				    <label for="monto_con_interes">Monto Con Interés</label>
+				    <input type="text" id="monto_con_interes" name="monto_con_interes" value="<%= request.getAttribute("montoConInteres") %>" readonly>
+				
+				    <label for="plazo_pago">Cantidad De Cuotas</label>
+				    <input type="text" id="plazo_pago" name="plazo_pago" value="<%= request.getAttribute("plazoPago") %>" readonly>
+				
+				    <label for="monto_por_cuota">Monto Por Cuota</label>
+				    <input type="text" id="monto_por_cuota" name="monto_por_cuota" value="<%= request.getAttribute("montoPorCuota") %>" readonly>
+				
+				    <div class="button-group">
+				        <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/InicioCliente.jsp'" class="cancel-button">Volver</button>
+				        <button type="submit" class="submit-button" name="confirmar">Confirmar</button>
+				    </div>
 				</form>
 
-
-
-					<div class="button-group">
-						<button type="button" class="cancel-button">Cancelar</button>
-						<button type="submit" class="submit-button" name="agregarBtn">Confirmar</button>
-					</div>
 
 					<!-- mensaje de que cargó bien y limpia, sino msj cargó mal -->
 					<%
@@ -74,7 +82,6 @@
 					<%
 						}
 					%>
-				</form>
 
 			</div>
 		</div>
