@@ -1,3 +1,5 @@
+<%@ page import="entidades.ClienteCuentaDTO"%>
+<%@ page import="java.util.ArrayList"%>
 <%@page import="java.math.BigDecimal"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -50,10 +52,8 @@ String nombreApellido = (String) request.getAttribute("nombreApellido");
 String correo = (String) request.getAttribute("correo");
 String telefono = (String) request.getAttribute("telefono");
 String direccion = (String) request.getAttribute("direccion");
-BigDecimal saldoCtaCorr= (BigDecimal) request.getAttribute("saldoCtaCorr");
-BigDecimal saldoCajaAhorro= (BigDecimal) request.getAttribute("saldoCajaAhorro");
-Integer numeroCajaAhorro = (Integer) request.getAttribute("numeroCajaAhorro");
-Integer numeroCtaCorriente = (Integer) request.getAttribute("numeroCtaCorriente");
+BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
+
 %>
 
 		<section class="content">
@@ -74,27 +74,34 @@ Integer numeroCtaCorriente = (Integer) request.getAttribute("numeroCtaCorriente"
 					<strong>Dirección:</strong> <%=direccion != null ? direccion : "" %>
 				</p>
 			</div>
+			
+			<%
+			ArrayList<ClienteCuentaDTO> cuentas = (ArrayList<ClienteCuentaDTO>) request.getAttribute("listaCuentas");
+			%>
+			
 			<div
 				style="width: 1px; height: 150px; background-color: #ccc; margin: 0 20px;"></div>
-			<div class="account-info">
-				<h2>Cuenta Corriente</h2>
-				<p>
-					<strong>Número de Cuenta:</strong> <%=numeroCtaCorriente != null ? numeroCtaCorriente : "" %>
-				</p>
-				<p>
-					<strong>Saldo:</strong> <%=saldoCtaCorr != null ? saldoCtaCorr : "" %>
-				</p>
-			</div>
-
-			<div class="account-info">
-				<h2>Caja de Ahorro</h2>
-				<p>
-					<strong>Número de Cuenta:</strong> <%=numeroCajaAhorro != null ? numeroCajaAhorro : "" %>
-				</p>
-				<p>
-					<strong>Saldo:</strong> <%=saldoCajaAhorro != null ? saldoCajaAhorro : "" %>
-				</p>
-			</div>
+				
+				<div class="cards-container">
+    <% 
+    if (cuentas != null && !cuentas.isEmpty()) {
+        for (ClienteCuentaDTO cuenta : cuentas) { 
+    %>
+    <div class="account-info">
+        <h2><%= cuenta.getTipoCuenta() %></h2>
+        <p><strong>Número de Cuenta:</strong> <%= cuenta.getNumeroCuenta() %></p>
+        <p><strong>Saldo:</strong> $<%= cuenta.getSaldo() %></p>
+        
+    </div>
+    <% 
+        }
+    } else { 
+    %>
+    <p>No hay cuentas disponibles.</p>
+    <% } %>
+	</div>
+				
+			
 		</div>
 		</section>
 	</div>
