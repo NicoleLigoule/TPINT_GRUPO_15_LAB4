@@ -1,89 +1,271 @@
+@charset "ISO-8859-1";
+
 /* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
 }
 
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding-top: 100px;
+}
+
+
 .navbar {
+    width: 100%;
+    background-color: #d6a6d6;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background-color: #0078d4;
-    padding: 10px 20px;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 2;
 }
 
 .hamburger {
-    display: none;
-    cursor: pointer;
+    display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 20px;
-    width: 30px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    margin-right: auto; 
 }
 
-.hamburger .line {
+.line {
+    width: 25px;
     height: 3px;
     background-color: white;
-    width: 100%;
+    margin: 3px 0;
 }
 
 .img_logo {
-    height: 40px;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto; 
 }
 
 .username {
+    font-size: 1.2rem;
     color: white;
-    font-size: 16px;
+    margin-left: auto; 
 }
 
 .main-container {
     display: flex;
-    padding: 20px;
+    padding-top: 20px;
 }
 
 .sidebar {
-    width: 250px;
-    background-color: #fff;
+    width: 250px; 
+    background-color: #d6a6d6;
     padding: 20px;
-    border-right: 2px solid #ddd;
+    height: 100vh; 
+    position: fixed;
+    top: 80px; 
+    left: 0;
+    transition: transform 1s ease;
+    transform: translateX(-100%); 
+    z-index: 1;
+}
+
+.sidebar.active {
+    transform: translateX(0); 
 }
 
 .sidebar ul {
-    list-style: none;
-    padding: 0;
+    list-style-type: none;
+    padding: 15px;
 }
 
 .sidebar ul li {
-    margin-bottom: 15px;
+    margin: 8px 0;
 }
 
 .sidebar ul li a {
     text-decoration: none;
+    font-size: 1.1rem;
     color: #333;
-    font-size: 16px;
     display: block;
+    padding: 4px;
+}
+
+.sidebar ul li a:hover {
+    color: #f8e3f4;
+}
+
+.submenu {
+    list-style-type: none;
+    padding-left: 20px;
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 1s ease; 
+}
+
+.menu-item.active .submenu {
+    max-height: 500px; 
+}
+
+
+.submenu li {
+    font-size: 1rem;
+    color: #555;
+    padding-left: 15px; 
+}
+
+.submenu li a {
+    color: #555;
+    text-decoration: none;
+}
+
+.submenu li a:hover {
+    color: #f8e3f4;
+}* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding-top: 100px;
+}
+
+
+.navbar {
+    width: 100%;
+    background-color: #d6a6d6;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    margin-right: auto; 
+}
+
+.line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+}
+
+.img_logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto; 
+}
+
+.username {
+    font-size: 1.2rem;
+    color: white;
+    margin-left: auto; 
+}
+
+.main-container {
+    display: flex;
+    padding-top: 20px;
+}
+
+.sidebar {
+    width: 250px; 
+    background-color: #d6a6d6;
+    padding: 20px;
+    height: 100vh; 
+    position: fixed;
+    top: 80px; 
+    left: 0;
+    transition: transform 1s ease;
+    transform: translateX(-100%); 
+    z-index: 1;
+}
+
+.sidebar.active {
+    transform: translateX(0); 
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 15px;
+}
+
+.sidebar ul li {
+    margin: 8px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #333;
+    display: block;
+    padding: 4px;
+}
+
+.sidebar ul li a:hover {
+    color: #f8e3f4;
+}
+
+.submenu {
+    list-style-type: none;
+    padding-left: 20px;
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 1s ease; 
+}
+
+.menu-item.active .submenu {
+    max-height: 500px; 
+}
+
+
+.submenu li {
+    font-size: 1rem;
+    color: #555;
+    padding-left: 15px; 
+}
+
+.submenu li a {
+    color: #555;
+    text-decoration: none;
+}
+
+.submenu li a:hover {
+    color: #f8e3f4;
 }
 
 .content {
     flex-grow: 1;
-    padding: 20px;
+    padding: 10px; /* Padding reducido */
 }
 
 /* Estilos de la paginación */
 .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px; /* Margen reducido */
 }
 
 .pagination a, .pagination span {
-    margin: 0 5px;
-    padding: 5px 10px;
+    margin: 0 3px;
+    padding: 3px 7px; /* Tamaño reducido */
     border-radius: 5px;
     color: #0078d4;
     cursor: pointer;
+    font-size: 10px;
 }
 
 .pagination a:hover {
@@ -96,129 +278,60 @@ body {
     color: #333;
 }
 
-/* Estilo para los movimientos */
-.movement-item {
-    border: 2px solid #ddd;
-    padding: 15px;
-    margin-bottom: 15px;
-    background-color: #fff;
-    border-radius: 5px;
+/* Estilo para la lista de movimientos */
+/* Centrado de las tarjetas con un ancho controlado */
+
+.movement-list {
     display: flex;
     flex-direction: column;
+    gap: 15px; /* Espaciado entre cada movimiento */
+    padding: 15px; /* Espaciado adicional para la lista */
+    max-width: 100%; /* Asegurarse de que la lista ocupe todo el ancho disponible */
+    overflow-y: auto; /* Permite el desplazamiento si hay muchos movimientos */
+    background-color: #f9f9f9; /* Fondo ligero para la lista */
+    border-radius: 5px; /* Bordes redondeados */
+    justify-content: center; /* Centra las tarjetas */
+    align-items: center; /* Alinea las tarjetas al centro */
+}
+
+.movement-item {
+    border: 1px solid #ddd; /* Bordes más delgados */
+    padding: 20px; /* Aumento del padding para dar más espacio */
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 14px; /* Fuente más grande */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaciado entre los elementos dentro de la tarjeta */
+    width: 80%; /* Controla el ancho de la tarjeta, no ocupa todo el ancho */
+    max-width: 600px; /* Establece un límite máximo para el ancho de la tarjeta */
+    word-wrap: break-word; /* Permite que las palabras largas se dividan y no se corten */
+    margin: 0 auto; /* Centra las tarjetas dentro del contenedor */
 }
 
 .movement-item h4 {
-    font-size: 18px;
+    font-size: 14px; /* Aumento del tamaño de fuente en el título */
     color: #333;
     margin-bottom: 10px;
     text-align: left;
+    font-weight: bold; /* Título en negrita para hacerlo más destacado */
 }
 
 .movement-item p {
-    font-size: 14px;
+    font-size: 14px; /* Aumento del tamaño de fuente en los párrafos */
     color: #555;
-    margin: 5px 0;
+    margin: 8px 0; /* Mejor espaciado entre los párrafos */
+    display: flex;
+    gap: 8px; /* Espaciado entre la etiqueta y el valor */
+    word-wrap: break-word; /* Permite que el texto largo se ajuste en varias líneas */
 }
 
-.movement-item strong {
+.movement-item p span {
+    font-weight: bold; /* Las etiquetas (como "Fecha", "Detalle") estarán en negrita */
     color: #333;
-    display: block;
-    margin-top: 10px;
 }
 
 .movement-item p strong {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.movement-item .movement-amount-negative {
-    color: #d32f2f;
-}
-
-.movement-item .movement-amount-positive {
-    color: #388e3c;
-}
-
-/* Estilo para los movimientos horizontales */
-.movement-item-horizontal {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.movement-item-horizontal h4 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
-    flex: 1;
-}
-
-.movement-item-horizontal p {
-    font-size: 14px;
-    color: #555;
-    margin: 5px 0;
-    flex: 2;
-}
-
-.movement-item-horizontal strong {
-    color: #333;
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.movement-item-horizontal .movement-amount-negative {
-    color: #d32f2f;
-}
-
-.movement-item-horizontal .movement-amount-positive {
-    color: #388e3c;
-}
-
-/* Estilo de las tarjetas de los movimientos */
-.movement-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    justify-content: center;
-    margin-top: 25px;
-}
-
-.movement-card {
-    width: 450px;
-    padding: 25px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
-}
-
-.movement-card:hover {
-    transform: translateY(-5px);
-}
-
-.movement-card h4 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 15px;
-}
-
-.movement-card p {
-    font-size: 14px;
-    color: #555;
-    margin: 8px 0;
-}
-
-.movement-card strong {
-    color: #333;
-}
-
-.movement-card .movement-amount-negative {
-    color: #d32f2f;
-}
-
-.movement-card .movement-amount-positive {
-    color: #388e3c;
+    font-weight: bold; /* Resalta los valores de los movimientos, como el importe o la fecha */
+    color: #000;
 }
