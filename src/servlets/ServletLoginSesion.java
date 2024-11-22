@@ -58,7 +58,8 @@ public class ServletLoginSesion extends HttpServlet {
             if (usuario.isRolUs()) { 
                 response.sendRedirect("MenuAdm.jsp");
             } else { 
-                response.sendRedirect("InicioCliente.jsp");
+                //response.sendRedirect("InicioCliente.jsp");
+                response.sendRedirect("servletInformacionCliente"); // Redirige al servlet
             }
         } else {
             request.setAttribute("errorMessage", "Usuario o contraseña incorrectos.");

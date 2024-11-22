@@ -2,6 +2,8 @@ package negocio;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.corba.se.impl.protocol.InfoOnlyServantCacheLocalCRDImpl;
+
 import entidades.Nacionalidad;
 import entidades.Sexo;
 import entidades.TipoDeCuenta;
@@ -62,9 +64,16 @@ public class DDL {
 	 }
 	 
 	 public ArrayList<ClienteCuentaDTO> ClienteCuentas(String CUIL) {
-		    ClienteCuentaDTODaoImpl clienteCuenta = new ClienteCuentaDTODaoImpl();
+		    ClienteCuentaDTODaoImpl clienteCuenta = new ClienteCuentaDTODaoImpl();		    
 		    return new ArrayList<ClienteCuentaDTO>(clienteCuenta.obtenerCuentasPorCuil(CUIL));
 		}
+	 
+	 public ClienteCuentaDTO infoClienteCtas(String CUIL) {
+		   ClienteCuentaDTO infocliente = new ClienteCuentaDTO();
+		   ClienteCuentaDTODaoImpl clienteCuenta = new ClienteCuentaDTODaoImpl();
+		   infocliente = clienteCuenta.infoClienteCuentas(CUIL);
+		   return infocliente;		 
+	 }
 	 
 	 public List<Cuenta> obtenercuentaUsurio( String cuil) {
 		 CuentaDaoImpl	 cuentaDao = new CuentaDaoImpl();
