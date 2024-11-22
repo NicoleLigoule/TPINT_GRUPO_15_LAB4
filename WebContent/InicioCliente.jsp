@@ -82,10 +82,14 @@ BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
 			<div
 				style="width: 1px; height: 150px; background-color: #ccc; margin: 0 20px;"></div>
 				
-				<div class="cards-container">
+		 <div class="cards-container">
     <% 
+    boolean hayCuentasValidas = false; // Indicador para tarjetas válidas
+    
     if (cuentas != null && !cuentas.isEmpty()) {
         for (ClienteCuentaDTO cuenta : cuentas) { 
+        	 if (cuenta != null && cuenta.getNumeroCuenta() > 0 && cuenta.getSaldo() != null) {
+        		 hayCuentasValidas = true; // Hay al menos una cuenta válida
     %>
     <div class="account-info">
         <h2><%= cuenta.getTipoCuenta() %></h2>
@@ -94,12 +98,15 @@ BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
         
     </div>
     <% 
+        	 }
         }
-    } else { 
+    } 
+ 	// Mostrar el mensaje solo si no hay cuentas válidas
+    if (!hayCuentasValidas) {  
     %>
-    <p>No hay cuentas disponibles.</p>
+    	<p>No hay cuentas disponibles.</p>
     <% } %>
-	</div>
+		</div>
 				
 			
 		</div>

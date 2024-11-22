@@ -55,9 +55,9 @@ public class ClienteCuentaDTODaoImpl implements ClienteCuentaDTODao{
 	    List<ClienteCuentaDTO> lista = new ArrayList<>();
 	    try {
 	    	ResultSet rs = cn.query("SELECT  cliente.nombre_Clii AS Nombre, cliente.apellido_Cli AS Apellido, cliente.correo_electronico_Cli AS Correo, cliente.telefono_Cli AS telefono, cliente.direccion_Cli AS Direccion, tipocuenta.Nombre_Tipo AS Tipo, cuenta.Numero_de_Cuenta_Cu AS NumeroCuenta, cuenta.Saldo_Cu AS Saldo "+
-	    			"FROM cliente INNER JOIN "+
+	    			"FROM cliente LEFT JOIN "+
 	    			"cuenta ON cliente.cuil_Cli = cuenta.Cuil_Cli_Cu AND cuenta.Estado_Cu = 1 "+
-	    			"INNER JOIN "+ 
+	    			"LEFT JOIN "+ 
 	    			"tipocuenta ON cuenta.Id_Tipo_Cuenta = tipocuenta.Id_Tipo_Cuenta "+
 	    	        "WHERE Cliente.cuil_Cli = '" + CUIL + "'");
 	        
