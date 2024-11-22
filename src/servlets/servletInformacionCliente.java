@@ -51,32 +51,40 @@ public class servletInformacionCliente extends HttpServlet {
         
         if(cuil != null)
         {
-        	DDL ddl = new DDL();
-        	ClienteCuentaDTO infoCliente = ddl.infoClienteCtas(cuil);
-        	if (infoCliente != null)
-        	{
-        		                  
-                 String nombreApellido = infoCliente.getNombre() + " " + infoCliente.getApellido();
-                 System.out.print("nombreApellido: "+nombreApellido);
-                 String correo = infoCliente.getCorreoElectronico();
-                 String telefono = infoCliente.getTelefono();
-                 String direccion = infoCliente.getDireccion();
-                BigDecimal saldoCtaCorr = infoCliente.getSaldoCtaCorriente();                
-                BigDecimal saldoCajaAhorro = infoCliente.getSaldoCajaAhorro();
-                Integer numeroCtaCorriente = infoCliente.getNumeroCuentaCorriente();
-                Integer numeroCajaAhorro = infoCliente.getNumeroCajaAhorro();
-                 
-                 request.setAttribute("usuario", usuario);
-                 request.setAttribute("nombreApellido", nombreApellido);
-                 request.setAttribute("correo", correo);
-                 request.setAttribute("telefono", telefono);
-                 request.setAttribute("direccion", direccion);
-                 request.setAttribute("saldoCtaCorr", saldoCtaCorr);
-                 request.setAttribute("saldoCajaAhorro", saldoCajaAhorro);
-                 request.setAttribute("numeroCtaCorriente", numeroCtaCorriente);
-                 request.setAttribute("numeroCajaAhorro", numeroCajaAhorro);
-        	}
+        	DDL ddl = new DDL();        	
+        	
+        	try{
+        		
+        		ArrayList<ClienteCuentaDTO> infoCliente = ddl.infoClienteCtas_2(cuil);
+        		System.out.println("lista de infoClientes: "+infoCliente);
+        		 
+        		if (infoCliente != null && !infoCliente.isEmpty())
+        		{
+        			 ClienteCuentaDTO cliente = infoCliente.get(0);
+        			 String nombreApellido = cliente.getNombre() + " " + cliente.getApellido();
+        			 String correo = cliente.getCorreoElectronico();
+                     String telefono = cliente.getTelefono();
+                     String direccion = cliente.getDireccion();
+                     
+                     request.setAttribute("usuario", usuario);
+                     request.setAttribute("nombreApellido", nombreApellido);
+                     request.setAttribute("correo", correo);
+                     request.setAttribute("telefono", telefono);
+                     request.setAttribute("direccion", direccion);
+                     request.setAttribute("listaCuentas", infoCliente);
+        		}else {
+                    // Si no hay cuentas ni nombre, muestra un mensaje
+                    request.setAttribute("mensaje", "No se encontraron clientes con CUIL: " + cuil);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                
+                request.setAttribute("mensaje", "Error al obtener las cuentas: " + e.getMessage());
+            }
+               		
+              
         }
+       
         
         
 

@@ -52,6 +52,7 @@ public class servletEliminarCuenta extends HttpServlet {
                     request.setAttribute("nombreApellido", nombreApellido);
                     request.setAttribute("listaCuentas", listaCuentas);
                     
+                    
 
                 } else {
                     // Si no hay cuentas ni nombre, muestra un mensaje

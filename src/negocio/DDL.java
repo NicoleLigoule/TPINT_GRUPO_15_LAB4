@@ -68,11 +68,10 @@ public class DDL {
 		    return new ArrayList<ClienteCuentaDTO>(clienteCuenta.obtenerCuentasPorCuil(CUIL));
 		}
 	 
-	 public ClienteCuentaDTO infoClienteCtas(String CUIL) {
-		   ClienteCuentaDTO infocliente = new ClienteCuentaDTO();
-		   ClienteCuentaDTODaoImpl clienteCuenta = new ClienteCuentaDTODaoImpl();
-		   infocliente = clienteCuenta.infoClienteCuentas(CUIL);
-		   return infocliente;		 
+	 //	METODO PARA PROBAR TARJETAS DINAMICAS EN INFO-CLIENTE
+	 public ArrayList<ClienteCuentaDTO> infoClienteCtas_2(String CUIL) {
+		 	ClienteCuentaDTODaoImpl clienteCuenta = new ClienteCuentaDTODaoImpl();		    
+		    return new ArrayList<ClienteCuentaDTO>(clienteCuenta.infoClienteCuentas2(CUIL));	 
 	 }
 	 
 	 public List<Cuenta> obtenercuentaUsurio( String cuil) {

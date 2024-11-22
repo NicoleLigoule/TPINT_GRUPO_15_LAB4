@@ -13,11 +13,8 @@ public class ClienteCuentaDTO {
 	   //---- vista infoCliente
 	    private String correoElectronico;
 	    private String telefono;
-	    private String direccion;
-	    private BigDecimal saldoCtaCorriente;
-	    private BigDecimal saldoCajaAhorro;
-	    private Integer numeroCuentaCorriente;
-	    private Integer numeroCajaAhorro;
+	    private String direccion;	    
+	    private BigDecimal saldo;	    
 	    private String CBU;
 	    
 
@@ -41,20 +38,15 @@ public class ClienteCuentaDTO {
 		public void setTelefono(String telefono) {	this.telefono = telefono; }
 		
 		public String getDireccion() {	return direccion; }
-		public void setDireccion(String direccion) { this.direccion = direccion; }
+		public void setDireccion(String direccion) { this.direccion = direccion; }		
 		
-		public BigDecimal getSaldoCtaCorriente() {	return saldoCtaCorriente;	}
-		public void setSaldoCtaCorriente(BigDecimal saldoCtaCorriente) {this.saldoCtaCorriente = saldoCtaCorriente;	}
 		
-		public BigDecimal getSaldoCajaAhorro() { return saldoCajaAhorro; }
-		public void setSaldoCajaAhorro(BigDecimal saldoCajaAhorro) { this.saldoCajaAhorro = saldoCajaAhorro; }
-		
-		public Integer getNumeroCuentaCorriente() {	return numeroCuentaCorriente; }		
-		public void setNumeroCuentaCorriente(Integer numeroCuentaCorriente) { this.numeroCuentaCorriente = numeroCuentaCorriente; }
-		
-		public Integer getNumeroCajaAhorro() { return numeroCajaAhorro; }
-		public void setNumeroCajaAhorro(Integer numeroCajaAhorro) {	this.numeroCajaAhorro = numeroCajaAhorro; }
 		
 		public String getCBU() {return CBU;	}
 		public void setCBU(String cBU) {CBU = cBU; }
+		
+		public BigDecimal getSaldo() {  return saldo; }
+		public void setSaldo(BigDecimal saldo) { this.saldo = saldo; }
+		
+		
 }
