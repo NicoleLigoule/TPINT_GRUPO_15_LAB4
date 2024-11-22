@@ -70,7 +70,7 @@ th {
 	</nav>
 
 	<div class="main-container">
-		<jsp:include page="SubMenu.jsp" />
+		<jsp:include page="Admin_SubMenu.jsp" />
 
 		<div class="content">
 			<h2>Listado de Clientes</h2>

@@ -37,7 +37,7 @@
 
 	<div class="main-container">
 		
-	<jsp:include page="SubMenu.jsp" />
+	<jsp:include page="Admin_SubMenu.jsp" />
 
 		<div class="Mastercontainer">
 
@@ -83,7 +83,15 @@
 					<%
 						}
 					%>
-					
+				<%-- 	  <%
+						    String errorMessage = (String) request.getAttribute("errorMessage");
+						    if (errorMessage != null) {
+						%>
+						    <p style="color: red;"><%= errorMessage %></p>
+						<%
+						    }
+						%>
+ --%>					
 				</div>
 			</div>
 		</div>
