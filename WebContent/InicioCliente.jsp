@@ -1,3 +1,4 @@
+<%@page import="java.math.BigDecimal"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="entidades.Usuario"%>
@@ -43,6 +44,17 @@
 					personal</a></li>
 		</ul>
 		</aside>
+		
+<%
+String nombreApellido = (String) request.getAttribute("nombreApellido");
+String correo = (String) request.getAttribute("correo");
+String telefono = (String) request.getAttribute("telefono");
+String direccion = (String) request.getAttribute("direccion");
+BigDecimal saldoCtaCorr= (BigDecimal) request.getAttribute("saldoCtaCorr");
+BigDecimal saldoCajaAhorro= (BigDecimal) request.getAttribute("saldoCajaAhorro");
+Integer numeroCajaAhorro = (Integer) request.getAttribute("numeroCajaAhorro");
+Integer numeroCtaCorriente = (Integer) request.getAttribute("numeroCtaCorriente");
+%>
 
 		<section class="content">
 		<h1 class="main-title">Información Personal</h1>
@@ -50,16 +62,16 @@
 			<div class="personal-info">
 				<h2>Datos del Usuario</h2>
 				<p>
-					<strong>Nombre:</strong> Nicole Ligoule
+					<strong>Nombre:</strong> <%=nombreApellido != null ? nombreApellido : ""%>
 				</p>
 				<p>
-					<strong>Correo:</strong> nicole@gmail.com
+					<strong>Correo:</strong> <%=correo != null ? correo : "" %>
 				</p>
 				<p>
-					<strong>Teléfono:</strong> +54 123 456789
+					<strong>Teléfono:</strong> <%=telefono != null ? telefono : "" %>
 				</p>
 				<p>
-					<strong>Dirección:</strong> Calle Lila 123, Pilar
+					<strong>Dirección:</strong> <%=direccion != null ? direccion : "" %>
 				</p>
 			</div>
 			<div
@@ -67,20 +79,20 @@
 			<div class="account-info">
 				<h2>Cuenta Corriente</h2>
 				<p>
-					<strong>Número de Cuenta:</strong> 1234567890
+					<strong>Número de Cuenta:</strong> <%=numeroCtaCorriente != null ? numeroCtaCorriente : "" %>
 				</p>
 				<p>
-					<strong>Saldo:</strong> $2,039,000.00
+					<strong>Saldo:</strong> <%=saldoCtaCorr != null ? saldoCtaCorr : "" %>
 				</p>
 			</div>
 
 			<div class="account-info">
 				<h2>Caja de Ahorro</h2>
 				<p>
-					<strong>Número de Cuenta:</strong> 9876543210
+					<strong>Número de Cuenta:</strong> <%=numeroCajaAhorro != null ? numeroCajaAhorro : "" %>
 				</p>
 				<p>
-					<strong>Saldo:</strong> $578,000.00
+					<strong>Saldo:</strong> <%=saldoCajaAhorro != null ? saldoCajaAhorro : "" %>
 				</p>
 			</div>
 		</div>
