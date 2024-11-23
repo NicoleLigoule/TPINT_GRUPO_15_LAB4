@@ -302,4 +302,11 @@ VALUES
 ('Ahorro'),
 ('Corriente');
 
+INSERT INTO Prestamo (Numero_de_Cuenta_Cu_Pt, Importe_solicitado_Pt, Plazo_Pago_Pt, Detalle_solicitud_Pt, Estado_Pt)
+VALUES (1010, 50000, '012', 'Préstamo para compra de auto', 1);
+
+INSERT INTO InteresXCantidadDMeses (Plazo_d_Pagos_En_meses_IXM, Tasa_de_Interes_IXM) 
+VALUES ('012', 5.5);
+
+
 
