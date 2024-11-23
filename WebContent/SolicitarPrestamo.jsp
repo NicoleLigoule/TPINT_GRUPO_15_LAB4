@@ -35,25 +35,12 @@
 	</nav>
 
 
+	<jsp:include page="Cliente_SubMenu.jsp" />
 	<div class="main-container">
-		<aside class="sidebar" id="sidebar">
-			<ul>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Transferencias</a></li>
-
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Solicitudes de prestamos</a></li>
-
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Pago de prestamos</a></li>
-				<li class="menu-item"><a href="#"
-					onclick="toggleSubmenu(event)">Informacion personal</a></li>
-			</ul>
-		</aside>
 
 		<div class="content">
 			<div class="form-card">
-				<h2>Solicitud de Préstamo</h2>
+				<h2>Solicitud de Prestamo</h2>
 				<form action="${pageContext.request.contextPath}/ServletConfirmarPrestamo" method="post">
 
 
@@ -80,12 +67,11 @@
 					
 					<label for="fecha_peticion">Fecha de Petición</label> <input
 						type="text" id="fecha_peticion" name="fecha_peticion" disabled
-						class="form-input"> <label for="importe_solicitado">Importe
-						Solicitado (Sin signo $)</label> <input type="number" id="importe_solicitado"
-						name="importe_solicitado" required step="0.01" class="form-input">
+						class="form-input"> <label for="importe_solicitado">Importe Solicitado (Sin signo $)</label> <input type="number" 
+						id="importe_solicitado" name="importe_solicitado" required step="0.01" class="form-input">
 
 					<!-- Plazo de Pago como un Dropdown (DDL) -->
-					<label for="plazo_pago">Cantidad de Cuotas</label> <select
+					<%-- <label for="plazo_pago">Cantidad de Cuotas</label> <select
 						id="plazo_pago" name="plazo_pago" required class="form-input">
                      <option value="" disabled selected>Seleccione las Cuotas</option>
 				    <%
@@ -104,6 +90,28 @@
 				    <%
 				        }
 				    %>
+					</select> --%>
+					
+					<!-- Plazo de Pago como un Dropdown (DDL) -->
+					<label for="plazo_pago">Cantidad de Cuotas</label>
+					<select id="plazo_pago" name="plazo_pago" required>
+					    <option value="" disabled selected>Seleccione el plazo de pago</option>
+					    <%
+					        List<InteresesXCantidadDeMeses> plazosPago = (List<InteresesXCantidadDeMeses>) request.getAttribute("plazosPago");
+					        if (plazosPago != null && !plazosPago.isEmpty()) {
+					            for (InteresesXCantidadDeMeses plazo : plazosPago) {
+					    %>
+					            <option value="<%= plazo.getMeses() %>">
+					                <%= plazo.getMeses() %> meses - Interes: <%= plazo.getInteresIxm() %>%
+					            </option>
+					    <%
+					            }
+					        } else {
+					    %>
+					        <option value="" disabled>No hay plazos de pago disponibles</option>
+					    <%
+					        } 
+					    %>
 					</select>
 
 					<div class="button-group">
