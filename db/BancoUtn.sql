@@ -111,7 +111,7 @@ CREATE TABLE Prestamo(
     Fecha_Peticion_Pt DATETIME DEFAULT CURRENT_TIMESTAMP,
     Importe_solicitado_Pt DECIMAL(11,2),
     Plazo_Pago_Pt CHAR(3),
-   Detalle_solicitud_Pt VARCHAR(100),
+   Detalle_solicitud_Pt VARCHAR(200),
     Estado_Pt BOOLEAN NOT NULL DEFAULT 0,
     CONSTRAINT FK_Cuenta_Prestamo FOREIGN KEY (Numero_de_Cuenta_Cu_Pt) REFERENCES Cuenta(Numero_de_Cuenta_Cu),
     CONSTRAINT FK_Interes FOREIGN KEY (Plazo_Pago_Pt) REFERENCES InteresXCantidadDMeses(Plazo_d_Pagos_En_meses_IXM)
@@ -286,7 +286,7 @@ INSERT INTO Localidad (ID_Provincia_Prv_Lca, Nombre_Loc_Lca) VALUES
 (5, 'Tafí del Valle');
 
 INSERT INTO Usuario (Cuil_us, Usuario_us, Contrasenia_us, Rol_us, Estado_us)
-VALUES ('20304050607', 'Pepe', '123', 1, 1);
+VALUES ('20-12345678-9', 'Pepe2', '123', 0, 1);
 
 INSERT INTO Cliente (
     cuil_Cli, dni_Cli, nombre_Clii, apellido_Cli, ID_sexo_Cli, ID_Nacionalidad_Cli, 

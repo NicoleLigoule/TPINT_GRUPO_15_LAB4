@@ -22,21 +22,21 @@
             <div class="form-card">
                 <h2>Confirmar Solicitud De Prestamo</h2>
 
-                <form action="ServletConfirmarPrestamo" method="get">
+                <form action="ServletProcesarPrestamo" method="post">
                     <label for="cuenta_destino">Cuenta Destino</label>
-                    <input type="text" id="cuenta_destino" name="cuenta_destino" value="<%= request.getAttribute("cuentaDestino") %>" readonly>
+                    <input type="text" id="cuenta_destino" name="cuenta_destino" value="<%= request.getAttribute("cuenta_destino") %>" readonly>
 
                     <label for="importe_solicitado">Monto Solicitado</label>
-                    <input type="text" id="importe_solicitado" name="importe_solicitado" value="<%= request.getAttribute("importeSolicitado") %>" readonly>
+                    <input type="text" id="importe_solicitado" name="importe_solicitado" value="<%= request.getAttribute("importe_solicitado") %>" readonly>
 
                     <label for="monto_con_interes">Monto Con Interés</label>
-                    <input type="text" id="monto_con_interes" name="monto_con_interes" value="<%= request.getAttribute("montoConInteres") %>" readonly>
+                    <input type="text" id="monto_con_interes" name="monto_con_interes" value="<%= request.getAttribute("monto_con_interes") %>" readonly>
 
                     <label for="plazo_pago">Cantidad De Cuotas</label>
-                    <input type="text" id="plazo_pago" name="plazo_pago" value="<%= request.getAttribute("plazoPago") %>" readonly>
+                    <input type="text" id="plazo_pago" name="plazo_pago" value="<%= request.getAttribute("plazo_pago") %>" readonly>
 
                     <label for="monto_por_cuota">Monto Por Cuota</label>
-                    <input type="text" id="monto_por_cuota" name="monto_por_cuota" value="<%= request.getAttribute("montoPorCuota") %>" readonly>
+                    <input type="text" id="monto_por_cuota" name="monto_por_cuota" value="<%= request.getAttribute("monto_por_cuota") %>" readonly>
 
                     <div class="button-group">
                         <button type="button" class="cancel-button">Volver</button>
@@ -45,19 +45,21 @@
  				</form>
                 <!-- Mensaje de estado -->
                 <%
-                    String status = (String) request.getAttribute("status");
-                    String mensaje = (String) request.getAttribute("mensaje");
+                    //String status = (String) request.getAttribute("status");
+                    String mensajeConfirmacion = (String) request.getAttribute("mensajeConfirmacion");
+                    String mensajeError = (String) request.getAttribute("mensajeError");
 
-                    if ("success".equals(status)) {
+                    if (mensajeConfirmacion != null) {
                 %>
                 <div class="alert alert-success">
-                    <%= mensaje %>
+                    <%= mensajeConfirmacion %>
                 </div>
                 <%
-                    } else if ("error".equals(status)) {
+                    } else if(mensajeError != null) {
+                    	
                 %>
                 <div class="alert alert-danger">
-                    <%= mensaje %>
+                    <%= mensajeError %>
                 </div>
                 <%
                     }

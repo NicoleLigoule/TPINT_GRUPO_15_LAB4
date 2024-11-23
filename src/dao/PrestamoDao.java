@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.List;
+
+import entidades.InteresesXCantidadDeMeses;
 import entidades.Prestamo;
 
 public interface PrestamoDao {
@@ -10,8 +12,8 @@ public interface PrestamoDao {
     boolean eliminarPrestamo(int idPrestamo);
     List<Prestamo> obtenerPrestamos();
     Prestamo obtenerPrestamoPorId(int idPrestamo);
-	boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, int plazoPago,
+	boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, InteresesXCantidadDeMeses plazoPago,
 			double montoPorCuota);
-	boolean comprobarPlazoExistente(int plazoPago);
+	boolean comprobarPlazoExistente(String plazoPago);
 }
 

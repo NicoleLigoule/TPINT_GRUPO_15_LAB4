@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entidades.Cuenta;
+import entidades.InteresesXCantidadDeMeses;
 import entidades.Prestamo;
 import dao.PrestamoDao;
 import dao.CuentaDao;
@@ -133,7 +134,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
     }
     
    
-    public boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, int plazoPago, double montoPorCuota) {
+    public boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, InteresesXCantidadDeMeses plazoPago, double montoPorCuota) {
         // Paso 1: Obtener la cuenta a partir de cuentaDestino
     	CuentaDaoImpl cuentaDao = new CuentaDaoImpl();
 
@@ -145,26 +146,26 @@ public class PrestamoDaoImpl implements PrestamoDao {
         prestamo.setNumeroDeCuentaCuPt(Integer.parseInt(cuentaDestino)); // Asumimos que cuentaDestino es un String que se puede convertir a int
         prestamo.setImporteSolicitadoPt(BigDecimal.valueOf(importeSolicitado)); 
         prestamo.setFechaPeticionPt(LocalDateTime.now()); // Fecha actual de solicitud
-        prestamo.setPlazoPagoPt(String.valueOf(plazoPago)); // Asumiendo que plazoPago es un número entero y lo convertimos a String
+        prestamo.setPlazoPagoPt(plazoPago.getPlazoDPagosEnMesesIxm()); // Asumiendo que plazoPago es un número entero y lo convertimos a String
         prestamo.setDetalleSolicitudPt("Solicitud de préstamo de " + montoConInteres + " con plazo de " + plazoPago + " meses.");
         prestamo.setEstadoPt(true); // Asumimos que el préstamo está en estado activo al momento de la creación
 
         // Paso 3: Asociar la cuenta y el interés
         prestamo.setCuenta(cuenta); // Asumimos que ya tienes una clase Cuenta y un método para obtenerla por cuentaDestino
-        prestamo.setInteres(new InteresesXCantidadDeMesesDaoImpl(plazoPago, montoConInteres)); // Aquí debes tener una implementación para calcular los intereses según el plazo
+//        prestamo.setInteres(new InteresesXCantidadDeMesesDaoImpl(plazoPago, montoConInteres)); // Aquí debes tener una implementación para calcular los intereses según el plazo
 
         // Paso 4: Guardar el prestamo en la base de datos
         return insertarPrestamo(prestamo); // Llamamos al método insertarPrestamo para almacenar el préstamo en la base de datos
     }
     
     @Override
-    public boolean comprobarPlazoExistente(int plazoPago) {
+    public boolean comprobarPlazoExistente(String plazoPago) {
         boolean existe = false;
         String query = "SELECT COUNT(*) FROM interesxcantidaddmeses WHERE Plazo_d_Pagos_En_meses_IXM = ?";
 
         try (Connection cn = conexion.Open()) {
             PreparedStatement ps = cn.prepareStatement(query);
-            ps.setInt(1, plazoPago);
+            ps.setString(1, plazoPago);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next() && rs.getInt(1) > 0) {  // Verificamos si el valor existe

@@ -35,26 +35,36 @@ public class ServletProcesarPrestamo extends HttpServlet {
 	 */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        String cuentaDestino = request.getParameter("cuenta_destino");
-        double importeSolicitado = Double.parseDouble(request.getParameter("importe_solicitado"));
-        double montoConInteres = Double.parseDouble(request.getParameter("monto_con_interes"));
-        int plazoPago = Integer.parseInt(request.getParameter("plazo_pago"));
-        double montoPorCuota = Double.parseDouble(request.getParameter("monto_por_cuota"));
-
-        
-        boolean exito = procesarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, plazoPago, montoPorCuota);
-
-        if (exito) {
-
-            response.sendRedirect("InicioCliente.jsp?status=success");
-        } else {
-
-            response.sendRedirect("ConfirmarPrestamo.jsp?status=error");
-        }
+//        String cuentaDestino = request.getParameter("cuenta_destino");
+//        double importeSolicitado = Double.parseDouble(request.getParameter("importe_solicitado"));
+//        double montoConInteres = Double.parseDouble(request.getParameter("monto_con_interes"));
+//        String plazoPago = request.getParameter("plazo_pago");
+//        double montoPorCuota = Double.parseDouble(request.getParameter("monto_por_cuota"));
+//
+//        
+//        boolean exito = procesarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, plazoPago, montoPorCuota);
+//        
+//        if (exito) {
+//        	request.setAttribute("mensaje", "prestamo cargado con exito");
+//        	request.setAttribute("status", "success");
+//        	
+//        	request.setAttribute("cuenta_destino", "success");
+//        	request.setAttribute("importe_solicitado", "success");
+//        	request.setAttribute("monto_con_interes", "success");
+//        	request.setAttribute("plazo_pago", "success");
+//        	request.setAttribute("monto_por_cuota", "success");
+//        	
+//        	request.getRequestDispatcher("ConfirmarPrestamo.jsp").forward(request, response);
+////            response.sendRedirect("InicioCliente.jsp?status=success");
+//        } else {
+//
+//            response.sendRedirect("ConfirmarPrestamo.jsp?status=error");
+//        }
     }
 
-    private boolean procesarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, int plazoPago, double montoPorCuota) {
-
+    private boolean procesarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago, double montoPorCuota) {
+    	//aca se carga en la db
+    	System.out.print("procesarPrestamo::SE PROCESA EL PRESTAMO");
         return true; 
     }
 

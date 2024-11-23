@@ -101,7 +101,7 @@
 					        if (plazosPago != null && !plazosPago.isEmpty()) {
 					            for (InteresesXCantidadDeMeses plazo : plazosPago) {
 					    %>
-					            <option value="<%= plazo.getMeses() %>">
+					            <option value="<%= plazo.getPlazoDPagosEnMesesIxm() %>">
 					                <%= plazo.getMeses() %> meses - Interes: <%= plazo.getInteresIxm() %>%
 					            </option>
 					    <%

@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.PrestamoDao;
+import daoImpl.InteresesXCantidadDeMesesDaoImpl;
 import daoImpl.PrestamoDaoImpl;
+import entidades.InteresesXCantidadDeMeses;
 
 /**
  * Servlet implementation class ServletConfirmarPrestamo
@@ -62,17 +64,31 @@ public class ServletConfirmarPrestamo extends HttpServlet {
 	    try {
 	        String cuentaDestino = request.getParameter("cuenta_destino");
 	        double importeSolicitado = Double.parseDouble(request.getParameter("importe_solicitado"));
-	        int plazoPago = Integer.parseInt(request.getParameter("plazo_pago"));
+	        String plazoPago = request.getParameter("plazo_pago");
+	        int plazoPagoMeses = 1;
+	        
+	        PrestamoDaoImpl prestamoDao = new PrestamoDaoImpl();	        
+	        boolean plazoValido = prestamoDao.comprobarPlazoExistente(plazoPago);
+	        
+	        InteresesXCantidadDeMesesDaoImpl plazoDao = new InteresesXCantidadDeMesesDaoImpl();
+	        InteresesXCantidadDeMeses interes = null; 
+	        
+	        if(plazoValido) {
+	        	interes = plazoDao.obtenerUno(plazoPago);
+		        plazoPagoMeses = interes.getMeses();
 
+	        }
+	        
+	        
+	        
 	        // Cálculos del préstamo
 	        double tasaInteres = 0.05;
-	        double montoConInteres = importeSolicitado * Math.pow(1 + tasaInteres, plazoPago);
-	        double montoPorCuota = montoConInteres / plazoPago;
+	        double montoConInteres = importeSolicitado * Math.pow(1 + tasaInteres, plazoPagoMeses);
+	        double montoPorCuota = montoConInteres / plazoPagoMeses;
 
-	        PrestamoDao prestamoDao = new PrestamoDaoImpl();
 
 	     // Verificar si el plazoPago existe en la tabla 'interesxcantidaddmeses'
-	     boolean plazoValido = prestamoDao.comprobarPlazoExistente(plazoPago);
+	     
 
 	     if (!plazoValido) {
 	         request.setAttribute("mensajeError", "El plazo de pago no es válido.");
@@ -81,7 +97,7 @@ public class ServletConfirmarPrestamo extends HttpServlet {
 	     }
 
 	     // Si el plazo es válido, guardar el préstamo
-	     boolean guardado = prestamoDao.guardarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, plazoPago, montoPorCuota);
+	     boolean guardado = prestamoDao.guardarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, interes, montoPorCuota);
 
 	        if (guardado) {
 	            // Si se guarda correctamente, mostrar mensaje de éxito
@@ -92,11 +108,11 @@ public class ServletConfirmarPrestamo extends HttpServlet {
 	        }
 
 	        // Establecer atributos para pasar al JSP de confirmación
-	        request.setAttribute("cuentaDestino", cuentaDestino);
-	        request.setAttribute("importeSolicitado", importeSolicitado);
-	        request.setAttribute("montoConInteres", montoConInteres);
-	        request.setAttribute("plazoPago", plazoPago);
-	        request.setAttribute("montoPorCuota", montoPorCuota);
+	        request.setAttribute("cuenta_destino", cuentaDestino);
+	        request.setAttribute("importe_solicitado", importeSolicitado);
+	        request.setAttribute("monto_con_interes", montoConInteres);
+	        request.setAttribute("plazo_pago", plazoPago);
+	        request.setAttribute("monto_por_cuota", montoPorCuota);
 
 	        // Redirigir a la página de confirmación
 	        request.getRequestDispatcher("ConfirmarPrestamo.jsp").forward(request, response);
