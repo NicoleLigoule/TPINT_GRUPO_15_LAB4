@@ -77,7 +77,7 @@ public class ServletRegistrarseNuevo extends HttpServlet {
                 }               
                 
                 
-                RequestDispatcher rd = request.getRequestDispatcher("ResgistrarseNuevo.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("RegistrarseNuevo.jsp");
                 rd.forward(request, response);
 
             } catch (Exception e) {
