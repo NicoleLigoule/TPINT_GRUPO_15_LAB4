@@ -62,9 +62,6 @@ CREATE TABLE Cuenta (
     CONSTRAINT UK_CBU UNIQUE (CBU_Cu)
 ) AUTO_INCREMENT = 1001;
 
-
-
-
 CREATE TABLE TipoMovimiento(
     Id_TipoMov_TM INT AUTO_INCREMENT,
     Descripcion_TM VARCHAR(40) NOT NULL,
@@ -98,7 +95,7 @@ CREATE TABLE Usuario(
     CONSTRAINT PK_Cuil PRIMARY KEY (Cuil_us)
 );
 
-    CREATE TABLE InteresXCantidadDMeses(
+CREATE TABLE InteresXCantidadDMeses(
     Plazo_d_Pagos_En_meses_IXM CHAR(3) PRIMARY KEY,
     Interes_IXM DECIMAL(5, 2),
     Meses INT,
@@ -111,12 +108,11 @@ CREATE TABLE Prestamo(
     Fecha_Peticion_Pt DATETIME DEFAULT CURRENT_TIMESTAMP,
     Importe_solicitado_Pt DECIMAL(11,2),
     Plazo_Pago_Pt CHAR(3),
-   Detalle_solicitud_Pt VARCHAR(100),
+    Detalle_solicitud_Pt VARCHAR(100),
     Estado_Pt BOOLEAN NOT NULL DEFAULT 0,
     CONSTRAINT FK_Cuenta_Prestamo FOREIGN KEY (Numero_de_Cuenta_Cu_Pt) REFERENCES Cuenta(Numero_de_Cuenta_Cu),
     CONSTRAINT FK_Interes FOREIGN KEY (Plazo_Pago_Pt) REFERENCES InteresXCantidadDMeses(Plazo_d_Pagos_En_meses_IXM)
 );
-
 
 CREATE TABLE DetallesXPrestamo(
     ID_Prestamo_Pt_Dt INT PRIMARY KEY,
@@ -143,18 +139,18 @@ FOR EACH ROW
 BEGIN
     DECLARE ultimoCBU BIGINT;
 
-    -- Obtener el último valor de CBU_Cu como un número entero
+    -- agarramos el Ãºltimo valor de CBU_Cu como un nÃºmero entero
     SELECT MAX(CAST(CBU_Cu AS UNSIGNED)) INTO ultimoCBU
     FROM Cuenta;
 
-    -- Si no hay valores previos en la tabla, se inicia con el número base
+    -- si no hay valores previos en la tabla, se inicia con el nÃºmero base
     IF ultimoCBU IS NULL THEN
         SET ultimoCBU = 5500990000000001;
     ELSE
         SET ultimoCBU = ultimoCBU + 1;
     END IF;
 
-    -- Asignar el nuevo CBU a la nueva cuenta
+    -- asignamos el nuevo CBU a la nueva cuenta
     SET NEW.CBU_Cu = CAST(ultimoCBU AS CHAR(22));
 END$$
 
@@ -179,7 +175,7 @@ BEGIN
     );
 END$$
 
-DELIMITER ;
+DELIMITERÂ ;
 
 DELIMITER $$
 
@@ -199,7 +195,7 @@ BEGIN
     END IF;
 END$$
 
-DELIMITER ;
+DELIMITERÂ ;
 DELIMITER $$
 
 CREATE TRIGGER after_prestamo_insert
@@ -238,10 +234,7 @@ BEGIN
     );
 END$$
 
-
-use bancoutn;
-
-
+-- INSERTS --
 
 INSERT INTO InteresXCantidadDMeses (Plazo_d_Pagos_En_meses_IXM, Interes_IXM, Meses)
 VALUES
@@ -250,8 +243,6 @@ VALUES
 ('06M', 19, 6),   -- 6 meses
 ('12M', 34, 9),  -- 9 meses
 ('24M', 45, 12); -- 12 meses
-
-
 
 
 INSERT INTO Nacionalidad (Id_Nacionalidad_nc, Descripcion_nc) VALUES
@@ -273,23 +264,23 @@ INSERT INTO Sexo (Descripcion) VALUES
 
 INSERT INTO Provincia (Nombre_Prov_Prv) VALUES 
 ('Buenos Aires'), 
-('CÃ³rdoba'),
+('Cordoba'),
 ('Santa Fe'), 
 ('Mendoza'),
-('TucumÃ¡n');
+('Tucuman');
 
 INSERT INTO Localidad (ID_Provincia_Prv_Lca, Nombre_Loc_Lca) VALUES 
 (1, 'La Plata'), 
 (1, 'Mar del Plata'), 
-(1, 'BahÃ­a Blanca'),
-(2, 'CÃ³rdoba Capital'),
+(1, 'Bahia Blanca'),
+(2, 'Cordoba Capital'),
 (2, 'Villa Carlos Paz'),
 (3, 'Rosario'),
 (3, 'Santa Fe Capital'),
 (4, 'Mendoza Capital'),
 (4, 'San Rafael'),
-(5, 'San Miguel de TucumÃ¡n'),
-(5, 'TafÃ­ del Valle');
+(5, 'San Miguel de Tucuman'),
+(5, 'Tafi del Valle');
 
 INSERT INTO Usuario (Cuil_us, Usuario_us, Contrasenia_us, Rol_us, Estado_us)
 VALUES ('20304050607', 'Pepe', '123', 1, 1);
@@ -299,13 +290,24 @@ INSERT INTO Cliente (
     fecha_nacimiento_Cli, direccion_Cli, ID_Localidad_Cli, correo_electronico_Cli, 
     telefono_Cli, estado_Cli
 ) VALUES 
-('20-12345678-9', 12345678, 'Juan', 'Pérez', 1, 'AR', '1990-05-10', 'Av. Siempre Viva 742', 1, 'juan.perez@gmail.com', '341-1234567', TRUE),
-('27-87654321-8', 87654321, 'María', 'Gómez', 2, 'BR', '1985-03-25', 'Calle Principal 123', 3, 'maria.gomez@hotmail.com', '11-87654321', FALSE),
-('30-11223344-7', 11223344, 'Carlos', 'López', 1, 'CL', '1995-08-15', 'Av. Libertador 456', 6, 'carlos.lopez@yahoo.com', '261-1122334', TRUE);
+('20-12345678-9', 12345678, 'Juan', 'PÃ©rez', 1, 'AR', '1990-05-10', 'Av. Siempre Viva 742', 1, 'juan.perez@gmail.com', '341-1234567', TRUE),
+('27-87654321-8', 87654321, 'MarÃ­a', 'GÃ³mez', 2, 'BR', '1985-03-25', 'Calle Principal 123', 3, 'maria.gomez@hotmail.com', '11-87654321', FALSE),
+('30-11223344-7', 11223344, 'Carlos', 'LÃ³pez', 1, 'CL', '1995-08-15', 'Av. Libertador 456', 6, 'carlos.lopez@yahoo.com', '261-1122334', TRUE);
 
 INSERT INTO TipoCuenta (Nombre_Tipo) 
 VALUES 
 ('Ahorro'),
 ('Corriente');
 
+-- CUENTAS DE EJEMPLO
+INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
+VALUES
+('20-12345678-9', '2024-11-24', 1, '1234567890123456789012', 10000, 1);
 
+INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
+VALUES
+('27-87654321-8', '2024-11-24', 2, '2345678901234567890123', 15000, 1);
+
+INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
+VALUES
+('30-11223344-7', '2024-11-24', 1, '3456789012345678901234', 500, 1);

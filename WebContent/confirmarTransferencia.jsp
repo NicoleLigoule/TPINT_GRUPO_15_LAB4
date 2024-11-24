@@ -29,7 +29,9 @@
 	</nav>
 
 	<div class="main-container">
-		<jsp:include page="Admin_SubMenu.jsp" />
+	<jsp:include page="Cliente_SubMenu.jsp" />
+	
+		<%-- <jsp:include page="Admin_SubMenu.jsp" /> --%>
 
 		<div class="form-container">
 			<h2>Confirma que todo esté bien</h2>

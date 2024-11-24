@@ -29,7 +29,8 @@
 	</a> <span class="username"><%= usuario.getUsuarioUs() %></span> </nav>
 
 
-	<div class="main-container">
+
+	<!-- <div class="main-container">
 		<aside class="sidebar" id="sidebar">
 		<ul>
 			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Transferencias</a>
@@ -54,8 +55,10 @@
 			<li><a href="#">Información personal</a></li>
 		</ul>
 		</aside>
-
+ -->
 		<section class="content"> <!-- movimientos -->
+			<jsp:include page="Cliente_SubMenu.jsp" />
+			
 		<div class="movements-list">
 			<h3>Hoy</h3>
 			<div class="movement-item">

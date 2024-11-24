@@ -247,5 +247,32 @@ public class CuentaDaoImpl implements CuentaDao {
 		return new InteresesXCantidadDeMeses(plazoDPagosEnMesesIxm,interesIxm,meses);
 
 	}
-;  
+	
+	public Cuenta obtenerCuentaPorNumero(String numeroCuenta) {
+	    cn = new Conexion();
+	    cn.Open();
+	    Cuenta cuenta = null;
+	    try {
+	        String query = "SELECT * FROM Cuenta WHERE Estado_Cu = 1 AND Numero_de_Cuenta_Cu = ?";
+	        PreparedStatement statement = cn.getSQLConexion().prepareStatement(query);
+	        statement.setString(1, numeroCuenta);
+	        ResultSet rs = statement.executeQuery();
+	        if (rs.next()) {
+	            cuenta = new Cuenta();
+	            cuenta.setNumeroDeCuentaCu(rs.getInt("Numero_de_Cuenta_Cu"));
+	            cuenta.setCuilCliCu(rs.getString("Cuil_Cli_Cu"));
+	            cuenta.setFechaCreacionCu(rs.getDate("Fecha_Creacion_Cu").toLocalDate());
+	            cuenta.setIdTipoCuenta(rs.getInt("Id_Tipo_Cuenta"));
+	            cuenta.setCbuCu(rs.getString("CBU_Cu"));
+	            cuenta.setSaldoCu(rs.getBigDecimal("Saldo_Cu"));
+	            cuenta.setEstadoCu(rs.getBoolean("Estado_Cu"));
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        cn.close();
+	    }
+	    return cuenta;
+	}
+
 }

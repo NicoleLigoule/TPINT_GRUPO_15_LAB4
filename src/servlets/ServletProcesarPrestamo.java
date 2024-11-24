@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import daoImpl.PrestamoDaoImpl;
+
 /**
  * Servlet implementation class ServletProcesarPrestamo
  */
@@ -38,24 +40,33 @@ public class ServletProcesarPrestamo extends HttpServlet {
         String cuentaDestino = request.getParameter("cuenta_destino");
         double importeSolicitado = Double.parseDouble(request.getParameter("importe_solicitado"));
         double montoConInteres = Double.parseDouble(request.getParameter("monto_con_interes"));
-        int plazoPago = Integer.parseInt(request.getParameter("plazo_pago"));
-        double montoPorCuota = Double.parseDouble(request.getParameter("monto_por_cuota"));
+        double montoPorCuota = Double.parseDouble(request.getParameter("monto_por_cuota"));        
+        String plazoPagoIXM = request.getParameter("plazo_pago_IXM");
+        
 
         
-        boolean exito = procesarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, plazoPago, montoPorCuota);
+        boolean exito = procesarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, plazoPagoIXM, montoPorCuota);
 
-        if (exito) {
-
-            response.sendRedirect("InicioCliente.jsp?status=success");
-        } else {
-
-            response.sendRedirect("ConfirmarPrestamo.jsp?status=error");
+        if(exito) {
+        	
+        	//redireccionas aca mismo con un mensaje de exito
+            request.setAttribute("mensajeConfirmacion", "Préstamo confirmado y guardado exitosamente.");
+        }else {
+        	//redireccionas aca mismo con un mensaje de Fallo al procesar prestamos
+            request.setAttribute("mensajeError", "Error al guardar el préstamo en la base de datos.");
         }
+        
+        request.getRequestDispatcher("ConfirmarPrestamo.jsp").forward(request, response);
+        
     }
 
-    private boolean procesarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, int plazoPago, double montoPorCuota) {
-
-        return true; 
+    private boolean procesarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago, double montoPorCuota) {
+    	//aca se carga en la db
+	     // Si el plazo es válido, guardar el préstamo
+        PrestamoDaoImpl prestamoDao = new PrestamoDaoImpl();	
+	    boolean guardado = prestamoDao.guardarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, plazoPago, montoPorCuota);
+    	System.out.print("procesarPrestamo::SE PROCESA EL PRESTAMO");
+        return guardado; 
     }
 
 

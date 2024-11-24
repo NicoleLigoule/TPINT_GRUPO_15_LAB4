@@ -32,21 +32,7 @@
 	</a> <span class="username"><%= usuario.getUsuarioUs() %></span> </nav>
 
 	<div class="main-container">
-		<aside class="sidebar" id="sidebar">
-		<ul>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Transferencias</a>
-			</li>
-
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Solicitudes
-					de prestamos</a></li>
-
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Pago
-					de prestamos</a></li>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Informacion
-					personal</a></li>
-		</ul>
-		</aside>
-		
+			<jsp:include page="Cliente_SubMenu.jsp" />
 <%
 String nombreApellido = (String) request.getAttribute("nombreApellido");
 String correo = (String) request.getAttribute("correo");
