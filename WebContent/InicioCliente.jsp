@@ -31,9 +31,9 @@
 	<div class="main-container">
 		<aside class="sidebar" id="sidebar">
 		<ul>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Transferencias</a>
-			</li>
-
+			
+			<li class="menu-item"><a href="servletTransferencia?Param=1">Realizar Transferencia</a></li>
+			
 			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Solicitudes
 					de prestamos</a></li>
 
