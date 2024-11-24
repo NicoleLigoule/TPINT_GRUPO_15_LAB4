@@ -7,12 +7,12 @@ import entidades.Prestamo;
 
 public interface PrestamoDao {
 	
-    boolean insertarPrestamo(Prestamo prestamo);
+	int insertarPrestamo(Prestamo prestamo);
     boolean actualizarPrestamo(Prestamo prestamo);
     boolean eliminarPrestamo(int idPrestamo);
     List<Prestamo> obtenerPrestamos();
     Prestamo obtenerPrestamoPorId(int idPrestamo);
-	boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, InteresesXCantidadDeMeses plazoPago,
+	boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago,
 			double montoPorCuota);
 	boolean comprobarPlazoExistente(String plazoPago);
 }

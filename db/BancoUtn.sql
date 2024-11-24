@@ -246,8 +246,8 @@ VALUES
 ('01M', 2, 1),   -- 1 mes, 
 ('03M', 9, 3),   -- 3 meses
 ('06M', 19, 6),   -- 6 meses, 
-('12M', 34, 9),  -- 9 meses, 
-('24M', 45, 12),††--†12†meses
+('09M', 34, 9),  -- 9 meses, 
+('12M', 45, 12),††--†12†meses
 INSERT INTO Nacionalidad (Id_Nacionalidad_nc, Descripcion_nc) VALUES
 ('AR', 'Argentina'),
 ('BR', 'Brasil'),
@@ -286,7 +286,7 @@ INSERT INTO Localidad (ID_Provincia_Prv_Lca, Nombre_Loc_Lca) VALUES
 (5, 'Taf√≠ del Valle');
 
 INSERT INTO Usuario (Cuil_us, Usuario_us, Contrasenia_us, Rol_us, Estado_us)
-VALUES ('20-12345678-9', 'Pepe2', '123', 0, 1);
+VALUES ('20-12345678-9', 'Pepe', '123', 1, 1);
 
 INSERT INTO Cliente (
     cuil_Cli, dni_Cli, nombre_Clii, apellido_Cli, ID_sexo_Cli, ID_Nacionalidad_Cli, 

@@ -24,19 +24,22 @@
 
                 <form action="ServletProcesarPrestamo" method="post">
                     <label for="cuenta_destino">Cuenta Destino</label>
-                    <input type="text" id="cuenta_destino" name="cuenta_destino" value="<%= request.getAttribute("cuenta_destino") %>" readonly>
+                    <input type="text" id="cuenta_destino" name="cuenta_destino" value="<%= request.getAttribute("cuenta_destino") != null ? request.getAttribute("cuenta_destino") : request.getParameter("cuenta_destino") %>" readonly>
 
                     <label for="importe_solicitado">Monto Solicitado</label>
-                    <input type="text" id="importe_solicitado" name="importe_solicitado" value="<%= request.getAttribute("importe_solicitado") %>" readonly>
+                    <input type="text" id="importe_solicitado" name="importe_solicitado" value="<%= request.getAttribute("importe_solicitado") != null ? request.getAttribute("importe_solicitado") : request.getParameter("importe_solicitado")%>" readonly>
 
                     <label for="monto_con_interes">Monto Con Interés</label>
-                    <input type="text" id="monto_con_interes" name="monto_con_interes" value="<%= request.getAttribute("monto_con_interes") %>" readonly>
+                    <input type="text" id="monto_con_interes" name="monto_con_interes" value="<%= request.getAttribute("monto_con_interes") != null ? request.getAttribute("monto_con_interes") : request.getParameter("monto_con_interes")%>" readonly>
 
                     <label for="plazo_pago">Cantidad De Cuotas</label>
-                    <input type="text" id="plazo_pago" name="plazo_pago" value="<%= request.getAttribute("plazo_pago") %>" readonly>
+                    <input type="text" id="plazo_pago" name="plazo_pago" value="<%= request.getAttribute("plazo_pago") != null ? request.getAttribute("plazo_pago") : request.getParameter("plazo_pago")%>" readonly>
+                    
+					<label for="plazo_pago_IXM">Cantidad De Cuotas</label>
+                    <input type="hidden" id="plazo_pago_IXM" name="plazo_pago_IXM" value="<%= request.getAttribute("plazo_pago_IXM") != null ? request.getAttribute("plazo_pago_IXM") : request.getParameter("plazo_pago_IXM")%>" readonly>
 
                     <label for="monto_por_cuota">Monto Por Cuota</label>
-                    <input type="text" id="monto_por_cuota" name="monto_por_cuota" value="<%= request.getAttribute("monto_por_cuota") %>" readonly>
+                    <input type="text" id="monto_por_cuota" name="monto_por_cuota" value="<%= request.getAttribute("monto_por_cuota") != null ? request.getAttribute("monto_por_cuota") : request.getParameter("monto_por_cuota")%>" readonly>
 
                     <div class="button-group">
                         <button type="button" class="cancel-button">Volver</button>

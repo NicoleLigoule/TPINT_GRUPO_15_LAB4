@@ -20,12 +20,12 @@ public class PrestamoDaoImpl implements PrestamoDao {
     }
 
     @Override
-    public boolean insertarPrestamo(Prestamo prestamo) {
-        boolean resultado = false;
+    public int insertarPrestamo(Prestamo prestamo) {
+        int idPrestamo = -1; // Valor por defecto si falla la inserción
         String query = "INSERT INTO Prestamo (Numero_de_Cuenta_Cu_Pt, Importe_solicitado_Pt, Plazo_Pago_Pt, Detalle_solicitud_Pt, Estado_Pt) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection cn = conexion.Open()) {
-            PreparedStatement ps = cn.prepareStatement(query);
+            PreparedStatement ps = cn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, prestamo.getNumeroDeCuentaCuPt());
             ps.setBigDecimal(2, prestamo.getImporteSolicitadoPt());
             ps.setString(3, prestamo.getPlazoPagoPt());
@@ -34,13 +34,18 @@ public class PrestamoDaoImpl implements PrestamoDao {
 
             int filasAfectadas = ps.executeUpdate();
             if (filasAfectadas > 0) {
-                resultado = true;
+                // Obtener el ID generado
+                ResultSet generatedKeys = ps.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    idPrestamo = generatedKeys.getInt(1); // Asumimos que el ID generado está en la primera columna
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultado;
+        return idPrestamo;
     }
+
 
     @Override
     public boolean actualizarPrestamo(Prestamo prestamo) {
@@ -134,7 +139,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
     }
     
    
-    public boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, InteresesXCantidadDeMeses plazoPago, double montoPorCuota) {
+    public boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago, double montoPorCuota) {
         // Paso 1: Obtener la cuenta a partir de cuentaDestino
     	CuentaDaoImpl cuentaDao = new CuentaDaoImpl();
 
@@ -146,16 +151,18 @@ public class PrestamoDaoImpl implements PrestamoDao {
         prestamo.setNumeroDeCuentaCuPt(Integer.parseInt(cuentaDestino)); // Asumimos que cuentaDestino es un String que se puede convertir a int
         prestamo.setImporteSolicitadoPt(BigDecimal.valueOf(importeSolicitado)); 
         prestamo.setFechaPeticionPt(LocalDateTime.now()); // Fecha actual de solicitud
-        prestamo.setPlazoPagoPt(plazoPago.getPlazoDPagosEnMesesIxm()); // Asumiendo que plazoPago es un número entero y lo convertimos a String
+        prestamo.setPlazoPagoPt(plazoPago); // Asumiendo que plazoPago es un número entero y lo convertimos a String
         prestamo.setDetalleSolicitudPt("Solicitud de préstamo de " + montoConInteres + " con plazo de " + plazoPago + " meses.");
         prestamo.setEstadoPt(true); // Asumimos que el préstamo está en estado activo al momento de la creación
 
         // Paso 3: Asociar la cuenta y el interés
         prestamo.setCuenta(cuenta); // Asumimos que ya tienes una clase Cuenta y un método para obtenerla por cuentaDestino
 //        prestamo.setInteres(new InteresesXCantidadDeMesesDaoImpl(plazoPago, montoConInteres)); // Aquí debes tener una implementación para calcular los intereses según el plazo
-
+        insertarPrestamo(prestamo); 
+        
+//        insertDetallePrestamo()
         // Paso 4: Guardar el prestamo en la base de datos
-        return insertarPrestamo(prestamo); // Llamamos al método insertarPrestamo para almacenar el préstamo en la base de datos
+        return true;// Llamamos al método insertarPrestamo para almacenar el préstamo en la base de datos
     }
     
     @Override
