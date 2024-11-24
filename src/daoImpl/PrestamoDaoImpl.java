@@ -153,7 +153,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
         prestamo.setFechaPeticionPt(LocalDateTime.now()); // Fecha actual de solicitud
         prestamo.setPlazoPagoPt(plazoPago); // Asumiendo que plazoPago es un número entero y lo convertimos a String
         prestamo.setDetalleSolicitudPt("Solicitud de préstamo de " + montoConInteres + " con plazo de " + plazoPago + " meses.");
-        prestamo.setEstadoPt(true); // Asumimos que el préstamo está en estado activo al momento de la creación
+        prestamo.setEstadoPt(false); // Asumimos que el préstamo está en estado activo al momento de la creación
 
         // Paso 3: Asociar la cuenta y el interés
         prestamo.setCuenta(cuenta); // Asumimos que ya tienes una clase Cuenta y un método para obtenerla por cuentaDestino
