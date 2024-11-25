@@ -1,7 +1,10 @@
 package negocio;
 
 
-import daoImpl.CuentaDaoImpl;;
+import java.util.List;
+
+import daoImpl.CuentaDaoImpl;
+import entidades.Cuenta;;
 
 public class NegocioCuentas {
 
@@ -20,5 +23,11 @@ public class NegocioCuentas {
 		 
 		 return cuentaDao.borrar(numeroCuenta);
 	 }
+
+	 public List<Cuenta> obtenerCuentasPorCuil(String cuil) {
+		    // Llamar al método de la capa Dao para obtener las cuentas filtradas por CUIL
+		    return cuentaDao.obtenerCuentasPorCuil(cuil);
+		}
+
 
 }

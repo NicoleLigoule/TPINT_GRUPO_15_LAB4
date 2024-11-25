@@ -1,15 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@ page import="entidades.Usuario"%>
-<%@ page import="daoImpl.TransferenciaDaoImpl"%>
 <%@ page import="java.util.List"%>
 <%@ page import="entidades.Transferencias"%>
+<%@ page import="entidades.Cuenta"%>
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     if (usuario == null) {
         response.sendRedirect("Login.jsp");
         return;
     }
+
+    // Obtener las cuentas desde el atributo de la sesión o desde la base de datos
+    List<Cuenta> cuentas = (List<Cuenta>) request.getAttribute("cuentas"); // O el método que uses para pasar las cuentas
 %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -46,23 +50,42 @@
                 <h2>Realizar Transferencia</h2>
                 <p>Completa los datos para realizar una transferencia</p>
                 <!-- Cambiar acción a Servlet para procesar la transferencia -->
-                <form action="servletTransferencia" method="post">
+							<form action="servletTransferencia" method="post">
+						    <!-- Cuenta Origen (DDL) -->
+						    <div class="form-group">
+						    <label for="cuentaOrigen">Cuenta Origen:</label>
+						     </div>
+						   <select id="cuentaOrigen" name="cuentaOrigen" required>
+						    <option value="" disabled selected>Seleccione su cuenta</option>
+						    <% if (cuentas != null) {
+						        for (Cuenta cuenta : cuentas) { %>
+						            <option value="<%= cuenta.getNumeroDeCuentaCu() %>">
+						                <%= cuenta.getNumeroDeCuentaCu() %>
+						            </option>
+						    <%  } } %>
+						    
+						</select>
 
-    <label for="cuentaOrigen">Cuenta Origen</label>
-    <input type="text" id="cuentaOrigen" name="cuentaOrigen" required pattern="\d+" placeholder="Cuenta Origen">
+						<div class="form-group">
+						
+						    <!-- Cuenta Destino (Textbox) -->
+						    <label for="Cbu">Cuenta Destino:</label>
+						    <input type="text" id="cbu" name="cbu" required pattern="\d+" placeholder="Cuenta Destino">
+						
+						    <!-- Monto -->
+						    <label for="monto">Monto:</label>
+						    <input type="text" id="monto" name="monto" required pattern="\d+(\.\d{1,2})?" placeholder="Monto (ejemplo: 1000.50)">
+						
+						    <!-- Detalle -->
+						    <label for="detalle">Detalle:</label>
+						    <input type="text" id="detalle" name="detalle" placeholder="Detalle de la transferencia">
+						
+						    <!-- Botón de transferencia -->
+						    <button type="submit" class="btn" name="RealizarBtn">Realizar Transferencia</button>
+						    </div>
+						</form>
 
-    <label for="cuentaDestino">Cuenta Destino</label>
-    <input type="text" id="cuentaDestino" name="cuentaDestino" required pattern="\d+" placeholder="Cuenta Destino">
-
-    <label for="monto">Monto</label>
-    <input type="text" id="monto" name="monto" required pattern="\d+(\.\d{1,2})?" placeholder="Monto (ejemplo: 1000.50)">
-
-    <label for="detalle">Detalle</label>
-    <input type="text" id="detalle" name="detalle" placeholder="Detalle de la transferencia">
-
-    <button type="submit" class="submit-button" name="RealizarBtn">Realizar Transferencia</button>
-</form>
-
+					
             </div>
         </div>
     </div>

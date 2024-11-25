@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Transferencias {
     private int idTransferencia;
     private int cuentaOrigen;
-    private int cuentaDestino;
+    private String CbuCuentaDestino;
     private double monto;
     private LocalDateTime fechaTransferencia;
     private String detalle;
@@ -15,10 +15,10 @@ public class Transferencias {
     }
 
     // Constructor con parámetros
-    public Transferencias(int idTransferencia, int cuentaOrigen, int cuentaDestino, double monto, LocalDateTime fechaTransferencia, String detalle) {
+    public Transferencias(int idTransferencia, int cuentaOrigen, String CbuCuentaDestino, double monto, LocalDateTime fechaTransferencia, String detalle) {
         this.idTransferencia = idTransferencia;
         this.cuentaOrigen = cuentaOrigen;
-        this.cuentaDestino = cuentaDestino;
+        this.setCbuCuentaDestino(CbuCuentaDestino);
         this.monto = monto;
         this.fechaTransferencia = fechaTransferencia;
         this.detalle = detalle;
@@ -41,13 +41,7 @@ public class Transferencias {
         this.cuentaOrigen = cuentaOrigen;
     }
 
-    public int getCuentaDestino() {
-        return cuentaDestino;
-    }
-
-    public void setCuentaDestino(int cuentaDestino) {
-        this.cuentaDestino = cuentaDestino;
-    }
+   
 
     public double getMonto() {
         return monto;
@@ -73,16 +67,16 @@ public class Transferencias {
         this.detalle = detalle;
     }
 
+	public String getCbuCuentaDestino() {
+		return CbuCuentaDestino;
+	}
+
+	public void setCbuCuentaDestino(String cbuCuentaDestino) {
+		CbuCuentaDestino = cbuCuentaDestino;
+	}
+
     // Método toString para depuración
-    @Override
-    public String toString() {
-        return "Transferencias{" +
-                "idTransferencia=" + idTransferencia +
-                ", cuentaOrigen=" + cuentaOrigen +
-                ", cuentaDestino=" + cuentaDestino +
-                ", monto=" + monto +
-                ", fechaTransferencia=" + fechaTransferencia +
-                ", detalle='" + detalle + '\'' +
-                '}';
-    }
+  
+
+
 }

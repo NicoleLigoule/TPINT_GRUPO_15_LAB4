@@ -1,4 +1,4 @@
-package daoImpl;
+package daoImpl;	
 
 import dao.TransferenciaDao;
 import entidades.Transferencias;
@@ -12,7 +12,7 @@ public class TransferenciaDaoImpl implements TransferenciaDao {
 	 private Conexion cn;
 	
 	 @Override
-	 public void realizarTransferencia(int cuentaOrigen, int cuentaDestino, double monto, String detalle) throws Exception {
+	 public void realizarTransferencia(int cuentaOrigen, String CbuCuentaDestino, double monto, String detalle) throws Exception {
 	     Conexion cn = Conexion.getConexion(); // Obtener la instancia de la conexión
 	     cn.Open(); // Abrir la conexión a la base de datos
 
@@ -26,7 +26,7 @@ public class TransferenciaDaoImpl implements TransferenciaDao {
 
 	         // Establecer los parámetros del procedimiento almacenado
 	         stmt.setInt(1, cuentaOrigen);  // Cuenta de origen
-	         stmt.setInt(2, cuentaDestino); // Cuenta de destino
+	         stmt.setString(2, CbuCuentaDestino); // Cuenta de destino
 	         stmt.setDouble(3, monto);     // Monto a transferir
 	         stmt.setString(4, detalle);   // Detalle de la transferencia
 
