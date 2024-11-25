@@ -108,7 +108,7 @@ CREATE TABLE Prestamo(
     Fecha_Peticion_Pt DATETIME DEFAULT CURRENT_TIMESTAMP,
     Importe_solicitado_Pt DECIMAL(11,2),
     Plazo_Pago_Pt CHAR(3),
-    Detalle_solicitud_Pt VARCHAR(100),
+    Detalle_solicitud_Pt VARCHAR(200),
     Estado_Pt BOOLEAN NOT NULL DEFAULT 0,
     CONSTRAINT FK_Cuenta_Prestamo FOREIGN KEY (Numero_de_Cuenta_Cu_Pt) REFERENCES Cuenta(Numero_de_Cuenta_Cu),
     CONSTRAINT FK_Interes FOREIGN KEY (Plazo_Pago_Pt) REFERENCES InteresXCantidadDMeses(Plazo_d_Pagos_En_meses_IXM)
@@ -154,8 +154,6 @@ BEGIN
     SET NEW.CBU_Cu = CAST(ultimoCBU AS CHAR(22));
 END$$
 
-DELIMITER ;
-
 DELIMITER $$
 
 CREATE TRIGGER after_cliente_insert
@@ -195,7 +193,6 @@ BEGIN
     END IF;
 END$$
 
-DELIMITER ;
 DELIMITER $$
 
 CREATE TRIGGER after_prestamo_insert
@@ -240,9 +237,9 @@ INSERT INTO InteresXCantidadDMeses (Plazo_d_Pagos_En_meses_IXM, Interes_IXM, Mes
 VALUES
 ('01M', 2, 1),   -- 1 mes
 ('03M', 9, 3),   -- 3 meses
-('06M', 19, 6),   -- 6 meses
-('12M', 34, 9),  -- 9 meses
-('24M', 45, 12); -- 12 meses
+('06M', 19, 6),   -- 6 meses, 
+('09M', 34, 9),  -- 9 meses, 
+('12M', 45, 12),  -- 12 meses
 
 
 INSERT INTO Nacionalidad (Id_Nacionalidad_nc, Descripcion_nc) VALUES
