@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Prestamo;
-import entidades.Usuario;
 import negocio.NegocioPrestamo;
 
 @WebServlet("/ServletPagoPrestamo")
