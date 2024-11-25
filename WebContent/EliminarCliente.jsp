@@ -30,7 +30,7 @@
 	</nav>
 	<div class="main-container">
 		
-		<jsp:include page="Admin_SubMenu.jsp" />
+		<jsp:include page="SubMenu_Admin.jsp" />
 
 		<div class="content">
 			<div class="form-card">

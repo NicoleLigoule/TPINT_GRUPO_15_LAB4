@@ -29,7 +29,7 @@
 		</a> <span class="username"><%= usuario.getUsuarioUs() %></span>
 	</nav>
 	<div class="main-container">
-			<jsp:include page="Cliente_SubMenu.jsp" />
+			<jsp:include page="SubMenu_Cliente.jsp" />
 
 		<div class="form-container">
 			<h2>Transferencia Completada</h2>
@@ -43,6 +43,8 @@
 			<div style="margin-top: 30px;"></div>
 			<a href="InicioCliente.jsp" class="btn">Volver al Menú</a>
 		</div>
+	</div>
+	
 		<script src="JS/MenuAdm.js"></script>
 		<script>
         function toggleSidebar() {

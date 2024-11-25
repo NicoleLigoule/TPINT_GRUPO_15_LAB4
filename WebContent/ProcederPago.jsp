@@ -30,7 +30,7 @@
 		</a> <span class="username"><%= usuario.getUsuarioUs() %></span>
 	</nav>
 	<div class="main-container">
-	<jsp:include page="Cliente_SubMenu.jsp" />
+	<jsp:include page="SubMenu_Cliente.jsp" />
 
 		<div class="content">
 			<div class="form-card">

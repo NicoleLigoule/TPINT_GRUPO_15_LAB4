@@ -33,7 +33,7 @@ public class servletAgregarCliente extends HttpServlet {
      */
     public servletAgregarCliente() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**

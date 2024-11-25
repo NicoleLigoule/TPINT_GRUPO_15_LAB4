@@ -15,5 +15,13 @@ public interface PrestamoDao {
 	boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago,
 			double montoPorCuota);
 	boolean comprobarPlazoExistente(String plazoPago);
+	
+	public List<Prestamo> obtenerPrestamoPorCuenta(int numeroCuenta);
+	static int obtenerCuotasPagadas(int idPrestamoPt) {
+		
+		return 0;
+	}
+	
+
 }
 

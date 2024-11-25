@@ -35,7 +35,7 @@
 	</nav>
 
 
-	<jsp:include page="Cliente_SubMenu.jsp" />
+	<jsp:include page="SubMenu_Cliente.jsp" />
 	<div class="main-container">
 
 		<div class="content">
