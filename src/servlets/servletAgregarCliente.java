@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import abml.abmlCliente;
 import entidades.Cliente;
 import entidades.Nacionalidad;
 import entidades.Sexo;
@@ -20,6 +19,7 @@ import entidades.Provincia;
 import entidades.Localidad;
 
 import negocio.DDL;
+import negocio.NegocioClientes;
 
 /**
  * Servlet implementation class servletAgregarCliente
@@ -75,7 +75,7 @@ public class servletAgregarCliente extends HttpServlet {
                     } else {
                         response.getWriter().println("No se encontraron Localidad.");
                     }
-                }               
+                }
                 
                 
                 RequestDispatcher rd = request.getRequestDispatcher("AgregarCliente.jsp");
@@ -162,8 +162,10 @@ public class servletAgregarCliente extends HttpServlet {
             c.setCorreo(request.getParameter("email"));
             System.out.println("Email: " + request.getParameter("email"));
 
-            abmlCliente abmlcliente = new abmlCliente();
-            boolean insert = abmlcliente.agregarCliente(c);
+//            abmlCliente abmlcliente = new abmlCliente();
+//            boolean insert = abmlcliente.agregarCliente(c);
+            NegocioClientes negCli = new NegocioClientes();
+            boolean insert = negCli.agregarCliente(c);
 
 	            if (insert) {         
 	                response.sendRedirect("servletAgregarCliente?Param=1&status=success");
