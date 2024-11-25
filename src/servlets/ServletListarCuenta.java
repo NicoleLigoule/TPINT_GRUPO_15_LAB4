@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import abml.abmlCuenta;
 import entidades.Cuenta;
+import negocio.NegocioCuentas;
 
 /**
  * Servlet implementation class ServletListarCuenta
@@ -35,10 +35,10 @@ public class ServletListarCuenta extends HttpServlet {
 		System.out.print("LLEGA AL SERVLET");
 		System.out.print("LLEGA O NO????");
         if (request.getParameter("Param") != null) {
-            abmlCuenta abmlcuenta = new abmlCuenta();
+            NegocioCuentas negCue = new NegocioCuentas();
             try {
             	System.out.print("entra a lista");
-                List<Cuenta> listaCuenta = abmlcuenta.obtenerCuentaTodos();
+                List<Cuenta> listaCuenta = negCue.obtenerCuentaTodos();
 
                 if (listaCuenta != null && !listaCuenta.isEmpty()) {
                     System.out.println("Contenido de listaCuenta:");

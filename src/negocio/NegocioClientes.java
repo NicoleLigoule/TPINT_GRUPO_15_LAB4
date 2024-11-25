@@ -20,13 +20,7 @@ public class NegocioClientes {
 
         return clienteDao.borrarCuil(cuilCli);
     }
-//    public int obtenProv(String lca) {
-//    	ProvinciaDaoImpl dao=new ProvinciaDaoImpl();
-//    	
-//    	int prov= dao.ObtenerProvinciaXLocalidad(lca);
-//    	return prov;
-//    	
-//    }
+
     
 	public boolean agregarCliente(Cliente cliente) {
 		return clienteDao.insertar(cliente);

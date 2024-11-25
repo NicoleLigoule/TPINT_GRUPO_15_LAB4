@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import abml.abmlCliente;
 import entidades.Cliente;
 import entidades.Localidad;
 import entidades.Nacionalidad;
 import entidades.Provincia;
 import entidades.Sexo;
 import negocio.DDL;
+import negocio.NegocioClientes;
 
 /**
  * Servlet implementation class ServletRegistrarseNuevo
@@ -160,9 +160,8 @@ public class ServletRegistrarseNuevo extends HttpServlet {
 	            System.out.println("Email: " + request.getParameter("email"));
 	            c.setEstado(false);
 	            
-
-	            abmlCliente abmlcliente = new abmlCliente();
-	            boolean insert = abmlcliente.agregarCliente(c);
+	            NegocioClientes negCli = new NegocioClientes();
+	            boolean insert = negCli.agregarCliente(c);
 
 		            if (insert) {         
 		                response.sendRedirect("Login.jsp");

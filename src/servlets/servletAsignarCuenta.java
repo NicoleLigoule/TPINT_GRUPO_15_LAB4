@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import abml.abmlCuenta;
 import entidades.Cuenta;
+import negocio.NegocioCuentas;
 
 /**
  * Servlet implementation class servletAsignarCuenta
@@ -39,7 +39,8 @@ public class servletAsignarCuenta extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		abmlCuenta abmlCu = new abmlCuenta();
+		NegocioCuentas negCue = new NegocioCuentas();
+
 		int numeroCuenta = 0;
 		String cuilCliente = request.getParameter("cuilCliente");
 		if(request.getParameter("numeroCuenta") != null &&
@@ -47,10 +48,10 @@ public class servletAsignarCuenta extends HttpServlet {
 			numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));
 			System.out.print("cuil y numero de cuenta obtenidos exitosamente" + cuilCliente +" | "+ numeroCuenta);
 			
-			Cuenta cuenta = abmlCu.obtenerCuenta(numeroCuenta);
+			Cuenta cuenta = negCue.obtenerCuenta(numeroCuenta);
 			cuenta.setCuilCliCu(cuilCliente);
 			
-			if(abmlCu.editarCuenta(cuenta)) {      
+			if(negCue.editarCuenta(cuenta)) {      
                 response.sendRedirect("AsignarCuenta.jsp?status=success");
             } else {
                 request.setAttribute("Error", "Error al agregar Cuenta a Cliente.");

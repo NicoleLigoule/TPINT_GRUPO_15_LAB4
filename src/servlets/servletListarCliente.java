@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import abml.abmlCliente;
 import entidades.Cliente;
+import negocio.NegocioClientes;
 
 /**
  * Servlet implementation class servletListarCliente
@@ -33,10 +33,10 @@ public class servletListarCliente extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	System.out.print("LLEGA AL SERVLET");
         if (request.getParameter("Param") != null) {
-            abmlCliente abmlcliente = new abmlCliente();
+            NegocioClientes negClie = new NegocioClientes();
             try {
             	System.out.print("entra a lista");
-                List<Cliente> listaClientes = abmlcliente.obtenerClientesTodos();
+                List<Cliente> listaClientes = negClie.obtenerClientesTodos();
 
                 if (listaClientes != null && !listaClientes.isEmpty()) {
                     System.out.println("Contenido de listaClientes:");

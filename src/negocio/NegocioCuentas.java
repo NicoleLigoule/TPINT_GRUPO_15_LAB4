@@ -1,7 +1,11 @@
 package negocio;
 
 
-import daoImpl.CuentaDaoImpl;;
+import java.util.List;
+
+import daoImpl.CuentaDaoImpl;
+import entidades.Cuenta;
+import entidades.TipoDeCuenta;;
 
 public class NegocioCuentas {
 
@@ -20,5 +24,35 @@ public class NegocioCuentas {
 		 
 		 return cuentaDao.borrar(numeroCuenta);
 	 }
+	 
+	 public boolean agregarCuenta(Cuenta cuenta) {
+			if(cuenta.getCuilCliCu() != null) {
+				return cuentaDao.insertar(cuenta);
+			}else {
+				return cuentaDao.insertarSinCliente(cuenta);
+			}
+
+		}
+		
+		public boolean editarCuenta(Cuenta cuenta) {
+			return cuentaDao.editar(cuenta);
+		}
+		
+		
+		public Cuenta obtenerCuenta(int id) {
+			return cuentaDao.obtenerUno(id);
+		}
+		
+		public List<Cuenta> obtenerCuentaTodos() {
+			return cuentaDao.obtenerTodos();
+		}
+
+		public List<Cuenta> obtenerCuentasPorCuil(String cuil) {
+		    return cuentaDao.obtenerCuentasPorCuil(cuil);
+		}
+		
+		public List<TipoDeCuenta> obtenerTiposTodos() {
+			return cuentaDao.readallTipoDeCuentas();
+		}
 
 }
