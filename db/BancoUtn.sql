@@ -108,7 +108,7 @@ CREATE TABLE Prestamo(
     Fecha_Peticion_Pt DATETIME DEFAULT CURRENT_TIMESTAMP,
     Importe_solicitado_Pt DECIMAL(11,2),
     Plazo_Pago_Pt CHAR(3),
-    Detalle_solicitud_Pt VARCHAR(100),
+    Detalle_solicitud_Pt VARCHAR(200),
     Estado_Pt BOOLEAN NOT NULL DEFAULT 0,
     CONSTRAINT FK_Cuenta_Prestamo FOREIGN KEY (Numero_de_Cuenta_Cu_Pt) REFERENCES Cuenta(Numero_de_Cuenta_Cu),
     CONSTRAINT FK_Interes FOREIGN KEY (Plazo_Pago_Pt) REFERENCES InteresXCantidadDMeses(Plazo_d_Pagos_En_meses_IXM)
@@ -126,7 +126,8 @@ CREATE TABLE CuotasXPrestamos(
     ID_Prestamo_Pt_Cp INT,
     Fecha_vencimiento_Cp DATE,
     N_Cuota INT NOT NULL,
-   
+   	pagada BOOLEAN DEFAULT 0,
+    
     CONSTRAINT FK_Prestamo_Cuota FOREIGN KEY (ID_Prestamo_Pt_Cp) REFERENCES Prestamo(ID_Prestamo_Pt),
     CONSTRAINT UK_CuotasXPrestamos UNIQUE (ID_Prestamo_Pt_Cp, Fecha_vencimiento_Cp, N_Cuota)
 );
@@ -232,6 +233,7 @@ BEGIN
         importe_x_cuotas,    
         meses               
     );
+    
 END$$
 
 -- INSERTS --
@@ -311,3 +313,9 @@ VALUES
 INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
 VALUES
 ('30-11223344-7', '2024-11-24', 1, '3456789012345678901234', 500, 1);
+
+
+
+
+
+SELECT * FROM DetallesXPrestamo
