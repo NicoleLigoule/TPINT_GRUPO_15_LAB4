@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.PrestamoDao;
-import daoImpl.PrestamoDaoImpl;
 import entidades.Prestamo;
 import entidades.Usuario;
 import negocio.NegocioPrestamo;
@@ -38,14 +36,14 @@ public class ServletPagoPrestamo extends HttpServlet {
         for (Prestamo prestamo : prestamos) {
         	
         	// HACER OTRA ENTIDAD PARA PRESTAMOSINFO
-            int cuotasPagadas = PrestamoDao.obtenerCuotasPagadas(prestamo.getIdPrestamoPt());
-            
-            
-            prestamo.setCuotasPagadas(cuotasPagadas);
-            prestamo.setMontoRestante(calcularMontoRestante(prestamo));
+//            int cuotasPagadas = prestamo.obtenerCuotasPagadas(prestamo.getIdPrestamoPt());
+//            
+//            
+//            prestamo.setCuotasPagadas(cuotasPagadas);
+//            prestamo.setMontoRestante(calcularMontoRestante(prestamo));
 
             System.out.println("Prestamo ID: " + prestamo.getIdPrestamoPt() +
-                    ", Cuotas Pagadas: " + cuotasPagadas +
+//                    ", Cuotas Pagadas: " + cuotasPagadas +
                     ", Monto Restante: " + prestamo.getMontoRestante());
         }
 
@@ -56,9 +54,10 @@ public class ServletPagoPrestamo extends HttpServlet {
 
     private double calcularMontoRestante(Prestamo prestamo) {
        
-        double total = prestamo.getMontoTotal();
-        double pagado = prestamo.getMontoPagado();
-        return total - pagado;
+//        double total = prestamo.getMontoTotal();
+//        double pagado = prestamo.getMontoPagado();
+//        return total - pagado;
+    	return 0;
     }
 
     
