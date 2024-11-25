@@ -103,7 +103,11 @@ th {
 								<td><%= pres.getFechaPeticionPt() %></td>
 	                            <td><%= pres.getImporteSolicitadoPt() %></td>
 	                            <td><%= pres.getPlazoPagoPt() %></td>
-								<td><button onclick="seleccionarFila(this)">Seleccionar</button></td>
+								<td>
+				<form action="TuServlet" method="POST">
+                    <!-- Campo oculto para enviar el ID del préstamo -->
+                    <input type="hidden" name="prestamoId" value="<%= pres.getIdPrestamoPt() %>">
+                    <button type="submit">Examinar</button></td>
 							</tr>
 							<% } }%>
 						</tbody>
