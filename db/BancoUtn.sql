@@ -108,7 +108,7 @@ CREATE TABLE Prestamo(
     Fecha_Peticion_Pt DATETIME DEFAULT CURRENT_TIMESTAMP,
     Importe_solicitado_Pt DECIMAL(11,2),
     Plazo_Pago_Pt CHAR(3),
-    Detalle_solicitud_Pt VARCHAR(100),
+    Detalle_solicitud_Pt VARCHAR(200),
     Estado_Pt BOOLEAN NOT NULL DEFAULT 0,
     CONSTRAINT FK_Cuenta_Prestamo FOREIGN KEY (Numero_de_Cuenta_Cu_Pt) REFERENCES Cuenta(Numero_de_Cuenta_Cu),
     CONSTRAINT FK_Interes FOREIGN KEY (Plazo_Pago_Pt) REFERENCES InteresXCantidadDMeses(Plazo_d_Pagos_En_meses_IXM)
