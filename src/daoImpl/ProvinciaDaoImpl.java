@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import dao.ProvinciaDao;
-import entidades.Localidad;
 import entidades.Provincia;
 
 public class ProvinciaDaoImpl implements ProvinciaDao {

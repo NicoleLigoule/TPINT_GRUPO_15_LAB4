@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.CuentaDao;
-import entidades.ClienteCuentaDTO;
 import entidades.Cuenta;
 import entidades.TipoDeCuenta;
 import entidades.InteresesXCantidadDeMeses;
