@@ -1,16 +1,19 @@
 package entidades;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Prestamo {
 
     private int idPrestamoPt;              
     private int numeroDeCuentaCuPt;        
-    private LocalDateTime fechaPeticionPt; 
+    private LocalDate fechaPeticionPt; 
     private BigDecimal importeSolicitadoPt;
     private String plazoPagoPt;            
-    private String detalleSolicitudPt;     
+    private String detalleSolicitudPt;
+    private double montoCuota;
     private boolean estadoPt;           
+    private int cuotasPagadas;
     
     private Cuenta cuenta; // Relación con la tabla Cuenta              
     private InteresesXCantidadDeMeses interes; // Relacionado con la tabla InteresesXCantidadDeMeses
@@ -20,7 +23,7 @@ public class Prestamo {
     }
 
     // Constructor con parámetros
-    public Prestamo(int numeroDeCuentaCuPt, LocalDateTime fechaPeticionPt, BigDecimal importeSolicitadoPt,
+    public Prestamo(int numeroDeCuentaCuPt, LocalDate fechaPeticionPt, BigDecimal importeSolicitadoPt,
                     String plazoPagoPt, String detalleSolicitudPt, boolean estadoPt) {
         this.numeroDeCuentaCuPt = numeroDeCuentaCuPt;
         this.fechaPeticionPt = fechaPeticionPt;
@@ -47,12 +50,12 @@ public class Prestamo {
         this.numeroDeCuentaCuPt = numeroDeCuentaCuPt;
     }
 
-    public LocalDateTime getFechaPeticionPt() {
+    public LocalDate getFechaPeticionPt() {
         return fechaPeticionPt;
     }
 
-    public void setFechaPeticionPt(LocalDateTime fechaPeticionPt) {
-        this.fechaPeticionPt = fechaPeticionPt;
+    public void setFechaPeticionPt(LocalDate localDate) {
+        this.fechaPeticionPt = localDate;
     }
 
     public BigDecimal getImporteSolicitadoPt() {
@@ -87,6 +90,10 @@ public class Prestamo {
         this.estadoPt = estadoPt;
     }
 
+    public double getMontoRestante() {
+        return importeSolicitadoPt.doubleValue() - (cuotasPagadas * montoCuota);
+    }
+    
     // Relaciones con otras entidades
     public Cuenta getCuenta() {
         return cuenta;

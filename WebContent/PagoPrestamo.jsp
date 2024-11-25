@@ -40,65 +40,17 @@
 			    <h1>Realizar Pago</h1>
 			    <form action="ServletPagoPrestamo" method="post">
 			        <label for="idPrestamo">ID del Préstamo:</label>
-			        <input type="text" id="idPrestamo" name="idPrestamo" required><br>
+			        <input type="text" id="idPrestamo" name="idPrestamo" required>
+			        <br>
 			        <label for="monto">Monto a Pagar:</label>
-			        <input type="number" id="monto" name="monto" step="0.01" required><br>
+			        <input type="number" id="monto" name="monto" step="0.01" required>
+			        <br>
 			        <button type="submit">Pagar</button>
 			    </form>
 
 		    <p>${mensaje}</p>
 		    <a href="PagoPrestamo.jsp">Volver</a>
 
-				<!-- <form action="ProcederPago.jsp" method="post">
-					<table class="loan-table">
-						<thead>
-							<tr>
-								<th>Número de Préstamo</th>
-								<th>Importe de la Cuota</th>
-								<th>Cuotas Restantes</th>
-								<th>Pagar Cuota</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>123456</td>
-								<td>$500.00</td>
-								<td>12</td>
-								<td>
-									<button type="submit" name="pago" value="123456"
-										class="pay-button">Pagar</button>
-								</td>
-							</tr>
-							<tr>
-								<td>789101</td>
-								<td>$650.00</td>
-								<td>8</td>
-								<td>
-									<button type="submit" name="pago" value="789101"
-										class="pay-button">Pagar</button>
-								</td>
-							</tr>
-							<tr>
-								<td>112131</td>
-								<td>$300.00</td>
-								<td>15</td>
-								<td>
-									<button type="submit" name="pago" value="112131"
-										class="pay-button">Pagar</button>
-								</td>
-							</tr>
-							<tr>
-								<td>141516</td>
-								<td>$450.00</td>
-								<td>10</td>
-								<td>
-									<button type="submit" name="pago" value="141516"
-										class="pay-button">Pagar</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</form> -->
 			</div>
 		</div>
 	</div>
