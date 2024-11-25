@@ -11,6 +11,7 @@ public interface PrestamoDao {
     boolean actualizarPrestamo(Prestamo prestamo);
     boolean eliminarPrestamo(int idPrestamo);
     List<Prestamo> obtenerPrestamos();
+    List<Prestamo> ListarPrestamosAprobar();
     Prestamo obtenerPrestamoPorId(int idPrestamo);
 	boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago,
 			double montoPorCuota);

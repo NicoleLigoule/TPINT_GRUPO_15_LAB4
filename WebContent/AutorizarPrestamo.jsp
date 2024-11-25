@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="entidades.Prestamo"%>
 
 <%@ page import="entidades.Usuario"%>
 <%
@@ -43,7 +44,7 @@ th {
 }
 </style>
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	$(document)
 			.ready(
 					function() {
@@ -59,7 +60,7 @@ th {
 										});
 					});
 </script>
- -->
+
 </head>
 <body>
 	<nav class="navbar">
@@ -74,7 +75,7 @@ th {
 	</a> <span class="username"><%=usuario.getUsuarioUs()%></span> </nav>
 
 	<div class="main-container">
-		<jsp:include page="SubMenu_Admin.jsp" />
+		<jsp:include page="Admin_SubMenu.jsp" />
 
 		<div class="content">
 			<div>
@@ -84,36 +85,16 @@ th {
 					<table id="table_id" class="display">
 						<thead>
 							<tr>
-								<th>Dni</th>
-								<th>Cuil</th>
-								<th>Nombre</th>
-								<th>Apellido</th>
-								<th>Género</th>
-								<th>Nacionalidad</th>
-								<th>Fecha de Nacimiento</th>
-								<th>Dirección</th>
-								<th>Provincia</th>
-								<th>Localidad</th>
-								<th>Correo Electrónico</th>
-								<th>Teléfono</th>
-								<th>Seleccionar</th>
+								<th>Fecha Peticion</th>
+								<th>Importe Solicitado</th>
+								<th>Plazo de Pago</th>
+
 							</tr>
 						</thead>
 						<tbody>
-
+						<% for (Prestamo pres : ListarPrestamosAprobar) { %>
 							<tr>
-								<td>12345678</td>
-								<td>20-12345678-9</td>
-								<td>Juan</td>
-								<td>Pérez</td>
-								<td>M</td>
-								<td>Argentina</td>
-								<td>1980-05-15</td>
-								<td>Av. Siempre Viva 123</td>
-								<td>Buenos Aires</td>
-								<td>La Plata</td>
-								<td>juan.perez@example.com</td>
-								<td>1234-5678</td>
+								
 								<td><button onclick="seleccionarFila(this)">Seleccionar</button></td>
 							</tr>
 						</tbody>
