@@ -32,24 +32,15 @@ public class ServletAutorizarPrestamo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("Param") != null) {
+   
             DDL ddlPrestamo = new DDL();
             try {
             	System.out.print("entra a lista");
                 List<Prestamo> listaPrestamo = ddlPrestamo.ListarPrestamosAprobar();
-
-                if (listaPrestamo != null && !listaPrestamo.isEmpty()) {
-                    System.out.println("Contenido de listaPrestamo:");
-                    for (Object prestamo : listaPrestamo) {
-                        System.out.println(prestamo);
-                    }
                     request.setAttribute("listaPrestamo", listaPrestamo); 
-
-                } else {
-                    request.setAttribute("Mensaje", "No se encontraron Prestamos.");
-                }
-
-                
+                    for (Prestamo cuenta : listaPrestamo) {
+                        System.out.println(cuenta.toString());
+                    }
                 RequestDispatcher rd = request.getRequestDispatcher("AutorizarPrestamo.jsp");
                 rd.forward(request, response);
 
@@ -57,7 +48,7 @@ public class ServletAutorizarPrestamo extends HttpServlet {
                 e.printStackTrace();
                 response.getWriter().println("Error al obtener la lista de prestamos: " + e.getMessage());
             }
-        }
+      
 	}
 
 	/**

@@ -234,7 +234,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
     
     public List<Prestamo> ListarPrestamosAprobar() {
         List<Prestamo> prestamos = new ArrayList<>();
-        String query = "SELECT ID_Prestamo_Pt, Numero_de_Cuenta_Cu_Pt, Fecha_Peticion_Pt, Importe_solicitado_Pt, Plazo_Pago_Pt,Detalle_solicitud_Pt FROM bancoutn.prestamo WHERE Estado_Pt = 0";
+        String query = "SELECT ID_Prestamo_Pt, Numero_de_Cuenta_Cu_Pt, Fecha_Peticion_Pt, Importe_solicitado_Pt, Plazo_Pago_Pt, Detalle_solicitud_Pt FROM bancoutn.prestamo WHERE Estado_Pt = 0;";
 
         try (Connection cn = conexion.Open(); Statement stmt = cn.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
@@ -242,7 +242,12 @@ public class PrestamoDaoImpl implements PrestamoDao {
                 Prestamo prestamo = new Prestamo();
                 prestamo.setIdPrestamoPt(rs.getInt("ID_Prestamo_Pt"));
                 prestamo.setNumeroDeCuentaCuPt(rs.getInt("Numero_de_Cuenta_Cu_Pt"));
-                prestamo.setFechaPeticionPt(LocalDate.now());
+                Date sqlDate = rs.getDate("Fecha_Peticion_Pt");
+                if (sqlDate != null) {
+                    prestamo.setFechaPeticionPt(sqlDate.toLocalDate());
+                } else {
+                    prestamo.setFechaPeticionPt(null); 
+                }
                 prestamo.setImporteSolicitadoPt(rs.getBigDecimal("Importe_solicitado_Pt"));
                 prestamo.setPlazoPagoPt(rs.getString("Plazo_Pago_Pt"));
                 prestamo.setDetalleSolicitudPt(rs.getString("Detalle_solicitud_Pt"));

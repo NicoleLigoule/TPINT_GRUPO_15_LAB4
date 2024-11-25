@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="entidades.Prestamo"%>
+<%@ page import="java.util.List" %>
 
 <%@ page import="entidades.Usuario"%>
 <%
@@ -82,10 +83,7 @@ th {
 				<h2>Listado de Préstamos Solicitados</h2>
 				<br>
 				<div>
-				 <%
-                    List<Prestamo> listaPrestamo = (List<Prestamo>) request.getAttribute("listaPrestamo");
-                    if (listaPrestamo != null && !listaPrestamo.isEmpty()) {
-                %>
+
 					<table id="table_id" class="display">
 						<thead>
 							<tr>
@@ -96,6 +94,10 @@ th {
 							</tr>
 						</thead>
 						<tbody>
+				<%
+					List<Prestamo> listaPrestamo = (List<Prestamo>) request.getAttribute("listaPrestamo");
+                    if (listaPrestamo != null && !listaPrestamo.isEmpty()) {
+                %>
 						<% for (Prestamo pres : listaPrestamo) { %>
 							<tr>
 								<td><%= pres.getFechaPeticionPt() %></td>
@@ -103,7 +105,7 @@ th {
 	                            <td><%= pres.getPlazoPagoPt() %></td>
 								<td><button onclick="seleccionarFila(this)">Seleccionar</button></td>
 							</tr>
-							<% } %>
+							<% } }%>
 						</tbody>
 					</table>
 				</div>
