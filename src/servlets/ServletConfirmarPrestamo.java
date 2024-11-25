@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.PrestamoDao;
 import daoImpl.InteresesXCantidadDeMesesDaoImpl;
 import daoImpl.PrestamoDaoImpl;
 import entidades.InteresesXCantidadDeMeses;

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UsuarioDao;
-import daoImpl.UsuarioDaoImpl;
+import dao.UsuarioDao; //TODO: sacar el dao de aca
+import daoImpl.UsuarioDaoImpl; //TODO: sacar el dao de aca
 import entidades.Usuario;
 
 /**

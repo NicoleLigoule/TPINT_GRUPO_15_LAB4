@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import abml.abmlCuenta;
 import entidades.Cuenta;
 import entidades.TipoDeCuenta;
 import negocio.DDL;
+import negocio.NegocioCuentas;
 	
 	@WebServlet("/servletAgregarCuenta")
 	public class servletAgregarCuenta extends HttpServlet {
@@ -114,22 +114,15 @@ import negocio.DDL;
 	                }
 	            }
 	
-	            // Obtener y establecer el estado de la cuenta
-	           /* String estado = request.getParameter("estado");
-	            if (estado != null) {
-	                cuenta.setEstadoCu(estado.equals("Activa"));
-	                System.out.println("Estado de la Cuenta: " + estado);
-	            }*/
-	
             	// Obtener y establecer el estado de la cuenta (checkbox)
 	            String estadoCheckbox = request.getParameter("estado");
 	            cuenta.setEstadoCu(estadoCheckbox != null); // true si está marcado, false si no lo está
 	            System.out.println("Estado de la Cuenta: " + (estadoCheckbox != null));
 
 	            
-	            // Llamada a la lógica de negocio para agregar cuenta
-	            abmlCuenta abmlcuenta = new abmlCuenta();
-	            boolean insert = abmlcuenta.agregarCuenta(cuenta);
+	            // Llamada a la lógica de negocio para agregar cuenta	            
+	            NegocioCuentas negCue = new NegocioCuentas();
+	            boolean insert = negCue.agregarCuenta(cuenta);
 	
 	            // Verificar si la inserción fue exitosa
 	            if (insert) {

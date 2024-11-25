@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import abml.abmlCuenta;
 import entidades.Cuenta;
 import entidades.TipoDeCuenta;
+import negocio.NegocioCuentas;
 
 @WebServlet("/servletEditarCuenta")
 public class servletEditarCuenta extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private abmlCuenta cuentaManager;
+    private NegocioCuentas cuentaManager;
 
     @Override
     public void init() throws ServletException {
-        cuentaManager = new abmlCuenta();
+        cuentaManager = new NegocioCuentas();
         System.out.println("Servlet inicializado y cuentaManager creado");
     }
 

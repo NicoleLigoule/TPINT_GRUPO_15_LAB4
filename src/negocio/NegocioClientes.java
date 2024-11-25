@@ -1,7 +1,9 @@
 package negocio;
 
+import java.util.List;
+
 import daoImpl.ClienteDaoImpl;
-import daoImpl.ProvinciaDaoImpl;
+import entidades.Cliente;
 public class NegocioClientes {
     
     private ClienteDaoImpl clienteDao;
@@ -18,11 +20,29 @@ public class NegocioClientes {
 
         return clienteDao.borrarCuil(cuilCli);
     }
-    public int obtenProv(String lca) {
-    	ProvinciaDaoImpl dao=new ProvinciaDaoImpl();
-    	
-    	int prov= dao.ObtenerProvinciaXLocalidad(lca);
-    	return prov;
-    	
-    }
+
+    
+	public boolean agregarCliente(Cliente cliente) {
+		return clienteDao.insertar(cliente);
+	}
+	
+	public boolean editarCliente(Cliente cliente) {
+		return clienteDao.editar(cliente);
+	}
+	
+	
+	public Cliente obtenerCliente(int dni) {
+		return clienteDao.obtenerUno(dni);
+	}
+	
+	public Cliente obtenerClienteCuil(String cuil) {
+		return clienteDao.obtenerUnoPorCuil(cuil);
+	}
+	
+	public List<Cliente> obtenerClientesTodos() {
+		return clienteDao.obtenerTodos();
+	}
+    
+    
 }
+

@@ -2,19 +2,15 @@ package servlets;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import abml.abmlCliente;
-import daoImpl.ClienteDaoImpl;
-import daoImpl.LocalidadDaoImpl;
+import daoImpl.LocalidadDaoImpl; //TODO: sacar el dao de aca
 import entidades.Localidad;
 import entidades.Cliente;
 import entidades.Nacionalidad;
@@ -45,8 +41,8 @@ public class servletEditarCliente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Cliente cliente = null;
 		if (request.getParameter("cuil") != null) {
-			ClienteDaoImpl clienteDao = new ClienteDaoImpl();
-			cliente = clienteDao.obtenerUnoPorCuil(request.getParameter("cuil"));
+			NegocioClientes negCli = new NegocioClientes();
+			cliente = negCli.obtenerClienteCuil(request.getParameter("cuil"));
 			
 			
 		}
@@ -116,8 +112,8 @@ public class servletEditarCliente extends HttpServlet {
 			cli.setTelefono(request.getParameter("telefono"));
 			cli.setEstado(Boolean.parseBoolean(request.getParameter("estado"))); 
 			
-			abmlCliente abmlCli = new abmlCliente();
-			boolean inserted = abmlCli.editarCliente(cli);
+			NegocioClientes negCli = new NegocioClientes();
+			boolean inserted = negCli.editarCliente(cli);
 			if(inserted) {
 				response.getWriter().println("CLIENTE MODIFICADO CON EXITO");
 				request.getRequestDispatcher("SolicitarClienteEditar.jsp").forward(request, response);
