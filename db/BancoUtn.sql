@@ -154,8 +154,6 @@ BEGIN
     SET NEW.CBU_Cu = CAST(ultimoCBU AS CHAR(22));
 END$$
 
-DELIMITER ;
-
 DELIMITER $$
 
 CREATE TRIGGER after_cliente_insert
@@ -195,7 +193,6 @@ BEGIN
     END IF;
 END$$
 
-DELIMITER ;
 DELIMITER $$
 
 CREATE TRIGGER after_prestamo_insert
@@ -240,9 +237,9 @@ INSERT INTO InteresXCantidadDMeses (Plazo_d_Pagos_En_meses_IXM, Interes_IXM, Mes
 VALUES
 ('01M', 2, 1),   -- 1 mes
 ('03M', 9, 3),   -- 3 meses
-('06M', 19, 6),   -- 6 meses
-('12M', 34, 9),  -- 9 meses
-('24M', 45, 12); -- 12 meses
+('06M', 19, 6),   -- 6 meses, 
+('09M', 34, 9),  -- 9 meses, 
+('12M', 45, 12),  -- 12 meses
 
 
 INSERT INTO Nacionalidad (Id_Nacionalidad_nc, Descripcion_nc) VALUES
