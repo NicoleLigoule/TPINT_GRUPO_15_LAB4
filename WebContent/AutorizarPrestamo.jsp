@@ -75,13 +75,17 @@ th {
 	</a> <span class="username"><%=usuario.getUsuarioUs()%></span> </nav>
 
 	<div class="main-container">
-		<jsp:include page="Admin_SubMenu.jsp" />
+		<jsp:include page="SubMenu_Admin.jsp" />
 
 		<div class="content">
 			<div>
 				<h2>Listado de Préstamos Solicitados</h2>
 				<br>
 				<div>
+				 <%
+                    List<Prestamo> listaPrestamo = (List<Prestamo>) request.getAttribute("listaPrestamo");
+                    if (listaPrestamo != null && !listaPrestamo.isEmpty()) {
+                %>
 					<table id="table_id" class="display">
 						<thead>
 							<tr>
@@ -92,11 +96,14 @@ th {
 							</tr>
 						</thead>
 						<tbody>
-						<% for (Prestamo pres : ListarPrestamosAprobar) { %>
+						<% for (Prestamo pres : listaPrestamo) { %>
 							<tr>
-								
+								<td><%= pres.getFechaPeticionPt() %></td>
+	                            <td><%= pres.getImporteSolicitadoPt() %></td>
+	                            <td><%= pres.getPlazoPagoPt() %></td>
 								<td><button onclick="seleccionarFila(this)">Seleccionar</button></td>
 							</tr>
+							<% } %>
 						</tbody>
 					</table>
 				</div>
