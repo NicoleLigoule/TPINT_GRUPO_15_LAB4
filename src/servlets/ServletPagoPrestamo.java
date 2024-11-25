@@ -28,52 +28,51 @@ public class ServletPagoPrestamo extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Obtén el parámetro de la cuenta desde el request
+      
         int idCuenta = Integer.parseInt(request.getParameter("idCuenta"));
 
-        // Obtén la lista de préstamos por cuenta
+      
         List<Prestamo> prestamos = prestamoNegocio.obtenerPrestamoPorCuenta(idCuenta);
 
-        // Procesa cada préstamo y calcula las cuotas pagadas y el monto restante
+    
         for (Prestamo prestamo : prestamos) {
         	
         	// HACER OTRA ENTIDAD PARA PRESTAMOSINFO
-            int cuotasPagadas = PrestamoDao.obtenerCuotasPagadas(prestamo.getIdPrestamoPt()); // Calcula cuotas pagadas
+            int cuotasPagadas = PrestamoDao.obtenerCuotasPagadas(prestamo.getIdPrestamoPt());
             
             
             prestamo.setCuotasPagadas(cuotasPagadas);
-            prestamo.setMontoRestante(calcularMontoRestante(prestamo)); // Método de cálculo
+            prestamo.setMontoRestante(calcularMontoRestante(prestamo));
 
-            // Debugging/log (puedes eliminarlo si no es necesario)
             System.out.println("Prestamo ID: " + prestamo.getIdPrestamoPt() +
                     ", Cuotas Pagadas: " + cuotasPagadas +
                     ", Monto Restante: " + prestamo.getMontoRestante());
         }
 
-        // Guarda la lista en el request y redirige a una página JSP
+      
         request.setAttribute("prestamos", prestamos);
         request.getRequestDispatcher("/listaPrestamos.jsp").forward(request, response);
     }
 
     private double calcularMontoRestante(Prestamo prestamo) {
-        // Lógica para calcular el monto restante basado en las cuotas pagadas
+       
         double total = prestamo.getMontoTotal();
         double pagado = prestamo.getMontoPagado();
-        return total - pagado; // Lógica simplificada
+        return total - pagado;
     }
 
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // Obtener parámetros del formulario
+          
             int idPrestamo = Integer.parseInt(request.getParameter("idPrestamo"));
             double monto = Double.parseDouble(request.getParameter("monto"));
 
-            // Llamar a la capa de negocio
+          
             boolean exito = prestamoNegocio.realizarPagoPrestamo(idPrestamo, monto);
 
-            // Redirigir según el resultado
+       
             String mensaje;
             if (exito) {
                 mensaje = "El pago se realizó con éxito.";
@@ -86,7 +85,7 @@ public class ServletPagoPrestamo extends HttpServlet {
             
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error en los datos enviados.");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error en los datos enviados."); // cambiar
         }
     }
 }
