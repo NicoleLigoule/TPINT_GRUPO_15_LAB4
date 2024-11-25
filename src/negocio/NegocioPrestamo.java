@@ -7,9 +7,9 @@ import daoImpl.PrestamoDaoImpl;
 import entidades.Prestamo;
 
 
-public class PrestamoNegocio {
+public class NegocioPrestamo {
     private PrestamoDao prestamoDao;
-    public PrestamoNegocio() {
+    public NegocioPrestamo() {
         this.prestamoDao = new PrestamoDaoImpl();
     }
     
