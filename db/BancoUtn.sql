@@ -196,7 +196,7 @@ BEGIN
     END IF;
 END$$
 
-DELIMITERÂ ;
+DELIMITER ;
 DELIMITER $$
 
 CREATE TRIGGER after_prestamo_insert
@@ -234,7 +234,48 @@ BEGIN
         meses               
     );
     
+    CALL GenerarCuotas(NEW.ID_Prestamo_Pt, meses);
+    
 END$$
+
+DELIMITER $$
+
+CREATE PROCEDURE GenerarCuotas(
+    IN p_ID_Prestamo INT,       -- ID del préstamo
+    IN p_CantidadMeses INT      -- Cantidad de meses (cuotas)
+)
+BEGIN
+    DECLARE v_FechaVencimiento DATE;
+
+    -- Inicializa la fecha de vencimiento como la fecha actual
+    SET v_FechaVencimiento = CURDATE();
+
+    -- Ciclo FOR para iterar por cada cuota
+    FOR i IN 1 .. p_CantidadMeses DO
+        -- Inserta cada cuota en la tabla
+        INSERT INTO CuotasXPrestamos (
+            ID_Prestamo_Pt_Cp,
+            Fecha_vencimiento_Cp,
+            N_Cuota,
+            pagada
+        ) VALUES (
+            p_ID_Prestamo,       -- ID del préstamo
+            v_FechaVencimiento,  -- Fecha de vencimiento
+            i,                   -- Número de cuota
+            0                    -- Estado inicial: no pagada
+        );
+
+        -- Incrementa la fecha de vencimiento al siguiente mes
+        SET v_FechaVencimiento = DATE_ADD(v_FechaVencimiento, INTERVAL 1 MONTH);
+    END FOR;
+END;
+$$
+
+DELIMITER ;
+
+
+
+
 
 -- INSERTS --
 
