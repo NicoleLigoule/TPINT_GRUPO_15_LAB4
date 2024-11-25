@@ -7,7 +7,7 @@ import entidades.InteresesXCantidadDeMeses;
 public class InteresesXCantidadDeMesesDaoImpl implements dao.InteresesXCantidadDeMesesDao {
 
 	public InteresesXCantidadDeMesesDaoImpl() {
-		// TODO Auto-generated constructor stub
+	
 	}
 	
 	public InteresesXCantidadDeMeses obtenerUno(String plazo) {

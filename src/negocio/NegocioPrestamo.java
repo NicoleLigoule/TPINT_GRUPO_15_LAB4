@@ -70,7 +70,7 @@ public class NegocioPrestamo {
 
 
 	public List<Prestamo> obtenerPrestamoPorCuenta(int idCuenta) {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 

@@ -13,17 +13,17 @@ import dao.PrestamoDao;
 import daoImpl.PrestamoDaoImpl;
 import entidades.Prestamo;
 import entidades.Usuario;
-import negocio.PrestamoNegocio;
+import negocio.NegocioPrestamo;
 
 @WebServlet("/ServletPagoPrestamo")
 public class ServletPagoPrestamo extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private PrestamoNegocio prestamoNegocio;
+    private NegocioPrestamo prestamoNegocio;
 
     public ServletPagoPrestamo() {
         super();
-        this.prestamoNegocio = new PrestamoNegocio();
+        this.prestamoNegocio = new NegocioPrestamo();
     }
 
     @Override
@@ -39,6 +39,8 @@ public class ServletPagoPrestamo extends HttpServlet {
         	
         	// HACER OTRA ENTIDAD PARA PRESTAMOSINFO
             int cuotasPagadas = PrestamoDao.obtenerCuotasPagadas(prestamo.getIdPrestamoPt()); // Calcula cuotas pagadas
+            
+            
             prestamo.setCuotasPagadas(cuotasPagadas);
             prestamo.setMontoRestante(calcularMontoRestante(prestamo)); // Método de cálculo
 

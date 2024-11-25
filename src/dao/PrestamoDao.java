@@ -18,7 +18,7 @@ public interface PrestamoDao {
 	
 	public List<Prestamo> obtenerPrestamoPorCuenta(int numeroCuenta);
 	static int obtenerCuotasPagadas(int idPrestamoPt) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 	

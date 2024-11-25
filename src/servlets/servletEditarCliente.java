@@ -31,7 +31,7 @@ public class servletEditarCliente extends HttpServlet {
 	 */
 	public servletEditarCliente() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
