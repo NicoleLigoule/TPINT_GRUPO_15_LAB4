@@ -35,6 +35,10 @@ public class NegocioClientes {
 		return clienteDao.obtenerUno(dni);
 	}
 	
+	public Cliente obtenerClienteCuil(String cuil) {
+		return clienteDao.obtenerUnoPorCuil(cuil);
+	}
+	
 	public List<Cliente> obtenerClientesTodos() {
 		return clienteDao.obtenerTodos();
 	}

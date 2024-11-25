@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daoImpl.ClienteDaoImpl;
-import daoImpl.LocalidadDaoImpl;
+import daoImpl.LocalidadDaoImpl; //TODO: sacar el dao de aca
 import entidades.Localidad;
 import entidades.Cliente;
 import entidades.Nacionalidad;
@@ -42,8 +41,8 @@ public class servletEditarCliente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Cliente cliente = null;
 		if (request.getParameter("cuil") != null) {
-			ClienteDaoImpl clienteDao = new ClienteDaoImpl();
-			cliente = clienteDao.obtenerUnoPorCuil(request.getParameter("cuil"));
+			NegocioClientes negCli = new NegocioClientes();
+			cliente = negCli.obtenerClienteCuil(request.getParameter("cuil"));
 			
 			
 		}
