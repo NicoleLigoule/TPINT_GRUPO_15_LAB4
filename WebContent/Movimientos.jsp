@@ -28,36 +28,8 @@
 		class="img_logo" alt="Logo UTN">
 	</a> <span class="username"><%= usuario.getUsuarioUs() %></span> </nav>
 
-
-
-	<!-- <div class="main-container">
-		<aside class="sidebar" id="sidebar">
-		<ul>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Transferencias</a>
-			</li>
-
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Solicitudes
-					de prestamos</a></li>
-
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Pago
-					de prestamos</a></li>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Informacion
-					personal</a></li>
-		</ul>
-		</aside>
-
-
-		<aside class="sidebar" id="sidebar">
-		<ul>
-			<li><a href="#">Transferencias</a></li>
-			<li><a href="#">Solicitudes de prestamos</a></li>
-			<li><a href="#">Pago de prestamos</a></li>
-			<li><a href="#">Información personal</a></li>
-		</ul>
-		</aside>
- -->
 		<section class="content"> <!-- movimientos -->
-			<jsp:include page="Cliente_SubMenu.jsp" />
+			<jsp:include page="SubMenu_Cliente.jsp" />
 			
 		<div class="movements-list">
 			<h3>Hoy</h3>

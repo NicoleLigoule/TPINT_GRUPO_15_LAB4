@@ -13,7 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PagoPrestamo</title>
+<title>Pago Prestamo</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Css/PagoPrestamo.css">
 <body>
@@ -30,14 +30,26 @@
 	</nav>
 
 	<div class="main-container">
-		<jsp:include page="Cliente_SubMenu.jsp" />
+		<jsp:include page="SubMenu_Cliente.jsp" />
 
 		<div class="content">
 			<div class="form-card">
 				<h2>Pago de Préstamos</h2>
-				<p>Seleccione el préstamo y la cuota que desea pagar:</p>
+				<p>Seleccione el préstamo y la cuota que desea pagar:</p>   
+				
+			    <h1>Realizar Pago</h1>
+			    <form action="ServletPagoPrestamo" method="post">
+			        <label for="idPrestamo">ID del Préstamo:</label>
+			        <input type="text" id="idPrestamo" name="idPrestamo" required><br>
+			        <label for="monto">Monto a Pagar:</label>
+			        <input type="number" id="monto" name="monto" step="0.01" required><br>
+			        <button type="submit">Pagar</button>
+			    </form>
 
-				<form action="ProcederPago.jsp" method="post">
+		    <p>${mensaje}</p>
+		    <a href="PagoPrestamo.jsp">Volver</a>
+
+				<!-- <form action="ProcederPago.jsp" method="post">
 					<table class="loan-table">
 						<thead>
 							<tr>
@@ -86,7 +98,7 @@
 							</tr>
 						</tbody>
 					</table>
-				</form>
+				</form> -->
 			</div>
 		</div>
 	</div>

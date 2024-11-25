@@ -47,30 +47,47 @@ public class PrestamoDaoImpl implements PrestamoDao {
     }
 
 
+//    @Override
+//    public boolean actualizarPrestamo(Prestamo prestamo) {
+//        boolean resultado = false;
+//        String query = "UPDATE Prestamo SET Numero_de_Cuenta_Cu_Pt = ?, Importe_solicitado_Pt = ?, Plazo_Pago_Pt = ?, Detalle_solicitud_Pt = ?, Estado_Pt = ? WHERE ID_Prestamo_Pt = ?";
+//
+//        try (Connection cn = conexion.Open()) {
+//            PreparedStatement ps = cn.prepareStatement(query);
+//            ps.setInt(1, prestamo.getNumeroDeCuentaCuPt());
+//            ps.setBigDecimal(2, prestamo.getImporteSolicitadoPt());
+//            ps.setString(3, prestamo.getPlazoPagoPt());
+//            ps.setString(4, prestamo.getDetalleSolicitudPt());
+//            ps.setBoolean(5, prestamo.isEstadoPt());
+//
+//            ps.setInt(6, prestamo.getIdPrestamoPt());
+//
+//            int filasAfectadas = ps.executeUpdate();
+//            if (filasAfectadas > 0) {
+//                resultado = true;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return resultado;
+//    }
+    
     @Override
     public boolean actualizarPrestamo(Prestamo prestamo) {
-        boolean resultado = false;
-        String query = "UPDATE Prestamo SET Numero_de_Cuenta_Cu_Pt = ?, Importe_solicitado_Pt = ?, Plazo_Pago_Pt = ?, Detalle_solicitud_Pt = ?, Estado_Pt = ? WHERE ID_Prestamo_Pt = ?";
-
+        String query = "UPDATE Prestamo SET Estado_Pt = ? WHERE ID_Prestamo_Pt = ?";
         try (Connection cn = conexion.Open()) {
-            PreparedStatement ps = cn.prepareStatement(query);
-            ps.setInt(1, prestamo.getNumeroDeCuentaCuPt());
-            ps.setBigDecimal(2, prestamo.getImporteSolicitadoPt());
-            ps.setString(3, prestamo.getPlazoPagoPt());
-            ps.setString(4, prestamo.getDetalleSolicitudPt());
-            ps.setBoolean(5, prestamo.isEstadoPt());
-
-            ps.setInt(6, prestamo.getIdPrestamoPt());
-
-            int filasAfectadas = ps.executeUpdate();
-            if (filasAfectadas > 0) {
-                resultado = true;
-            }
+            PreparedStatement ps = cn.prepareStatement(query);            
+            ps.setBoolean(1, prestamo.isEstadoPt()); // Asumiendo que 'estado' es un booleano (pagado = true)
+            ps.setInt(2, prestamo.getIdPrestamoPt());
+            
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return resultado;
     }
+
 
     @Override
     public boolean eliminarPrestamo(int idPrestamo) {
@@ -185,4 +202,9 @@ public class PrestamoDaoImpl implements PrestamoDao {
         return existe;
     }
 
+    
+    
+    
+    
+    
 }

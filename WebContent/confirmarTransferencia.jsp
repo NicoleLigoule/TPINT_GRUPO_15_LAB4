@@ -29,7 +29,7 @@
 	</nav>
 
 	<div class="main-container">
-	<jsp:include page="Cliente_SubMenu.jsp" />
+	<jsp:include page="SubMenu_Cliente.jsp" />
 	
 		<%-- <jsp:include page="Admin_SubMenu.jsp" /> --%>
 
