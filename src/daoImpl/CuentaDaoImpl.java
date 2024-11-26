@@ -277,5 +277,23 @@ public class CuentaDaoImpl implements CuentaDao {
 	    }
 	    return cuenta;
 	}
-
+	public String obtenerCuilCuentaPorNumero(String numeroCuenta) {
+	    cn = new Conexion();
+	    cn.Open();
+	    String N_cuil = null;
+	    try {
+	        String query = "SELECT Cuil_Cli_Cu  FROM bancoutn.Cuenta  WHERE Numero_de_Cuenta_Cu = ?";
+	        PreparedStatement statement = cn.getSQLConexion().prepareStatement(query);
+	        statement.setString(1, numeroCuenta);
+	        ResultSet rs = statement.executeQuery();
+	        if (rs.next()) {
+	        	N_cuil= (String) rs.getString("Cuil_Cli_Cu");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        cn.close();
+	    }
+	    return N_cuil;
+	}
 }

@@ -22,6 +22,7 @@ public interface PrestamoDao {
 		
 		return 0;
 	}
+	public InteresesXCantidadDeMeses obtenerIntereses(String iDInteres);
 	
 
 }

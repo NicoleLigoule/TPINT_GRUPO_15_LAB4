@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Cliente;
+import entidades.InteresesXCantidadDeMeses;
 import entidades.Prestamo;
+import negocio.NegocioCuentas;
 import negocio.NegocioPrestamo;
 
 /**
@@ -35,6 +38,7 @@ public class servletExaminarPrestamo extends HttpServlet {
 
 		int IDPRestamo=-1;
         NegocioPrestamo ddlPrestamo = new NegocioPrestamo();
+        NegocioCuentas NegoCuentas=new NegocioCuentas();
         String IDPRestam = request.getParameter("PrestamoSelec");
         if (IDPRestam != null && !IDPRestam.isEmpty()) {
         	IDPRestamo= Integer.parseInt(IDPRestam);
@@ -45,7 +49,12 @@ public class servletExaminarPrestamo extends HttpServlet {
           Prestamo Prestamo = ddlPrestamo.obtenerPrestamo(IDPRestamo);
                 request.setAttribute("Prestamo", Prestamo); 
                     System.out.println(Prestamo.toString());
-                
+                Cliente cli= NegoCuentas.obtenerClienteDeLACuenta(String.valueOf(Prestamo.getNumeroDeCuentaCuPt()));
+                request.setAttribute("Clientes", cli); 
+                System.out.println(cli.toString());
+                InteresesXCantidadDeMeses Interes = ddlPrestamo.InteresesdelPrestamo(Prestamo.getPlazoPagoPt());
+                request.setAttribute("Interes", Interes); 
+                    System.out.println(Interes.toString());
             RequestDispatcher rd = request.getRequestDispatcher("ExaminarPrestamo.jsp");
             rd.forward(request, response);
 

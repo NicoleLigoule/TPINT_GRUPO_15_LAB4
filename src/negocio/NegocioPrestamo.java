@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.PrestamoDao;
 import daoImpl.PrestamoDaoImpl;
+import entidades.InteresesXCantidadDeMeses;
 import entidades.Prestamo;
 
 
@@ -78,6 +79,11 @@ public class NegocioPrestamo {
 		Prestamo pres= prestamoDao.obtenerPrestamoPorId(IDprestamo);
 		return pres;
 		
+	}
+	public InteresesXCantidadDeMeses InteresesdelPrestamo(String IDInteres) {
+		InteresesXCantidadDeMeses interes= prestamoDao.obtenerIntereses(IDInteres);
+		
+		return interes;	
 	}
 
 }

@@ -3,7 +3,9 @@ package negocio;
 
 import java.util.List;
 
+import daoImpl.ClienteDaoImpl;
 import daoImpl.CuentaDaoImpl;
+import entidades.Cliente;
 import entidades.Cuenta;
 import entidades.TipoDeCuenta;;
 
@@ -54,5 +56,11 @@ public class NegocioCuentas {
 		public List<TipoDeCuenta> obtenerTiposTodos() {
 			return cuentaDao.readallTipoDeCuentas();
 		}
+		public Cliente obtenerClienteDeLACuenta(String numeroCuenta) {
 
+			String cuil= cuentaDao.obtenerCuilCuentaPorNumero(numeroCuenta);
+			ClienteDaoImpl clienteDao =new 	ClienteDaoImpl();
+			Cliente cli=clienteDao.obtenerUnoPorCuil(cuil);
+			return cli;
+		}
 }

@@ -258,6 +258,28 @@ public class PrestamoDaoImpl implements PrestamoDao {
         }
         return prestamos;
     }
+    @Override
+    public InteresesXCantidadDeMeses obtenerIntereses(String iDInteres) {
+    	InteresesXCantidadDeMeses interes=new InteresesXCantidadDeMeses();
+    	Conexion cn=new Conexion();
+        cn.Open();
+        try  {
+	        String query = "SELECT Plazo_d_Pagos_En_meses_IXM, Interes_IXM,Meses  FROM bancoutn.InteresXCantidadDMeses WHERE Plazo_d_Pagos_En_meses_IXM = ?";
+	        PreparedStatement statement = cn.getSQLConexion().prepareStatement(query);
+	        statement.setString(1, iDInteres);
+	        ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+              	interes.setPlazoDPagosEnMesesIxm(rs.getString("Plazo_d_Pagos_En_meses_IXM"));
+            	interes.setInteresIxm(rs.getBigDecimal("Interes_IXM"));
+                interes.setMeses(rs.getInt("Meses"));
+                
 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       
+    	return interes;
+    }
     
 }
