@@ -53,22 +53,10 @@ import negocio.NegocioCuentas;
 	    
 	    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        System.out.println("ENTRO AL SERVLET");
-	
+
 	        if (request.getParameter("agregarBtn") != null) {
 	            Cuenta cuenta = new Cuenta();
-	        
-	            String Cuil = request.getParameter("cuil");
-	            if (Cuil != null && !Cuil.isEmpty()) {
-	                try {
-	                    cuenta.setCuilCliCu(Cuil);
-	                    System.out.println("cuil: " + Cuil);
-	                } catch (NumberFormatException e) {
-	                    System.out.println("Error: Tipo de cuenta no válido.");
-	                    request.setAttribute("Error", "Tipo de cuenta no válido.");
-	                    request.getRequestDispatcher("/AgregarCuenta.jsp").forward(request, response);
-	                    return;
-	                }
-	            }
+	            
 	            // Obtener y establecer tipo de cuenta
 	            String tipoCuenta = request.getParameter("tipoCuenta");
 	            if (tipoCuenta != null && !tipoCuenta.isEmpty()) {
@@ -82,22 +70,9 @@ import negocio.NegocioCuentas;
 	                    return;
 	                }
 	            }
-	
-	            // Obtener y validar saldo
-	            String saldoStr = request.getParameter("saldo");
-	            if (saldoStr != null && !saldoStr.isEmpty()) {
-	                try {
-	                    BigDecimal saldo = new BigDecimal(saldoStr);
-	                    cuenta.setSaldoCu(saldo);
-	                    System.out.println("Saldo: " + saldo);
-	                } catch (NumberFormatException e) {
-	                    System.out.println("Error: El saldo ingresado no es un número válido.");
-	                    request.setAttribute("Error", "El saldo ingresado no es válido.");
-	                    request.getRequestDispatcher("/AgregarCuenta.jsp").forward(request, response);
-	                    return;
-	                }
-	            }
-	
+
+	            
+
 	            // Obtener y validar fecha de apertura
 	            String fechaAperturaStr = request.getParameter("fechaApertura");
 	            if (fechaAperturaStr != null && !fechaAperturaStr.isEmpty()) {
@@ -113,17 +88,16 @@ import negocio.NegocioCuentas;
 	                    return;
 	                }
 	            }
-	
-            	// Obtener y establecer el estado de la cuenta (checkbox)
+
+	            // Obtener y establecer el estado de la cuenta (checkbox)
 	            String estadoCheckbox = request.getParameter("estado");
 	            cuenta.setEstadoCu(estadoCheckbox != null); // true si está marcado, false si no lo está
 	            System.out.println("Estado de la Cuenta: " + (estadoCheckbox != null));
 
-	            
-	            // Llamada a la lógica de negocio para agregar cuenta	            
+	            // Llamada a la lógica de negocio para agregar cuenta
 	            NegocioCuentas negCue = new NegocioCuentas();
 	            boolean insert = negCue.agregarCuenta(cuenta);
-	
+
 	            // Verificar si la inserción fue exitosa
 	            if (insert) {
 	                System.out.println("Cuenta agregada exitosamente.");
@@ -136,4 +110,5 @@ import negocio.NegocioCuentas;
 	            }
 	        }
 	    }
+
 	}

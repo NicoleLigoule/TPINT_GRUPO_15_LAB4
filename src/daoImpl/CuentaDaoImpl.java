@@ -159,16 +159,16 @@ public class CuentaDaoImpl implements CuentaDao {
     }
     
     @Override
-	public boolean insertarSinCliente(Cuenta cuenta) {
-    	cn = new Conexion();
+    public boolean insertarSinCliente(Cuenta cuenta) {
+        cn = new Conexion();
         cn.Open();
         boolean estado = true;
-        String query = "INSERT INTO Cuenta (Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu) VALUES ('" +
+        String query = "INSERT INTO Cuenta (Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Estado_Cu) VALUES ('" +
                 cuenta.getFechaCreacionCu() + "', " +
                 cuenta.getIdTipoCuenta() + ", '" +
                 cuenta.getCbuCu() + "', " +
-                cuenta.getSaldoCu() + ", " +
                 (cuenta.isEstadoCu() ? 1 : 0) + ")";
+
         try {
             estado = cn.execute(query);
         } catch (Exception e) {
@@ -178,7 +178,7 @@ public class CuentaDaoImpl implements CuentaDao {
             cn.close();
         }
         return estado;
-	}
+    }
 
     @Override
     public boolean editar(Cuenta cuenta) {
