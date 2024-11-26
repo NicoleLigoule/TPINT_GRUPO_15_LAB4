@@ -70,8 +70,20 @@ public class servletExaminarPrestamo extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+	if(request.getParameter("agregarBtn") != null) {
+		  try {
+			  
+			  
+	        	RequestDispatcher rd = request.getRequestDispatcher("/ServletAutorizarPrestamo");
+	            rd.forward(request, response);
 
-}
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            response.getWriter().println("Error al obtener la lista de prestamos: " + e.getMessage());
+	        }
+	
+	}
+	
+	
+	}
+	}
