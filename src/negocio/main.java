@@ -1,23 +1,22 @@
 package negocio;
-//import java.util.ArrayList;
-//
-//import entidades.TipoDeCuenta;
-//import entidades.Nacionalidad;
-//import negocio.DDL;
-//import negocio.NegocioClientes;
-//public class main {
-////	public static void main(String[] args) {
-////		NegocioClientes neg= new NegocioClientes();
-////		int h=neg.obtenProv("2");
-////		
-////		System.out.println("El ID de la provincia es: "+ h);
-////		
-////    DDL lista= new DDL();
-////    
-////    ArrayList<Nacionalidad> ver =lista.Nacionalidad();
-////    
-////    for (Nacionalidad cuenta : ver) {
-////        System.out.println(cuenta.toString());
-////    }
-////	}
-//}
+import java.util.ArrayList;
+import java.util.List;
+
+import entidades.TipoDeCuenta;
+import entidades.Nacionalidad;
+import entidades.Prestamo;
+import negocio.DDL;
+import negocio.NegocioClientes;
+public class main {
+	public static void main(String[] args) {
+
+		
+    DDL lista= new DDL();
+    
+    List<Prestamo> listaPrestamo = lista.ListarPrestamosAprobar();
+    
+    for (Prestamo cuenta : listaPrestamo) {
+        System.out.println(cuenta.toString());
+    }
+	}
+}

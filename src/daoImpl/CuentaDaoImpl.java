@@ -55,13 +55,16 @@ public class CuentaDaoImpl implements CuentaDao {
         cn.Open();
         List<Cuenta> lista = new ArrayList<>();
         try {
-            ResultSet rs = cn.query("SELECT * FROM Cuenta WHERE Estado_Cu = 1");
+            ResultSet rs = cn.query("SELECT C.Numero_de_Cuenta_Cu, C.Cuil_Cli_Cu, C.Fecha_Creacion_Cu, T.Nombre_Tipo, C.CBU_Cu, C.Saldo_Cu, C.Estado_Cu, T.Nombre_Tipo " +
+                    "FROM Cuenta C " +
+                    "JOIN TipoCuenta T ON C.Id_Tipo_Cuenta = T.Id_Tipo_Cuenta " +
+                    "WHERE C.Estado_Cu = 1");
             while (rs.next()) {
                 Cuenta cuenta = new Cuenta();
                 cuenta.setNumeroDeCuentaCu(rs.getInt("Numero_de_Cuenta_Cu"));
                 cuenta.setCuilCliCu(rs.getString("Cuil_Cli_Cu"));
                 cuenta.setFechaCreacionCu(rs.getDate("Fecha_Creacion_Cu").toLocalDate());
-                cuenta.setIdTipoCuenta(rs.getInt("Id_Tipo_Cuenta"));
+                cuenta.setTipoCuentaDescripcion(rs.getString("Nombre_Tipo")); // Descripci�n del tipo de cuenta
                 cuenta.setCbuCu(rs.getString("CBU_Cu"));
                 cuenta.setSaldoCu(rs.getBigDecimal("Saldo_Cu"));
                 cuenta.setEstadoCu(rs.getBoolean("Estado_Cu"));
@@ -157,16 +160,16 @@ public class CuentaDaoImpl implements CuentaDao {
     }
     
     @Override
-	public boolean insertarSinCliente(Cuenta cuenta) {
-    	cn = new Conexion();
+    public boolean insertarSinCliente(Cuenta cuenta) {
+        cn = new Conexion();
         cn.Open();
         boolean estado = true;
-        String query = "INSERT INTO Cuenta (Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu) VALUES ('" +
+        String query = "INSERT INTO Cuenta (Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Estado_Cu) VALUES ('" +
                 cuenta.getFechaCreacionCu() + "', " +
                 cuenta.getIdTipoCuenta() + ", '" +
                 cuenta.getCbuCu() + "', " +
-                cuenta.getSaldoCu() + ", " +
                 (cuenta.isEstadoCu() ? 1 : 0) + ")";
+
         try {
             estado = cn.execute(query);
         } catch (Exception e) {
@@ -176,7 +179,8 @@ public class CuentaDaoImpl implements CuentaDao {
             cn.close();
         }
         return estado;
-	}
+    }
+
 
     @Override
     public boolean editar(Cuenta cuenta) {
@@ -312,4 +316,23 @@ public class CuentaDaoImpl implements CuentaDao {
         return lista;
 	}
 
+	public String obtenerCuilCuentaPorNumero(String numeroCuenta) {
+	    cn = new Conexion();
+	    cn.Open();
+	    String N_cuil = null;
+	    try {
+	        String query = "SELECT Cuil_Cli_Cu  FROM bancoutn.Cuenta  WHERE Numero_de_Cuenta_Cu = ?";
+	        PreparedStatement statement = cn.getSQLConexion().prepareStatement(query);
+	        statement.setString(1, numeroCuenta);
+	        ResultSet rs = statement.executeQuery();
+	        if (rs.next()) {
+	        	N_cuil= (String) rs.getString("Cuil_Cli_Cu");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        cn.close();
+	    }
+	    return N_cuil;
+	}
 }

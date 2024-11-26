@@ -77,7 +77,7 @@
     </nav>
 
     <div class="main-container">
-        <jsp:include page="Admin_SubMenu.jsp" />
+        <jsp:include page="SubMenu_Admin.jsp" />
 
         <div class="content">
             <h2>Listado de Cuentas</h2>
@@ -106,7 +106,7 @@
                             <td><%= cuenta.getNumeroDeCuentaCu() %></td>
                             <td><%= cuenta.getCuilCliCu() %></td>
                             <td><%= cuenta.getFechaCreacionCu() %></td>
-                            <td><%= cuenta.getIdTipoCuenta() %></td>
+                            <td><%= cuenta.getTipoCuentaDescripcion() %></td>
                             <td><%= cuenta.getCbuCu() %></td>
                             <td><%= cuenta.getSaldoCu() %></td>
                             <td><%= cuenta.isEstadoCu() ? "Activa" : "Inactiva" %></td>
@@ -114,6 +114,12 @@
                         <% } %>
                     </tbody>
                 </table>
+                <div class="button-group">
+						
+						
+						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
+						
+					</div>
 
                 <% } else { %>
                 <p class="mensaje-sin-cuentas">No se encontraron Cuentas.</p>

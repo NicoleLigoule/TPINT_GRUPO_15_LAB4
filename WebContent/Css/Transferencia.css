@@ -27,7 +27,7 @@ body {
     cursor: pointer;
     background: transparent;
     border: none;
-    margin-right: auto; 
+    margin-right: auto;
 }
 
 .line {
@@ -40,13 +40,13 @@ body {
 .img_logo {
     width: 60px;
     height: 60px;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 
 .username {
     font-size: 1.2rem;
     color: white;
-    margin-left: auto; 
+    margin-left: auto;
 }
 
 .main-container {
@@ -55,20 +55,20 @@ body {
 }
 
 .sidebar {
-    width: 250px; 
+    width: 250px;
     background-color: #d6a6d6;
     padding: 20px;
-    height: 100vh; 
+    height: 100vh;
     position: fixed;
-    top: 80px; 
+    top: 80px;
     left: 0;
     transition: transform 1s ease;
-    transform: translateX(-100%); 
+    transform: translateX(-100%);
     z-index: 1;
 }
 
 .sidebar.active {
-    transform: translateX(0); 
+    transform: translateX(0);
 }
 
 .sidebar ul {
@@ -95,19 +95,19 @@ body {
 .submenu {
     list-style-type: none;
     padding-left: 20px;
-    max-height: 0; 
-    overflow: hidden; 
-    transition: max-height 0.3s ease; 
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
 }
 
 .menu-item.active .submenu {
-    max-height: 500px; 
+    max-height: 500px;
 }
 
 .submenu li {
     font-size: 1rem;
     color: #555;
-    padding-left: 15px; 
+    padding-left: 15px;
 }
 
 .submenu li a {
@@ -134,89 +134,10 @@ body {
     padding: 20px;
     border-radius: 8px;
     width: 100%;
-    max-width: 500px; 
+    max-width: 500px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin: 0 auto; 
-}
-
-.form-container {
-    background-color: #ffffff; 
-    border-radius: 10px; 
-    padding: 20px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    margin: 20px auto; /* Cambiar a auto para centrar */
-    max-width: 400px; 
-    text-align: center; 
-}
-
-
-.confirmation-details p {
-    font-size: 18px; 
-    margin: 10px 0; 
-}
-
-.btn {
-    background-color: #28a745; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    padding: 10px 20px; 
-    font-size: 16px; 
-    cursor: pointer; 
-    transition: background-color 0.3s; 
-    margin-top: 20px; /* Añadir margen superior */
-}
-.btn:hover {
-    background-color: #218838; 
-}
-
-input[type="text"],
-input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-input[type="text"]:focus,
-input[type="number"]:focus {
-    outline: none;
-    border-color: #d6a6d6;
-    box-shadow: 0 0 5px rgba(214, 166, 214, 0.5); 
-}
-
-.confirm-button, .cancel-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.confirm-button {
-    background-color: #28a745;
-    color: white;
-    cursor: pointer;
-}
-
-.confirm-button:hover {
-    background-color: #218838; 
-}
-
-.cancel-button {
-    background-color: #dc3545;
-    color: white;
-    cursor: pointer;
-}
-
-.cancel-button:hover {
-    background-color: #c82333; 
+    margin: 0 auto;
 }
 
 h2 {
@@ -224,24 +145,113 @@ h2 {
     margin-bottom: 20px;
 }
 
-.loan-table {
-    width: 100%;
-    border-collapse: collapse;
+select,
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%; /* Ahora el ancho es del 100% */
+    padding: 12px; /* Padding ajustado para mayor tamaño */
+    margin: 10px auto; /* Margen para centrar */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 1.1rem; /* Aumentado el tamaño de la fuente */
+    color: #333;
+    outline: none;
+    display: block;
+    transition: border-color 0.3s ease;
+}
+
+select:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    border-color: #d6a6d6;
+    box-shadow: 0 0 5px rgba(214, 166, 214, 0.5);
+}
+
+textarea {
+    resize: none;
+}
+
+button[type="submit"],
+input[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
     margin-top: 20px;
 }
 
-.loan-table th,
-.loan-table td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+    background-color: #218838;
 }
 
-.loan-table th {
-    background-color: #d6a6d6;
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrado de los elementos del formulario */
+    padding: 20px;
+}
+
+form .form-group {
+    margin-bottom: 20px;
+}
+
+form textarea {
+    height: 120px; /* Aumentada la altura de la textarea */
+}
+
+form input[type="submit"] {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem;
+    }
+
+    .form-card {
+        width: 100%;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .content {
+        padding: 10px;
+    }
+}
+
+
+button[type="button"] {
+    background-color: #007bff; /* Color azul para el botón */
     color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    width: 100%; /* Puedes ponerlo al 100% del ancho del formulario */
 }
 
-.loan-table tr:hover {
-    background-color: #f1f1f1;
+button[type="button"]:hover {
+    background-color: #0056b3; /* Color más oscuro al hacer hover */
 }

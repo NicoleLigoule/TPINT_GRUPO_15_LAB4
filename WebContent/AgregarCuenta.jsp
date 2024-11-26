@@ -33,7 +33,7 @@
 		</a> <span class="username"><%=usuario.getUsuarioUs()%></span>
 	</nav>
 	<div class="main-container">
-		<jsp:include page="Admin_SubMenu.jsp" />
+		<jsp:include page="SubMenu_Admin.jsp" />
 
 		<div class="content">
 			<div class="form-card">
@@ -41,12 +41,7 @@
 				<br>
 				<h3>Datos del socio</h3>
 				<form action="servletAgregarCuenta" method="post">
-					<!-- <label for="dni">DNI Cliente</label>
-                    <input type="text" id="dni" name="dni" placeholder="DNI" required> -->
-
-
-					<label for="cuil">CUIL Cliente</label> <input type="text" id="cuil"
-						name="cuil" placeholder="CUIL"> <br>
+					<br>
 					<%
 						ArrayList<TipoDeCuenta> listaSeguros = null;
 						if (request.getAttribute("listaTCuentas") != null) {
@@ -75,23 +70,11 @@
 					</select>
 
 					<!-- Saldo -->
-					<label for="saldo">Saldo Inicial</label> <input type="text"
-						id="saldo" name="saldo" placeholder="Ingrese el saldo inicial"
-						required>
+					
 
 					<!-- Fecha de Apertura -->
 					<label for="fechaApertura">Fecha de Apertura</label> <input
 						type="date" id="fechaApertura" name="fechaApertura" required>
-
-					<!-- Estado de la Cuenta -->
-					<!--  <label for="estado">Estado de la Cuenta</label> <select id="estado"
-						name="estado" required>
-						<option value="" disabled selected>Seleccione el estado
-							de la cuenta</option>
-						<option value="Activa">Activa</option>
-						<option value="Inactiva">Inactiva</option>
-					</select>-->
-					<!-- Estado de la Cuenta -->
 					
 					<%
 					    Cuenta cuenta = (Cuenta) request.getAttribute("cuenta");
@@ -108,6 +91,12 @@
 						<button type="button" class="cancel-button"
 							onclick="window.history.back()">Volver</button>
 						<button type="submit" class="submit-button" name="agregarBtn">Agregar</button>
+					</div>
+					<div class="button-group">
+						
+						
+						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
+						
 					</div>
 					<!-- mensaje de que cargó bien y limpia, sino msj cargó mal -->
 					<%

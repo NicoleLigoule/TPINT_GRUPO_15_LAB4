@@ -4,7 +4,9 @@ package negocio;
 import java.time.LocalDate;
 import java.util.List;
 
+import daoImpl.ClienteDaoImpl;
 import daoImpl.CuentaDaoImpl;
+import entidades.Cliente;
 import entidades.Cuenta;
 import entidades.TipoDeCuenta;;
 
@@ -47,7 +49,7 @@ public class NegocioCuentas {
 		public List<Cuenta> obtenerCuentaTodos() {
 			return cuentaDao.obtenerTodos();
 		}
-
+ 
 		public List<Cuenta> obtenerCuentasPorCuil(String cuil) {
 		    return cuentaDao.obtenerCuentasPorCuil(cuil);
 		}

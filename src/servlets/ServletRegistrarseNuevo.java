@@ -32,7 +32,7 @@ public class ServletRegistrarseNuevo extends HttpServlet {
      */
     public ServletRegistrarseNuevo() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**

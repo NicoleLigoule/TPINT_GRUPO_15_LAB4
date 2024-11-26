@@ -26,7 +26,7 @@ public class servletEliminarCuenta extends HttpServlet {
      */
     public servletEliminarCuenta() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
