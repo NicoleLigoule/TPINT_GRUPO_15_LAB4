@@ -43,7 +43,7 @@ BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
 %>
 
 		<section class="content">
-		<h1 class="main-title">Informaci�n Personal</h1>
+		<h1 class="main-title">Informacion Personal</h1>
 		<div class="info-container">
 			<div class="personal-info">
 				<h2>Datos del Usuario</h2>
@@ -54,10 +54,10 @@ BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
 					<strong>Correo:</strong> <%=correo != null ? correo : "" %>
 				</p>
 				<p>
-					<strong>Tel�fono:</strong> <%=telefono != null ? telefono : "" %>
+					<strong>Telefono:</strong> <%=telefono != null ? telefono : "" %>
 				</p>
 				<p>
-					<strong>Direcci�n:</strong> <%=direccion != null ? direccion : "" %>
+					<strong>Direccion:</strong> <%=direccion != null ? direccion : "" %>
 				</p>
 			</div>
 			
@@ -79,7 +79,7 @@ BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
     %>
     <div class="account-info">
         <h2><%= cuenta.getTipoCuenta() %></h2>
-        <p><strong>N�mero de Cuenta:</strong> <%= cuenta.getNumeroCuenta() %></p>
+        <p><strong>Numero de Cuenta:</strong> <%= cuenta.getNumeroCuenta() %></p>
         <p><strong>Saldo:</strong> $<%= cuenta.getSaldo() %></p>
         
     </div>

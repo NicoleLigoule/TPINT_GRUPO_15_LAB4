@@ -23,32 +23,79 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/Transferencia.css">
 </head>
 <body>
-	<nav class="navbar">
-		<button class="hamburger" onclick="toggleSidebar()">
-			<div class="line"></div>
-			<div class="line"></div>
-			<div class="line"></div>
-		</button>
-		<a href="${pageContext.request.contextPath}/Login.jsp"> <img
-			src="${pageContext.request.contextPath}/img/png_logo.png"
-			class="img_logo" alt="Logo UTN">
-		</a> <span class="username"><%= usuario.getUsuarioUs() %></span>
-	</nav>
+    <nav class="navbar">
+        <button class="hamburger" onclick="toggleSidebar()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </button>
+        <a href="${pageContext.request.contextPath}/Login.jsp">
+            <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
+        </a>
+        <span class="username"><%= usuario.getUsuarioUs() %></span>
+    </nav>
 
-	<div class="main-container">
-			<jsp:include page="SubMenu_Cliente.jsp" />
-		<div class="content">
-			<div class="form-card">
-				<h2>Validar CBU</h2>
-				<p>Elegi a que cuenta transferir</p>
-				<form action="ImporteTransferencia.jsp" method="post">
-					<input type="text" id="cbu" name="cbu" required pattern="\d{22}"
-						placeholder="Ingresa el CBU" maxlength="22">
-					<button type="submit" class="confirm-button">Validar</button>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <ul>
+                <li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Transferencias</a></li>
+                <li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Solicitudes de préstamos</a></li>
+                <li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Pago de préstamos</a></li>
+                <li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Información personal</a></li>
+            </ul>
+        </aside>
+
+        <div class="content">
+            <div class="form-card">
+                <h2>Realizar Transferencia</h2>
+                <p>Completa los datos para realizar una transferencia</p>
+                <!-- Cambiar acción a Servlet para procesar la transferencia -->
+                <form action="servletTransferencia" method="post">
+                    <!-- Cuenta Origen (DDL) -->
+                    <div class="form-group">
+                        <label for="cuentaOrigen">Cuenta Origen:</label>
+                        <select id="cuentaOrigen" name="cuentaOrigen" required>
+                            <option value="" disabled selected>Seleccione su cuenta</option>
+                            <% if (cuentas != null) {
+                                for (Cuenta cuenta : cuentas) { %>
+                                    <option value="<%= cuenta.getNumeroDeCuentaCu() %>">
+                                        Cuenta: <%= cuenta.getNumeroDeCuentaCu() %> - Saldo: <%= cuenta.getSaldoCu() %>
+                                    </option>
+                            <%  } } %>
+                        </select>
+                    </div>
+
+                    <!-- Cuenta Destino (Textbox) -->
+                    <div class="form-group">
+                        <label for="Cbu">Cuenta Destino:</label>
+                        <input type="text" id="cbu" name="cbu" required pattern="\d+" placeholder="Cuenta Destino">
+                    </div>
+
+                    <!-- Monto -->
+                    <div class="form-group">
+                        <label for="monto">Monto:</label>
+                        <input type="text" id="monto" name="monto" required pattern="\d+(\.\d{1,2})?" placeholder="Monto (ejemplo: 1000.50)">
+                    </div>
+
+                    <!-- Detalle -->
+                    <div class="form-group">
+                        <label for="detalle">Detalle:</label>
+                        <input type="text" id="detalle" name="detalle" placeholder="Detalle de la transferencia">
+                    </div>
+
+                    <!-- Botón de transferencia -->
+                    <button type="submit" class="btn" name="RealizarBtn">Realizar Transferencia</button>
+                    
+                    <!-- Botón para redirigir al menú principal -->
+				
+                     <button type="button" class="submit-button" onclick="location='/TPINT_GRUPO_15_LAB4/servletInformacionCliente'">Volver al Menú Principal</button>
+                    
+                </form>
+                
+            </div>
+        </div>
+        		
+    </div>
 
     <script src="JS/MenuAdm.js"></script>
     <script>
