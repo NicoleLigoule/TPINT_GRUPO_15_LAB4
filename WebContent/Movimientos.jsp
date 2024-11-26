@@ -24,66 +24,12 @@
     <link href="${pageContext.request.contextPath}/Css/Movimientos.css" type="text/css" rel="stylesheet"/>
 
     <!-- Bloque de estilo directo en JSP para probar -->
-    <style>
-        #cuentaSeleccionada {
-            border-radius: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            font-size: 14px;
-            background-color: #fff;
-        }
 
-        button[type="submit"] {
-            background-color: #d6a6d6;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #c097c0;
-        }
-
-        .movements-list h3 {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .movement-item {
-            background-color: #f9f9f9;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-
-        .pagination {
-            margin-top: 20px;
-        }
-
-        .pagination span,
-        .pagination a {
-            padding: 5px 10px;
-            margin: 0 5px;
-            border: 1px solid #ddd;
-            text-decoration: none;
-        }
-
-        .pagination a:hover {
-            background-color: #f0f0f0;
-        }
-
-    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
-        <button class="hamburger" onclick="toggleSidebar()">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </button>
+        
         <a href="${pageContext.request.contextPath}/Login.jsp">
             <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
@@ -99,7 +45,7 @@
                 <li><a href="#">Información personal</a></li>
             </ul>
         </aside>
-
+	
         <section class="content">
             <div class="movements-list">
                 <h3>Movimientos</h3>
@@ -122,6 +68,7 @@
                         %>
                     </select>
                     <button type="submit">Ver movimientos</button>
+                     <a href="InicioCliente.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
                 </form>
 
                 <!-- Mostrar lista de movimientos -->
@@ -145,7 +92,7 @@
                     <p>No hay movimientos disponibles para la cuenta seleccionada.</p>
                 <% } %>
             </div>
-
+	
             <!-- Paginación -->
             <div class="pagination">
                 <span>1</span>
@@ -153,11 +100,10 @@
                 <a href="#">3</a>
                 <a href="#">Siguiente ></a>
             </div>
+           
         </section>
-		  <form action="InicioCliente.jsp" method="get">
-    <button type="submit" class="btn btn-primary">Volver al Menú Principal</button>
+		  
 </form>
-s
     </div>
 
     <script src="JS/MenuAdm.js"></script>
