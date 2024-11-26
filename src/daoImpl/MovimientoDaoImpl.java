@@ -14,33 +14,7 @@ import entidades.Movimiento;
 public class MovimientoDaoImpl implements MovimientoDao {
     private Conexion cn;
 
-    @Override
-    public List<Movimiento> obtenerMovimientos() {
-        cn = new Conexion();
-        cn.Open();
-        List<Movimiento> lista = new ArrayList<>();
-        try {
-            ResultSet rs = cn.query("SELECT * FROM Movimiento");
-            while (rs.next()) {
-                Movimiento movimiento = new Movimiento();
-
-                // Asignación de valores según la estructura de la base de datos
-                movimiento.setIdMovimientoMov(rs.getInt("Id_Movimiento_Mov"));
-                movimiento.setFechaMovimientoMov(rs.getTimestamp("FechaMovimiento_Mov").toLocalDateTime());
-                movimiento.setDetalleMov(rs.getString("Detalle_Mov"));
-                movimiento.setImporteMov(rs.getBigDecimal("Importe_Mov"));
-                movimiento.setIdTipoMovTMMov(rs.getInt("Id_TipoMov_TM_Mov"));
-
-                lista.add(movimiento);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            cn.close();
-        }
-        return lista;
-    }
-
+    
     @Override
     public List<Movimiento> obtenerMovimientosPorCuenta(int numeroCuenta) {
         cn = new Conexion();
@@ -48,12 +22,7 @@ public class MovimientoDaoImpl implements MovimientoDao {
         List<Movimiento> lista = new ArrayList<>();
         try {
             // Construir la consulta con eliminación de duplicados
-            String query = "SELECT DISTINCT " +
-                    "m.Id_Movimiento_Mov, " +
-                    "DATE_FORMAT(m.FechaMovimiento_Mov, '%Y-%m-%d %H:%i:%s') AS FechaMovimiento_Mov, " +
-                    "m.Detalle_Mov, " +
-                    "m.Importe_Mov, " +
-                    "tm.Descripcion_TM AS TipoMovimiento " +
+            String query = "SELECT DISTINCT m.*, tm.Descripcion_TM " +
                     "FROM MovimientoXCuenta mx " +
                     "JOIN Movimiento m ON mx.Id_Movimiento__Mov_MXC = m.Id_Movimiento_Mov " +
                     "JOIN TipoMovimiento tm ON m.Id_TipoMov_TM_Mov = tm.Id_TipoMov_TM " +
@@ -66,17 +35,14 @@ public class MovimientoDaoImpl implements MovimientoDao {
                 // Mapear las columnas a las propiedades de la clase Movimiento
                 movimiento.setIdMovimientoMov(rs.getInt("Id_Movimiento_Mov"));
                 
-                // Aquí obtenemos la fecha formateada como String
-                String fechaMovimiento = rs.getString("FechaMovimiento_Mov");  // Ahora es un String
-                movimiento.setFechaMovimientoMov(fechaMovimiento);  // Asignamos el String al setter
-                
+                // Obtener la fecha como String formateada y asignarla
+                String fechaMovimiento = rs.getString("FechaMovimiento_Mov");
+                movimiento.setFechaMovimientoMov(fechaMovimiento);  // Guardar como String ya formateado
                 movimiento.setDetalleMov(rs.getString("Detalle_Mov"));
                 movimiento.setImporteMov(rs.getBigDecimal("Importe_Mov"));
                 movimiento.setIdTipoMovTMMov(rs.getInt("Id_TipoMov_TM_Mov"));
+                movimiento.setDescripcionTipoMov(rs.getString("Descripcion_TM"));
                 
-                // Asignamos la descripción del tipo de movimiento
-                movimiento.setDescripcionTipoMov(rs.getString("TipoMovimiento"));
-
                 lista.add(movimiento);
             }
         } catch (SQLException e) {
@@ -86,4 +52,8 @@ public class MovimientoDaoImpl implements MovimientoDao {
         }
         return lista;
     }
+
+
+
+    
 }

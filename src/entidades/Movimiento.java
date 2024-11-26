@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public class Movimiento {
 
     private int idMovimientoMov;           
-    private LocalDateTime fechaMovimientoMov; 
+    private String fechaMovimientoMov; 
     private String detalleMov;            
     private BigDecimal importeMov;        
     private int idTipoMovTMMov;           
@@ -16,7 +16,7 @@ public class Movimiento {
     public Movimiento() {
     }
 
-    public Movimiento(int idMovimientoMov, LocalDateTime fechaMovimientoMov, String detalleMov, 
+    public Movimiento(int idMovimientoMov, String fechaMovimientoMov, String detalleMov, 
                       BigDecimal importeMov, int idTipoMovTMMov, String descripcionTipoMov) {
         this.idMovimientoMov = idMovimientoMov;
         this.fechaMovimientoMov = fechaMovimientoMov;
@@ -35,12 +35,12 @@ public class Movimiento {
         this.idMovimientoMov = idMovimientoMov;
     }
 
-    public LocalDateTime getFechaMovimientoMov() {
+    public String getFechaMovimientoMov() {
         return fechaMovimientoMov;
     }
 
-    public void setFechaMovimientoMov(LocalDateTime fechaMovimientoMov) {
-        this.fechaMovimientoMov = fechaMovimientoMov;
+    public void setFechaMovimientoMov(String fechaMovimiento) {
+        this.fechaMovimientoMov = fechaMovimiento;
     }
 
     public String getDetalleMov() {
