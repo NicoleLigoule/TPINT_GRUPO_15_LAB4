@@ -14,4 +14,8 @@ public class NegocioMovimiento {
     public List<Movimiento> obtenerMovimientosPorCuenta(int numeroCuenta) {
         return movimientoDao.obtenerMovimientosPorCuenta(numeroCuenta);
     }
+
+    public List<Movimiento> obtenerMovimientosPorCuentaYTipo(int numeroCuenta, String tipoMovimiento) {
+        return movimientoDao.obtenerMovimientosPorCuentaYTipo(numeroCuenta, tipoMovimiento);
+    }
 }

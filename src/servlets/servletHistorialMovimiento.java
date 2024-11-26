@@ -17,56 +17,48 @@ import entidades.Usuario;
 import negocio.NegocioCuentas;
 import negocio.NegocioMovimiento;
 
-/**
- * Servlet implementation class servletHistorialMovimiento
- */
 @WebServlet("/servletHistorialMovimiento")
 public class servletHistorialMovimiento extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final long serialVersionUID = 1L;
+
     public servletHistorialMovimiento() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        
+
         if (usuario == null) {
             response.sendRedirect("Login.jsp");
             return;
         }
 
         String cuil = usuario.getCuilUs();
-        System.out.println("CUIL del usuario: " + cuil); // Depuración
-
         NegocioMovimiento negocioMovimiento = new NegocioMovimiento();
         NegocioCuentas negocioCuentas = new NegocioCuentas();
 
-        // Obtener las cuentas asociadas al usuario
         List<Cuenta> cuentas = negocioCuentas.obtenerCuentasPorCuil(cuil);
 
         if (cuentas != null && !cuentas.isEmpty()) {
-            request.setAttribute("cuentas", cuentas); // Atributo para el JSP
-            
+            request.setAttribute("cuentas", cuentas);
         } else {
             request.setAttribute("MensajeCuentas", "No se encontraron cuentas asociadas.");
         }
 
-        // Obtener la cuenta seleccionada
         String cuentaSeleccionada = request.getParameter("cuentaSeleccionada");
+        String tipoMovimiento = request.getParameter("tipoMovimiento");
 
         if (cuentaSeleccionada != null) {
             try {
                 int numeroCuenta = Integer.parseInt(cuentaSeleccionada);
-                List<Movimiento> listaMovimientos = negocioMovimiento.obtenerMovimientosPorCuenta(numeroCuenta);
+
+                List<Movimiento> listaMovimientos;
+                if (tipoMovimiento != null && !tipoMovimiento.isEmpty()) {
+                    listaMovimientos = negocioMovimiento.obtenerMovimientosPorCuentaYTipo(numeroCuenta, tipoMovimiento);
+                } else {
+                    listaMovimientos = negocioMovimiento.obtenerMovimientosPorCuenta(numeroCuenta);
+                }
 
                 if (listaMovimientos != null && !listaMovimientos.isEmpty()) {
                     request.setAttribute("listaMovimientos", listaMovimientos);
@@ -86,13 +78,7 @@ public class servletHistorialMovimiento extends HttpServlet {
         rd.forward(request, response);
     }
 
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }
