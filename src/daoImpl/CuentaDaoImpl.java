@@ -180,6 +180,7 @@ public class CuentaDaoImpl implements CuentaDao {
         return estado;
     }
 
+
     @Override
     public boolean editar(Cuenta cuenta) {
         cn = new Conexion();
