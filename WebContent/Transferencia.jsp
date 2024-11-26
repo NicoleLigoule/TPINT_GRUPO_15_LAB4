@@ -1,20 +1,27 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@ page import="entidades.Usuario"%>
+<%@ page import="java.util.List"%>
+<%@ page import="entidades.Transferencias"%>
+<%@ page import="entidades.Cuenta"%>
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     if (usuario == null) {
         response.sendRedirect("Login.jsp");
         return;
     }
+
+    // Obtener las cuentas desde el atributo de la sesión o desde la base de datos
+    List<Cuenta> cuentas = (List<Cuenta>) request.getAttribute("cuentas"); // O el método que uses para pasar las cuentas
 %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transferencia</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/Css/Transferencia.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar Transferencia</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/Transferencia.css">
+</head>
 <body>
 	<nav class="navbar">
 		<button class="hamburger" onclick="toggleSidebar()">
@@ -43,8 +50,8 @@
 		</div>
 	</div>
 
-	<script src="JS/MenuAdm.js"></script>
-	<script>
+    <script src="JS/MenuAdm.js"></script>
+    <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('active');

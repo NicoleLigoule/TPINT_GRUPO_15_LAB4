@@ -1,21 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List"%>
 <%@ page import="entidades.Usuario"%>
+<%@ page import="entidades.Movimiento"%>
+<%@ page import="entidades.Cuenta"%>
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     if (usuario == null) {
         response.sendRedirect("Login.jsp");
         return;
     }
+
+    List<Movimiento> listaMovimientos = (List<Movimiento>) request.getAttribute("listaMovimientos");
+    List<Cuenta> cuentas = (List<Cuenta>) request.getAttribute("cuentas"); // Lista de cuentas asociadas al usuario
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Movimientos</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/Css/Movimientos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimientos</title>
+    <!-- Asegurï¿½ndonos de que la ruta sea correcta -->
+    <link href="${pageContext.request.contextPath}/Css/Movimientos.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Bloque de estilo directo en JSP para probar -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
 <body>
 	<nav class="navbar">
 	<button class="hamburger" onclick="toggleSidebar()">
@@ -37,7 +48,7 @@
 				<div class="movement-icon"></div>
 				<div class="movement-details">
 					<p>
-						<strong>Claudio Nuñez</strong>
+						<strong>Claudio Nuï¿½ez</strong>
 					</p>
 					<p>Transferencia enviada</p>
 					<p>Caja de ahorro</p>
@@ -84,33 +95,26 @@
 					<p>Transferencia enviada</p>
 					<p>Caja de ahorro</p>
 				</div>
-				<div class="movement-amount-negative">- $55,450.40</div>
-				<div class="movement-time">21:40</div>
-			</div>
+                <% 
+                    } else {
+                %>
+                    <p>No hay movimientos disponibles para la cuenta seleccionada.</p>
+                <% } %>
+            </div>
+	
+            <!-- Paginaciï¿½n -->
+            <div class="pagination">
+                <span>1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">Siguiente ></a>
+            </div>
+           
+        </section>
+		  
+</form>
+    </div>
 
-			<h3>1 de noviembre</h3>
-			<div class="movement-item">
-				<div class="movement-icon"></div>
-				<div class="movement-details">
-					<p>
-						<strong>Dante Luongo</strong>
-					</p>
-					<p>Ingreso de dinero</p>
-					<p>Transferencia externa</p>
-				</div>
-				<div class="movement-amount-positive">+ $70,000.00</div>
-				<div class="movement-time">18:20</div>
-			</div>
-		</div>
-
-		<!-- paginacion -->
-		<div class="pagination">
-			<span>1</span> <a href="#">2</a> <a href="#">3</a> <a href="#">Siguiente
-				></a>
-		</div>
-		</section>
-	</div>
-
-	<script src="JS/MenuAdm.js"></script>
+    <script src="JS/MenuAdm.js"></script>
 </body>
 </html>

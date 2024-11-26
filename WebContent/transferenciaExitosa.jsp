@@ -7,6 +7,9 @@
         response.sendRedirect("Login.jsp");
         return;
     }
+    // Obtener los valores de CBU y el importe de la transferencia de la sesión
+    String cbuDestino = (String) session.getAttribute("cbuDestino");
+    String importe = (String) session.getAttribute("importe");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -15,7 +18,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Transferencia</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/Css/Transferencia.css">
+    href="${pageContext.request.contextPath}/Css/Transferencia.css">
+</head>
 <body>
 	<nav class="navbar">
 		<button class="hamburger" onclick="toggleSidebar()">

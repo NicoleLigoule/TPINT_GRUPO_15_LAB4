@@ -1,5 +1,6 @@
 @charset "ISO-8859-1";
 
+/* Estilos generales */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -12,6 +13,7 @@ body {
     margin: 0;
     padding-top: 100px;
 }
+
 
 .navbar {
     width: 100%;
@@ -54,155 +56,410 @@ body {
 
 .main-container {
     display: flex;
-    padding-top: 60px;
+    padding-top: 20px;
 }
 
 .sidebar {
-    width: 250px;
-    background-color: #d69ecf;
-    height: 100vh;
-    padding-top: 20px;
+    width: 250px; 
+    background-color: #d6a6d6;
+    padding: 20px;
+    height: 100vh; 
     position: fixed;
-    top: 60px;
-    left: -250px;
-    transition: left 0.3s ease;
-    overflow-y: auto;
+    top: 80px; 
+    left: 0;
+    transition: transform 1s ease;
+    transform: translateX(-100%); 
     z-index: 1;
 }
 
 .sidebar.active {
-    left: 0;
+    transform: translateX(0); 
 }
 
 .sidebar ul {
-    list-style: none;
-    padding: 20px 0 0 0; 
-    margin: 0;
+    list-style-type: none;
+    padding: 15px;
 }
 
-.menu-item {
-    padding: 10px 20px;
+.sidebar ul li {
+    margin: 8px 0;
 }
 
-.menu-item > a {
+.sidebar ul li a {
     text-decoration: none;
+    font-size: 1.1rem;
     color: #333;
-    font-weight: bold;
     display: block;
-    padding: 10px;
+    padding: 4px;
 }
 
-.menu-item > a:hover {
-    background-color: #BB8FCE;
-    color: #fff;
+.sidebar ul li a:hover {
+    color: #f8e3f4;
 }
 
 .submenu {
-    display: none;
-    list-style: none;
+    list-style-type: none;
     padding-left: 20px;
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 1s ease; 
 }
 
 .menu-item.active .submenu {
-    display: block;
+    max-height: 500px; 
+}
+
+
+.submenu li {
+    font-size: 1rem;
+    color: #555;
+    padding-left: 15px; 
 }
 
 .submenu li a {
-    padding: 8px 20px;
-    display: block;
+    color: #555;
     text-decoration: none;
-    color: #333;
-    font-weight: normal;
 }
 
 .submenu li a:hover {
-    background-color: #C39BD3;
-    color: #fff;
+    color: #f8e3f4;
+}* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding-top: 100px;
 }
 
 
-.content {
-    margin-left: 550px;
-     margin-right: 550px;
-    padding-top: 20px;
-    width: calc(100% - 270px);
-}
-
-
-
-.filters {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.filters input, .filters select, .filters button {
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.movements-list h3 {
-    margin-top: 20px;
-    font-size: 1.1em;
-    color: #555;
-}
-
-.movement-item {
+.navbar {
+    width: 100%;
+    background-color: #d6a6d6;
     display: flex;
     align-items: center;
-    padding: 15px;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    margin-right: auto; 
+}
+
+.line {
+    width: 25px;
+    height: 3px;
     background-color: white;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 3px 0;
 }
 
-.movement-icon {
-    width: 40px;
-    height: 40px;
-    background-color: #eee;
-    border-radius: 50%;
-    margin-right: 10px;
+.img_logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto; 
 }
 
-.movement-details {
-    flex: 1;
+.username {
+    font-size: 1.2rem;
+    color: white;
+    margin-left: auto; 
 }
 
-.movement-amount-negative {
-    font-weight: bold;
-    color: #d32f2f; /* rojo para egresos */
-    margin-left: 10px;
+.main-container {
+    display: flex;
+    padding-top: 20px;
 }
 
-.movement-amount-positive {
-    font-weight: bold;
-    color: #388e3c; /* verde para ingresos */
-    margin-left: 10px;
+.sidebar {
+    width: 250px; 
+    background-color: #d6a6d6;
+    padding: 20px;
+    height: 100vh; 
+    position: fixed;
+    top: 80px; 
+    left: 0;
+    transition: transform 1s ease;
+    transform: translateX(-100%); 
+    z-index: 1;
+}
+
+.sidebar.active {
+    transform: translateX(0); 
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 15px;
+}
+
+.sidebar ul li {
+    margin: 8px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #333;
+    display: block;
+    padding: 4px;
+}
+
+.sidebar ul li a:hover {
+    color: #f8e3f4;
+}
+
+.submenu {
+    list-style-type: none;
+    padding-left: 20px;
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 1s ease; 
+}
+
+.menu-item.active .submenu {
+    max-height: 500px; 
 }
 
 
-.movement-time {
-    color: #777;
-    font-size: 0.9em;
+.submenu li {
+    font-size: 1rem;
+    color: #555;
+    padding-left: 15px; 
 }
 
+.submenu li a {
+    color: #555;
+    text-decoration: none;
+}
+
+.submenu li a:hover {
+    color: #f8e3f4;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 10px; /* Padding reducido */
+}
+
+/* Estilos de la paginación */
 .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px; /* Margen reducido */
 }
 
 .pagination a, .pagination span {
-    margin: 0 5px;
-    padding: 5px 10px;
+    margin: 0 3px;
+    padding: 3px 7px; /* Tamaño reducido */
     border-radius: 5px;
     color: #0078d4;
     cursor: pointer;
+    font-size: 10px;
 }
 
 .pagination a:hover {
     background-color: #0078d4;
     color: white;
 }
+
+.pagination span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilo para la lista de movimientos */
+/* Centrado de las tarjetas con un ancho controlado */
+
+.movement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaciado entre cada movimiento */
+    padding: 15px; /* Espaciado adicional para la lista */
+    max-width: 100%; /* Asegurarse de que la lista ocupe todo el ancho disponible */
+    overflow-y: auto; /* Permite el desplazamiento si hay muchos movimientos */
+    background-color: #f9f9f9; /* Fondo ligero para la lista */
+    border-radius: 5px; /* Bordes redondeados */
+    justify-content: center; /* Centra las tarjetas */
+    align-items: center; /* Alinea las tarjetas al centro */
+}
+
+.movement-item {
+    border: 1px solid #ddd; /* Bordes más delgados */
+    padding: 20px; /* Aumento del padding para dar más espacio */
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 14px; /* Fuente más grande */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaciado entre los elementos dentro de la tarjeta */
+    width: 80%; /* Controla el ancho de la tarjeta, no ocupa todo el ancho */
+    max-width: 600px; /* Establece un límite máximo para el ancho de la tarjeta */
+    word-wrap: break-word; /* Permite que las palabras largas se dividan y no se corten */
+    margin: 0 auto; /* Centra las tarjetas dentro del contenedor */
+}
+
+.movement-item h4 {
+    font-size: 14px; /* Aumento del tamaño de fuente en el título */
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: bold; /* Título en negrita para hacerlo más destacado */
+}
+
+.movement-item p {
+    font-size: 14px; /* Aumento del tamaño de fuente en los párrafos */
+    color: #555;
+    margin: 8px 0; /* Mejor espaciado entre los párrafos */
+    display: flex;
+    gap: 8px; /* Espaciado entre la etiqueta y el valor */
+    word-wrap: break-word; /* Permite que el texto largo se ajuste en varias líneas */
+}
+
+.movement-item p span {
+    font-weight: bold; /* Las etiquetas (como "Fecha", "Detalle") estarán en negrita */
+    color: #333;
+}
+
+.movement-item p strong {
+    font-weight: bold; /* Resalta los valores de los movimientos, como el importe o la fecha */
+    color: #000;
+}
+
+
+/* Estilos para el DropDownList (select) */
+select {
+    background-color: #fff;
+    border: 1px solid #ddd; /* Borde gris suave */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px;
+    font-size: 14px;
+    width: 100%; /* Para que ocupe el ancho completo del contenedor */
+    margin-bottom: 15px; /* Espaciado inferior */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto al pasar el mouse sobre el DropDownList */
+select:hover {
+    border-color: #0078d4; /* Cambia el borde al pasar el mouse */
+    box-shadow: 0 2px 5px rgba(0, 120, 212, 0.2); /* Añade sombra suave */
+}
+
+/* Estilo para el botón */
+button {
+    background-color: #0078d4; /* Fondo azul */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Relleno interior */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%; /* Para que ocupe el ancho completo del contenedor */
+}
+
+/* Efecto al pasar el mouse sobre el botón */
+button:hover {
+    background-color: #005bb5; /* Cambio de color al pasar el mouse */
+    transform: translateY(-2px); /* Le da un pequeño efecto de levantamiento */
+}
+
+/* Efecto cuando el botón es presionado */
+button:active {
+    transform: translateY(1px); /* Efecto de presionado */
+}
+
+/* Ajuste de los contenedores de los elementos (formulario) */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre los elementos del formulario */
+    max-width: 400px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px; /* Bordes redondeados para el formulario */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+}
+
+form label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px; /* Espaciado entre la etiqueta y el campo */
+}
+
+button[type="button"] {
+    background-color: #007bff; /* Color azul para el botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    width: 100%; /* Puedes ponerlo al 100% del ancho del formulario */
+}
+
+button[type="button"]:hover {
+    background-color: #0056b3; /* Color más oscuro al hacer hover */
+}
+
+#cuentaSeleccionada {
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            background-color: #fff;
+        }
+
+        button[type="submit"] {
+            background-color: #d6a6d6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #c097c0;
+        }
+
+        .movements-list h3 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .movement-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .pagination span,
+        .pagination a {
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            text-decoration: none;
+        }
+
+        .pagination a:hover {
+            background-color: #f0f0f0;
+        }

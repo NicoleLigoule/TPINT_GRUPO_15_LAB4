@@ -1,78 +1,86 @@
 package entidades;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Movimiento {
 
-	    private int idMovimientoMov;           
-	    private LocalDateTime fechaMovimientoMov; 
-	    private String detalleMov;            
-	    private BigDecimal importeMov;        
-	    private int idTipoMovTMMov;           
+    private int idMovimientoMov;           
+    private LocalDateTime fechaMovimientoMov; 
+    private String detalleMov;            
+    private BigDecimal importeMov;        
+    private int idTipoMovTMMov;           
+    private String descripcionTipoMov;   // Nueva propiedad para la descripción del tipo de movimiento
 
-	    // Constructores
-	    public Movimiento() {
-	         
-	    }
+    // Constructores
+    public Movimiento() {
+    }
 
-	    
-	    public Movimiento(int idMovimientoMov, LocalDateTime fechaMovimientoMov, String detalleMov, BigDecimal importeMov, int idTipoMovTMMov) {
-	        this.idMovimientoMov = idMovimientoMov;
-	        this.fechaMovimientoMov = fechaMovimientoMov;
-	        this.detalleMov = detalleMov;
-	        this.importeMov = importeMov;
-	        this.idTipoMovTMMov = idTipoMovTMMov;
-	    }
+    public Movimiento(int idMovimientoMov, LocalDateTime fechaMovimientoMov, String detalleMov, 
+                      BigDecimal importeMov, int idTipoMovTMMov, String descripcionTipoMov) {
+        this.idMovimientoMov = idMovimientoMov;
+        this.fechaMovimientoMov = fechaMovimientoMov;
+        this.detalleMov = detalleMov;
+        this.importeMov = importeMov;
+        this.idTipoMovTMMov = idTipoMovTMMov;
+        this.descripcionTipoMov = descripcionTipoMov; // Inicializar la descripción
+    }
 
-	    // Getters y setters
-	    public int getIdMovimientoMov() {
-	        return idMovimientoMov;
-	    }
+    // Getters y setters
+    public int getIdMovimientoMov() {
+        return idMovimientoMov;
+    }
 
-	    public void setIdMovimientoMov(int idMovimientoMov) {
-	        this.idMovimientoMov = idMovimientoMov;
-	    }
+    public void setIdMovimientoMov(int idMovimientoMov) {
+        this.idMovimientoMov = idMovimientoMov;
+    }
 
-	    public LocalDateTime getFechaMovimientoMov() {
-	        return fechaMovimientoMov;
-	    }
+    public LocalDateTime getFechaMovimientoMov() {
+        return fechaMovimientoMov;
+    }
 
-	    public void setFechaMovimientoMov(LocalDateTime fechaMovimientoMov) {
-	        this.fechaMovimientoMov = fechaMovimientoMov;
-	    }
+    public void setFechaMovimientoMov(LocalDateTime fechaMovimientoMov) {
+        this.fechaMovimientoMov = fechaMovimientoMov;
+    }
 
-	    public String getDetalleMov() {
-	        return detalleMov;
-	    }
+    public String getDetalleMov() {
+        return detalleMov;
+    }
 
-	    public void setDetalleMov(String detalleMov) {
-	        this.detalleMov = detalleMov;
-	    }
+    public void setDetalleMov(String detalleMov) {
+        this.detalleMov = detalleMov;
+    }
 
-	    public BigDecimal getImporteMov() {
-	        return importeMov;
-	    }
+    public BigDecimal getImporteMov() {
+        return importeMov;
+    }
 
-	    public void setImporteMov(BigDecimal importeMov) {
-	        this.importeMov = importeMov;
-	    }
+    public void setImporteMov(BigDecimal importeMov) {
+        this.importeMov = importeMov;
+    }
 
-	    public int getIdTipoMovTMMov() {
-	        return idTipoMovTMMov;
-	    }
+    public int getIdTipoMovTMMov() {
+        return idTipoMovTMMov;
+    }
 
-	    public void setIdTipoMovTMMov(int idTipoMovTMMov) {
-	        this.idTipoMovTMMov = idTipoMovTMMov;
-	    }
+    public void setIdTipoMovTMMov(int idTipoMovTMMov) {
+        this.idTipoMovTMMov = idTipoMovTMMov;
+    }
 
+    // Getter y Setter para la nueva propiedad descripcionTipoMov
+    public String getDescripcionTipoMov() {
+        return descripcionTipoMov;
+    }
 
-	    // Override toString()
-		@Override
-		public String toString() {
-			return "Movimiento [idMovimientoMov=" + idMovimientoMov + ", fechaMovimientoMov=" + fechaMovimientoMov
-					+ ", detalleMov=" + detalleMov + ", importeMov=" + importeMov + ", idTipoMovTMMov=" + idTipoMovTMMov
-					+ "]";
-		}
-	    
-	}
+    public void setDescripcionTipoMov(String descripcionTipoMov) {
+        this.descripcionTipoMov = descripcionTipoMov;
+    }
 
+    // Override toString()
+    @Override
+    public String toString() {
+        return "Movimiento [idMovimientoMov=" + idMovimientoMov + ", fechaMovimientoMov=" + fechaMovimientoMov
+                + ", detalleMov=" + detalleMov + ", importeMov=" + importeMov + ", idTipoMovTMMov=" + idTipoMovTMMov
+                + ", descripcionTipoMov=" + descripcionTipoMov + "]"; // Mostrar también la descripción en el toString
+    }
+}

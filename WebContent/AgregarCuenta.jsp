@@ -109,6 +109,12 @@
 							onclick="window.history.back()">Volver</button>
 						<button type="submit" class="submit-button" name="agregarBtn">Agregar</button>
 					</div>
+					<div class="button-group">
+						
+						
+						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
+						
+					</div>
 					<!-- mensaje de que cargó bien y limpia, sino msj cargó mal -->
 					<%
 						String status = request.getParameter("status");

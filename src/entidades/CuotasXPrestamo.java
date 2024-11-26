@@ -6,7 +6,7 @@ public class CuotasXPrestamo {
 	    private int idPrestamoPtCp; 
 	    private LocalDate fechaVencimientoCp; 
 	    private int nCuota; 
-
+	    
 	    // Constructores
 	    public CuotasXPrestamo() {
 	    	
