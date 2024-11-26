@@ -1,6 +1,7 @@
 package negocio;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import daoImpl.ClienteDaoImpl;
@@ -56,8 +57,12 @@ public class NegocioCuentas {
 		public List<TipoDeCuenta> obtenerTiposTodos() {
 			return cuentaDao.readallTipoDeCuentas();
 		}
-		public Cliente obtenerClienteDeLACuenta(String numeroCuenta) {
+		
+		public List<Cuenta> obtenerCuentasReporte(int tipo,LocalDate fechaDesde, LocalDate fechaHasta) {
+		    return cuentaDao.obtenerCuentasReporte(tipo, fechaDesde, fechaHasta);
+		}
 
+		public Cliente obtenerClienteDeLACuenta(String numeroCuenta) {
 			String cuil= cuentaDao.obtenerCuilCuentaPorNumero(numeroCuenta);
 			ClienteDaoImpl clienteDao =new 	ClienteDaoImpl();
 			Cliente cli=clienteDao.obtenerUnoPorCuil(cuil);
