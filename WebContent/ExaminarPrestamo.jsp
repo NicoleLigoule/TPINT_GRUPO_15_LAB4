@@ -39,14 +39,15 @@
 
 	<div class="main-container">
 		<jsp:include page="SubMenu_Admin.jsp" />
-
+		
+   <div class="Mastercontainer">
 		<div class="content">
 			<div class="form-card">
 				<h2>Examinar Prestamo</h2>
 				<%Prestamo IDPRestam =(Prestamo)request.getAttribute("Prestamo"); %>
 				<%Cliente Client =(Cliente)request.getAttribute("Clientes"); %>
 				<%InteresesXCantidadDeMeses Interese =(InteresesXCantidadDeMeses)request.getAttribute("Interes"); %>
-				<!-- Primer formulario (GET) GUARDAMOS HASTA PROVINCIA -->
+				
 				<form action="servletExaminarPrestamo" method="POST">
 					<label for="ID">Identificador De prestamo</label> <input type="text" id="Identificador" name="Identificador"
 						placeholder="Identificador"
@@ -56,7 +57,30 @@
 						placeholder="DNI"
 						value=$"+<%=IDPRestam.getImporteSolicitadoPt() != null ? IDPRestam.getImporteSolicitadoPt() : ""%>"
 						readonly>
-					<label for="cuil">CUIL</label> <input
+					<label for="cuil">Importe con intereses</label> <input
+						type="text" id="cuil" name="cuil" placeholder="CUIL"
+						value="<%=request.getParameter("cuil") != null ? request.getParameter("cuil") : ""%>"
+						required> 
+
+				</form>
+
+			</div>
+		</div>
+		<div class="content">
+			<div class="form-card">
+				<h2>Examinar Prestamo</h2>
+				
+				
+				<form action="servletExaminarPrestamo" method="POST">
+					<label for="ID">Identificador De prestamo</label> <input type="text" id="Identificador" name="Identificador"
+						placeholder="Identificador"
+						value="<%=IDPRestam.getIdPrestamoPt()!= -1 ? IDPRestam.getIdPrestamoPt() : ""%>"
+						readonly>
+			       <label for="Importe">Importe solicitado</label> <input type="text" id="Importe" name="Importe"
+						placeholder="DNI"
+						value=$"+<%=IDPRestam.getImporteSolicitadoPt() != null ? IDPRestam.getImporteSolicitadoPt() : ""%>"
+						readonly>
+					<label for="cuil">Importe con intereses</label> <input
 						type="text" id="cuil" name="cuil" placeholder="CUIL"
 						value="<%=request.getParameter("cuil") != null ? request.getParameter("cuil") : ""%>"
 						required> 
@@ -66,6 +90,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 
 	<script src="JS/MenuAdm.js"></script>
 </body>
