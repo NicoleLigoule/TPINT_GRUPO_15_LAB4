@@ -62,4 +62,10 @@ public class NegocioCuentas {
 		    return cuentaDao.obtenerCuentasReporte(tipo, fechaDesde, fechaHasta);
 		}
 
+		public Cliente obtenerClienteDeLACuenta(String numeroCuenta) {
+			String cuil= cuentaDao.obtenerCuilCuentaPorNumero(numeroCuenta);
+			ClienteDaoImpl clienteDao =new 	ClienteDaoImpl();
+			Cliente cli=clienteDao.obtenerUnoPorCuil(cuil);
+			return cli;
+		}
 }
