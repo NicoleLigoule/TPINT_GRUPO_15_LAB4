@@ -6,7 +6,7 @@ public class InteresesXCantidadDeMeses {
 
 	    private String plazoDPagosEnMesesIxm;  
 	    private BigDecimal interesIxm;         
-	    private int meses;                     
+	    private int Meses_int;                     
 
 	    // Constructores
 	    public InteresesXCantidadDeMeses() {
@@ -16,7 +16,7 @@ public class InteresesXCantidadDeMeses {
 	    public InteresesXCantidadDeMeses(String plazoDPagosEnMesesIxm, BigDecimal interesIxm, int meses) {
 	        this.plazoDPagosEnMesesIxm = plazoDPagosEnMesesIxm;
 	        this.interesIxm = interesIxm;
-	        this.meses = meses;
+	        this.Meses_int = meses;
 	    }
 
 	    // Getters y Setters
@@ -37,11 +37,11 @@ public class InteresesXCantidadDeMeses {
 	    }
 
 	    public int getMeses() {
-	        return meses;
+	        return Meses_int;
 	    }
 
 	    public void setMeses(int meses) {
-	        this.meses = meses;
+	        this.Meses_int = meses;
 	    }
 
 
@@ -49,7 +49,7 @@ public class InteresesXCantidadDeMeses {
 		@Override
 		public String toString() {
 			return "InteresesXCantidadDeMeses [plazoDPagosEnMesesIxm=" + plazoDPagosEnMesesIxm + ", interesIxm="
-					+ interesIxm + ", meses=" + meses + "]";
+					+ interesIxm + ", Meses_int=" + Meses_int + "]";
 		}
 
 	    

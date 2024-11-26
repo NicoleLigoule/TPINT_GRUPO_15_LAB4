@@ -25,7 +25,7 @@ public class InteresesXCantidadDeMesesDaoImpl implements dao.InteresesXCantidadD
 				
 				interes.setPlazoDPagosEnMesesIxm(rs.getString("Plazo_d_Pagos_En_meses_IXM"));				
 				interes.setInteresIxm(rs.getBigDecimal("Interes_IXM"));
-				interes.setMeses(rs.getInt("Meses"));
+				interes.setMeses(rs.getInt("Meses_int"));
 			}
 
 			

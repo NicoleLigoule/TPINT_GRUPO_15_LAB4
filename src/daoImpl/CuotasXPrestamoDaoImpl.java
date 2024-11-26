@@ -15,6 +15,10 @@ public class CuotasXPrestamoDaoImpl implements CuotasXPrestamoDao {
     public CuotasXPrestamoDaoImpl(Connection connection) {
         this.connection = connection;
     }
+    
+    public CuotasXPrestamoDaoImpl() {
+        this.connection = new Conexion().Open();
+    }
 
     @Override
     public void agregarCuota(CuotasXPrestamo cuota) {

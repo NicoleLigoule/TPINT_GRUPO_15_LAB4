@@ -212,11 +212,17 @@ public class PrestamoDaoImpl implements PrestamoDao {
         
         ArrayList<CuotasXPrestamo> cuotasLocal = new ArrayList<>();
 
-        try (Connection cn = conexion.Open();
-               PreparedStatement psCuotas = cn.prepareStatement(queryCuotas);
-               ResultSet rsCuotas = psCuotas.executeQuery()) {
+        try (Connection cn = conexion.Open();) {
+        	PreparedStatement psCuotas = cn.prepareStatement(queryCuotas);
+    		
+    		
+    		
+    		
+            psCuotas.setInt(1, idPrestamoPt);
+    		
+    		
+            ResultSet rsCuotas = psCuotas.executeQuery();
 
-               psCuotas.setInt(1, idPrestamoPt);
 
                while (rsCuotas.next()) {
                    CuotasXPrestamo cuota = new CuotasXPrestamo();
@@ -242,6 +248,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
         try {
             Connection cn = conexion.Open();
             PreparedStatement psDetalles = cn.prepareStatement(queryDetalles);
+            psDetalles.setInt(1, idPrestamoPt);
             ResultSet rsDetalles = psDetalles.executeQuery();
 
             if (rsDetalles.next()) {

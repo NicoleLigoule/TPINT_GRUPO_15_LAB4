@@ -5,6 +5,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="javafx.util.Pair" %>
+<%@ page import="java.math.BigDecimal" %>
+
 
 <%
     // Obtención del usuario de la sesión
@@ -41,25 +43,31 @@
 
                 <%
                     // Recuperamos la lista de préstamos del request
-                    List<Pair<Integer, ArrayList<Prestamo>>> prestamosXCuenta = (List<Pair<Integer, ArrayList<Prestamo>>>) request.getAttribute("prestamosXCuenta");
+                    List<Pair<Integer, ArrayList<Prestamo>>> prestamosXCuenta = (List<Pair<Integer, ArrayList<Prestamo>>>) request.getAttribute("PrestamosXCuenta");
                     if (prestamosXCuenta != null && !prestamosXCuenta.isEmpty()) {
                         for (Pair<Integer, ArrayList<Prestamo>> pair : prestamosXCuenta) {
                             ArrayList<Prestamo> prestamos = pair.getValue();
                             for (Prestamo prestamo : prestamos) {
                             	
-                            	long cuotasPendientes = prestamo.getCuotas().stream().filter(cuota -> !cuota.getPagada()).count(); 
-                            	
+                            	int	cuotasImpagas = 0;
+                            	float totalDebt = 0;
+                                for (CuotasXPrestamo cuotas : prestamo.getCuotas()) {
+	                               	if(cuotas.getPagada() == false){
+	                               		cuotasImpagas = cuotasImpagas + 1;
+	                               		totalDebt =  totalDebt + prestamo.getDetalle().getImporteXCuotasDt().floatValue();
+	                               	}
+                                }
                 %>
                 
 					
 					
-					<p><strong>Cuotas Pendientes:</strong> <%= cuotasPendientes %></p>
+					
 
                             <div class="loan-card" onclick="redirigirAPago(<%= prestamo.getIdPrestamoPt() %>)">
                                 <h2>Préstamo #<%= prestamo.getIdPrestamoPt() %></h2>
                                 <p><strong>Número de Cuenta:</strong> <%= prestamo.getNumeroDeCuentaCuPt() %></p>
-                                <p><strong>Monto Total:</strong> $<%= prestamo.getMontoRestante() %></p>
-                                <p><strong>Cuotas Pendientes:</strong> <%=cuotasPendientes %> </p>
+                                <p><strong>Monto Total:</strong> $<%= totalDebt %></p>
+                                <p><strong>Cuotas Pendientes:</strong> <%=cuotasImpagas %> </p>
                                 <p><strong>Precio por Cuota:</strong> $<%= prestamo.getDetalle().getImporteXCuotasDt() %></p>
                             </div>
                 <%

@@ -56,7 +56,7 @@ public class ServletPagoPrestamo extends HttpServlet {
                     System.out.println("PagoPrestamo | No se encontraron cuentas para el CUIL: " + cuil);
                 } else {
                     for (Cuenta cuenta : cuentas) {
-                    	ArrayList<Prestamo> listaPrestamos = (ArrayList<Prestamo>) negocioPrestamo.obtenerPrestamoPorCuenta(cuenta.getNumeroDeCuentaCu());
+                    	ArrayList<Prestamo> listaPrestamos = (ArrayList<Prestamo>) negocioPrestamo.obtenerPrestamoPorCuentaConDetalle(cuenta.getNumeroDeCuentaCu());
                      
                         prestamoXCuenta.add(new Pair<>(cuenta.getNumeroDeCuentaCu(), listaPrestamos));
                     }
@@ -66,7 +66,7 @@ public class ServletPagoPrestamo extends HttpServlet {
                 
                 System.out.println("Lista de prestamos: " + prestamoXCuenta);
 
-                RequestDispatcher rd = request.getRequestDispatcher("PagoPrestamo.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("PagoPrestamo_Seleccionar.jsp");
                 rd.forward(request, response);
 
             } catch (Exception e) {

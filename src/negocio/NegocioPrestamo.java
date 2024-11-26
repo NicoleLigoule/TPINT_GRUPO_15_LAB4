@@ -3,7 +3,9 @@ package negocio;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.CuotasXPrestamoDao;
 import dao.PrestamoDao;
+import daoImpl.CuotasXPrestamoDaoImpl;
 import daoImpl.PrestamoDaoImpl;
 import entidades.CuotasXPrestamo;
 import entidades.DetalleXPrestamo;
@@ -15,6 +17,7 @@ public class NegocioPrestamo {
     
     public NegocioPrestamo() {
         this.prestamoDao = new PrestamoDaoImpl();
+        
     }
     
     // me devuelve un prestamo totalmente cargado (lista de cuotas, descripcion)
@@ -122,6 +125,21 @@ public class NegocioPrestamo {
 
 	public List<Prestamo> obtenerPrestamoPorCuenta(int idCuenta) {
 		return prestamoDao.obtenerPrestamoPorCuenta(idCuenta);
+	}
+	
+	public List<Prestamo> obtenerPrestamoPorCuentaConDetalle(int idCuenta) {
+		List<Prestamo> prestamos = prestamoDao.obtenerPrestamoPorCuenta(idCuenta);
+		
+		
+		for(Prestamo pr : prestamos) {
+			pr.setDetalle(prestamoDao.TraerDetalles(pr.getIdPrestamoPt()));
+			pr.setCuotas(prestamoDao.TraerCuotas(pr.getIdPrestamoPt()));
+		}
+		
+		
+		
+		
+		return prestamos;
 	}
 
 }
