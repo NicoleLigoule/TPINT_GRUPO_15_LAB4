@@ -15,7 +15,7 @@
 					<li><a href="ServletListarCuenta?Param=1">Listar Cuenta</a></li>
 					<li><a href="AsignarCuenta.jsp">Asignar Cuenta</a></li>
 				</ul></li>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Autorizacion de Prestamos</a>
+			<li class="menu-item"><a href="ServletAutorizarPrestamo?Param=1" >Autorizacion de Prestamos</a>
 				<!-- <ul class="submenu">
                         <li> <a href="#">Transaccion</a></li>
                         <li> <a href="#">Ver Historial</a></li>
