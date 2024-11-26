@@ -106,7 +106,7 @@
                             <td><%= cuenta.getNumeroDeCuentaCu() %></td>
                             <td><%= cuenta.getCuilCliCu() %></td>
                             <td><%= cuenta.getFechaCreacionCu() %></td>
-                            <td><%= cuenta.getIdTipoCuenta() %></td>
+                            <td><%= cuenta.getTipoCuentaDescripcion() %></td>
                             <td><%= cuenta.getCbuCu() %></td>
                             <td><%= cuenta.getSaldoCu() %></td>
                             <td><%= cuenta.isEstadoCu() ? "Activa" : "Inactiva" %></td>

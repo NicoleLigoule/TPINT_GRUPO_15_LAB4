@@ -54,13 +54,16 @@ public class CuentaDaoImpl implements CuentaDao {
         cn.Open();
         List<Cuenta> lista = new ArrayList<>();
         try {
-            ResultSet rs = cn.query("SELECT * FROM Cuenta WHERE Estado_Cu = 1");
+            ResultSet rs = cn.query("SELECT C.Numero_de_Cuenta_Cu, C.Cuil_Cli_Cu, C.Fecha_Creacion_Cu, T.Nombre_Tipo, C.CBU_Cu, C.Saldo_Cu, C.Estado_Cu, T.Nombre_Tipo " +
+                    "FROM Cuenta C " +
+                    "JOIN TipoCuenta T ON C.Id_Tipo_Cuenta = T.Id_Tipo_Cuenta " +
+                    "WHERE C.Estado_Cu = 1");
             while (rs.next()) {
                 Cuenta cuenta = new Cuenta();
                 cuenta.setNumeroDeCuentaCu(rs.getInt("Numero_de_Cuenta_Cu"));
                 cuenta.setCuilCliCu(rs.getString("Cuil_Cli_Cu"));
                 cuenta.setFechaCreacionCu(rs.getDate("Fecha_Creacion_Cu").toLocalDate());
-                cuenta.setIdTipoCuenta(rs.getInt("Id_Tipo_Cuenta"));
+                cuenta.setTipoCuentaDescripcion(rs.getString("Nombre_Tipo")); // Descripción del tipo de cuenta
                 cuenta.setCbuCu(rs.getString("CBU_Cu"));
                 cuenta.setSaldoCu(rs.getBigDecimal("Saldo_Cu"));
                 cuenta.setEstadoCu(rs.getBoolean("Estado_Cu"));
