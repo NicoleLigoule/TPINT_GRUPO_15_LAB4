@@ -140,11 +140,11 @@ FOR EACH ROW
 BEGIN
     DECLARE ultimoCBU BIGINT;
 
-    -- agarramos el último valor de CBU_Cu como un número entero
+    -- agarramos el Ãºltimo valor de CBU_Cu como un nÃºmero entero
     SELECT MAX(CAST(CBU_Cu AS UNSIGNED)) INTO ultimoCBU
     FROM Cuenta;
 
-    -- si no hay valores previos en la tabla, se inicia con el número base
+    -- si no hay valores previos en la tabla, se inicia con el nÃºmero base
     IF ultimoCBU IS NULL THEN
         SET ultimoCBU = 5500990000000001;
     ELSE
@@ -176,7 +176,7 @@ BEGIN
     );
 END$$
 
-DELIMITER ;
+DELIMITERÂ ;
 
 DELIMITER $$
 
@@ -196,7 +196,7 @@ BEGIN
     END IF;
 END$$
 
-DELIMITER�;
+DELIMITER ;
 DELIMITER $$
 
 CREATE TRIGGER after_prestamo_insert
@@ -241,41 +241,40 @@ END$$
 DELIMITER $$
 
 CREATE PROCEDURE GenerarCuotas(
-    IN p_ID_Prestamo INT,       -- ID del pr�stamo
+    IN p_ID_Prestamo INT,       -- ID del préstamo
     IN p_CantidadMeses INT      -- Cantidad de meses (cuotas)
 )
 BEGIN
     DECLARE v_FechaVencimiento DATE;
+    DECLARE i INT DEFAULT 1;
 
     -- Inicializa la fecha de vencimiento como la fecha actual
     SET v_FechaVencimiento = CURDATE();
 
-    -- Ciclo FOR para iterar por cada cuota
-    FOR i IN 1 .. p_CantidadMeses DO
-        -- Inserta cada cuota en la tabla
+    -- Ciclo WHILE para iterar por cada cuota
+    WHILE i <= p_CantidadMeses DO
+        -- Inserta cada cuota en la tabla CuotasXPrestamos
         INSERT INTO CuotasXPrestamos (
             ID_Prestamo_Pt_Cp,
             Fecha_vencimiento_Cp,
             N_Cuota,
             pagada
         ) VALUES (
-            p_ID_Prestamo,       -- ID del pr�stamo
+            p_ID_Prestamo,       -- ID del préstamo
             v_FechaVencimiento,  -- Fecha de vencimiento
-            i,                   -- N�mero de cuota
+            i,                   -- Número de cuota
             0                    -- Estado inicial: no pagada
         );
 
         -- Incrementa la fecha de vencimiento al siguiente mes
         SET v_FechaVencimiento = DATE_ADD(v_FechaVencimiento, INTERVAL 1 MONTH);
-    END FOR;
-END;
-$$
+        
+        -- Incrementa el contador de cuotas
+        SET i = i + 1;
+    END WHILE;
+END$$
 
 DELIMITER ;
-
-
-
-
 
 -- INSERTS --
 
@@ -333,9 +332,9 @@ INSERT INTO Cliente (
     fecha_nacimiento_Cli, direccion_Cli, ID_Localidad_Cli, correo_electronico_Cli, 
     telefono_Cli, estado_Cli
 ) VALUES 
-('20-12345678-9', 12345678, 'Juan', 'Pérez', 1, 'AR', '1990-05-10', 'Av. Siempre Viva 742', 1, 'juan.perez@gmail.com', '341-1234567', TRUE),
-('27-87654321-8', 87654321, 'María', 'Gómez', 2, 'BR', '1985-03-25', 'Calle Principal 123', 3, 'maria.gomez@hotmail.com', '11-87654321', FALSE),
-('30-11223344-7', 11223344, 'Carlos', 'López', 1, 'CL', '1995-08-15', 'Av. Libertador 456', 6, 'carlos.lopez@yahoo.com', '261-1122334', TRUE);
+('20-12345678-9', 12345678, 'Juan', 'PÃ©rez', 1, 'AR', '1990-05-10', 'Av. Siempre Viva 742', 1, 'juan.perez@gmail.com', '341-1234567', TRUE),
+('27-87654321-8', 87654321, 'MarÃ­a', 'GÃ³mez', 2, 'BR', '1985-03-25', 'Calle Principal 123', 3, 'maria.gomez@hotmail.com', '11-87654321', FALSE),
+('30-11223344-7', 11223344, 'Carlos', 'LÃ³pez', 1, 'CL', '1995-08-15', 'Av. Libertador 456', 6, 'carlos.lopez@yahoo.com', '261-1122334', TRUE);
 
 INSERT INTO TipoCuenta (Nombre_Tipo) 
 VALUES 
