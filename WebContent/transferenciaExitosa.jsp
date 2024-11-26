@@ -22,6 +22,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transferencia</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/Transferencia.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
 </head>
 <body>
     <nav class="navbar">
@@ -56,7 +58,13 @@
                 <p>
                     <strong>Detalle:</strong> <%= detalle %>
                 </p>
-
+					<div class="print-button-container">
+                <button class="print-button" onclick="window.print()">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+            </div>
+            
+        
                 <div style="margin-top: 30px;"></div>
                 <button type="button" class="submit-button" onclick="location='/TPINT_GRUPO_15_LAB4/servletInformacionCliente'">Volver al Menú Principal</button>
             </div>
