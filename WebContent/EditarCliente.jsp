@@ -16,6 +16,8 @@
 	}
 %>
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -152,7 +154,15 @@
 					<div class="button-group">
 						<button type="button" class="cancel-button">Cancelar</button>
 						<button type="submit" class="submit-button" name="agregarBtn">Agregar</button>
+						
+						
+						
+						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
+						
+	
 					</div>
+					
+					
 
 					<!-- mensaje de que cargï¿½ bien y limpia, sino msj cargï¿½ mal -->
 					<%
@@ -181,6 +191,7 @@
 					%>
 					
 				</form>
+				
 
 			</div>
 		</div>

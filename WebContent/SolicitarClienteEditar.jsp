@@ -48,6 +48,12 @@
 				        <button type="submit" class="submit-button">Enviar</button>
 				        <button type="reset" class="cancel-button">Cancelar</button>
 				      </div>
+				      <div class="button-group">
+						
+						
+						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
+						
+					</div>
 				</form>
 
 

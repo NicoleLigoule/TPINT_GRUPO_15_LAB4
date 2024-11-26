@@ -156,6 +156,13 @@
 							<button type="button" class="cancel-button">Volver</button>
 							<button type="submit" class="submit-button">Modificar</button>
 						</div>
+						
+						<div class="button-group">
+						
+						
+						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
+						
+					</div>
 						<br>
 					</form>
 

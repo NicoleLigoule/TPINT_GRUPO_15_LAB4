@@ -2,6 +2,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="entidades.Usuario"%>
 <%@ page import="entidades.Movimiento"%>
+<%@ page import="entidades.Cuenta"%>
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     if (usuario == null) {
@@ -10,6 +11,7 @@
     }
 
     List<Movimiento> listaMovimientos = (List<Movimiento>) request.getAttribute("listaMovimientos");
+    List<Cuenta> cuentas = (List<Cuenta>) request.getAttribute("cuentas"); // Lista de cuentas asociadas al usuario
 %>
 
 <!DOCTYPE html>
@@ -18,7 +20,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movimientos</title>
-   <link href="Css/Movimientos.css" type="text/css" rel="stylesheet"/>
+    <!-- Asegurándonos de que la ruta sea correcta -->
+    <link href="${pageContext.request.contextPath}/Css/Movimientos.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Bloque de estilo directo en JSP para probar -->
+    <style>
+        #cuentaSeleccionada {
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            background-color: #fff;
+        }
+
+        button[type="submit"] {
+            background-color: #d6a6d6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #c097c0;
+        }
+
+        .movements-list h3 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .movement-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .pagination span,
+        .pagination a {
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            text-decoration: none;
+        }
+
+        .pagination a:hover {
+            background-color: #f0f0f0;
+        }
+
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
@@ -45,39 +101,63 @@
         </aside>
 
         <section class="content">
-    <div class="movements-list">
-        <h3>Movimientos</h3>
+            <div class="movements-list">
+                <h3>Movimientos</h3>
 
-        <% 
-            if (listaMovimientos != null && !listaMovimientos.isEmpty()) {
-        %>
-            <div class="movement-list">
-                <% for (Movimiento movimiento : listaMovimientos) { %>
-                    <div class="movement-item">
-                        <h4>ID Movimiento: <%= movimiento.getIdMovimientoMov() %></h4>
-                        <p><strong>Fecha:</strong> <%= movimiento.getFechaMovimientoMov() %></p>
-                        <p><strong>Detalle:</strong> <%= movimiento.getDetalleMov() %></p>
-                        <p><strong>Importe:</strong> <%= movimiento.getImporteMov() %></p>
-                        <p><strong>Tipo Movimiento:</strong> <%= movimiento.getIdTipoMovTMMov() %></p>
-                    </div>
+                <!-- Formulario para seleccionar una cuenta -->
+                <form method="get" action="servletHistorialMovimiento">
+                    <label for="cuentaSeleccionada">Seleccionar cuenta:</label>
+                    <select name="cuentaSeleccionada" id="cuentaSeleccionada">
+                     <option value="" disabled selected>Seleccione su cuenta</option>
+                        <% 
+                            if (cuentas != null) {
+                                for (Cuenta cuenta : cuentas) {
+                        %>
+                            <option value="<%= cuenta.getNumeroDeCuentaCu() %>">
+                                Cuenta: <%= cuenta.getNumeroDeCuentaCu() %> - Saldo: <%= cuenta.getSaldoCu() %>
+                            </option>
+                        <% 
+                                }
+                            }
+                        %>
+                    </select>
+                    <button type="submit">Ver movimientos</button>
+                </form>
+
+                <!-- Mostrar lista de movimientos -->
+                <% 
+                    if (listaMovimientos != null && !listaMovimientos.isEmpty()) {
+                %>
+                    <div class="movement-list">
+    <% for (Movimiento movimiento : listaMovimientos) { %>
+			        <div class="movement-item">
+			            <h4>ID Movimiento: <%= movimiento.getIdMovimientoMov() %></h4>
+			            <p><strong>Fecha:</strong> <%= movimiento.getFechaMovimientoMov() %></p>
+			            <p><strong>Detalle:</strong> <%= movimiento.getDetalleMov() %></p>
+			            <p><strong>Importe:</strong> <%= movimiento.getImporteMov() %></p>
+			            <p><strong>Tipo Movimiento:</strong> <%= movimiento.getDescripcionTipoMov() %></p> <!-- Cambiado -->
+			        </div>
+			  	  <% } %>
+				</div>
+                <% 
+                    } else {
+                %>
+                    <p>No hay movimientos disponibles para la cuenta seleccionada.</p>
                 <% } %>
             </div>
-        <% 
-            } else {
-        %>
-            <p>No hay movimientos disponibles.</p>
-        <% } %>
-    </div>
 
-    <!-- Paginación -->
-    <div class="pagination">
-        <span>1</span>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">Siguiente ></a>
-    </div>
-</section>
-
+            <!-- Paginación -->
+            <div class="pagination">
+                <span>1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">Siguiente ></a>
+            </div>
+        </section>
+		  <form action="InicioCliente.jsp" method="get">
+    <button type="submit" class="btn btn-primary">Volver al Menú Principal</button>
+</form>
+s
     </div>
 
     <script src="JS/MenuAdm.js"></script>

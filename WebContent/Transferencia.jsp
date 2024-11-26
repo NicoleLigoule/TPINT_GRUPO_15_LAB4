@@ -50,44 +50,52 @@
                 <h2>Realizar Transferencia</h2>
                 <p>Completa los datos para realizar una transferencia</p>
                 <!-- Cambiar acción a Servlet para procesar la transferencia -->
-							<form action="servletTransferencia" method="post">
-						    <!-- Cuenta Origen (DDL) -->
-						    <div class="form-group">
-						    <label for="cuentaOrigen">Cuenta Origen:</label>
-						     </div>
-						   <select id="cuentaOrigen" name="cuentaOrigen" required>
-						    <option value="" disabled selected>Seleccione su cuenta</option>
-						    <% if (cuentas != null) {
-						        for (Cuenta cuenta : cuentas) { %>
-						            <option value="<%= cuenta.getNumeroDeCuentaCu() %>">
-						                <%= cuenta.getNumeroDeCuentaCu() %>
-						            </option>
-						    <%  } } %>
-						    
-						</select>
+                <form action="servletTransferencia" method="post">
+                    <!-- Cuenta Origen (DDL) -->
+                    <div class="form-group">
+                        <label for="cuentaOrigen">Cuenta Origen:</label>
+                        <select id="cuentaOrigen" name="cuentaOrigen" required>
+                            <option value="" disabled selected>Seleccione su cuenta</option>
+                            <% if (cuentas != null) {
+                                for (Cuenta cuenta : cuentas) { %>
+                                    <option value="<%= cuenta.getNumeroDeCuentaCu() %>">
+                                        Cuenta: <%= cuenta.getNumeroDeCuentaCu() %> - Saldo: <%= cuenta.getSaldoCu() %>
+                                    </option>
+                            <%  } } %>
+                        </select>
+                    </div>
 
-						<div class="form-group">
-						
-						    <!-- Cuenta Destino (Textbox) -->
-						    <label for="Cbu">Cuenta Destino:</label>
-						    <input type="text" id="cbu" name="cbu" required pattern="\d+" placeholder="Cuenta Destino">
-						
-						    <!-- Monto -->
-						    <label for="monto">Monto:</label>
-						    <input type="text" id="monto" name="monto" required pattern="\d+(\.\d{1,2})?" placeholder="Monto (ejemplo: 1000.50)">
-						
-						    <!-- Detalle -->
-						    <label for="detalle">Detalle:</label>
-						    <input type="text" id="detalle" name="detalle" placeholder="Detalle de la transferencia">
-						
-						    <!-- Botón de transferencia -->
-						    <button type="submit" class="btn" name="RealizarBtn">Realizar Transferencia</button>
-						    </div>
-						</form>
+                    <!-- Cuenta Destino (Textbox) -->
+                    <div class="form-group">
+                        <label for="Cbu">Cuenta Destino:</label>
+                        <input type="text" id="cbu" name="cbu" required pattern="\d+" placeholder="Cuenta Destino">
+                    </div>
 
-					
+                    <!-- Monto -->
+                    <div class="form-group">
+                        <label for="monto">Monto:</label>
+                        <input type="text" id="monto" name="monto" required pattern="\d+(\.\d{1,2})?" placeholder="Monto (ejemplo: 1000.50)">
+                    </div>
+
+                    <!-- Detalle -->
+                    <div class="form-group">
+                        <label for="detalle">Detalle:</label>
+                        <input type="text" id="detalle" name="detalle" placeholder="Detalle de la transferencia">
+                    </div>
+
+                    <!-- Botón de transferencia -->
+                    <button type="submit" class="btn" name="RealizarBtn">Realizar Transferencia</button>
+                    
+                    <!-- Botón para redirigir al menú principal -->
+				
+                    <a href="InicioCliente.jsp">
+					    <button type="button">Volver al Menú Principal</button></a>
+                    
+                </form>
+                
             </div>
         </div>
+        		
     </div>
 
     <script src="JS/MenuAdm.js"></script>

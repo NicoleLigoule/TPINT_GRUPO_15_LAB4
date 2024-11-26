@@ -114,6 +114,12 @@
                         <% } %>
                     </tbody>
                 </table>
+                <div class="button-group">
+						
+						
+						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
+						
+					</div>
 
                 <% } else { %>
                 <p class="mensaje-sin-cuentas">No se encontraron Cuentas.</p>

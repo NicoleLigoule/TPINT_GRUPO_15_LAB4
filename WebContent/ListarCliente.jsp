@@ -113,12 +113,23 @@ th {
 					</tr>
 					<% } %>
 				</tbody>
+				<div class="button-group">
+						
+						
+						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
+						
+					</div>
 			</table>
+			
 			<% } else { %>
 			<p>No se encontraron clientes.</p>
 			<% } %>
 		</div>
+		
+		
 	</div>
+	
+	
 
 	<script src="${pageContext.request.contextPath}/JS/MenuAdm.js"></script>
 </body>

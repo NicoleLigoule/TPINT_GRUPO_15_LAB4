@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.MovimientoDaoImpl;
+import entidades.Cuenta;
 import entidades.Movimiento;
+import entidades.Usuario;
+import negocio.NegocioCuentas;
+import negocio.NegocioMovimiento;
 
 /**
  * Servlet implementation class servletHistorialMovimiento
@@ -33,31 +37,53 @@ public class servletHistorialMovimiento extends HttpServlet {
 	 */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.print("Llega al Servlet historial movimiento");
-        if (request.getParameter("Param") != null) {
-            MovimientoDaoImpl movimientoDao = new MovimientoDaoImpl();
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        
+        if (usuario == null) {
+            response.sendRedirect("Login.jsp");
+            return;
+        }
+
+        String cuil = usuario.getCuilUs();
+        System.out.println("CUIL del usuario: " + cuil); // Depuración
+
+        NegocioMovimiento negocioMovimiento = new NegocioMovimiento();
+        NegocioCuentas negocioCuentas = new NegocioCuentas();
+
+        // Obtener las cuentas asociadas al usuario
+        List<Cuenta> cuentas = negocioCuentas.obtenerCuentasPorCuil(cuil);
+
+        if (cuentas != null && !cuentas.isEmpty()) {
+            request.setAttribute("cuentas", cuentas); // Atributo para el JSP
+            
+        } else {
+            request.setAttribute("MensajeCuentas", "No se encontraron cuentas asociadas.");
+        }
+
+        // Obtener la cuenta seleccionada
+        String cuentaSeleccionada = request.getParameter("cuentaSeleccionada");
+
+        if (cuentaSeleccionada != null) {
             try {
-                System.out.print("Obtiene movimientos");
-                List<Movimiento> listaMovimientos = movimientoDao.obtenerMovimientos();
+                int numeroCuenta = Integer.parseInt(cuentaSeleccionada);
+                List<Movimiento> listaMovimientos = negocioMovimiento.obtenerMovimientosPorCuenta(numeroCuenta);
 
                 if (listaMovimientos != null && !listaMovimientos.isEmpty()) {
-                    System.out.println("Contenido de listaMovimientos:");
-                    for (Movimiento movimiento : listaMovimientos) {
-                        System.out.println(movimiento);
-                    }
                     request.setAttribute("listaMovimientos", listaMovimientos);
                 } else {
-                    request.setAttribute("Mensaje", "No se encontraron movimientos.");
+                    request.setAttribute("MensajeMovimientos", "No se encontraron movimientos para la cuenta seleccionada.");
                 }
 
-                RequestDispatcher rd = request.getRequestDispatcher("Movimientos.jsp");
-                rd.forward(request, response);
-
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
-                response.getWriter().println("Error al obtener la lista de movimientos: " + e.getMessage());
+                request.setAttribute("MensajeMovimientos", "El número de cuenta proporcionado no es válido.");
             }
+        } else {
+            request.setAttribute("MensajeMovimientos", "No se seleccionó ninguna cuenta.");
         }
+
+        RequestDispatcher rd = request.getRequestDispatcher("Movimientos.jsp");
+        rd.forward(request, response);
     }
 
 

@@ -145,41 +145,27 @@ h2 {
     margin-bottom: 20px;
 }
 
-select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+select,
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%; /* Ahora el ancho es del 100% */
+    padding: 12px; /* Padding ajustado para mayor tamaño */
+    margin: 10px auto; /* Margen para centrar */
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-    font-size: 1rem;
+    font-size: 1.1rem; /* Aumentado el tamaño de la fuente */
     color: #333;
     outline: none;
+    display: block;
     transition: border-color 0.3s ease;
 }
 
-select:focus {
-    border-color: #d6a6d6;
-    box-shadow: 0 0 5px rgba(214, 166, 214, 0.5);
-}
-
-input[type="text"],
-input[type="number"],
-textarea,
- {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
+select:focus,
 input[type="text"]:focus,
 input[type="number"]:focus,
-textarea:focus,
- {
-    outline: none;
+textarea:focus {
     border-color: #d6a6d6;
     box-shadow: 0 0 5px rgba(214, 166, 214, 0.5);
 }
@@ -188,11 +174,7 @@ textarea {
     resize: none;
 }
 
-textarea:focus {
-    border-color: #d6a6d6;
-    box-shadow: 0 0 5px rgba(214, 166, 214, 0.5);
-}
-
+button[type="submit"],
 input[type="submit"] {
     background-color: #28a745;
     color: white;
@@ -205,6 +187,7 @@ input[type="submit"] {
     margin-top: 20px;
 }
 
+button[type="submit"]:hover,
 input[type="submit"]:hover {
     background-color: #218838;
 }
@@ -219,7 +202,7 @@ label {
 form {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* Centrado de los elementos del formulario */
     padding: 20px;
 }
 
@@ -227,10 +210,8 @@ form .form-group {
     margin-bottom: 20px;
 }
 
-
-
 form textarea {
-    height: 100px;
+    height: 120px; /* Aumentada la altura de la textarea */
 }
 
 form input[type="submit"] {
@@ -255,4 +236,22 @@ form input[type="submit"] {
     .content {
         padding: 10px;
     }
+}
+
+
+button[type="button"] {
+    background-color: #007bff; /* Color azul para el botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    width: 100%; /* Puedes ponerlo al 100% del ancho del formulario */
+}
+
+button[type="button"]:hover {
+    background-color: #0056b3; /* Color más oscuro al hacer hover */
 }

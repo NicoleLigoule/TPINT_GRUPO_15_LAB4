@@ -335,3 +335,83 @@ body {
     font-weight: bold; /* Resalta los valores de los movimientos, como el importe o la fecha */
     color: #000;
 }
+
+
+/* Estilos para el DropDownList (select) */
+select {
+    background-color: #fff;
+    border: 1px solid #ddd; /* Borde gris suave */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px;
+    font-size: 14px;
+    width: 100%; /* Para que ocupe el ancho completo del contenedor */
+    margin-bottom: 15px; /* Espaciado inferior */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto al pasar el mouse sobre el DropDownList */
+select:hover {
+    border-color: #0078d4; /* Cambia el borde al pasar el mouse */
+    box-shadow: 0 2px 5px rgba(0, 120, 212, 0.2); /* Añade sombra suave */
+}
+
+/* Estilo para el botón */
+button {
+    background-color: #0078d4; /* Fondo azul */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Relleno interior */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%; /* Para que ocupe el ancho completo del contenedor */
+}
+
+/* Efecto al pasar el mouse sobre el botón */
+button:hover {
+    background-color: #005bb5; /* Cambio de color al pasar el mouse */
+    transform: translateY(-2px); /* Le da un pequeño efecto de levantamiento */
+}
+
+/* Efecto cuando el botón es presionado */
+button:active {
+    transform: translateY(1px); /* Efecto de presionado */
+}
+
+/* Ajuste de los contenedores de los elementos (formulario) */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre los elementos del formulario */
+    max-width: 400px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px; /* Bordes redondeados para el formulario */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+}
+
+form label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px; /* Espaciado entre la etiqueta y el campo */
+}
+
+button[type="button"] {
+    background-color: #007bff; /* Color azul para el botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    width: 100%; /* Puedes ponerlo al 100% del ancho del formulario */
+}
+
+button[type="button"]:hover {
+    background-color: #0056b3; /* Color más oscuro al hacer hover */
+}
+
