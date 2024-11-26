@@ -68,7 +68,8 @@ public class CuotasXPrestamoDaoImpl implements CuotasXPrestamoDao {
                 cuota = new CuotasXPrestamo(
                         rs.getInt("ID_Prestamo_Pt_Cp"),
                         rs.getDate("Fecha_vencimiento_Cp").toLocalDate(),
-                        rs.getInt("N_Cuota")
+                        rs.getInt("N_Cuota"),
+                        rs.getBoolean("pagada")
                 );
             }
         } catch (SQLException e) {
@@ -87,7 +88,8 @@ public class CuotasXPrestamoDaoImpl implements CuotasXPrestamoDao {
                 CuotasXPrestamo cuota = new CuotasXPrestamo(
                         rs.getInt("ID_Prestamo_Pt_Cp"),
                         rs.getDate("Fecha_vencimiento_Cp").toLocalDate(),
-                        rs.getInt("N_Cuota")
+                        rs.getInt("N_Cuota"),
+                        rs.getBoolean("pagada")
                 );
                 cuotas.add(cuota);
             }

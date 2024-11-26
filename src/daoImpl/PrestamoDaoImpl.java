@@ -9,6 +9,7 @@ import java.util.List;
 import entidades.Cuenta;
 import entidades.CuotasXPrestamo;
 import entidades.DetalleXPrestamo;
+import entidades.Localidad;
 import entidades.Prestamo;
 import dao.PrestamoDao;
 
@@ -128,7 +129,6 @@ public class PrestamoDaoImpl implements PrestamoDao {
                 prestamo.setPlazoPagoPt(rs.getString("Plazo_Pago_Pt"));
                 prestamo.setDetalleSolicitudPt(rs.getString("Detalle_solicitud_Pt"));
                 prestamo.setEstadoPt(rs.getBoolean("Estado_Pt"));
-                TraerCuotasYDetalles(1);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -206,60 +206,58 @@ public class PrestamoDaoImpl implements PrestamoDao {
         return existe;
     }
     
-    private boolean TraerCuotasYDetalles(int idPrestamoPt) {
-    	boolean existe = false;
-    	Prestamo prestamo = new Prestamo();
- 
-        String queryDetalles = "SELECT Importe_C_Interes_Dt, Importe_X_Cuotas_Dt, Cantidad_Cuotas_Dt " +
-                               "FROM DetallesXPrestamo WHERE ID_Prestamo_Pt_Dt = ?";
-
+    public ArrayList<CuotasXPrestamo> TraerCuotas(int idPrestamoPt){ 
         String queryCuotas = "SELECT Fecha_vencimiento_Cp, N_Cuota " +
                              "FROM CuotasXPrestamos WHERE ID_Prestamo_Pt_Cp = ?";
         
-        DetalleXPrestamo detalleLocal = null;
         ArrayList<CuotasXPrestamo> cuotasLocal = new ArrayList<>();
 
-        try (Connection cn = conexion.Open()) {
-        	
-            // 1. Detalles
-            try (PreparedStatement psDetalles = cn.prepareStatement(queryDetalles)) {
-                psDetalles.setInt(1, idPrestamoPt);
-                ResultSet rsDetalles = psDetalles.executeQuery();
+        try (Connection cn = conexion.Open();
+               PreparedStatement psCuotas = cn.prepareStatement(queryCuotas);
+               ResultSet rsCuotas = psCuotas.executeQuery()) {
 
-                if (rsDetalles.next()) {
-                    detalleLocal = new DetalleXPrestamo();
-                    detalleLocal.setImporteCInteresDt(rsDetalles.getBigDecimal("Importe_C_Interes_Dt"));
-                    detalleLocal.setImporteXCuotasDt(rsDetalles.getBigDecimal("Importe_X_Cuotas_Dt"));
-                    detalleLocal.setCantidadCuotasDt(rsDetalles.getInt("Cantidad_Cuotas_Dt"));
-                    existe = true;
-                }
-            }
-            
-            // 2. Cuotas
-            try (PreparedStatement psCuotas = cn.prepareStatement(queryCuotas)) {
-                psCuotas.setInt(1, idPrestamoPt);
-                ResultSet rsCuotas = psCuotas.executeQuery();
+               psCuotas.setInt(1, idPrestamoPt);
 
-                while (rsCuotas.next()) {
-                    CuotasXPrestamo cuota = new CuotasXPrestamo();
-                    cuota.setFechaVencimientoCp(rsCuotas.getDate("Fecha_vencimiento_Cp").toLocalDate());
-                    cuota.setNCuota(rsCuotas.getInt("N_Cuota"));
-                    cuotasLocal.add(cuota);
-                }
+               while (rsCuotas.next()) {
+                   CuotasXPrestamo cuota = new CuotasXPrestamo();
+                   cuota.setFechaVencimientoCp(rsCuotas.getDate("Fecha_vencimiento_Cp").toLocalDate());
+                   cuota.setNCuota(rsCuotas.getInt("N_Cuota"));
+                   cuotasLocal.add(cuota);
+               }
+           } catch (SQLException e) {
+               e.printStackTrace();
+           }
+        System.out.printf("cuotasLocal", cuotasLocal);
+
+    	return cuotasLocal;
+    }
+    
+    
+    public DetalleXPrestamo TraerDetalles(int idPrestamoPt) {
+        String queryDetalles = "SELECT Importe_C_Interes_Dt, Importe_X_Cuotas_Dt, Cantidad_Cuotas_Dt " +
+                               "FROM DetallesXPrestamo WHERE ID_Prestamo_Pt_Dt = ?";
+
+        DetalleXPrestamo detalleLocal = null;
+
+        try {
+            Connection cn = conexion.Open();
+            PreparedStatement psDetalles = cn.prepareStatement(queryDetalles);
+            ResultSet rsDetalles = psDetalles.executeQuery();
+
+            if (rsDetalles.next()) {
+                detalleLocal = new DetalleXPrestamo();
+                detalleLocal.setImporteCInteresDt(rsDetalles.getBigDecimal("Importe_C_Interes_Dt"));
+                detalleLocal.setImporteXCuotasDt(rsDetalles.getBigDecimal("Importe_X_Cuotas_Dt"));
+                detalleLocal.setCantidadCuotasDt(rsDetalles.getInt("Cantidad_Cuotas_Dt"));
             }
+            rsDetalles.close();
+            psDetalles.close();
+            cn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         System.out.printf("detalleLocal", detalleLocal);
-        System.out.printf("cuotasLocal", cuotasLocal);
-        // asignamos
-        prestamo.setDetalle(detalleLocal);
-        prestamo.setCuotas(cuotasLocal);
-
-        return existe;
+        return detalleLocal;
     }
-
-
 }
 

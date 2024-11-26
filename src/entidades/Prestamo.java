@@ -18,7 +18,7 @@ public class Prestamo {
     private DetalleXPrestamo detalle; // Relacionado con la tabla DetallesXPrestamo
     private ArrayList<CuotasXPrestamo> cuotas; // Relacionado con la tabla CuotasXPrestamos
     
-    private Cuenta cuenta; // Relacinado con la tabla Cuenta              
+    private Cuenta cuenta; // Relacionado con la tabla Cuenta              
     private InteresesXCantidadDeMeses interes; // Relacionado con la tabla InteresesXCantidadDeMeses
 
     // Constructores

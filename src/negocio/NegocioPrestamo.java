@@ -1,21 +1,72 @@
 package negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.PrestamoDao;
 import daoImpl.PrestamoDaoImpl;
+import entidades.CuotasXPrestamo;
+import entidades.DetalleXPrestamo;
 import entidades.Prestamo;
 
 
 public class NegocioPrestamo {
     private PrestamoDao prestamoDao;
+    
     public NegocioPrestamo() {
         this.prestamoDao = new PrestamoDaoImpl();
     }
     
+    // me devuelve un prestamo totalmente cargado (lista de cuotas, descripcion)
+    public Prestamo PrestamoCargado(int id) {
+    	Prestamo prestamo = null;
+    	
+    	prestamo = prestamoDao.obtenerPrestamoPorId(id);
+    	ArrayList<CuotasXPrestamo> cuotas = prestamoDao.TraerCuotas(id);    	
+    	DetalleXPrestamo detalle = prestamoDao.TraerDetalles(id);     
+    	
+        if (prestamo != null) {
+            prestamo.setCuotas(cuotas);
+            prestamo.setDetalle(detalle);
+        }
+            
+    	return prestamo;
+    }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public boolean realizarPagoPrestamo(int idPrestamo, double monto) {
-        // Validar negocio: no se permite pagar montos negativos o cero
         if (monto <= 0) {
             return false;
         }
@@ -70,8 +121,7 @@ public class NegocioPrestamo {
 
 
 	public List<Prestamo> obtenerPrestamoPorCuenta(int idCuenta) {
-	
-		return null;
+		return prestamoDao.obtenerPrestamoPorCuenta(idCuenta);
 	}
 
 }
