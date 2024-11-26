@@ -4,6 +4,8 @@
 <%@page import="java.util.List"%>
 <%@page import="entidades.Prestamo"%>
 <%@page import="entidades.Localidad"%>
+<%@page import="entidades.Cliente"%>
+<%@page import="entidades.InteresesXCantidadDeMeses"%>
 <%@ page import="entidades.Usuario"%>
 <%
 	Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -42,6 +44,8 @@
 			<div class="form-card">
 				<h2>Examinar Prestamo</h2>
 				<%Prestamo IDPRestam =(Prestamo)request.getAttribute("Prestamo"); %>
+				<%Cliente Client =(Cliente)request.getAttribute("Clientes"); %>
+				<%InteresesXCantidadDeMeses Interese =(InteresesXCantidadDeMeses)request.getAttribute("Interes"); %>
 				<!-- Primer formulario (GET) GUARDAMOS HASTA PROVINCIA -->
 				<form action="servletExaminarPrestamo" method="POST">
 					<label for="ID">Identificador De prestamo</label> <input type="text" id="Identificador" name="Identificador"
