@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -273,6 +274,42 @@ public class CuentaDaoImpl implements CuentaDao {
 	        cn.close();
 	    }
 	    return cuenta;
+	}
+
+	public List<Cuenta> obtenerCuentasReporte(int tipo, LocalDate fechaDesde, LocalDate fechaHasta) {
+		
+		cn = new Conexion();
+        cn.Open();
+        List<Cuenta> lista = new ArrayList<>();
+        String query = "SELECT * FROM Cuenta WHERE "+
+        			   "cuenta.Fecha_Creacion_Cu between ? AND ? "+
+        			   "AND cuenta.Id_Tipo_Cuenta = ? ";
+        
+        try {
+            PreparedStatement statement = cn.getSQLConexion().prepareStatement(query);
+            statement.setDate(1, java.sql.Date.valueOf(fechaDesde)); // Fecha desde
+            statement.setDate(2, java.sql.Date.valueOf(fechaHasta)); // Fecha hasta
+            statement.setInt(3, tipo); // Tipo de cuenta
+            
+           ResultSet rs = statement.executeQuery();
+            
+            while (rs.next()) {
+                Cuenta cuenta = new Cuenta();
+                cuenta.setNumeroDeCuentaCu(rs.getInt("Numero_de_Cuenta_Cu"));
+                cuenta.setCuilCliCu(rs.getString("Cuil_Cli_Cu"));
+                cuenta.setFechaCreacionCu(rs.getDate("Fecha_Creacion_Cu").toLocalDate());
+                cuenta.setIdTipoCuenta(rs.getInt("Id_Tipo_Cuenta"));
+                cuenta.setCbuCu(rs.getString("CBU_Cu"));
+                cuenta.setSaldoCu(rs.getBigDecimal("Saldo_Cu"));
+                cuenta.setEstadoCu(rs.getBoolean("Estado_Cu"));
+                lista.add(cuenta);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+        return lista;
 	}
 
 }

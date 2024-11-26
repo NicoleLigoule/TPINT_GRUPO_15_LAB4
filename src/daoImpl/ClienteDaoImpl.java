@@ -242,6 +242,53 @@ public class ClienteDaoImpl implements ClienteDao {
     return borrarCuilCliente;
 	}
 
+	@Override
+	public List<Cliente> obtenerTodosPorProvincia(int idProvincia) {
+		
+		cn = new Conexion();
+        cn.Open();
+        List<Cliente> lista = new ArrayList<>();
+        String query = "SELECT cliente.cuil_Cli AS CUIL, cliente.dni_Cli AS DNI, cliente.nombre_Clii AS Nombre, " +
+                "cliente.apellido_Cli AS Apellido, cliente.telefono_Cli AS Telefono, cliente.correo_electronico_Cli AS Correo, localidad.Nombre_Loc_Lca AS Localidad, provincia.Nombre_Prov_Prv AS Provincia " +
+                "FROM cliente " +
+                "INNER JOIN localidad ON cliente.ID_Localidad_cli = localidad.ID_Localidad_Lca " +
+                "INNER JOIN provincia ON localidad.ID_Provincia_Prv_Lca = provincia.ID_Provincia_Prv " +
+                "WHERE provincia.ID_Provincia_Prv = " + idProvincia + " AND cliente.estado_Cli = 1";
+        
+        try {
+        	ResultSet rs = cn.query(query);
+            while (rs.next()) {
+                System.out.println("CUIL: " + rs.getString("CUIL"));
+                System.out.println("DNI: " + rs.getInt("DNI"));
+                System.out.println("Nombre: " + rs.getString("Nombre"));
+                System.out.println("Apellido: " + rs.getString("Apellido"));
+                System.out.println("Teléfono: " + rs.getString("Telefono"));
+                System.out.println("Correo: " + rs.getString("Correo"));                                               
+                System.out.println("Localidad: " + rs.getString("Localidad"));
+                System.out.println("Provincia: " + rs.getString("Provincia"));               
+                System.out.println("---------------------------------------------------");
+
+                Cliente cliente = new Cliente();
+                cliente.setCuil(rs.getString("CUIL"));
+                cliente.setDni(rs.getInt("DNI"));
+                cliente.setNombre(rs.getString("Nombre"));
+                cliente.setApellido(rs.getString("Apellido"));
+                cliente.setTelefono(rs.getString("Telefono"));
+                cliente.setCorreo(rs.getString("Correo"));                
+                cliente.setDescripcion_localidad(rs.getString("Localidad")); // Usa el nombre directamente
+                cliente.setDescripcion_provincia(rs.getString("Provincia"));
+                
+                lista.add(cliente);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+        return lista;
+		
+	}
+
 
     /*  Esta parte es del PR de Clau, TO-DO: Modificarlo para que implemente las clases del dao "borrar" */
  /* private static final String bajaDeCliente = "UPDATE cliente SET estado_Cli = 0 WHERE cuil_Cli = ?";
