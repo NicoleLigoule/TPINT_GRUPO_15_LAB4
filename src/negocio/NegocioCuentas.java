@@ -48,7 +48,7 @@ public class NegocioCuentas {
 		public List<Cuenta> obtenerCuentaTodos() {
 			return cuentaDao.obtenerTodos();
 		}
-
+ 
 		public List<Cuenta> obtenerCuentasPorCuil(String cuil) {
 		    return cuentaDao.obtenerCuentasPorCuil(cuil);
 		}
