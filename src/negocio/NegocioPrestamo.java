@@ -73,5 +73,11 @@ public class NegocioPrestamo {
 	
 		return null;
 	}
+	
+	public Prestamo obtenerPrestamo(int IDprestamo) {
+		Prestamo pres= prestamoDao.obtenerPrestamoPorId(IDprestamo);
+		return pres;
+		
+	}
 
 }

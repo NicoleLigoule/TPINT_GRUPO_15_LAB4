@@ -104,10 +104,11 @@ th {
 	                            <td><%= pres.getImporteSolicitadoPt() %></td>
 	                            <td><%= pres.getPlazoPagoPt() %></td>
 								<td>
-				<form action="TuServlet" method="POST">
+				<form action="servletExaminarPrestamo" method="GET">
                     <!-- Campo oculto para enviar el ID del préstamo -->
-                    <input type="hidden" name="prestamoId" value="<%= pres.getIdPrestamoPt() %>">
+                    <input type="hidden" name="PrestamoSelec" value="<%= pres.getIdPrestamoPt() %>">
                     <button type="submit">Examinar</button></td>
+                 </form>
 							</tr>
 							<% } }%>
 						</tbody>
