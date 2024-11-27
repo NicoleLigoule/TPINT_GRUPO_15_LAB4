@@ -27,8 +27,7 @@
 		<a href="${pageContext.request.contextPath}/Login.jsp"> <img
 			src="${pageContext.request.contextPath}/img/png_logo.png"
 			class="img_logo" alt="Logo UTN">
-		</a> <span class="username"><%=usuario.getUsuarioUs()%></span> <span
-			class="username"><%=usuario.getUsuarioUs()%></span>
+		</a> <span class="username"><%=usuario.getUsuarioUs()%></span> 
 	</nav>
 
 	<div class="main-container">
