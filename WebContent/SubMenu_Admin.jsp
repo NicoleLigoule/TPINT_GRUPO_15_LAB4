@@ -15,17 +15,17 @@
 					<li><a href="ServletListarCuenta?Param=1">Listar Cuenta</a></li>
 					<li><a href="AsignarCuenta.jsp">Asignar Cuenta</a></li>
 				</ul></li>
-			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Autorizacion de Prestamos</a>
+			<li class="menu-item"><a href="ServletAutorizarPrestamo?Param=1" >Autorizacion de Prestamos</a>
 				<!-- <ul class="submenu">
                         <li> <a href="#">Transaccion</a></li>
                         <li> <a href="#">Ver Historial</a></li>
                     </ul>
                      --></li>
 			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Reportes</a>
-				<!-- <ul class="submenu">
-                        <li> <a href="#">Reporte de Clientes</a></li>
-                        <li> <a href="#">Reporte de Cuentas</a></li>
+				   <ul class="submenu">
+                        <li> <a href="servletReporteClientes?Param=1">Reporte de Clientes</a></li>
+                        <li> <a href="servletReporteCuentas?Param=1">Reporte de Cuentas</a></li>
                     </ul>
-                     --></li>
+                     </li>
 		</ul>
 		</aside>

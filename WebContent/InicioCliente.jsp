@@ -43,7 +43,7 @@ BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
 %>
 
 		<section class="content">
-		<h1 class="main-title">Información Personal</h1>
+		<h1 class="main-title">Informacion Personal</h1>
 		<div class="info-container">
 			<div class="personal-info">
 				<h2>Datos del Usuario</h2>
@@ -54,10 +54,10 @@ BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
 					<strong>Correo:</strong> <%=correo != null ? correo : "" %>
 				</p>
 				<p>
-					<strong>Teléfono:</strong> <%=telefono != null ? telefono : "" %>
+					<strong>Telefono:</strong> <%=telefono != null ? telefono : "" %>
 				</p>
 				<p>
-					<strong>Dirección:</strong> <%=direccion != null ? direccion : "" %>
+					<strong>Direccion:</strong> <%=direccion != null ? direccion : "" %>
 				</p>
 			</div>
 			
@@ -70,16 +70,16 @@ BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
 				
 		 <div class="cards-container">
     <% 
-    boolean hayCuentasValidas = false; // Indicador para tarjetas válidas
+    boolean hayCuentasValidas = false; // Indicador para tarjetas vï¿½lidas
     
     if (cuentas != null && !cuentas.isEmpty()) {
         for (ClienteCuentaDTO cuenta : cuentas) { 
         	 if (cuenta != null && cuenta.getNumeroCuenta() > 0 && cuenta.getSaldo() != null) {
-        		 hayCuentasValidas = true; // Hay al menos una cuenta válida
+        		 hayCuentasValidas = true; // Hay al menos una cuenta vï¿½lida
     %>
     <div class="account-info">
         <h2><%= cuenta.getTipoCuenta() %></h2>
-        <p><strong>Número de Cuenta:</strong> <%= cuenta.getNumeroCuenta() %></p>
+        <p><strong>Numero de Cuenta:</strong> <%= cuenta.getNumeroCuenta() %></p>
         <p><strong>Saldo:</strong> $<%= cuenta.getSaldo() %></p>
         
     </div>
@@ -87,7 +87,7 @@ BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
         	 }
         }
     } 
- 	// Mostrar el mensaje solo si no hay cuentas válidas
+ 	// Mostrar el mensaje solo si no hay cuentas vï¿½lidas
     if (!hayCuentasValidas) {  
     %>
     	<p>No hay cuentas disponibles.</p>

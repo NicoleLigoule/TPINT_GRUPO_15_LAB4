@@ -55,7 +55,7 @@ CREATE TABLE Cuenta (
     Fecha_Creacion_Cu DATE,
     Id_Tipo_Cuenta INT,
     CBU_Cu VARCHAR(22),
-    Saldo_Cu DECIMAL(11,2) DEFAULT 10000,  -- Saldo por defecto 10000
+    Saldo_Cu DECIMAL(11,2) DEFAULT 10000
     Estado_Cu BOOLEAN DEFAULT 1,
     FOREIGN KEY (Cuil_Cli_Cu) REFERENCES Cliente(cuil_Cli),  
     FOREIGN KEY (Id_Tipo_Cuenta) REFERENCES TipoCuenta(Id_Tipo_Cuenta), 
@@ -132,9 +132,19 @@ CREATE TABLE CuotasXPrestamos(
     CONSTRAINT UK_CuotasXPrestamos UNIQUE (ID_Prestamo_Pt_Cp, Fecha_vencimiento_Cp, N_Cuota)
 );
 
+CREATE TABLE Transferencias (
+    Id_Transferencia INT AUTO_INCREMENT PRIMARY KEY,
+    Cuenta_Origen INT NOT NULL,
+   CBU_CuentaDestino VARCHAR(22) NOT NULL,
+    Monto DECIMAL(11, 2) NOT NULL,
+    Fecha_Transferencia DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Detalle VARCHAR(100),
+    FOREIGN KEY (Cuenta_Origen) REFERENCES Cuenta(Numero_de_Cuenta_Cu),
+    FOREIGN KEY (CBU_CuentaDestino) REFERENCES Cuenta(CBU_Cu)
+);
 DELIMITER $$
 
-CREATE TRIGGER GenerarCBU
+CREATE TRIGGER before_insert_cuenta
 BEFORE INSERT ON Cuenta
 FOR EACH ROW
 BEGIN
@@ -153,11 +163,135 @@ BEGIN
 
     -- asignamos el nuevo CBU a la nueva cuenta
     SET NEW.CBU_Cu = CAST(ultimoCBU AS CHAR(22));
-END$$
+
+    -- Establecer saldo inicial de la cuenta a 10000
+    SET NEW.Saldo_Cu = 10000;  -- Valor predeterminado del saldo
+END $$
 
 DELIMITER ;
 
 DELIMITER $$
+
+create TRIGGER after_insert_cuenta
+AFTER INSERT ON Cuenta
+FOR EACH ROW
+BEGIN
+    -- Insertar un movimiento para la nueva cuenta
+    INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
+    VALUES (CONCAT('Alta de cuenta'), 10000, 1);  -- Monto por defecto
+
+    -- Obtener el ID del movimiento reci�n insertado
+    SET @MovimientoID = LAST_INSERT_ID();
+
+    -- Insertar la relaci�n en MovimientoXCuenta
+    INSERT INTO MovimientoXCuenta (Id_Movimiento__Mov_MXC, Num_Cuenta_Cu_MXC)
+    VALUES (@MovimientoID, NEW.Numero_de_Cuenta_Cu);
+END $$
+
+DELIMITER ;
+
+
+
+
+DELIMITER $$
+
+CREATE PROCEDURE RealizarTransferencia(
+    IN CuentaOrigen INT,
+    IN CBU_CuentaDestino VARCHAR(22),
+    IN Monto DECIMAL(11, 2),
+    IN DETALLE VARCHAR(100)
+)
+BEGIN
+    -- Declarar variables
+    DECLARE SaldoOrigen DECIMAL(11, 2);
+    DECLARE CuentaDestino INT;
+    DECLARE MovimientoOrigenID INT;
+    DECLARE MovimientoDestinoID INT;
+
+    -- Obtener el n�mero de cuenta basado en el CBU
+    SELECT Numero_de_Cuenta_Cu INTO CuentaDestino
+    FROM Cuenta
+    WHERE CBU_Cu = CBU_CuentaDestino AND Estado_Cu = 1;
+
+    IF CuentaDestino IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El CBU proporcionado no corresponde a una cuenta activa.';
+    END IF;
+
+    -- Verificar que la cuenta de origen existe y est� activa
+    IF NOT EXISTS (
+        SELECT 1 FROM Cuenta WHERE Numero_de_Cuenta_Cu = CuentaOrigen AND Estado_Cu = 1
+    ) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La cuenta de origen no existe o est� inactiva.';
+    END IF;
+
+    -- Obtener saldo de la cuenta de origen
+    SELECT Saldo_Cu INTO SaldoOrigen FROM Cuenta WHERE Numero_de_Cuenta_Cu = CuentaOrigen;
+
+    -- Verificar saldo suficiente
+    IF SaldoOrigen < Monto THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Saldo insuficiente en la cuenta de origen.';
+    END IF;
+
+    -- Actualizar saldos
+    UPDATE Cuenta SET Saldo_Cu = Saldo_Cu - Monto WHERE Numero_de_Cuenta_Cu = CuentaOrigen;
+    UPDATE Cuenta SET Saldo_Cu = Saldo_Cu + Monto WHERE Numero_de_Cuenta_Cu = CuentaDestino;
+
+    -- Registrar transferencia
+    INSERT INTO Transferencias (Cuenta_Origen, CBU_CuentaDestino, Monto, Detalle)
+    VALUES (CuentaOrigen, CBU_CuentaDestino, Monto, Detalle);
+
+    -- Registrar movimiento para la cuenta de origen
+    INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
+    VALUES (CONCAT('', Detalle), -Monto, 2);
+
+    -- Obtener el ID del movimiento reci�n creado
+    SET MovimientoOrigenID = LAST_INSERT_ID();
+
+    -- Registrar en MovimientoXCuenta para la cuenta de origen
+    INSERT INTO MovimientoXCuenta (Id_Movimiento__Mov_MXC, Num_Cuenta_Cu_MXC)
+    VALUES (MovimientoOrigenID, CuentaOrigen);
+
+    -- Registrar movimiento para la cuenta de destino
+    INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
+    VALUES (CONCAT('', Detalle), +Monto, 2);
+
+    -- Obtener el ID del movimiento reci�n creado
+    SET MovimientoDestinoID = LAST_INSERT_ID();
+
+    -- Registrar en MovimientoXCuenta para la cuenta de destino
+    INSERT INTO MovimientoXCuenta (Id_Movimiento__Mov_MXC, Num_Cuenta_Cu_MXC)
+    VALUES (MovimientoDestinoID, CuentaDestino);
+END$$
+
+DELIMITER ;
+
+    
+
+	DELIMITER $$
+
+	CREATE TRIGGER GenerarCBU
+	BEFORE INSERT ON Cuenta
+	FOR EACH ROW
+	BEGIN
+		DECLARE ultimoCBU BIGINT;
+
+		-- Obtener el �ltimo valor de CBU_Cu como un n�mero entero
+		SELECT MAX(CAST(CBU_Cu AS UNSIGNED)) INTO ultimoCBU
+		FROM Cuenta;
+
+		-- Si no hay valores previos en la tabla, se inicia con el n�mero base
+		IF ultimoCBU IS NULL THEN
+			SET ultimoCBU = 5500990000000001;
+		ELSE
+			SET ultimoCBU = ultimoCBU + 1;
+		END IF;
+
+		-- Asignar el nuevo CBU a la nueva cuenta
+		SET NEW.CBU_Cu = CAST(ultimoCBU AS CHAR(22));
+	END$$
+
+	DELIMITER ;
+    
 
 CREATE TRIGGER after_cliente_insert
 AFTER INSERT ON Cliente
@@ -196,7 +330,6 @@ BEGIN
     END IF;
 END$$
 
-DELIMITER ;
 DELIMITER $$
 
 CREATE TRIGGER after_prestamo_insert
@@ -306,9 +439,9 @@ INSERT INTO InteresXCantidadDMeses (Plazo_d_Pagos_En_meses_IXM, Interes_IXM, Mes
 VALUES
 ('01M', 2, 1),   -- 1 mes
 ('03M', 9, 3),   -- 3 meses
-('06M', 19, 6),   -- 6 meses
-('12M', 34, 9),  -- 9 meses
-('24M', 45, 12); -- 12 meses
+('06M', 19, 6),   -- 6 meses, 
+('09M', 34, 9),  -- 9 meses, 
+('12M', 45, 12),  -- 12 meses
 
 
 INSERT INTO Nacionalidad (Id_Nacionalidad_nc, Descripcion_nc) VALUES

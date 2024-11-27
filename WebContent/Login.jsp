@@ -45,10 +45,7 @@
 
 			<button type="submit">Ingresar</button>
 		</form>
-		<div class="links">
-			<a href="#">¿Olvidó su contraseña?</a> 
-			<a href="ServletRegistrarseNuevo?Param=1">¿No posee aún una cuenta?</a>
-		</div>
+
 	</div>
 </body>
 

@@ -3,6 +3,7 @@ package daoImpl;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,32 @@ public class PrestamoDaoImpl implements PrestamoDao {
     public interface PrestamoDao {
         List<Prestamo> obtenerPrestamosPorCuenta(int idCuenta);
     }
+
+
+//    @Override
+//    public boolean actualizarPrestamo(Prestamo prestamo) {
+//        boolean resultado = false;
+//        String query = "UPDATE Prestamo SET Numero_de_Cuenta_Cu_Pt = ?, Importe_solicitado_Pt = ?, Plazo_Pago_Pt = ?, Detalle_solicitud_Pt = ?, Estado_Pt = ? WHERE ID_Prestamo_Pt = ?";
+//
+//        try (Connection cn = conexion.Open()) {
+//            PreparedStatement ps = cn.prepareStatement(query);
+//            ps.setInt(1, prestamo.getNumeroDeCuentaCuPt());
+//            ps.setBigDecimal(2, prestamo.getImporteSolicitadoPt());
+//            ps.setString(3, prestamo.getPlazoPagoPt());
+//            ps.setString(4, prestamo.getDetalleSolicitudPt());
+//            ps.setBoolean(5, prestamo.isEstadoPt());
+//
+//            ps.setInt(6, prestamo.getIdPrestamoPt());
+//
+//            int filasAfectadas = ps.executeUpdate();
+//            if (filasAfectadas > 0) {
+//                resultado = true;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return resultado;
+//    }
     
     @Override
     public boolean actualizarPrestamo(Prestamo prestamo) {
@@ -67,6 +94,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
             return false;
         }
     }
+
 
     @Override
     public boolean eliminarPrestamo(int idPrestamo) {
@@ -165,7 +193,9 @@ public class PrestamoDaoImpl implements PrestamoDao {
         return prestamos;
     }
 
-    public boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago, double montoPorCuota) {
+    
+   
+    public boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago, String motivo) {
     	CuentaDaoImpl cuentaDao = new CuentaDaoImpl();
 
     	Cuenta cuenta = cuentaDao.obtenerCuentaPorNumero(cuentaDestino);
@@ -175,11 +205,11 @@ public class PrestamoDaoImpl implements PrestamoDao {
         prestamo.setImporteSolicitadoPt(BigDecimal.valueOf(importeSolicitado)); 
         prestamo.setFechaPeticionPt(LocalDate.now());
         prestamo.setPlazoPagoPt(plazoPago);
-        prestamo.setDetalleSolicitudPt("Solicitud de préstamo de " + montoConInteres + " con plazo de " + plazoPago + " meses.");
+        prestamo.setDetalleSolicitudPt(motivo);
         prestamo.setEstadoPt(false);
 
         prestamo.setCuenta(cuenta); 
-//        prestamo.setInteres(new InteresesXCantidadDeMesesDaoImpl(plazoPago, montoConInteres)); // tener una implementación para calcular los intereses según el plazo
+//        prestamo.setInteres(new InteresesXCantidadDeMesesDaoImpl(plazoPago, montoConInteres)); // tener una implementaciï¿½n para calcular los intereses segï¿½n el plazo
         insertarPrestamo(prestamo); 
         
 //        insertDetallePrestamo()
@@ -266,5 +296,55 @@ public class PrestamoDaoImpl implements PrestamoDao {
         System.out.printf("detalleLocal", detalleLocal);
         return detalleLocal;
     }
+    public List<Prestamo> ListarPrestamosAprobar() {
+        List<Prestamo> prestamos = new ArrayList<>();
+        String query = "SELECT ID_Prestamo_Pt, Numero_de_Cuenta_Cu_Pt, Fecha_Peticion_Pt, Importe_solicitado_Pt, Plazo_Pago_Pt, Detalle_solicitud_Pt FROM bancoutn.prestamo WHERE Estado_Pt = 0;";
+
+        try (Connection cn = conexion.Open(); Statement stmt = cn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Prestamo prestamo = new Prestamo();
+                prestamo.setIdPrestamoPt(rs.getInt("ID_Prestamo_Pt"));
+                prestamo.setNumeroDeCuentaCuPt(rs.getInt("Numero_de_Cuenta_Cu_Pt"));
+                Date sqlDate = rs.getDate("Fecha_Peticion_Pt");
+                if (sqlDate != null) {
+                    prestamo.setFechaPeticionPt(sqlDate.toLocalDate());
+                } else {
+                    prestamo.setFechaPeticionPt(null); 
+                }
+                prestamo.setImporteSolicitadoPt(rs.getBigDecimal("Importe_solicitado_Pt"));
+                prestamo.setPlazoPagoPt(rs.getString("Plazo_Pago_Pt"));
+                prestamo.setDetalleSolicitudPt(rs.getString("Detalle_solicitud_Pt"));
+                prestamos.add(prestamo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return prestamos;
+    }
+    @Override
+    public InteresesXCantidadDeMeses obtenerIntereses(String iDInteres) {
+    	InteresesXCantidadDeMeses interes=new InteresesXCantidadDeMeses();
+    	Conexion cn=new Conexion();
+        cn.Open();
+        try  {
+	        String query = "SELECT Plazo_d_Pagos_En_meses_IXM, Interes_IXM,Meses  FROM bancoutn.InteresXCantidadDMeses WHERE Plazo_d_Pagos_En_meses_IXM = ?";
+	        PreparedStatement statement = cn.getSQLConexion().prepareStatement(query);
+	        statement.setString(1, iDInteres);
+	        ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+              	interes.setPlazoDPagosEnMesesIxm(rs.getString("Plazo_d_Pagos_En_meses_IXM"));
+            	interes.setInteresIxm(rs.getBigDecimal("Interes_IXM"));
+                interes.setMeses(rs.getInt("Meses"));
+                
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       
+    	return interes;
+    }
+    
 }
 

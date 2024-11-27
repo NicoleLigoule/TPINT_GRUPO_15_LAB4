@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entidades.Nacionalidad;
+import entidades.Prestamo;
 import entidades.Sexo;
 import entidades.TipoDeCuenta;
 import entidades.Provincia;
@@ -17,6 +18,7 @@ import daoImpl.ClienteDaoImpl;
 import daoImpl.ddlClientes;
 import daoImpl.ProvinciaDaoImpl;
 import daoImpl.LocalidadDaoImpl;
+import daoImpl.PrestamoDaoImpl;
 
 
 public class DDL {
@@ -83,4 +85,10 @@ public class DDL {
 		 ArrayList<InteresesXCantidadDeMeses> INtereses = cuentaDao.readallIntereses();
 		    return  INtereses;
 		}
+	 
+	 public List<Prestamo> ListarPrestamosAprobar(){
+		 PrestamoDaoImpl ptDao = new PrestamoDaoImpl();
+		 List<Prestamo> prestamo = ptDao.ListarPrestamosAprobar();
+		    return  prestamo;
+	 }
 }

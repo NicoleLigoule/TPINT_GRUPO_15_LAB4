@@ -43,6 +43,9 @@ public class NegocioClientes {
 		return clienteDao.obtenerTodos();
 	}
     
+	public List<Cliente> obtenerClientesPorIdProvincia(int id) {
+		return clienteDao.obtenerTodosPorProvincia(id);
+	}
     
 }
 

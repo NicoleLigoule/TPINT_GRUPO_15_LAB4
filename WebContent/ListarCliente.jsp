@@ -73,6 +73,12 @@ th {
 		<jsp:include page="SubMenu_Admin.jsp" />
 
 		<div class="content">
+		<div class="button-group">
+						
+						
+						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
+						
+					</div>
 			<h2>Listado de Clientes</h2>
 			<%
                 List<Cliente> listaClientes = (List<Cliente>) request.getAttribute("listaClientes");
@@ -112,13 +118,21 @@ th {
 						<td><%= cliente.isEstado() ? "Activo" : "Inactivo" %></td>
 					</tr>
 					<% } %>
+					
 				</tbody>
+				
 			</table>
+			
+			
 			<% } else { %>
 			<p>No se encontraron clientes.</p>
 			<% } %>
 		</div>
+		
+		
 	</div>
+	
+	
 
 	<script src="${pageContext.request.contextPath}/JS/MenuAdm.js"></script>
 </body>

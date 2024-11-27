@@ -113,9 +113,12 @@
 					        } 
 					    %>
 					</select>
+					<label for="importe_solicitado">Motivo de solicitud</label> 
+					<input type="text" id="motivo" name="motivo" required class="form-input">
+					
 
 					<div class="button-group">
-						<button type="button" class="cancel-button" onclick="window.location.href='${pageContext.request.contextPath}/InicioCliente.jsp'">Cancelar</button>
+					 <button type="button" class="cancel-button" onclick="location='/TPINT_GRUPO_15_LAB4/servletInformacionCliente'">Cancelar</button>
 						<button type="submit" class="submit-button">Enviar Solicitud</button>
 					</div>
 				</form>
