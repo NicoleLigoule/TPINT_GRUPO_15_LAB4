@@ -62,6 +62,29 @@
                         <button type="submit" class="submit-button" name="confirmar">Confirmar</button>
                     </div>
  				</form>
+ 				
+ 				 <!-- Mensaje de estado -->
+                <%
+                    //String status = (String) request.getAttribute("status");
+                    String mensajeConfirmacion = (String) request.getAttribute("mensajeConfirmacion");
+                    String mensajeError = (String) request.getAttribute("mensajeError");
+
+                    if (mensajeConfirmacion != null) {
+                %>
+                <div class="alert alert-success">
+                    <%= mensajeConfirmacion %>
+                </div>
+                <%
+                    } else if(mensajeError != null) {
+                    	
+                %>
+                <div class="alert alert-danger">
+                    <%= mensajeError %>
+                </div>
+                <%
+                    }
+                %>
+                
 
 
             </div>
