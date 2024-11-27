@@ -36,7 +36,7 @@ public class ServletProcesarPrestamo extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        if(request.getParameter("confirmar") != null) {
         String cuentaDestino = request.getParameter("cuenta_destino");
         double importeSolicitado = Double.parseDouble(request.getParameter("importe_solicitado"));
         double montoConInteres = Double.parseDouble(request.getParameter("monto_con_interes"));
@@ -58,7 +58,11 @@ public class ServletProcesarPrestamo extends HttpServlet {
         }
         
         request.getRequestDispatcher("ConfirmarPrestamo.jsp").forward(request, response);
-        
+        }else {
+			        if(request.getParameter("Volver") != null) {
+			        	request.getRequestDispatcher("/ServletSolicitarPrestamo").forward(request, response);
+			        }
+        	  }
     }
 
 

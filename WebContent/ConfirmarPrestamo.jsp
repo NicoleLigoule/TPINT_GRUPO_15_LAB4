@@ -44,7 +44,7 @@
 				    <input type="hidden" name="motivo" value="<%= request.getAttribute("motivo") %>">
 			
                     <div class="button-group">
-                        <button type="button" class="cancel-button">Volver</button>
+                        <button type="submit" class="cancel-button"name="Volver">Volver</button>
                         <button type="submit" class="submit-button" name="confirmar">Confirmar</button>
                     </div>
  				</form>
