@@ -41,29 +41,39 @@
 
 	<div class="main-container">
 		<jsp:include page="SubMenu_Admin.jsp" />
-		
+	<%double PorcentajesAprobados =(double)request.getAttribute("POrcentajesAporbados"); %>	
+	<%double RendimietnosAprobados =(double)request.getAttribute("RendimientosAporbados"); %>	
+	<%double RendimietnosMEnsulaAprobados =(double)request.getAttribute("RendimientosMEnsualAporbados"); %>	
+	
    <div class="Mastercontainer">
 		<div class="content">
 			<div class="form-card">
 				<h2>Porcentaje De Prestamos Aprobados</h2>
-
+  				<p><%
+    out.print(PorcentajesAprobados+"%");
+				%></p>
 				
-				<form action="servletExaminarPrestamo" method="POST">
-
-						
-
-				</form>
 
 			</div>
 		</div>
 		<div class="content">
 			<div class="form-card">
 				<h2>Rendimiento Prestamos Aprobados</h2>
+				<p><%
+    out.print("$ "+RendimietnosAprobados);
+				%></p>
 				
-				
-				<form>
-					
-				</form>
+
+
+			</div>
+		</div>
+		<div class="content">
+			<div class="form-card">
+				<h2>Porcentaje De Prestamos Aprobados</h2>
+  				<p style="border: 2px solid black; padding: 8px;"><%
+    out.print("$ "+RendimietnosMEnsulaAprobados);
+				%></p>
+
 
 			</div>
 		</div>

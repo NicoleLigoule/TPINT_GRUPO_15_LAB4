@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import dao.ProvinciaDao;
+import entidades.Cuenta;
 import entidades.Provincia;
 
 public class ProvinciaDaoImpl implements ProvinciaDao {
@@ -122,5 +123,59 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
         }
     	
     	return idProv;
+    }
+    public double Porcentajes_p_aprobados() {
+        cn = new Conexion();
+        cn.Open();
+        double porcentaje=0;
+        try {
+            ResultSet rs = cn.query("SELECT  (COUNT(CASE WHEN Estado_Pt = 1 THEN 1 END) * 100.0 / COUNT(*)) AS Porcentaje_Prestamos_Activos FROM  Prestamo;");
+            if (rs.next()) {
+             porcentaje = rs.getDouble("Porcentaje_Prestamos_Activos");
+         
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+        return porcentaje;
+    	
+    }
+    public double Rendimientos_p_aprobados() {
+        cn = new Conexion();
+        cn.Open();
+        double resultado=0;
+        try {
+            ResultSet rs = cn.query("SELECT   (SUM(DetallesXPrestamo.Importe_C_Interes_Dt) - SUM(Prestamo.Importe_solicitado_Pt)) AS Resultado FROM Prestamo  JOIN DetallesXPrestamo  ON Prestamo.ID_Prestamo_Pt = DetallesXPrestamo.ID_Prestamo_Pt_Dt WHERE    Prestamo.Estado_Pt = 1 AND YEAR(Prestamo.Fecha_Peticion_Pt) = YEAR(CURDATE());");
+            if (rs.next()) {
+            	 resultado = rs.getDouble("Resultado");
+         
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+        return resultado;
+    	
+    }
+    public double RendimientosMEnsuales_p_aprobados() {
+        cn = new Conexion();
+        cn.Open();
+        double resultado=0;
+        try {
+            ResultSet rs = cn.query("SELECT (SUM(DetallesXPrestamo.Importe_C_Interes_Dt) - SUM(Prestamo.Importe_solicitado_Pt)) AS Resultado FROM Prestamo  JOIN DetallesXPrestamo  ON Prestamo.ID_Prestamo_Pt = DetallesXPrestamo.ID_Prestamo_Pt_Dt WHERE Prestamo.Estado_Pt = 1   AND YEAR(Prestamo.Fecha_Peticion_Pt) = YEAR(CURDATE()) AND MONTH(Prestamo.Fecha_Peticion_Pt) = MONTH(CURDATE());");
+            if (rs.next()) {
+            	 resultado = rs.getDouble("Resultado");
+         
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+        return resultado;
+    	
     }
 }

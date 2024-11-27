@@ -432,6 +432,20 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+
+CREATE TRIGGER TriggerInsertarSaldoPrestamo
+AFTER UPDATE ON Prestamo
+FOR EACH ROW
+BEGIN
+    IF NEW.Estado_Pt = 1 AND OLD.Estado_Pt <> 1 THEN
+        UPDATE Cuenta
+        SET Saldo_Cu = Saldo_Cu + NEW.Importe_solicitado_Pt
+        WHERE Numero_de_Cuenta_Cu = NEW.Numero_de_Cuenta_Cu_Pt;
+    END IF;
+END$$
+
+DELIMITER ;
 -- INSERTS --
 
 INSERT INTO InteresXCantidadDMeses (Plazo_d_Pagos_En_meses_IXM, Interes_IXM, Meses_int)

@@ -6,6 +6,7 @@ import java.util.List;
 
 import daoImpl.ClienteDaoImpl;
 import daoImpl.CuentaDaoImpl;
+import daoImpl.ProvinciaDaoImpl;
 import entidades.Cliente;
 import entidades.Cuenta;
 import entidades.TipoDeCuenta;;
@@ -68,4 +69,20 @@ public class NegocioCuentas {
 			Cliente cli=clienteDao.obtenerUnoPorCuil(cuil);
 			return cli;
 		}
+		
+	public double PorcentajeCreditosAprobados() {
+		ProvinciaDaoImpl dao=new ProvinciaDaoImpl();
+	double porcentaje = dao.Porcentajes_p_aprobados();
+	return porcentaje;
+	}
+	public double RendimientosCreditosAprobados() {
+		ProvinciaDaoImpl dao=new ProvinciaDaoImpl();
+	double porcentaje = dao.Rendimientos_p_aprobados();
+	return porcentaje;
+	}
+	public double RendimientosMEnsualesCreditosAprobados() {
+		ProvinciaDaoImpl dao=new ProvinciaDaoImpl();
+	double porcentaje = dao.RendimientosMEnsuales_p_aprobados();
+	return porcentaje;
+	}
 }
