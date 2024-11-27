@@ -42,7 +42,7 @@ public class ServletConfirmarPrestamo extends HttpServlet {
             double porcentajeInteresDecimal = (double) interes.getInteresIxm().floatValue() / 100;
             double porcentajeDeAñoSegunMeses = (double) 12 / interes.getMeses();
 
-            double montoConInteres = importeSolicitado + (importeSolicitado * porcentajeInteresDecimal * porcentajeDeAñoSegunMeses);
+            double montoConInteres =  (importeSolicitado *(1.00+ porcentajeInteresDecimal ));
             double montoPorCuota = montoConInteres / plazoPagoMeses;
 
             // Establecer los atributos para el JSP

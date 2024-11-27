@@ -122,8 +122,16 @@
 </div>
 <script>
     function aprobarPrestamo() {
-        alert("El prestamo a sido aprobado con éxito por usted");
-        return true; 
+     
+        const confirmar = confirm("¿Seguro que quiere aprobar el préstamo?");
+        
+        if (confirmar) {
+
+            alert("Préstamo aprobado");
+            
+
+            document.querySelector("form[action='servletExaminarPrestamo']").submit();
+        }
     }
 </script>
 
