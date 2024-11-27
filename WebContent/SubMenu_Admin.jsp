@@ -25,6 +25,7 @@
 				   <ul class="submenu">
                         <li> <a href="servletReporteClientes?Param=1">Reporte de Clientes</a></li>
                         <li> <a href="servletReporteCuentas?Param=1">Reporte de Cuentas</a></li>
+                        <li> <a href="ServletReportePrestamos?Param=1">Reporte de Prestamos</a></li>
                     </ul>
                      </li>
 		</ul>

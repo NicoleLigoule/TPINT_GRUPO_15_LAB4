@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import dao.CuentaDao;
 import dao.CuotasXPrestamoDao;
 import dao.MovimientoDao;
@@ -12,13 +13,12 @@ import daoImpl.CuentaDaoImpl;
 import daoImpl.CuotasXPrestamoDaoImpl;
 import daoImpl.MovimientoDaoImpl;
 import daoImpl.PrestamoDaoImpl;
+
+
+
 import entidades.Cuenta;
 import entidades.CuotasXPrestamo;
 import entidades.DetalleXPrestamo;
-import java.util.List;
-
-import dao.PrestamoDao;
-import daoImpl.PrestamoDaoImpl;
 import entidades.InteresesXCantidadDeMeses;
 import entidades.Prestamo;
 
@@ -68,7 +68,7 @@ public class NegocioPrestamo {
     		cu.setSaldoCu(saldo);
     		exito = cuentaDao.editar(cu);
     		
-//    		añade registro de movimiento
+//    		aï¿½ade registro de movimiento
     		String detalleMov = "se pago cuota del prestamo de la cuenta " + Integer.toString(idCuenta);
 //    		(1, 'Alta de cuenta'),
 //    		(2, 'Transferencia'),

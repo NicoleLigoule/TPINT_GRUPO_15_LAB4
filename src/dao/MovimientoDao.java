@@ -5,6 +5,7 @@ import java.util.List;
 import entidades.Movimiento;
 import entidades.TipoMovimiento;
 
+
 public interface MovimientoDao {
     List<Movimiento> obtenerMovimientosPorCuenta(int numeroCuenta);
     List<Movimiento> obtenerMovimientosPorCuentaYTipo(int numeroCuenta, String tipoMovimiento);
