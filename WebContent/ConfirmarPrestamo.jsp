@@ -39,6 +39,8 @@
 
                     <label for="monto_por_cuota">Monto Por Cuota</label>
                     <input type="text" id="monto_por_cuota" name="monto_por_cuota" value="<%= request.getAttribute("monto_por_cuota") != null ? request.getAttribute("monto_por_cuota") : request.getParameter("monto_por_cuota")%>" readonly>
+   					
+   				    <input type="hidden" name="plazo_pago_IXM" value="<%= request.getAttribute("plazo_pago_IXM") %>">
 
                     <div class="button-group">
                         <button type="button" class="cancel-button">Volver</button>
