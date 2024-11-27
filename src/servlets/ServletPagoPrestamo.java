@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import entidades.Cuenta;
 import entidades.Prestamo;
 import entidades.Usuario;
+import excepciones.excepcionesPagoPrestamo;
+import excepcionesImpl.excepcionesPagoPrestamoImpl;
 import javafx.util.Pair;
 import negocio.NegocioCuentas;
 import entidades.Prestamo;
@@ -78,6 +80,44 @@ public class ServletPagoPrestamo extends HttpServlet {
                 response.getWriter().println("error al obtener los datos: " + e.getMessage());
             }
         }else if (request.getParameter("idPrestamo") != null) {
+            try {
+                excepcionesPagoPrestamo excepciones = new excepcionesPagoPrestamoImpl();
+
+                // Validar usuario autenticado
+                Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+                excepciones.validarUsuarioAutenticado(usuario);
+
+                // Validar que el préstamo exista
+                int idPrestamo = Integer.parseInt(request.getParameter("idPrestamo"));
+                excepciones.validarPrestamoExistente(idPrestamo);
+
+                // Cargar datos del préstamo y usuario
+                NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
+                Prestamo pr = negocioPrestamo.PrestamoCargado(idPrestamo);
+                request.setAttribute("Prestamo_seleccionado", pr);
+
+                // Validar cuentas del usuario
+                String cuil = usuario.getCuilUs();
+                NegocioCuentas negocioCuentas = new NegocioCuentas();
+                List<Cuenta> cuentas = negocioCuentas.obtenerCuentasPorCuil(cuil);
+                if (cuentas == null || cuentas.isEmpty()) {
+                    throw new Exception("El usuario no tiene cuentas asociadas.");
+                }
+                request.setAttribute("cuentas_usuario", cuentas);
+
+                // Redirigir al JSP correspondiente
+                request.getRequestDispatcher("PagoPrestamo.jsp").forward(request, response);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.getWriter().println("Error: " + e.getMessage());
+            	}
+            }
+        }
+        
+        
+        
+       /* else if (request.getParameter("idPrestamo") != null) {
 //        	traer prestamo y meterlo en atributte, despues llamar al jsp que sigue
         	
         	NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
@@ -103,7 +143,7 @@ public class ServletPagoPrestamo extends HttpServlet {
         	
         }
         
-    }
+    }*/
 
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -114,7 +154,7 @@ public class ServletPagoPrestamo extends HttpServlet {
     	NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
 //		request.setParameter("idPrestamo", );
     	if(negocioPrestamo.realizarPagoPrestamo(idPrestamo, numCuenta)) {
-    		request.setAttribute("Mensaje_exito", "Se realizo el pago con exito de la cuota");
+    		request.setAttribute("Mensaje_exito", "Se realizo el pago de la cuota con exito");
     		System.out.print("SE HIZO BIEN EL PAGO");
 
     		
