@@ -61,6 +61,7 @@ public class NegocioPrestamo {
     	saldo = saldo.subtract(montoxCuota);
     	
     	if(saldo.compareTo(BigDecimal.ZERO) >= 0) {
+    		//TODO: agregrar exceptions para cuando no tenga saldo y por si falla el movimiento
     		pagarCuota(idPrestamo);
     		
 //    		descuenta de cuenta
