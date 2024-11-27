@@ -48,34 +48,40 @@ public class CuentaDaoImpl implements CuentaDao {
 
 	}
 	
-    @Override
-    public List<Cuenta> obtenerTodos() {
-        cn = new Conexion();
-        cn.Open();
-        List<Cuenta> lista = new ArrayList<>();
-        try {
-            ResultSet rs = cn.query("SELECT C.Numero_de_Cuenta_Cu, C.Cuil_Cli_Cu, C.Fecha_Creacion_Cu, T.Nombre_Tipo, C.CBU_Cu, C.Saldo_Cu, C.Estado_Cu, T.Nombre_Tipo " +
-                    "FROM Cuenta C " +
-                    "JOIN TipoCuenta T ON C.Id_Tipo_Cuenta = T.Id_Tipo_Cuenta " +
-                    "WHERE C.Estado_Cu = 1");
-            while (rs.next()) {
-                Cuenta cuenta = new Cuenta();
-                cuenta.setNumeroDeCuentaCu(rs.getInt("Numero_de_Cuenta_Cu"));
-                cuenta.setCuilCliCu(rs.getString("Cuil_Cli_Cu"));
-                cuenta.setFechaCreacionCu(rs.getDate("Fecha_Creacion_Cu").toLocalDate());
-                cuenta.setTipoCuentaDescripcion(rs.getString("Nombre_Tipo")); // Descripci�n del tipo de cuenta
-                cuenta.setCbuCu(rs.getString("CBU_Cu"));
-                cuenta.setSaldoCu(rs.getBigDecimal("Saldo_Cu"));
-                cuenta.setEstadoCu(rs.getBoolean("Estado_Cu"));
-                lista.add(cuenta);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {        	
-            cn.close();
-        }
-        return lista;
-    }
+	@Override
+	public List<Cuenta> obtenerTodos() {
+	    cn = new Conexion();
+	    cn.Open();
+	    List<Cuenta> lista = new ArrayList<>();
+	    try {
+	        String query =
+	            "SELECT C.Numero_de_Cuenta_Cu, C.Fecha_Creacion_Cu, T.Nombre_Tipo, C.CBU_Cu, C.Saldo_Cu, C.Estado_Cu, CC.Cuil_Cli_CC "+
+	            "FROM Cuenta C "+
+	            "JOIN TipoCuenta T ON C.Id_Tipo_Cuenta = T.Id_Tipo_Cuenta "+
+	            "LEFT JOIN CuentasXCliente CC ON C.Numero_de_Cuenta_Cu = CC.Numero_de_Cuenta "+
+	            "WHERE C.Estado_Cu = 1";
+	        
+	        ResultSet rs = cn.query(query);
+	        while (rs.next()) {
+	            Cuenta cuenta = new Cuenta();
+	            cuenta.setNumeroDeCuentaCu(rs.getInt("Numero_de_Cuenta_Cu"));
+	            cuenta.setCuilCliCu(rs.getString("Cuil_Cli_CC")); // Obtiene el CUIL desde la tabla intermedia
+	            cuenta.setFechaCreacionCu(rs.getDate("Fecha_Creacion_Cu").toLocalDate());
+	            cuenta.setTipoCuentaDescripcion(rs.getString("Nombre_Tipo"));
+	            cuenta.setCbuCu(rs.getString("CBU_Cu"));
+	            cuenta.setSaldoCu(rs.getBigDecimal("Saldo_Cu"));
+	            cuenta.setEstadoCu(rs.getBoolean("Estado_Cu"));
+	            lista.add(cuenta);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        cn.close();
+	    }
+	    return lista;
+	}
+
+
 
     @Override
     public Cuenta obtenerUno(int numeroCuenta) {

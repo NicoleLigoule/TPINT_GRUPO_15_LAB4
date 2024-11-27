@@ -51,7 +51,6 @@ CREATE TABLE Cliente(
 
 CREATE TABLE Cuenta (
     Numero_de_Cuenta_Cu INT AUTO_INCREMENT PRIMARY KEY,
-    Cuil_Cli_Cu VARCHAR(20),  
     Fecha_Creacion_Cu DATE,
     Id_Tipo_Cuenta INT,
     CBU_Cu VARCHAR(22),
@@ -61,6 +60,15 @@ CREATE TABLE Cuenta (
     FOREIGN KEY (Id_Tipo_Cuenta) REFERENCES TipoCuenta(Id_Tipo_Cuenta), 
     CONSTRAINT UK_CBU UNIQUE (CBU_Cu)
 ) AUTO_INCREMENT = 1001;
+
+CREATE TABLE CuentasXcliente(
+	Numero_de_Cuenta INT,
+    Cuil_Cli_CC VARCHAR(20),
+
+	CONSTRAINT PK_Id_CXC PRIMARY KEY (Numero_de_Cuenta, Cuil_Cli_CC),
+    CONSTRAINT FK_NCu FOREIGN KEY (Numero_de_Cuenta) REFERENCES Cuenta(Numero_de_Cuenta_Cu),
+    CONSTRAINT FK_NCuil FOREIGN KEY (Cuil_Cli_CC) REFERENCES Cliente(cuil_Cli)
+);
 
 CREATE TABLE TipoMovimiento(
     Id_TipoMov_TM INT AUTO_INCREMENT,
@@ -150,11 +158,11 @@ FOR EACH ROW
 BEGIN
     DECLARE ultimoCBU BIGINT;
 
-    -- agarramos el Ãºltimo valor de CBU_Cu como un nÃºmero entero
+    -- agarramos el ÃÂºltimo valor de CBU_Cu como un nÃÂºmero entero
     SELECT MAX(CAST(CBU_Cu AS UNSIGNED)) INTO ultimoCBU
     FROM Cuenta;
 
-    -- si no hay valores previos en la tabla, se inicia con el nÃºmero base
+    -- si no hay valores previos en la tabla, se inicia con el nÃÂºmero base
     IF ultimoCBU IS NULL THEN
         SET ultimoCBU = 5500990000000001;
     ELSE
@@ -180,10 +188,10 @@ BEGIN
     INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
     VALUES (CONCAT('Alta de cuenta'), 10000, 1);  -- Monto por defecto
 
-    -- Obtener el ID del movimiento reci�n insertado
+    -- Obtener el ID del movimiento reciï¿½n insertado
     SET @MovimientoID = LAST_INSERT_ID();
 
-    -- Insertar la relaci�n en MovimientoXCuenta
+    -- Insertar la relaciï¿½n en MovimientoXCuenta
     INSERT INTO MovimientoXCuenta (Id_Movimiento__Mov_MXC, Num_Cuenta_Cu_MXC)
     VALUES (@MovimientoID, NEW.Numero_de_Cuenta_Cu);
 END $$
@@ -208,7 +216,7 @@ BEGIN
     DECLARE MovimientoOrigenID INT;
     DECLARE MovimientoDestinoID INT;
 
-    -- Obtener el n�mero de cuenta basado en el CBU
+    -- Obtener el nï¿½mero de cuenta basado en el CBU
     SELECT Numero_de_Cuenta_Cu INTO CuentaDestino
     FROM Cuenta
     WHERE CBU_Cu = CBU_CuentaDestino AND Estado_Cu = 1;
@@ -217,11 +225,11 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El CBU proporcionado no corresponde a una cuenta activa.';
     END IF;
 
-    -- Verificar que la cuenta de origen existe y est� activa
+    -- Verificar que la cuenta de origen existe y estï¿½ activa
     IF NOT EXISTS (
         SELECT 1 FROM Cuenta WHERE Numero_de_Cuenta_Cu = CuentaOrigen AND Estado_Cu = 1
     ) THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La cuenta de origen no existe o est� inactiva.';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La cuenta de origen no existe o estï¿½ inactiva.';
     END IF;
 
     -- Obtener saldo de la cuenta de origen
@@ -244,7 +252,7 @@ BEGIN
     INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
     VALUES (CONCAT('', Detalle), -Monto, 2);
 
-    -- Obtener el ID del movimiento reci�n creado
+    -- Obtener el ID del movimiento reciï¿½n creado
     SET MovimientoOrigenID = LAST_INSERT_ID();
 
     -- Registrar en MovimientoXCuenta para la cuenta de origen
@@ -255,7 +263,7 @@ BEGIN
     INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
     VALUES (CONCAT('', Detalle), +Monto, 2);
 
-    -- Obtener el ID del movimiento reci�n creado
+    -- Obtener el ID del movimiento reciï¿½n creado
     SET MovimientoDestinoID = LAST_INSERT_ID();
 
     -- Registrar en MovimientoXCuenta para la cuenta de destino
@@ -275,11 +283,11 @@ DELIMITER ;
 	BEGIN
 		DECLARE ultimoCBU BIGINT;
 
-		-- Obtener el �ltimo valor de CBU_Cu como un n�mero entero
+		-- Obtener el ï¿½ltimo valor de CBU_Cu como un nï¿½mero entero
 		SELECT MAX(CAST(CBU_Cu AS UNSIGNED)) INTO ultimoCBU
 		FROM Cuenta;
 
-		-- Si no hay valores previos en la tabla, se inicia con el n�mero base
+		-- Si no hay valores previos en la tabla, se inicia con el nï¿½mero base
 		IF ultimoCBU IS NULL THEN
 			SET ultimoCBU = 5500990000000001;
 		ELSE
@@ -397,7 +405,7 @@ END$$
 DELIMITER $$
 
 CREATE PROCEDURE GenerarCuotas(
-    IN p_ID_Prestamo INT,       -- ID del préstamo
+    IN p_ID_Prestamo INT,       -- ID del prÃ©stamo
     IN p_CantidadMeses INT      -- Cantidad de meses (cuotas)
 )
 BEGIN
@@ -416,9 +424,9 @@ BEGIN
             N_Cuota,
             pagada
         ) VALUES (
-            p_ID_Prestamo,       -- ID del préstamo
+            p_ID_Prestamo,       -- ID del prÃ©stamo
             v_FechaVencimiento,  -- Fecha de vencimiento
-            i,                   -- Número de cuota
+            i,                   -- NÃºmero de cuota
             0                    -- Estado inicial: no pagada
         );
 
@@ -455,14 +463,14 @@ FOR EACH ROW
 BEGIN
     DECLARE MovimientoID INT;
 
-    -- Insertar un movimiento asociado al pr�stamo
+    -- Insertar un movimiento asociado al préstamo
     INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
-    VALUES (CONCAT('Pr�stamo solicitado: ', NEW.Detalle_solicitud_Pt), NEW.Importe_solicitado_Pt, 3); -- TipoMovimiento 3: Pr�stamo
+    VALUES (CONCAT('Préstamo solicitado: ', NEW.Detalle_solicitud_Pt), NEW.Importe_solicitado_Pt, 3); -- TipoMovimiento 3: Préstamo
 
-    -- Obtener el ID del movimiento reci�n insertado
+    -- Obtener el ID del movimiento recién insertado
     SET MovimientoID = LAST_INSERT_ID();
 
-    -- Asociar el movimiento a la cuenta relacionada con el pr�stamo
+    -- Asociar el movimiento a la cuenta relacionada con el préstamo
     INSERT INTO MovimientoXCuenta (Id_Movimiento__Mov_MXC, Num_Cuenta_Cu_MXC)
     VALUES (MovimientoID, NEW.Numero_de_Cuenta_Cu_Pt);
 END$$
@@ -545,17 +553,30 @@ VALUES  (1, 'Alta de cuenta'),
 
 
 -- CUENTAS DE EJEMPLO
-INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
+INSERT INTO Cuenta (Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
 VALUES
-('20-12345678-9', '2024-11-24', 1, '1234567890123456789012', 10000, 1);
+('2024-11-24', 1, '1234567890123456789012', 10000, 1);
 
-INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
+INSERT INTO Cuenta ( Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
 VALUES
-('27-87654321-8', '2024-11-24', 2, '2345678901234567890123', 15000, 1);
+( '2024-11-24', 2, '2345678901234567890123', 15000, 1);
 
-INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
+INSERT INTO Cuenta ( Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
 VALUES
-('30-11223344-7', '2024-11-24', 1, '3456789012345678901234', 500, 1);
+( '2024-11-24', 1, '3456789012345678901234', 500, 1);
+
+
+
+-- CUENTAS X CLIENTE
+INSERT INTO CuentasXcliente (Numero_de_Cuenta, Cuil_Cli_CC)
+VALUES (1001,'20-12345678-9');
+
+INSERT INTO CuentasXcliente (Numero_de_Cuenta, Cuil_Cli_CC)
+VALUES (1002,'27-87654321-8');
+
+INSERT INTO CuentasXcliente (Numero_de_Cuenta, Cuil_Cli_CC)
+VALUES (1003,'30-11223344-7');
+
 
 
 INSERT INTO Prestamo (
@@ -566,12 +587,13 @@ INSERT INTO Prestamo (
     Estado_Pt
 ) 
 VALUES (
-    1001,                           -- Número de cuenta existente en la tabla Cuenta
+    1001,                            -- numero de cuenta existente en la tabla Cuenta
     50000.00,                        -- Importe solicitado (por ejemplo, 50,000.00)
     '06M',                           -- Plazo de pago (por ejemplo, 12 meses, debe existir en InteresXCantidadDMeses)
-    'Préstamo para comprar un auto', -- Detalle de la solicitud
-    0                                -- Estado inicial del préstamo (0 = Pendiente, 1 = Aprobado/Rechazado)
+    'Prestamo para comprar un auto', -- Detalle de la solicitud
+    0                                -- Estado inicial del prestamo (0 = Pendiente, 1 = Aprobado/Rechazado)
 );
 
+-- ESTE UPDATE ES PARTE DEL SCRIPT, PARA TESTEAR CUANDO SE APRUEBA UN PRESTAMO
 UPDATE Prestamo SET Estado_Pt = 1 WHERE ID_Prestamo_Pt = 1;
 
