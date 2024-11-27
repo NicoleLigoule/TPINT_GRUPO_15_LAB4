@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UsuarioDao; //TODO: sacar el dao de aca
-import daoImpl.UsuarioDaoImpl; //TODO: sacar el dao de aca
+
 import entidades.Usuario;
+import negocio.NegocioClientes;
 
 /**
  * Servlet implementation class ServletLoginSesion
@@ -19,11 +19,7 @@ import entidades.Usuario;
 public class ServletLoginSesion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private UsuarioDao usuarioDao;
-	
-    public void init() throws ServletException {
-        usuarioDao = new UsuarioDaoImpl(); 
-    }
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -47,9 +43,8 @@ public class ServletLoginSesion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String usuarioUs = request.getParameter("usuario");
         String contraseniaUs = request.getParameter("contrasena");
-
-        Usuario usuario = usuarioDao.validarUsuario(usuarioUs, contraseniaUs);
-
+        NegocioClientes neg= new NegocioClientes();
+        Usuario usuario = neg.validadUsu(usuarioUs, contraseniaUs);
         if (usuario != null && usuario.isEstadoUs()) {
             HttpSession session = request.getSession();
             session.setAttribute("usuario", usuario);

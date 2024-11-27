@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daoImpl.MovimientoDaoImpl;
+
 import entidades.Cuenta;
 import entidades.Movimiento;
 import entidades.Usuario;
