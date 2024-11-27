@@ -2,15 +2,35 @@
 <%@ page import="entidades.Prestamo" %>
 <%@ page import="entidades.CuotasXPrestamo" %>
 <%@ page import="entidades.Usuario" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
-<%@ page import="javafx.util.Pair" %>
+<%@ page import="entidades.Cuenta" %>
+
 
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     if (usuario == null) {
         response.sendRedirect("Login.jsp");
         return;
+    }
+
+    // Obtén el objeto prestamo desde los atributos del request o session
+    Prestamo prestamo = (Prestamo) request.getAttribute("Prestamo_seleccionado");
+    if (prestamo == null) {
+        out.println("<p>Error: No se recibió ningún préstamo.</p>");
+        return;
+    }
+
+    // Contar cuotas impagas
+    int cuotasImpagas = 0;
+    float monto = 0;
+
+    if (prestamo.getCuotas() != null && prestamo.getDetalle() != null) {
+    	monto = prestamo.getDetalle().getImporteXCuotasDt().floatValue();
+        for (CuotasXPrestamo cuota : prestamo.getCuotas()) {
+            if (!cuota.getPagada()) {
+                cuotasImpagas++;                
+            }
+        }
     }
 %>
 <!DOCTYPE html>
@@ -23,9 +43,9 @@
 	href="${pageContext.request.contextPath}/Css/PagoPrestamo.css">
 <body>
     <nav class="navbar">
-        <a href="${pageContext.request.contextPath}/Login.jsp"> 
+        <a href="${pageContext.request.contextPath}/Login.jsp">
             <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
-        </a> 
+        </a>
         <span class="username"><%= usuario.getUsuarioUs() %></span>
         <jsp:include page="SubMenu_Cliente.jsp" />
     </nav>
@@ -33,93 +53,51 @@
     <div class="main-container">
         <div class="content">
             <div class="form-card">
-                <h2>Pago de Préstamos</h2>
-
+                <h2>Pago de Préstamo</h2>
                 <%
-                    List<Pair<Integer, ArrayList<Prestamo>>> prestamoXCuenta = (List<Pair<Integer, ArrayList<Prestamo>>>) request.getAttribute("PrestamosXCuenta");
-                    boolean hayCuotasImpagas = false; // Para controlar si hay al menos una cuota impaga
-                
-                    if (prestamoXCuenta != null && !prestamoXCuenta.isEmpty()) {
-                        for (Pair<Integer, ArrayList<Prestamo>> pair : prestamoXCuenta) {
-                            ArrayList<Prestamo> prestamos = pair.getValue();
-                            for (Prestamo prestamo : prestamos) {
-                                int cuotasImpagas = 0;
+                    if (cuotasImpagas > 0) {
+                %>
+                    <div class="loan-card">
+                        <h2>Préstamo #<%= prestamo.getIdPrestamoPt() %></h2>
+                        <p><strong>Número de Cuenta:</strong> <%= prestamo.getNumeroDeCuentaCuPt() %></p>
+                        <p><strong>Monto Total:</strong> $<%= prestamo.getMontoRestante() %></p>
+                        <p><strong>Cuotas Pendientes:</strong> <%= cuotasImpagas %></p>
+                        <p><strong>Precio por Cuota:</strong> $<%= monto != 0 ? monto : "N/A" %></p>
+                    </div>
 
-     
-                                if (prestamo.getCuotas() != null) {
-                                    for (CuotasXPrestamo cuota : prestamo.getCuotas()) {
-                                        if (!cuota.getPagada()) {
-                                            cuotasImpagas = cuotasImpagas+1;
-                                            hayCuotasImpagas = true;
-                                        }
+                    <form id="form-pago" action="ServletPagoPrestamo" method="post">
+                        <h3>Detalles del Pago</h3>
+                        <input type="hidden" name="idPrestamo" value="<%= prestamo.getIdPrestamoPt() %>">
+                        
+                        
+                        <p><strong>Monto a Pagar:</strong> $<%= monto != 0 ? monto : "N/A" %></p>
+                        
+                        <label for="cuentaPago">Seleccionar cuenta para el pago:</label>
+                        <select name="cuentaPago" id="cuentaPago" required>
+                            <%
+                                // Suponiendo que tienes una lista de cuentas del usuario
+                                List<Cuenta> cuentas = (List<Cuenta>) request.getAttribute("cuentas_usuario");
+                                if (cuentas != null) {
+                                    for (Cuenta cuenta : cuentas) {
+                            %>
+                                        <option value="<%= cuenta.getNumeroDeCuentaCu() %>">Cuenta #<%= cuenta.getNumeroDeCuentaCu() %></option>
+                            <%
                                     }
                                 }
-                                System.out.println("Cuotas impagas: " + cuotasImpagas);  // Para depurar
-                                if (cuotasImpagas > 0) {
-                %>
-                                   
-                                   <div class="loan-card" onclick="seleccionarPrestamo(<%= prestamo.getIdPrestamoPt() %>, 
-                                   '<%= prestamo.getMontoRestante() %>', '<%= cuotasImpagas %>', 
-                                   '<%= prestamo.getDetalle().getImporteXCuotasDt() %>')">
-                                    
-                                    
-                                    
-                                        <h2>Préstamo #<%= prestamo.getIdPrestamoPt() %></h2>
-                                        <p><strong>Número de Cuenta:</strong> <%= prestamo.getNumeroDeCuentaCuPt() %></p>
-                                        <p><strong>Monto Total:</strong> $<%= prestamo.getMontoRestante() %></p>
-                                        <p><strong>Cuotas Pendientes:</strong> <%= cuotasImpagas %></p>
-                                        <p><strong>Precio por Cuota:</strong> $<%= prestamo.getDetalle().getImporteXCuotasDt() %></p>
-                                    </div>
-                <%
-                                }
-                            }
-                        }
-                    }
+                            %>
+                        </select>
 
-                    if (!hayCuotasImpagas) {
+                        <button type="submit">Pagar</button>
+                    </form>
+                <%
+                    } else {
                 %>
-                        <p>Felicidades, no tiene cuotas impagas.</p>
+                    <p>Felicidades, no tiene cuotas impagas.</p>
                 <%
                     }
                 %>
-
-                <form id="form-pago" action="RealizarPago.jsp" method="post" style="display:none;">
-                    <h3>Detalles del Préstamo Seleccionado</h3>
-                    <input type="hidden" name="idPrestamo" id="idPrestamo">
-                    <p><strong>Monto Total:</strong> <span id="montoTotal"></span></p>
-                    <p><strong>Cuotas Pendientes:</strong> <span id="cuotasPendientes"></span></p>
-                    <p><strong>Precio por Cuota:</strong> <span id="precioCuota"></span></p>
-
-                    <label for="cuentaPago">Seleccionar cuenta para el pago:</label>
-                    <select name="cuentaPago" id="cuentaPago" required>
-                        <%
-                            // Suponiendo que hay una lista de cuentas del usuario
-                            List<Integer> cuentas = (List<Integer>) request.getAttribute("cuentasUsuario");
-                            if (cuentas != null) {
-                                for (Integer cuenta : cuentas) {
-                        %>
-                                    <option value="<%= cuenta %>">Cuenta #<%= cuenta %></option>
-                        <%
-                                }
-                            }
-                        %>
-                    </select>
-
-                    <button type="submit">Pagar</button>
-                </form>
             </div>
         </div>
     </div>
-
-
-    <script>
-        function seleccionarPrestamo(idPrestamo, montoTotal, cuotasPendientes, precioCuota) {
-            document.getElementById('form-pago').style.display = 'block';
-            document.getElementById('idPrestamo').value = idPrestamo;
-            document.getElementById('montoTotal').textContent = `$${montoTotal}`;
-            document.getElementById('cuotasPendientes').textContent = cuotasPendientes;
-            document.getElementById('precioCuota').textContent = `$${precioCuota}`;
-        }
-    </script>
 </body>
 </html>

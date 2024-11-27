@@ -81,8 +81,21 @@ public class ServletPagoPrestamo extends HttpServlet {
 //        	traer prestamo y meterlo en atributte, despues llamar al jsp que sigue
         	
         	NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
-        	Prestamo pr = negocioPrestamo.obtenerPrestamo(Integer.parseInt(request.getParameter("idPrestamo")));
+        	Prestamo pr = negocioPrestamo.PrestamoCargado(Integer.parseInt(request.getParameter("idPrestamo")));
         	request.setAttribute("Prestamo_seleccionado", pr);
+        	
+        	Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        	if (usuario == null) {
+                response.sendRedirect("Login.jsp");
+                return;
+            }
+            
+            String cuil = usuario.getCuilUs();
+            NegocioCuentas negocioCuentas = new NegocioCuentas();
+            List<Cuenta> cuentas = negocioCuentas.obtenerCuentasPorCuil(cuil);
+        	
+
+            request.setAttribute("cuentas_usuario", cuentas);
         	
         	request.getRequestDispatcher("PagoPrestamo.jsp").forward(request, response);
         	
@@ -94,6 +107,22 @@ public class ServletPagoPrestamo extends HttpServlet {
 
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-           
+    	
+    	int numCuenta = Integer.parseInt(request.getParameter("cuentaPago"));
+    	int idPrestamo = Integer.parseInt(request.getParameter("idPrestamo"));
+    	
+    	NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
+    	
+    	negocioPrestamo.pagarCuota(idPrestamo, numCuenta);
+    	
+    	
+    	
+    	
+    	
     }
+
+   
+
+    
+    
 }

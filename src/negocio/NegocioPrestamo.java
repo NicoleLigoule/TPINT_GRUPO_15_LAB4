@@ -142,5 +142,22 @@ public class NegocioPrestamo {
     	System.out.print("procesarPrestamo::SE PROCESA EL PRESTAMO");
         return guardado; 
     }
+    
+    public boolean pagarCuota(int idPrestamo, int idCuenta) {
+    	boolean pagada = false;
+    	PrestamoDaoImpl prestamoDao = new PrestamoDaoImpl();
+    	CuotasXPrestamoDaoImpl cuotaDao = new CuotasXPrestamoDaoImpl();
+    	ArrayList<CuotasXPrestamo> cu = prestamoDao.TraerCuotas(idPrestamo);
+    	for(CuotasXPrestamo cuota: cu) {
+    		if(cuota.getPagada() == false) {
+    			pagada = cuotaDao.pagarCuota(cuota);    
+    			break;
+    		}
+    	}
+    	
+    	
+    	return pagada;
+    	
+    }
 
 }

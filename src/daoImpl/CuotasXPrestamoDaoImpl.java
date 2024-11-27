@@ -34,16 +34,40 @@ public class CuotasXPrestamoDaoImpl implements CuotasXPrestamoDao {
     }
 
     @Override
-    public void actualizarCuota(CuotasXPrestamo cuota) {
+    public boolean actualizarCuota(CuotasXPrestamo cuota) {
         String sql = "UPDATE CuotasXPrestamos SET Fecha_vencimiento_Cp = ?, N_Cuota = ? WHERE ID_Prestamo_Pt_Cp = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setDate(1, Date.valueOf(cuota.getFechaVencimientoCp()));
             stmt.setInt(2, cuota.getNCuota());
             stmt.setInt(3, cuota.getIdPrestamoPtCp());
-            stmt.executeUpdate();
+            if(stmt.executeUpdate() > 0) {
+            	return true;
+            }
+            else {
+            	return false;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+		return false;
+    }
+    
+    @Override
+    public boolean pagarCuota(CuotasXPrestamo cuota) {
+        String sql = "UPDATE CuotasXPrestamos SET pagada = true WHERE ID_Prestamo_Pt_Cp = ? AND N_Cuota = ? ";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        	stmt.setInt(1, cuota.getIdPrestamoPtCp());
+        	stmt.setInt(2, cuota.getNCuota());
+            if(stmt.executeUpdate() > 0) {
+            	return true;
+            }
+            else {
+            	return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		return false;
     }
 
     @Override
