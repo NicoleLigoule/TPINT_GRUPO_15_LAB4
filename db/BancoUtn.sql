@@ -498,6 +498,14 @@ VALUES
 ('Ahorro'),
 ('Corriente');
 
+INSERT INTO TipoMovimiento (Id_TipoMov_TM, Descripcion_TM)
+VALUES  (1, 'Alta de cuenta'),
+		(2, 'Transferencia'),
+        (3, 'Alta de prestamo'),
+		(4, 'Pago de prestamo');
+
+
+
 -- CUENTAS DE EJEMPLO
 INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
 VALUES
