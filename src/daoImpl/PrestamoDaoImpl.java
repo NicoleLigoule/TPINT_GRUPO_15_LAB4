@@ -238,7 +238,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
     }
     
     public ArrayList<CuotasXPrestamo> TraerCuotas(int idPrestamoPt){ 
-        String queryCuotas = "SELECT Fecha_vencimiento_Cp, N_Cuota " +
+        String queryCuotas = "SELECT * " +
                              "FROM CuotasXPrestamos WHERE ID_Prestamo_Pt_Cp = ?";
         
         ArrayList<CuotasXPrestamo> cuotasLocal = new ArrayList<>();
@@ -257,8 +257,10 @@ public class PrestamoDaoImpl implements PrestamoDao {
 
                while (rsCuotas.next()) {
                    CuotasXPrestamo cuota = new CuotasXPrestamo();
+                   cuota.setIdPrestamoPtCp(rsCuotas.getInt("ID_Prestamo_Pt_Cp"));
                    cuota.setFechaVencimientoCp(rsCuotas.getDate("Fecha_vencimiento_Cp").toLocalDate());
                    cuota.setNCuota(rsCuotas.getInt("N_Cuota"));
+                   cuota.setPagada(rsCuotas.getBoolean("pagada"));
                    cuotasLocal.add(cuota);
                }
            } catch (SQLException e) {
