@@ -6,16 +6,18 @@ public class CuotasXPrestamo {
 	    private int idPrestamoPtCp; 
 	    private LocalDate fechaVencimientoCp; 
 	    private int nCuota; 
+	    boolean pagada;
 	    
 	    // Constructores
 	    public CuotasXPrestamo() {
 	    	
 	    }
 	    
-	    public CuotasXPrestamo(int idPrestamoPtCp, LocalDate fechaVencimientoCp, int nCuota) {
+	    public CuotasXPrestamo(int idPrestamoPtCp, LocalDate fechaVencimientoCp, int nCuota, boolean pagada) {
 	        this.idPrestamoPtCp = idPrestamoPtCp;
 	        this.fechaVencimientoCp = fechaVencimientoCp;
 	        this.nCuota = nCuota;
+	        this.pagada = pagada;
 	    }
 
 	    // Getters y setters
@@ -42,5 +44,14 @@ public class CuotasXPrestamo {
 	    public void setNCuota(int nCuota) {
 	        this.nCuota = nCuota;
 	    }
+	    
+	    public boolean getPagada() {
+	        return pagada;
+	    }
+
+	    public void setPagada(boolean pagada) {
+	        this.pagada = pagada;
+	    }
+	    
 	}
 

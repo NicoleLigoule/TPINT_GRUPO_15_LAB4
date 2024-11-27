@@ -123,11 +123,11 @@
 <script>
     function aprobarPrestamo() {
      
-        const confirmar = confirm("¿Seguro que quiere aprobar el préstamo?");
+        const confirmar = confirm("ï¿½Seguro que quiere aprobar el prï¿½stamo?");
         
         if (confirmar) {
 
-            alert("Préstamo aprobado");
+            alert("Prï¿½stamo aprobado");
             
 
             document.querySelector("form[action='servletExaminarPrestamo']").submit();

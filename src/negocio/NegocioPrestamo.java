@@ -1,5 +1,14 @@
 package negocio;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import dao.CuotasXPrestamoDao;
+import dao.PrestamoDao;
+import daoImpl.CuotasXPrestamoDaoImpl;
+import daoImpl.PrestamoDaoImpl;
+import entidades.CuotasXPrestamo;
+import entidades.DetalleXPrestamo;
 import java.util.List;
 
 import dao.PrestamoDao;
@@ -10,56 +19,73 @@ import entidades.Prestamo;
 
 public class NegocioPrestamo {
     private PrestamoDao prestamoDao;
+    
     public NegocioPrestamo() {
         this.prestamoDao = new PrestamoDaoImpl();
+        
     }
     
+    // me devuelve un prestamo totalmente cargado (lista de cuotas, descripcion)
+    public Prestamo PrestamoCargado(int id) {
+    	Prestamo prestamo = null;
+    	
+    	prestamo = prestamoDao.obtenerPrestamoPorId(id);
+    	ArrayList<CuotasXPrestamo> cuotas = prestamoDao.TraerCuotas(id);    	
+    	DetalleXPrestamo detalle = prestamoDao.TraerDetalles(id);     
+    	
+        if (prestamo != null) {
+            prestamo.setCuotas(cuotas);
+            prestamo.setDetalle(detalle);
+        }
+            
+    	return prestamo;
+    }
 
+    
     public boolean realizarPagoPrestamo(int idPrestamo, double monto) {
-        // Validar negocio: no se permite pagar montos negativos o cero
         if (monto <= 0) {
             return false;
         }
 
       
-        // Método público para obtener los préstamos por cuenta
+        // Mï¿½todo pï¿½blico para obtener los prï¿½stamos por cuenta
         //public List<Prestamo> obtenerPrestamoPorCuenta(int idCuenta) {
-      //      return prestamoDao.obtenerPrestamosPorCuenta(idCuenta); // Ajusta la lógica según tu DAO
+      //      return prestamoDao.obtenerPrestamosPorCuenta(idCuenta); // Ajusta la lï¿½gica segï¿½n tu DAO
        // }
         
         /*public List<Prestamo> obtenerPrestamoPorCuenta(int numeroCuenta) {
-            // Asegúrate de usar la instancia de PrestamoDao correctamente
+            // Asegï¿½rate de usar la instancia de PrestamoDao correctamente
             List<Prestamo> prestamos = prestamoDao.obtenerPrestamoPorCuenta(numeroCuenta);
-            // Aquí puedes trabajar con la lista de préstamos
+            // Aquï¿½ puedes trabajar con la lista de prï¿½stamos
             return prestamos;
         }*/
 
         
-        // Obtener el préstamo desde la base de datos
+        // Obtener el prï¿½stamo desde la base de datos
         Prestamo prestamo = prestamoDao.obtenerPrestamoPorId(idPrestamo);
         if (prestamo == null) {
-            return false; // El préstamo no existe
+            return false; // El prï¿½stamo no existe
         }
 
-        // Verificar si el préstamo ya está pagado
+        // Verificar si el prï¿½stamo ya estï¿½ pagado
         if (prestamo.isEstadoPt()) {
-            return false; // El préstamo ya está pagado
+            return false; // El prï¿½stamo ya estï¿½ pagado
         }
 
         // Calcular el saldo restante
         double saldoRestante = prestamo.getImporteSolicitadoPt().doubleValue() - monto;
 
-        // Si el saldo restante es menor a 0, no se puede pagar más del saldo pendiente
+        // Si el saldo restante es menor a 0, no se puede pagar mï¿½s del saldo pendiente
         if (saldoRestante < 0) {
             return false; // El monto excede el saldo pendiente
         }
 
-        // Si el saldo es 0, marcar el préstamo como pagado
+        // Si el saldo es 0, marcar el prï¿½stamo como pagado
         if (saldoRestante == 0) {
             prestamo.setEstadoPt(true); // Marcar como pagado
         }
 
-        // Actualizar el préstamo con el nuevo saldo o estado
+        // Actualizar el prï¿½stamo con el nuevo saldo o estado
         boolean exito = prestamoDao.actualizarPrestamo(prestamo);
         if (!exito) {
             return false; // Si hubo un error al actualizar, retornar false
@@ -71,9 +97,24 @@ public class NegocioPrestamo {
 
 
 	public List<Prestamo> obtenerPrestamoPorCuenta(int idCuenta) {
-	
-		return null;
+		return prestamoDao.obtenerPrestamoPorCuenta(idCuenta);
 	}
+	
+	public List<Prestamo> obtenerPrestamoPorCuentaConDetalle(int idCuenta) {
+		List<Prestamo> prestamos = prestamoDao.obtenerPrestamoPorCuenta(idCuenta);
+		
+		
+		for(Prestamo pr : prestamos) {
+			pr.setDetalle(prestamoDao.TraerDetalles(pr.getIdPrestamoPt()));
+			pr.setCuotas(prestamoDao.TraerCuotas(pr.getIdPrestamoPt()));
+		}
+		
+		
+		
+		
+		return prestamos;
+	}
+	
 	
 	public Prestamo obtenerPrestamo(int IDprestamo) {
 		Prestamo pres= prestamoDao.obtenerPrestamoPorId(IDprestamo);
@@ -94,12 +135,29 @@ public class NegocioPrestamo {
 	}
     public boolean procesarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago,String Detalle) {
     	//aca se carga en la db
-	     // Si el plazo es válido, guardar el préstamo
+	     // Si el plazo es vï¿½lido, guardar el prï¿½stamo
         PrestamoDaoImpl prestamoDao = new PrestamoDaoImpl();
 
 	    boolean guardado = prestamoDao.guardarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, plazoPago, Detalle );
     	System.out.print("procesarPrestamo::SE PROCESA EL PRESTAMO");
         return guardado; 
+    }
+    
+    public boolean pagarCuota(int idPrestamo, int idCuenta) {
+    	boolean pagada = false;
+    	PrestamoDaoImpl prestamoDao = new PrestamoDaoImpl();
+    	CuotasXPrestamoDaoImpl cuotaDao = new CuotasXPrestamoDaoImpl();
+    	ArrayList<CuotasXPrestamo> cu = prestamoDao.TraerCuotas(idPrestamo);
+    	for(CuotasXPrestamo cuota: cu) {
+    		if(cuota.getPagada() == false) {
+    			pagada = cuotaDao.pagarCuota(cuota);    
+    			break;
+    		}
+    	}
+    	
+    	
+    	return pagada;
+    	
     }
 
 }

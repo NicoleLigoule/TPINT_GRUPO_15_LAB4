@@ -16,6 +16,7 @@ public class ServletConfirmarPrestamo extends HttpServlet {
 
     public ServletConfirmarPrestamo() {
         super();
+        
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,21 +29,21 @@ public class ServletConfirmarPrestamo extends HttpServlet {
 
             NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
 
-            // Obtener el interés utilizando la capa de negocio
+            // Obtener el interes utilizando la capa de negocio
             InteresesXCantidadDeMeses interes = negocioPrestamo.InteresesdelPrestamo(plazoPago);
             
             if (interes == null) {
-                request.setAttribute("mensajeError", "El plazo de pago no es válido.");
+                request.setAttribute("mensajeError", "El plazo de pago no es valido.");
                 request.getRequestDispatcher("ConfirmarPrestamo.jsp").forward(request, response);
                 return;
             }
 
-            // Realizar cálculos
+            // Realizar calculos
             int plazoPagoMeses = interes.getMeses();
             double porcentajeInteresDecimal = (double) interes.getInteresIxm().floatValue() / 100;
-            double porcentajeDeAñoSegunMeses = (double) 12 / interes.getMeses();
+            double porcentajeDeAnioSegunMeses = (double) 12 / interes.getMeses();
 
-            double montoConInteres =  (importeSolicitado *(1.00+ porcentajeInteresDecimal ));
+            double montoConInteres = importeSolicitado + (importeSolicitado * porcentajeInteresDecimal * porcentajeDeAnioSegunMeses);
             double montoPorCuota = montoConInteres / plazoPagoMeses;
 
             // Establecer los atributos para el JSP
@@ -60,7 +61,7 @@ public class ServletConfirmarPrestamo extends HttpServlet {
             request.setAttribute("mensajeError", "Hubo un error al procesar los datos. Verifique los valores ingresados.");
             request.getRequestDispatcher("ConfirmarPrestamo.jsp").forward(request, response);
         } catch (Exception e) {
-            request.setAttribute("mensajeError", "Hubo un problema al procesar la solicitud de préstamo.");
+            request.setAttribute("mensajeError", "Hubo un problema al procesar la solicitud de prestamo.");
             request.getRequestDispatcher("ConfirmarPrestamo.jsp").forward(request, response);
         }
     }

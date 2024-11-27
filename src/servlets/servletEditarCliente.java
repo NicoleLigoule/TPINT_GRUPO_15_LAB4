@@ -10,14 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daoImpl.LocalidadDaoImpl; //TODO: sacar el dao de aca
 import entidades.Localidad;
 import entidades.Cliente;
 import entidades.Nacionalidad;
 import entidades.Provincia;
 import entidades.Sexo;
+
 import negocio.DDL;
 import negocio.NegocioClientes;
+import negocio.NegocioLocalidades;
 
 /**
  * Servlet implementation class servletEditarCliente
@@ -73,8 +74,8 @@ public class servletEditarCliente extends HttpServlet {
 			response.getWriter().println("No se encontraron provincias.");
 		}
 		
-		LocalidadDaoImpl daoLoc = new LocalidadDaoImpl();
-		int idProvincia = daoLoc.obtenerUna(cliente.getId_localidad()).getId_provincia();
+		NegocioLocalidades negLoc = new NegocioLocalidades();
+		int idProvincia = negLoc.obtenerLocalidad(cliente.getId_localidad()).getId_provincia();
 		cliente.setId_provincia(idProvincia);
 		
 		ArrayList<Localidad> listaLocalidad = lista.Localidad(idProvincia);

@@ -1,6 +1,10 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,6 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Cuenta;
+import entidades.Prestamo;
+import entidades.Usuario;
+import javafx.util.Pair;
+import negocio.NegocioCuentas;
 import entidades.Prestamo;
 import entidades.Usuario;
 import negocio.NegocioPrestamo;
@@ -26,65 +35,94 @@ public class ServletPagoPrestamo extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      
-        int idCuenta = Integer.parseInt(request.getParameter("idCuenta"));
+    	System.out.print("doGet ServletPagoPrestamo");
+    	
+    	
+        if (request.getParameter("Param") != null) {
+            try {
+                Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+                NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
+                NegocioCuentas negocioCuentas = new NegocioCuentas();
+                ArrayList<Pair<Integer, ArrayList<Prestamo>>> prestamoXCuenta = new ArrayList<Pair<Integer, ArrayList<Prestamo>>>();
+                
+                if (usuario == null) {
+                    response.sendRedirect("Login.jsp");
+                    return;
+                }
+                
+                String cuil = usuario.getCuilUs();
+                System.out.println("PagoPrestamo | CUIL del usuario: " + cuil);
+                
+               
+                List<Cuenta> cuentas = negocioCuentas.obtenerCuentasPorCuil(cuil);
+                
+                if (cuentas == null || cuentas.isEmpty()) {
+                    System.out.println("PagoPrestamo | No se encontraron cuentas para el CUIL: " + cuil);
+                } else {
+                    for (Cuenta cuenta : cuentas) {
+                    	ArrayList<Prestamo> listaPrestamos = (ArrayList<Prestamo>) negocioPrestamo.obtenerPrestamoPorCuentaConDetalle(cuenta.getNumeroDeCuentaCu());
+                     
+                        prestamoXCuenta.add(new Pair<>(cuenta.getNumeroDeCuentaCu(), listaPrestamos));
+                    }
+                    
+                   request.setAttribute("PrestamosXCuenta", prestamoXCuenta);
+                }
+                
+                System.out.println("Lista de prestamos: " + prestamoXCuenta);
 
-      
-        List<Prestamo> prestamos = prestamoNegocio.obtenerPrestamoPorCuenta(idCuenta);
+                RequestDispatcher rd = request.getRequestDispatcher("PagoPrestamo_Seleccionar.jsp");
+                rd.forward(request, response);
 
-    
-        for (Prestamo prestamo : prestamos) {
-        	
-        	// HACER OTRA ENTIDAD PARA PRESTAMOSINFO
-//            int cuotasPagadas = prestamo.obtenerCuotasPagadas(prestamo.getIdPrestamoPt());
-//            
-//            
-//            prestamo.setCuotasPagadas(cuotasPagadas);
-//            prestamo.setMontoRestante(calcularMontoRestante(prestamo));
-
-            System.out.println("Prestamo ID: " + prestamo.getIdPrestamoPt() +
-//                    ", Cuotas Pagadas: " + cuotasPagadas +
-                    ", Monto Restante: " + prestamo.getMontoRestante());
-        }
-
-      
-        request.setAttribute("prestamos", prestamos);
-        request.getRequestDispatcher("/listaPrestamos.jsp").forward(request, response);
-    }
-
-    private double calcularMontoRestante(Prestamo prestamo) {
-       
-//        double total = prestamo.getMontoTotal();
-//        double pagado = prestamo.getMontoPagado();
-//        return total - pagado;
-    	return 0;
-    }
-
-    
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-          
-            int idPrestamo = Integer.parseInt(request.getParameter("idPrestamo"));
-            double monto = Double.parseDouble(request.getParameter("monto"));
-
-          
-            boolean exito = prestamoNegocio.realizarPagoPrestamo(idPrestamo, monto);
-
-       
-            String mensaje;
-            if (exito) {
-                mensaje = "El pago se realizó con éxito.";
-            } else {
-                mensaje = "El pago no se pudo realizar. Verifique los datos.";
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.getWriter().println("error al obtener los datos: " + e.getMessage());
             }
-
-            request.setAttribute("mensaje", mensaje);
-            request.getRequestDispatcher("PagoPrestamo.jsp").forward(request, response);
+        }else if (request.getParameter("idPrestamo") != null) {
+//        	traer prestamo y meterlo en atributte, despues llamar al jsp que sigue
+        	
+        	NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
+        	Prestamo pr = negocioPrestamo.PrestamoCargado(Integer.parseInt(request.getParameter("idPrestamo")));
+        	request.setAttribute("Prestamo_seleccionado", pr);
+        	
+        	Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        	if (usuario == null) {
+                response.sendRedirect("Login.jsp");
+                return;
+            }
             
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error en los datos enviados."); // cambiar
+            String cuil = usuario.getCuilUs();
+            NegocioCuentas negocioCuentas = new NegocioCuentas();
+            List<Cuenta> cuentas = negocioCuentas.obtenerCuentasPorCuil(cuil);
+        	
+
+            request.setAttribute("cuentas_usuario", cuentas);
+        	
+        	request.getRequestDispatcher("PagoPrestamo.jsp").forward(request, response);
+        	
+        	
+        	
         }
+        
     }
+
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	int numCuenta = Integer.parseInt(request.getParameter("cuentaPago"));
+    	int idPrestamo = Integer.parseInt(request.getParameter("idPrestamo"));
+    	
+    	NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
+    	
+    	negocioPrestamo.pagarCuota(idPrestamo, numCuenta);
+    	
+    	
+    	
+    	
+    	
+    }
+
+   
+
+    
+    
 }

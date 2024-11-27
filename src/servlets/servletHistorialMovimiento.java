@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import entidades.Cuenta;
 import entidades.Movimiento;
 import entidades.Usuario;
@@ -68,10 +67,10 @@ public class servletHistorialMovimiento extends HttpServlet {
 
             } catch (NumberFormatException e) {
                 e.printStackTrace();
-                request.setAttribute("MensajeMovimientos", "El número de cuenta proporcionado no es válido.");
+                request.setAttribute("MensajeMovimientos", "El nï¿½mero de cuenta proporcionado no es vï¿½lido.");
             }
         } else {
-            request.setAttribute("MensajeMovimientos", "No se seleccionó ninguna cuenta.");
+            request.setAttribute("MensajeMovimientos", "No se seleccionï¿½ ninguna cuenta.");
         }
 
         RequestDispatcher rd = request.getRequestDispatcher("Movimientos.jsp");

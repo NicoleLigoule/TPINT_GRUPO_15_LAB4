@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.CuentaDao;
-import entidades.ClienteCuentaDTO;
 import entidades.Cuenta;
 import entidades.TipoDeCuenta;
 import entidades.InteresesXCantidadDeMeses;
@@ -18,7 +17,7 @@ public class CuentaDaoImpl implements CuentaDao {
 
     private Conexion cn;
     private static final String readallTipoDeCuentas = "SELECT * FROM TipoCuenta";
-    private static final String readallINteresesPrestamos = "SELECT Plazo_d_Pagos_En_meses_IXM,Interes_IXM,Meses FROM bancoutn.interesxcantidaddmeses;";
+    private static final String readallINteresesPrestamos = "SELECT Plazo_d_Pagos_En_meses_IXM,Interes_IXM,Meses_int FROM bancoutn.interesxcantidaddmeses;";
 	public ArrayList<TipoDeCuenta> readallTipoDeCuentas()
 	{
 		//PreparedStatement statement;
@@ -248,7 +247,7 @@ public class CuentaDaoImpl implements CuentaDao {
 	{
 		String plazoDPagosEnMesesIxm = resultSet.getString("Plazo_d_Pagos_En_meses_IXM");
 		BigDecimal interesIxm = resultSet.getBigDecimal("Interes_IXM");
-		int meses=resultSet.getInt("Meses");
+		int meses=resultSet.getInt("Meses_int");
 		return new InteresesXCantidadDeMeses(plazoDPagosEnMesesIxm,interesIxm,meses);
 
 	}

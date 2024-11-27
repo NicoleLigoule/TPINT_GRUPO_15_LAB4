@@ -1,11 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="entidades.Usuario"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="entidades.Prestamo" %>
+<%@ page import="entidades.CuotasXPrestamo" %>
+<%@ page import="entidades.Usuario" %>
+<%@ page import="java.util.List" %>
+<%@ page import="entidades.Cuenta" %>
+
+
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     if (usuario == null) {
         response.sendRedirect("Login.jsp");
         return;
+    }
+
+    // Obtén el objeto prestamo desde los atributos del request o session
+    Prestamo prestamo = (Prestamo) request.getAttribute("Prestamo_seleccionado");
+    if (prestamo == null) {
+        out.println("<p>Error: No se recibió ningún préstamo.</p>");
+        return;
+    }
+
+    // Contar cuotas impagas
+    int cuotasImpagas = 0;
+    float monto = 0;
+
+    if (prestamo.getCuotas() != null && prestamo.getDetalle() != null) {
+    	monto = prestamo.getDetalle().getImporteXCuotasDt().floatValue();
+        for (CuotasXPrestamo cuota : prestamo.getCuotas()) {
+            if (!cuota.getPagada()) {
+                cuotasImpagas++;                
+            }
+        }
     }
 %>
 <!DOCTYPE html>
@@ -17,55 +42,62 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/Css/PagoPrestamo.css">
 <body>
-	<nav class="navbar">
-		<button class="hamburger" onclick="toggleSidebar()">
-			<div class="line"></div>
-			<div class="line"></div>
-			<div class="line"></div>
-		</button>
-		<a href="${pageContext.request.contextPath}/Login.jsp"> <img
-			src="${pageContext.request.contextPath}/img/png_logo.png"
-			class="img_logo" alt="Logo UTN">
-		</a> <span class="username"><%= usuario.getUsuarioUs() %></span>
-	</nav>
+    <nav class="navbar">
+        <a href="${pageContext.request.contextPath}/Login.jsp">
+            <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
+        </a>
+        <span class="username"><%= usuario.getUsuarioUs() %></span>
+        <jsp:include page="SubMenu_Cliente.jsp" />
+    </nav>
 
-	<div class="main-container">
-		<jsp:include page="SubMenu_Cliente.jsp" />
+    <div class="main-container">
+        <div class="content">
+            <div class="form-card">
+                <h2>Pago de Préstamo</h2>
+                <%
+                    if (cuotasImpagas > 0) {
+                %>
+                    <div class="loan-card">
+                        <h2>Préstamo #<%= prestamo.getIdPrestamoPt() %></h2>
+                        <p><strong>Número de Cuenta:</strong> <%= prestamo.getNumeroDeCuentaCuPt() %></p>
+                        <p><strong>Monto Total:</strong> $<%= prestamo.getMontoRestante() %></p>
+                        <p><strong>Cuotas Pendientes:</strong> <%= cuotasImpagas %></p>
+                        <p><strong>Precio por Cuota:</strong> $<%= monto != 0 ? monto : "N/A" %></p>
+                    </div>
 
-		<div class="content">
-			<div class="form-card">
-				<h2>Pago de Préstamos</h2>
-				<p>Seleccione el préstamo y la cuota que desea pagar:</p>   
-				
-			    <h1>Realizar Pago</h1>
-			    <form action="ServletPagoPrestamo" method="post">
-			        <label for="idPrestamo">ID del Préstamo:</label>
-			        <input type="text" id="idPrestamo" name="idPrestamo" required>
-			        <br>
-			        <label for="monto">Monto a Pagar:</label>
-			        <input type="number" id="monto" name="monto" step="0.01" required>
-			        <br>
-			        <button type="submit">Pagar</button>
-			    </form>
+                    <form id="form-pago" action="ServletPagoPrestamo" method="post">
+                        <h3>Detalles del Pago</h3>
+                        <input type="hidden" name="idPrestamo" value="<%= prestamo.getIdPrestamoPt() %>">
+                        
+                        
+                        <p><strong>Monto a Pagar:</strong> $<%= monto != 0 ? monto : "N/A" %></p>
+                        
+                        <label for="cuentaPago">Seleccionar cuenta para el pago:</label>
+                        <select name="cuentaPago" id="cuentaPago" required>
+                            <%
+                                // Suponiendo que tienes una lista de cuentas del usuario
+                                List<Cuenta> cuentas = (List<Cuenta>) request.getAttribute("cuentas_usuario");
+                                if (cuentas != null) {
+                                    for (Cuenta cuenta : cuentas) {
+                            %>
+                                        <option value="<%= cuenta.getNumeroDeCuentaCu() %>">Cuenta #<%= cuenta.getNumeroDeCuentaCu() %></option>
+                            <%
+                                    }
+                                }
+                            %>
+                        </select>
 
-		    <p>${mensaje}</p>
-		    <a href="PagoPrestamo.jsp">Volver</a>
-
-			</div>
-		</div>
-	</div>
-
-	<script src="JS/MenuAdm.js"></script>
-	<script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        }
-
-        function toggleSubmenu(event) {
-            const menuItem = event.target.parentElement;
-            menuItem.classList.toggle('active');
-        }
-    </script>
+                        <button type="submit">Pagar</button>
+                    </form>
+                <%
+                    } else {
+                %>
+                    <p>Felicidades, no tiene cuotas impagas.</p>
+                <%
+                    }
+                %>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

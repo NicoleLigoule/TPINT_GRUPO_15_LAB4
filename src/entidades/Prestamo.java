@@ -2,6 +2,7 @@ package entidades;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Prestamo {
 
@@ -14,15 +15,15 @@ public class Prestamo {
     private double montoCuota;
     private boolean estadoPt;           
     private int cuotasPagadas;
+    private DetalleXPrestamo detalle; // Relacionado con la tabla DetallesXPrestamo
+    private ArrayList<CuotasXPrestamo> cuotas; // Relacionado con la tabla CuotasXPrestamos
     
-    private Cuenta cuenta; // Relación con la tabla Cuenta              
+    private Cuenta cuenta; // Relacionado con la tabla Cuenta              
     private InteresesXCantidadDeMeses interes; // Relacionado con la tabla InteresesXCantidadDeMeses
 
     // Constructores
     public Prestamo() {
     }
-
-    // Constructor con parámetros
     public Prestamo(int numeroDeCuentaCuPt, LocalDate fechaPeticionPt, BigDecimal importeSolicitadoPt,
                     String plazoPagoPt, String detalleSolicitudPt, boolean estadoPt) {
         this.numeroDeCuentaCuPt = numeroDeCuentaCuPt;
@@ -111,7 +112,25 @@ public class Prestamo {
         this.interes = interes;
     }
 
-    // Método toString() 
+    // detalle
+    public DetalleXPrestamo getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(DetalleXPrestamo detalle) {
+        this.detalle = detalle;
+    }
+
+    // cuotas
+    public ArrayList<CuotasXPrestamo> getCuotas() {
+        return cuotas;
+    }
+
+    public void setCuotas(ArrayList<CuotasXPrestamo> cuotas) {
+        this.cuotas = cuotas;
+    }
+    
+    
     @Override
     public String toString() {
         return "Prestamo [idPrestamoPt=" + idPrestamoPt + ", numeroDeCuentaCuPt=" + numeroDeCuentaCuPt

@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 import entidades.Usuario;
+import negocio.NegocioUsuarios;
+
 import negocio.NegocioClientes;
 
 /**
@@ -19,7 +20,11 @@ import negocio.NegocioClientes;
 public class ServletLoginSesion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-
+	private NegocioUsuarios negUsr;
+	
+    public void init() throws ServletException {
+    	negUsr = new NegocioUsuarios(); 
+    }
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,8 +48,9 @@ public class ServletLoginSesion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String usuarioUs = request.getParameter("usuario");
         String contraseniaUs = request.getParameter("contrasena");
-        NegocioClientes neg= new NegocioClientes();
-        Usuario usuario = neg.validadUsu(usuarioUs, contraseniaUs);
+
+        Usuario usuario = negUsr.validarUsuario(usuarioUs, contraseniaUs);
+
         if (usuario != null && usuario.isEstadoUs()) {
             HttpSession session = request.getSession();
             session.setAttribute("usuario", usuario);
@@ -57,7 +63,7 @@ public class ServletLoginSesion extends HttpServlet {
                 response.sendRedirect("servletInformacionCliente"); // Redirige al servlet
             }
         } else {
-            request.setAttribute("errorMessage", "Usuario o contraseña incorrectos.");
+            request.setAttribute("errorMessage", "Usuario o contraseï¿½a incorrectos.");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
     }

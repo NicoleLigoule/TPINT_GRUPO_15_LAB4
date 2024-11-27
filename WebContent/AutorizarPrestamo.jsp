@@ -45,7 +45,7 @@ th {
 }
 </style>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document)
 			.ready(
 					function() {
@@ -61,7 +61,7 @@ th {
 										});
 					});
 </script>
-
+ -->
 </head>
 <body>
 	<nav class="navbar">
@@ -102,7 +102,7 @@ th {
 							<tr>
 								<td><%= pres.getFechaPeticionPt() %></td>
 	                            <td><%= pres.getImporteSolicitadoPt() %></td>
-	                            <td><%= pres.getPlazoPagoPt() %></td>
+	                            <td><%= pres.getInteres().getMeses() %> Meses</td>
 								<td>
 				<form action="servletExaminarPrestamo" method="GET">
                     <!-- Campo oculto para enviar el ID del préstamo -->
