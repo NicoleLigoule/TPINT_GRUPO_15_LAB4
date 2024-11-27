@@ -545,6 +545,8 @@ VALUES (
     50000.00,                        -- Importe solicitado (por ejemplo, 50,000.00)
     '06M',                           -- Plazo de pago (por ejemplo, 12 meses, debe existir en InteresXCantidadDMeses)
     'Préstamo para comprar un auto', -- Detalle de la solicitud
-    1                                -- Estado inicial del préstamo (0 = Pendiente, 1 = Aprobado/Rechazado)
+    0                                -- Estado inicial del préstamo (0 = Pendiente, 1 = Aprobado/Rechazado)
 );
+
+UPDATE Prestamo SET Estado_Pt = 1 WHERE ID_Prestamo_Pt = 1;
 
