@@ -102,7 +102,7 @@ th {
 							<tr>
 								<td><%= pres.getFechaPeticionPt() %></td>
 	                            <td><%= pres.getImporteSolicitadoPt() %></td>
-	                            <td><%= pres.getPlazoPagoPt() %></td>
+	                            <td><%= pres.getInteres().getMeses() %> Meses</td>
 								<td>
 				<form action="servletExaminarPrestamo" method="GET">
                     <!-- Campo oculto para enviar el ID del préstamo -->

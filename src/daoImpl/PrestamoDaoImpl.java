@@ -316,6 +316,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
                 prestamo.setImporteSolicitadoPt(rs.getBigDecimal("Importe_solicitado_Pt"));
                 prestamo.setPlazoPagoPt(rs.getString("Plazo_Pago_Pt"));
                 prestamo.setDetalleSolicitudPt(rs.getString("Detalle_solicitud_Pt"));
+                prestamo.setInteres(obtenerIntereses(prestamo.getPlazoPagoPt()));
                 prestamos.add(prestamo);
             }
         } catch (SQLException e) {
@@ -330,11 +331,11 @@ public class PrestamoDaoImpl implements PrestamoDao {
     	Conexion cn=new Conexion();
         cn.Open();
         try  {
-	        String query = "SELECT Plazo_d_Pagos_En_meses_IXM, Interes_IXM,Meses  FROM bancoutn.InteresXCantidadDMeses WHERE Plazo_d_Pagos_En_meses_IXM = ?";
+	        String query = "SELECT Plazo_d_Pagos_En_meses_IXM, Interes_IXM, Meses_int  FROM bancoutn.InteresXCantidadDMeses WHERE Plazo_d_Pagos_En_meses_IXM = ?";
 	        PreparedStatement statement = cn.getSQLConexion().prepareStatement(query);
 	        statement.setString(1, iDInteres);
 	        ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
               	interes.setPlazoDPagosEnMesesIxm(rs.getString("Plazo_d_Pagos_En_meses_IXM"));
             	interes.setInteresIxm(rs.getBigDecimal("Interes_IXM"));
                 interes.setMeses(rs.getInt("Meses_int"));
