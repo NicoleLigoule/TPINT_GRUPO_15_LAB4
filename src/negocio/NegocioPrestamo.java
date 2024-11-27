@@ -92,5 +92,14 @@ public class NegocioPrestamo {
 		return alta;
 		
 	}
+    public boolean procesarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago,String Detalle) {
+    	//aca se carga en la db
+	     // Si el plazo es válido, guardar el préstamo
+        PrestamoDaoImpl prestamoDao = new PrestamoDaoImpl();
+
+	    boolean guardado = prestamoDao.guardarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, plazoPago, Detalle );
+    	System.out.print("procesarPrestamo::SE PROCESA EL PRESTAMO");
+        return guardado; 
+    }
 
 }

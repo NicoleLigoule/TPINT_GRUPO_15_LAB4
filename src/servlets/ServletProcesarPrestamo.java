@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daoImpl.PrestamoDaoImpl;
+import negocio.NegocioPrestamo;
 
 /**
  * Servlet implementation class ServletProcesarPrestamo
@@ -42,10 +42,11 @@ public class ServletProcesarPrestamo extends HttpServlet {
         double montoConInteres = Double.parseDouble(request.getParameter("monto_con_interes"));
         double montoPorCuota = Double.parseDouble(request.getParameter("monto_por_cuota"));        
         String plazoPagoIXM = request.getParameter("plazo_pago_IXM");
-        
+        String motivo = request.getParameter("motivo");
+        NegocioPrestamo neg=new NegocioPrestamo();
 
         
-        boolean exito = procesarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, plazoPagoIXM, montoPorCuota);
+        boolean exito = neg.procesarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, plazoPagoIXM, motivo);
 
         if(exito) {
         	
@@ -60,14 +61,7 @@ public class ServletProcesarPrestamo extends HttpServlet {
         
     }
 
-    private boolean procesarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago, double montoPorCuota) {
-    	//aca se carga en la db
-	     // Si el plazo es válido, guardar el préstamo
-        PrestamoDaoImpl prestamoDao = new PrestamoDaoImpl();	
-	    boolean guardado = prestamoDao.guardarPrestamo(cuentaDestino, importeSolicitado, montoConInteres, plazoPago, montoPorCuota);
-    	System.out.print("procesarPrestamo::SE PROCESA EL PRESTAMO");
-        return guardado; 
-    }
+
 
 
 }

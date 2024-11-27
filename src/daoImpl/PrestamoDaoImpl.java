@@ -191,7 +191,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
 
     
    
-    public boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago, double montoPorCuota) {
+    public boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago, String motivo) {
     	CuentaDaoImpl cuentaDao = new CuentaDaoImpl();
 
     	Cuenta cuenta = cuentaDao.obtenerCuentaPorNumero(cuentaDestino);
@@ -201,7 +201,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
         prestamo.setImporteSolicitadoPt(BigDecimal.valueOf(importeSolicitado)); 
         prestamo.setFechaPeticionPt(LocalDate.now());
         prestamo.setPlazoPagoPt(plazoPago);
-        prestamo.setDetalleSolicitudPt("Solicitud de préstamo de " + montoConInteres + " con plazo de " + plazoPago + " meses.");
+        prestamo.setDetalleSolicitudPt(motivo);
         prestamo.setEstadoPt(false);
 
         prestamo.setCuenta(cuenta); 

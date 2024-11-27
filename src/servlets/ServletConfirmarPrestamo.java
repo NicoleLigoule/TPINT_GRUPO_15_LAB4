@@ -23,6 +23,8 @@ public class ServletConfirmarPrestamo extends HttpServlet {
             String cuentaDestino = request.getParameter("cuenta_destino");
             double importeSolicitado = Double.parseDouble(request.getParameter("importe_solicitado"));
             String plazoPago = request.getParameter("plazo_pago");
+            String Motivo = request.getParameter("motivo");
+            
 
             NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
 
@@ -50,6 +52,7 @@ public class ServletConfirmarPrestamo extends HttpServlet {
             request.setAttribute("plazo_pago", interes.getMeses());
             request.setAttribute("plazo_pago_IXM", interes.getPlazoDPagosEnMesesIxm());
             request.setAttribute("monto_por_cuota", montoPorCuota);
+            request.setAttribute("motivo", Motivo);
 
             request.getRequestDispatcher("ConfirmarPrestamo.jsp").forward(request, response);
 
