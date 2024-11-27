@@ -24,6 +24,7 @@
 			<li class="menu-item"><a href="#" onclick="toggleSubmenu(event)">Reportes</a>
 				   <ul class="submenu">
                         <li> <a href="servletReporteClientes?Param=1">Reporte de Clientes</a></li>
+                        <li> <a href="ReporteEdades.jsp">Reporte por Edades</a></li>
                         <li> <a href="servletReporteCuentas?Param=1">Reporte de Cuentas</a></li>
                     </ul>
                      </li>

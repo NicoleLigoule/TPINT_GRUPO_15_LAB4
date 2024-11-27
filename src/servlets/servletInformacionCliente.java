@@ -55,7 +55,7 @@ public class servletInformacionCliente extends HttpServlet {
         	try{
         		
         		ArrayList<ClienteCuentaDTO> infoCliente = ddl.infoClienteCtas_2(cuil);
-        		System.out.println("lista de infoClientes: "+infoCliente);
+        		System.out.println("lista de infoClientes: "+infoCliente);        		
         		 
         		if (infoCliente != null && !infoCliente.isEmpty())
         		{
