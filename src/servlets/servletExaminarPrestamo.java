@@ -89,8 +89,12 @@ public class servletExaminarPrestamo extends HttpServlet {
 	            response.getWriter().println("Error al obtener la lista de prestamos: " + e.getMessage());
 	        }
 	
-	}
+	}else {
+        if(request.getParameter("Rechazar") != null) {
+        	request.getRequestDispatcher("/ServletAutorizarPrestamo").forward(request, response);
+        }
 	
 	
 	}
 	}
+}

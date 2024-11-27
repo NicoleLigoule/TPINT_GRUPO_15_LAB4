@@ -81,7 +81,7 @@
 						value=<%=Interese.getMeses() != -1 ?Interese.getMeses() : ""%>
 						readonly>
 				 <div class="button-group">
-						<button type="button" class="cancel-button">Rechazar</button>
+						<button type="submit" class="cancel-button" name="Rechazar">Rechazar</button>
 						<button type="submit" class="submit-button" name="AprobarBtn">Aprobar</button>
 						
 					</div>
