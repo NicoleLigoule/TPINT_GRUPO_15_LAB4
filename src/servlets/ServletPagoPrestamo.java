@@ -120,7 +120,7 @@ public class ServletPagoPrestamo extends HttpServlet {
     	}
     	
     	
-    	request.getRequestDispatcher("PagoPrestamo.jsp").forward(request, response);
+    	request.getRequestDispatcher("ServletPagoPrestamo?idPrestamo=" + request.getParameter("idPrestamo")).forward(request, response);
     	
     	
     }
