@@ -446,6 +446,31 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER insert_prestamo_movimiento
+AFTER INSERT ON Prestamo
+FOR EACH ROW
+BEGIN
+    DECLARE MovimientoID INT;
+
+    -- Insertar un movimiento asociado al préstamo
+    INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
+    VALUES (CONCAT('Préstamo solicitado: ', NEW.Detalle_solicitud_Pt), NEW.Importe_solicitado_Pt, 3); -- TipoMovimiento 3: Préstamo
+
+    -- Obtener el ID del movimiento recién insertado
+    SET MovimientoID = LAST_INSERT_ID();
+
+    -- Asociar el movimiento a la cuenta relacionada con el préstamo
+    INSERT INTO MovimientoXCuenta (Id_Movimiento__Mov_MXC, Num_Cuenta_Cu_MXC)
+    VALUES (MovimientoID, NEW.Numero_de_Cuenta_Cu_Pt);
+END$$
+
+DELIMITER ;
+
+
+
 -- INSERTS --
 
 INSERT INTO InteresXCantidadDMeses (Plazo_d_Pagos_En_meses_IXM, Interes_IXM, Meses_int)

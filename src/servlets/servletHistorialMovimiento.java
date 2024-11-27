@@ -48,29 +48,51 @@ public class servletHistorialMovimiento extends HttpServlet {
         String cuentaSeleccionada = request.getParameter("cuentaSeleccionada");
         String tipoMovimiento = request.getParameter("tipoMovimiento");
 
+        // Paginación
+        int page = 1; // Página por defecto
+        int limit = 5; // Número de movimientos por página
+
+        String pageParam = request.getParameter("page");
+        if (pageParam != null && !pageParam.isEmpty()) {
+            try {
+                page = Integer.parseInt(pageParam);
+            } catch (NumberFormatException e) {
+                // Manejar el error si el parámetro no es válido
+                page = 1;
+            }
+        }
+
         if (cuentaSeleccionada != null) {
             try {
                 int numeroCuenta = Integer.parseInt(cuentaSeleccionada);
 
                 List<Movimiento> listaMovimientos;
+                int totalMovimientos;
+
+                // Obtener movimientos según los parámetros de cuenta y tipo de movimiento
                 if (tipoMovimiento != null && !tipoMovimiento.isEmpty()) {
-                    listaMovimientos = negocioMovimiento.obtenerMovimientosPorCuentaYTipo(numeroCuenta, tipoMovimiento);
+                    listaMovimientos = negocioMovimiento.obtenerMovimientosPorCuentaYTipoPaginado(numeroCuenta, tipoMovimiento, page, limit);
+                    totalMovimientos = negocioMovimiento.contarMovimientosPorCuentaYTipo(numeroCuenta, tipoMovimiento);
                 } else {
-                    listaMovimientos = negocioMovimiento.obtenerMovimientosPorCuenta(numeroCuenta);
+                    listaMovimientos = negocioMovimiento.obtenerMovimientosPorCuentaPaginado(numeroCuenta, page, limit);
+                    totalMovimientos = negocioMovimiento.contarMovimientosPorCuenta(numeroCuenta);
                 }
 
                 if (listaMovimientos != null && !listaMovimientos.isEmpty()) {
                     request.setAttribute("listaMovimientos", listaMovimientos);
+                    int totalPaginas = (int) Math.ceil((double) totalMovimientos / limit);
+                    request.setAttribute("totalPaginas", totalPaginas);
+                    request.setAttribute("paginaActual", page);
                 } else {
                     request.setAttribute("MensajeMovimientos", "No se encontraron movimientos para la cuenta seleccionada.");
                 }
 
             } catch (NumberFormatException e) {
                 e.printStackTrace();
-                request.setAttribute("MensajeMovimientos", "El nï¿½mero de cuenta proporcionado no es vï¿½lido.");
+                request.setAttribute("MensajeMovimientos", "El número de cuenta proporcionado no es válido.");
             }
         } else {
-            request.setAttribute("MensajeMovimientos", "No se seleccionï¿½ ninguna cuenta.");
+            request.setAttribute("MensajeMovimientos", "No se seleccionó ninguna cuenta.");
         }
 
         RequestDispatcher rd = request.getRequestDispatcher("Movimientos.jsp");

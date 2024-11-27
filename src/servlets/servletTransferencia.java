@@ -61,35 +61,31 @@ public class servletTransferencia extends HttpServlet {
 
         if (request.getParameter("RealizarBtn") != null) {
             try {
+                // Capturar los datos ingresados en el formulario
                 int cuentaOrigen = Integer.parseInt(request.getParameter("cuentaOrigen"));
                 String cbuCuentaDestino = request.getParameter("cbu");
                 double monto = Double.parseDouble(request.getParameter("monto"));
                 String detalle = request.getParameter("detalle");
 
-                // Obtener la fecha y hora actuales con el formato deseado
-                LocalDateTime ahora = LocalDateTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String fechaHoraTransferencia = ahora.format(formatter); // Formato deseado
-
-                // Llamar al negocio para realizar la transferencia
-                transferenciaNegocio.realizarTransferencia(cuentaOrigen, cbuCuentaDestino, monto, detalle);
-
-                // Establecer los atributos de sesión
+                // Guardar los datos en la sesión
                 HttpSession session = request.getSession();
+                session.setAttribute("cuentaOrigen", cuentaOrigen);
                 session.setAttribute("cbuDestino", cbuCuentaDestino);
-                session.setAttribute("importe", String.valueOf(monto));
-                session.setAttribute("fechaHoraTransferencia", fechaHoraTransferencia); // Guardar la fecha y hora
-                session.setAttribute("detalle", detalle); // Guardar el detalle
+                session.setAttribute("importe", monto);
+                session.setAttribute("detalle", detalle);
 
-                // Redirigir a la página de transferencia exitosa
-                RequestDispatcher rd = request.getRequestDispatcher("transferenciaExitosa.jsp");
-                rd.forward(request, response);
+                // Redirigir al servlet de confirmación
+                response.sendRedirect("servletConfirmarTransferencia");
+
             } catch (Exception e) {
                 e.printStackTrace();
-                request.setAttribute("error", "Error en la transferencia: " + e.getMessage());
+                request.setAttribute("error", "Error al procesar los datos: " + e.getMessage());
                 RequestDispatcher rd = request.getRequestDispatcher("Transferencia.jsp");
                 rd.forward(request, response);
             }
         }
     }
+
+
+
 }

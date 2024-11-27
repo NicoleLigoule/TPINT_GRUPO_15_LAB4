@@ -463,3 +463,40 @@ button[type="button"]:hover {
         .pagination a:hover {
             background-color: #f0f0f0;
         }
+        
+
+
+.card {
+    border: 1px solid #ddd;  /* Borde gris claro */
+    border-radius: 8px;  /* Bordes redondeados */
+    padding: 20px;  /* Espaciado interno */
+    max-width: 400px;  /* Ancho máximo */
+    margin: 20px auto;  /* Centrado horizontal y espacio alrededor */
+    background-color: #f9f9f9;  /* Fondo de la tarjeta */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+}
+
+#paginacion .pagina {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    background-color: #7a3d81;  /* Rosa/violeta oscuro */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#paginacion .pagina:hover {
+    background-color: #642c6e;  /* Rosa/violeta más oscuro al pasar el mouse */
+}
+
+#paginacion .pagina:active {
+    background-color: #4f205a;  /* Rosa/violeta aún más oscuro cuando está activo */
+}
+
+#paginacion .disabled {
+    background-color: #c6c6c6;
+    cursor: not-allowed;
+}
+

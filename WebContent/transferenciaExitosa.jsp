@@ -10,10 +10,11 @@
     }
 
     // Obtener los valores de CBU, importe, fecha y hora, y detalle de la sesión
-    String cbuDestino = (String) session.getAttribute("cbuDestino");
-    String importe = (String) session.getAttribute("importe");
-    String fechaHoraTransferencia = (String) session.getAttribute("fechaHoraTransferencia");
-    String detalle = (String) session.getAttribute("detalle");
+		    String cbuDestino = (String) session.getAttribute("cbuDestino");
+			Double importe = (Double) session.getAttribute("importe"); // Cambié String a Double
+			String fechaHoraTransferencia = (String) session.getAttribute("fechaHoraTransferencia");
+			String detalle = (String) session.getAttribute("detalle");
+
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -62,11 +63,14 @@
                 <button class="print-button" onclick="window.print()">
                     <i class="fas fa-print"></i> Imprimir
                 </button>
+                
+                <div style="margin-top: 30px;"></div>
+                <button type="button" class="submit-button" onclick="location='/TPINT_GRUPO_15_LAB4/servletInformacionCliente'">Volver al Menú Principal</button>
+		
             </div>
             
         
-                <div style="margin-top: 30px;"></div>
-                <button type="button" class="submit-button" onclick="location='/TPINT_GRUPO_15_LAB4/servletInformacionCliente'">Volver al Menú Principal</button>
+                
             </div>
         </div>
 
