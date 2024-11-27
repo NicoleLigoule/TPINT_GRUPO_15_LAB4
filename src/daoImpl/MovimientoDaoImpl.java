@@ -1,8 +1,10 @@
 package daoImpl;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import dao.MovimientoDao;
 import entidades.Movimiento;
+import entidades.TipoMovimiento;
 
 public class MovimientoDaoImpl implements MovimientoDao {
     private Conexion cn;
@@ -77,4 +80,77 @@ public class MovimientoDaoImpl implements MovimientoDao {
         }
         return lista;
     }
+    
+    
+    @Override
+    public List<TipoMovimiento> obtenerTipoMovimientos(){
+		
+    	cn = new Conexion();
+        cn.Open();
+        List<TipoMovimiento> lista = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM TipoMovimiento";
+
+            ResultSet rs = cn.query(query);
+            while (rs.next()) {
+            	TipoMovimiento tipo = new TipoMovimiento();
+                
+            	tipo.setIdTipoMovTM(rs.getInt("Id_TipoMov_TM"));
+            	tipo.setDescripcionTM(rs.getString("Descripcion_TM"));            	
+                lista.add(tipo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+    	
+    	
+    	return lista;
+    	
+    }
+    
+    @Override
+    public boolean agregarMovimiento(int numCuenta, String detalle, int tipoMv, BigDecimal monto) {
+    	cn = new Conexion();
+        cn.Open();
+        boolean exito = false;
+        try {
+        	 String insertMovimiento = "INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov) VALUES (?, ?, ?)";
+             String insertMovimientoXCuenta = "INSERT INTO MovimientoXCuenta (Id_Movimiento__Mov_MXC, Num_Cuenta_Cu_MXC) VALUES (?, ?)";
+             
+             PreparedStatement movimientoStmt = null;
+             PreparedStatement movimientoXCuentaStmt = null;
+             ResultSet generatedKeys = null;
+             
+             
+             movimientoStmt = (PreparedStatement)cn.getSQLConexion().prepareStatement(insertMovimiento,Statement.RETURN_GENERATED_KEYS);
+             
+             movimientoStmt.setString(1, detalle);
+             movimientoStmt.setBigDecimal(2, monto);
+             movimientoStmt.setInt(3, tipoMv);
+             exito = movimientoStmt.executeUpdate()> 0;
+             
+             generatedKeys = movimientoStmt.getGeneratedKeys();
+             
+             if (generatedKeys.next()) {
+                 int idMovimiento = generatedKeys.getInt(1);
+
+                 // Insertar en la tabla MovimientoXCuenta
+                 movimientoXCuentaStmt = (PreparedStatement)cn.getSQLConexion().prepareStatement(insertMovimientoXCuenta);
+                 movimientoXCuentaStmt.setInt(1, idMovimiento);
+                 movimientoXCuentaStmt.setInt(2, numCuenta);
+                 exito = exito && (movimientoXCuentaStmt.executeUpdate() > 0);
+             }
+    	
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+    	
+		return exito;
+    	
+    }
+    
 }

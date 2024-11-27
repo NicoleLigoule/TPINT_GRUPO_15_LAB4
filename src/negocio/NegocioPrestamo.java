@@ -1,12 +1,18 @@
 package negocio;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.CuentaDao;
 import dao.CuotasXPrestamoDao;
+import dao.MovimientoDao;
 import dao.PrestamoDao;
+import daoImpl.CuentaDaoImpl;
 import daoImpl.CuotasXPrestamoDaoImpl;
+import daoImpl.MovimientoDaoImpl;
 import daoImpl.PrestamoDaoImpl;
+import entidades.Cuenta;
 import entidades.CuotasXPrestamo;
 import entidades.DetalleXPrestamo;
 import java.util.List;
@@ -19,10 +25,13 @@ import entidades.Prestamo;
 
 public class NegocioPrestamo {
     private PrestamoDao prestamoDao;
+    private CuentaDao cuentaDao;
+    private MovimientoDao movDao;
     
     public NegocioPrestamo() {
         this.prestamoDao = new PrestamoDaoImpl();
-        
+        this.cuentaDao = new CuentaDaoImpl();
+        this.movDao = new MovimientoDaoImpl();
     }
     
     // me devuelve un prestamo totalmente cargado (lista de cuotas, descripcion)
@@ -42,57 +51,33 @@ public class NegocioPrestamo {
     }
 
     
-    public boolean realizarPagoPrestamo(int idPrestamo, double monto) {
-        if (monto <= 0) {
-            return false;
-        }
+    public boolean realizarPagoPrestamo(int idPrestamo, int idCuenta) {
+    	boolean exito = false;
+    	Cuenta cu =cuentaDao.obtenerUno(idCuenta);
+    	Prestamo pr = PrestamoCargado(idPrestamo);
+    	
+    	BigDecimal saldo = cu.getSaldoCu();
+    	BigDecimal montoxCuota = pr.getDetalle().getImporteXCuotasDt();
+    	saldo = saldo.subtract(montoxCuota);
+    	
+    	if(saldo.compareTo(BigDecimal.ZERO) >= 0) {
+    		pagarCuota(idPrestamo);
+    		
+//    		descuenta de cuenta
+    		cu.setSaldoCu(saldo);
+    		exito = cuentaDao.editar(cu);
+    		
+//    		añade registro de movimiento
+    		String detalleMov = "se pago cuota del prestamo de la cuenta " + Integer.toString(idCuenta);
+//    		(1, 'Alta de cuenta'),
+//    		(2, 'Transferencia'),
+//          (3, 'Alta de prestamo'),
+//    		(4, 'Pago de prestamo');
 
-      
-        // Mï¿½todo pï¿½blico para obtener los prï¿½stamos por cuenta
-        //public List<Prestamo> obtenerPrestamoPorCuenta(int idCuenta) {
-      //      return prestamoDao.obtenerPrestamosPorCuenta(idCuenta); // Ajusta la lï¿½gica segï¿½n tu DAO
-       // }
-        
-        /*public List<Prestamo> obtenerPrestamoPorCuenta(int numeroCuenta) {
-            // Asegï¿½rate de usar la instancia de PrestamoDao correctamente
-            List<Prestamo> prestamos = prestamoDao.obtenerPrestamoPorCuenta(numeroCuenta);
-            // Aquï¿½ puedes trabajar con la lista de prï¿½stamos
-            return prestamos;
-        }*/
-
-        
-        // Obtener el prï¿½stamo desde la base de datos
-        Prestamo prestamo = prestamoDao.obtenerPrestamoPorId(idPrestamo);
-        if (prestamo == null) {
-            return false; // El prï¿½stamo no existe
-        }
-
-        // Verificar si el prï¿½stamo ya estï¿½ pagado
-        if (prestamo.isEstadoPt()) {
-            return false; // El prï¿½stamo ya estï¿½ pagado
-        }
-
-        // Calcular el saldo restante
-        double saldoRestante = prestamo.getImporteSolicitadoPt().doubleValue() - monto;
-
-        // Si el saldo restante es menor a 0, no se puede pagar mï¿½s del saldo pendiente
-        if (saldoRestante < 0) {
-            return false; // El monto excede el saldo pendiente
-        }
-
-        // Si el saldo es 0, marcar el prï¿½stamo como pagado
-        if (saldoRestante == 0) {
-            prestamo.setEstadoPt(true); // Marcar como pagado
-        }
-
-        // Actualizar el prï¿½stamo con el nuevo saldo o estado
-        boolean exito = prestamoDao.actualizarPrestamo(prestamo);
-        if (!exito) {
-            return false; // Si hubo un error al actualizar, retornar false
-        }
-
-        // Si todo fue exitoso, retornar true
-        return true;
+    		exito = exito && movDao.agregarMovimiento(idCuenta, detalleMov, 4, montoxCuota); //sabemos que el 4 es el pago de un prestamo
+    		
+    	}
+        return exito;
     }
 
 
@@ -143,7 +128,7 @@ public class NegocioPrestamo {
         return guardado; 
     }
     
-    public boolean pagarCuota(int idPrestamo, int idCuenta) {
+    public boolean pagarCuota(int idPrestamo) {
     	boolean pagada = false;
     	PrestamoDaoImpl prestamoDao = new PrestamoDaoImpl();
     	CuotasXPrestamoDaoImpl cuotaDao = new CuotasXPrestamoDaoImpl();
