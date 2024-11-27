@@ -7,7 +7,6 @@
 <%@ page import="javafx.util.Pair" %>
 <%@ page import="java.math.BigDecimal" %>
 
-
 <%
     // Obtención del usuario de la sesión
     Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -41,55 +40,52 @@
                 <h2>Seleccionar Préstamo</h2>
                 <p>Seleccione uno de los préstamos disponibles para realizar el pago:</p>   
 
-                <%
-                    // Recuperamos la lista de préstamos del request
-                    List<Pair<Integer, ArrayList<Prestamo>>> prestamosXCuenta = (List<Pair<Integer, ArrayList<Prestamo>>>) request.getAttribute("PrestamosXCuenta");
-                    if (prestamosXCuenta != null && !prestamosXCuenta.isEmpty()) {
-                        for (Pair<Integer, ArrayList<Prestamo>> pair : prestamosXCuenta) {
-                            ArrayList<Prestamo> prestamos = pair.getValue();
-                            for (Prestamo prestamo : prestamos) {
-                            	
-                            	int	cuotasImpagas = 0;
-                            	float totalDebt = 0;
-                                for (CuotasXPrestamo cuotas : prestamo.getCuotas()) {
-	                               	if(cuotas.getPagada() == false){
-	                               		cuotasImpagas = cuotasImpagas + 1;
-	                               		totalDebt =  totalDebt + prestamo.getDetalle().getImporteXCuotasDt().floatValue();
-	                               	}
+                <div class="loan-cards-container">
+                    <%
+                        // Recuperamos la lista de préstamos del request
+                        List<Pair<Integer, ArrayList<Prestamo>>> prestamosXCuenta = (List<Pair<Integer, ArrayList<Prestamo>>>) request.getAttribute("PrestamosXCuenta");
+                        if (prestamosXCuenta != null && !prestamosXCuenta.isEmpty()) {
+                            for (Pair<Integer, ArrayList<Prestamo>> pair : prestamosXCuenta) {
+                                ArrayList<Prestamo> prestamos = pair.getValue();
+                                for (Prestamo prestamo : prestamos) {
+                                    int cuotasImpagas = 0;
+                                    float totalDebt = 0;
+
+                                    // Calcular las cuotas impagas y el total de la deuda
+                                    for (CuotasXPrestamo cuota : prestamo.getCuotas()) {
+                                        if (!cuota.getPagada()) {
+                                            cuotasImpagas++;
+                                            totalDebt += prestamo.getDetalle().getImporteXCuotasDt().floatValue();
+                                        }
+                                    }
+                    %>
+                                    <!-- Generar tarjeta de préstamo -->
+                                    <div class="loan-card" onclick="redirigirAPago(<%= prestamo.getIdPrestamoPt() %>)">
+                                        <h3>Préstamo #<%= prestamo.getIdPrestamoPt() %></h3>
+                                        <p><strong>Número de Cuenta:</strong> <%= prestamo.getNumeroDeCuentaCuPt() %></p>
+                                        <p><strong>Monto Total:</strong> $<%= String.format("%.2f", totalDebt) %></p>
+                                        <p><strong>Cuotas Pendientes:</strong> <%= cuotasImpagas %></p>
+                                        <p><strong>Precio por Cuota:</strong> $<%= prestamo.getDetalle().getImporteXCuotasDt() %></p>
+                                    </div>
+                    <%
                                 }
-                %>
-                
-					
-					
-					
-
-                            <div class="loan-card" onclick="redirigirAPago(<%= prestamo.getIdPrestamoPt() %>)">
-                                <h2>Préstamo #<%= prestamo.getIdPrestamoPt() %></h2>
-                                <p><strong>Número de Cuenta:</strong> <%= prestamo.getNumeroDeCuentaCuPt() %></p>
-                                <p><strong>Monto Total:</strong> $<%= totalDebt %></p>
-                                <p><strong>Cuotas Pendientes:</strong> <%=cuotasImpagas %> </p>
-                                <p><strong>Precio por Cuota:</strong> $<%= prestamo.getDetalle().getImporteXCuotasDt() %></p>
-                            </div>
-                <%
                             }
+                        } else {
+                    %>
+                            <p>No hay préstamos disponibles para seleccionar.</p>
+                    <%
                         }
-                    } else {
-                %>
-                        <p>No hay préstamos disponibles para seleccionar.</p>
-                <%
-                    }
-                %>
-
-                <p>${mensaje}</p>
-                <a href="PagoPrestamo.jsp">Volver</a>
+                    %>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="JS/MenuAdm.js"></script>
+    <script src="${pageContext.request.contextPath}/JS/MenuAdm.js"></script>
     <script>
         function redirigirAPago(idPrestamo) {
-            window.location.href = "PagoPrestamo.jsp?idPrestamo=" + idPrestamo;
+            // Redirige a la página PagarPrestamo.jsp con el ID del préstamo seleccionado
+            window.location.href = "PagarPrestamo.jsp?idPrestamo=" + idPrestamo;
         }
     </script>
 </body>
