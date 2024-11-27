@@ -85,4 +85,10 @@ public class NegocioCuentas {
 	double porcentaje = dao.RendimientosMEnsuales_p_aprobados();
 	return porcentaje;
 	}
+	
+	public double RendimientosAnualesCreditosPagados() {
+		ProvinciaDaoImpl dao=new ProvinciaDaoImpl();
+	double porcentaje = dao.RendimientosAnuales_p_pagados();
+	return porcentaje;
+	}
 }

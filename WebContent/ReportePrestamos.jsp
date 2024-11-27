@@ -43,13 +43,14 @@
 		<jsp:include page="SubMenu_Admin.jsp" />
 	<%double PorcentajesAprobados =(double)request.getAttribute("POrcentajesAporbados"); %>	
 	<%double RendimietnosAprobados =(double)request.getAttribute("RendimientosAporbados"); %>	
-	<%double RendimietnosMEnsulaAprobados =(double)request.getAttribute("RendimientosMEnsualAporbados"); %>	
+	<%double RendimietnosMEnsulaAprobados =(double)request.getAttribute("RendimientosMEnsualAporbados"); %>
+	<%double RendimientosAnualPagado =(double)request.getAttribute("RendimientosAnualPagado"); %>	
 	
    <div class="Mastercontainer">
 		<div class="content">
 			<div class="form-card">
 				<h2>Porcentaje De Prestamos Aprobados</h2>
-  				<p><%
+  				<p style="border: 2px solid black; padding: 8px;"><%
     out.print(PorcentajesAprobados+"%");
 				%></p>
 				
@@ -58,8 +59,8 @@
 		</div>
 		<div class="content">
 			<div class="form-card">
-				<h2>Rendimiento Prestamos Aprobados</h2>
-				<p><%
+				<h2>Rendimientos De Los Pagos Aprobados Este Año</h2>
+				<p style="border: 2px solid black; padding: 8px;"><%
     out.print("$ "+RendimietnosAprobados);
 				%></p>
 				
@@ -69,9 +70,19 @@
 		</div>
 		<div class="content">
 			<div class="form-card">
-				<h2>Porcentaje De Prestamos Aprobados</h2>
+				<h2>Rendimientos Cobrados En Este Mes</h2>
   				<p style="border: 2px solid black; padding: 8px;"><%
     out.print("$ "+RendimietnosMEnsulaAprobados);
+				%></p>
+
+
+			</div>
+		</div>
+		<div class="content">
+			<div class="form-card">
+				<h2>Rendimientos Cobrados En Este Año</h2>
+  				<p style="border: 2px solid black; padding: 8px;"><%
+    out.print("$ "+RendimientosAnualPagado);
 				%></p>
 
 

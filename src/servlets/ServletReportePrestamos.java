@@ -40,6 +40,9 @@ public class ServletReportePrestamos extends HttpServlet {
 	        double REnMEnsual_PretamosAprobados = Neg.RendimientosMEnsualesCreditosAprobados();
 	        request.setAttribute("RendimientosMEnsualAporbados", REnMEnsual_PretamosAprobados);
 	        
+	        double REnAnual_PretamosPagados = Neg.RendimientosAnualesCreditosPagados();
+	        request.setAttribute("RendimientosAnualPagado", REnAnual_PretamosPagados);
+	        
 			RequestDispatcher rd = request.getRequestDispatcher("ReportePrestamos.jsp");
 			rd.forward(request, response);
 		

@@ -165,9 +165,28 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
         cn.Open();
         double resultado=0;
         try {
-            ResultSet rs = cn.query("SELECT (SUM(DetallesXPrestamo.Importe_C_Interes_Dt) - SUM(Prestamo.Importe_solicitado_Pt)) AS Resultado FROM Prestamo  JOIN DetallesXPrestamo  ON Prestamo.ID_Prestamo_Pt = DetallesXPrestamo.ID_Prestamo_Pt_Dt WHERE Prestamo.Estado_Pt = 1   AND YEAR(Prestamo.Fecha_Peticion_Pt) = YEAR(CURDATE()) AND MONTH(Prestamo.Fecha_Peticion_Pt) = MONTH(CURDATE());");
+            ResultSet rs = cn.query("SELECT    SUM(DetallesXPrestamo.Importe_X_Cuotas_Dt - (Prestamo.Importe_solicitado_Pt / DetallesXPrestamo.Cantidad_Cuotas_Dt)) AS Ganancia_Total FROM   CuotasXPrestamos JOIN Prestamo ON   CuotasXPrestamos.ID_Prestamo_Pt_Cp = Prestamo.ID_Prestamo_Pt JOIN    DetallesXPrestamo  ON    Prestamo.ID_Prestamo_Pt = DetallesXPrestamo.ID_Prestamo_Pt_Dt WHERE   CuotasXPrestamos.pagada = 1  AND YEAR(CuotasXPrestamos.Fecha_vencimiento_Cp) = YEAR(CURDATE()) AND MONTH(CuotasXPrestamos.Fecha_vencimiento_Cp) = MONTH(CURDATE());");
             if (rs.next()) {
-            	 resultado = rs.getDouble("Resultado");
+            	 resultado = rs.getDouble("Ganancia_Total");
+         
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cn.close();
+        }
+        return resultado;
+    	
+    }
+    
+    public double RendimientosAnuales_p_pagados() {
+        cn = new Conexion();
+        cn.Open();
+        double resultado=0;
+        try {
+            ResultSet rs = cn.query("SELECT     SUM(DetallesXPrestamo.Importe_X_Cuotas_Dt - (Prestamo.Importe_solicitado_Pt / DetallesXPrestamo.Cantidad_Cuotas_Dt)) AS Ganancia_Total FROM    CuotasXPrestamos JOIN    Prestamo  ON   CuotasXPrestamos.ID_Prestamo_Pt_Cp = Prestamo.ID_Prestamo_Pt JOIN  DetallesXPrestamo ON Prestamo.ID_Prestamo_Pt = DetallesXPrestamo.ID_Prestamo_Pt_Dt WHERE CuotasXPrestamos.pagada = 1  AND YEAR(CuotasXPrestamos.Fecha_vencimiento_Cp) = YEAR(CURDATE());");
+            if (rs.next()) {
+            	 resultado = rs.getDouble("Ganancia_Total");
          
             }
         } catch (Exception e) {
