@@ -61,7 +61,7 @@ public class ServletConfirmarPrestamo extends HttpServlet {
             request.setAttribute("mensajeError", "Hubo un error al procesar los datos. Verifique los valores ingresados.");
             request.getRequestDispatcher("ConfirmarPrestamo.jsp").forward(request, response);
         } catch (Exception e) {
-            request.setAttribute("mensajeError", "Hubo un problema al procesar la solicitud de pr�stamo.");
+            request.setAttribute("mensajeError", "Hubo un problema al procesar la solicitud de prestamo.");
             request.getRequestDispatcher("ConfirmarPrestamo.jsp").forward(request, response);
         }
     }

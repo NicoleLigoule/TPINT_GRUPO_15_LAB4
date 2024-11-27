@@ -40,9 +40,9 @@
 	        <aside class="sidebar" id="sidebar">
 	            <ul>
 	                <li><a href="#">Transferencias</a></li>
-	                <li><a href="#">Solicitudes de pr�stamos</a></li>
-	                <li><a href="#">Pago de pr�stamos</a></li>
-	                <li><a href="#">Informaci�n personal</a></li>
+	                <li><a href="#">Solicitudes de prestamos</a></li>
+	                <li><a href="#">Pago de prestamos</a></li>
+	                <li><a href="#">Informacion personal</a></li>
 	            </ul>
 	        </aside>
 		
@@ -78,7 +78,7 @@
 	    
 	    </select>
 				  <button type="submit">Ver movimientos</button>
-				  <button type="button" class="submit-button" onclick="location='/TPINT_GRUPO_15_LAB4/servletInformacionCliente'">Volver al Men� Principal</button>
+				  <button type="button" class="submit-button" onclick="location='/TPINT_GRUPO_15_LAB4/servletInformacionCliente'">Volver al Menu Principal</button>
 				</form>
 	
 	

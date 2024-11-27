@@ -16,11 +16,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pago Préstamo</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/PagoPrestamo.css">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pago Prestamo</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/Css/PagoPrestamo.css">
 <body>
     <nav class="navbar">
         <a href="${pageContext.request.contextPath}/Login.jsp"> 

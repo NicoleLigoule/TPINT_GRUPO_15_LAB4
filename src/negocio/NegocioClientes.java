@@ -2,8 +2,11 @@ package negocio;
 
 import java.util.List;
 
+import dao.UsuarioDao;
 import daoImpl.ClienteDaoImpl;
+import daoImpl.UsuarioDaoImpl;
 import entidades.Cliente;
+import entidades.Usuario;
 public class NegocioClientes {
     
     private ClienteDaoImpl clienteDao;
@@ -46,6 +49,14 @@ public class NegocioClientes {
 	public List<Cliente> obtenerClientesPorIdProvincia(int id) {
 		return clienteDao.obtenerTodosPorProvincia(id);
 	}
+	
+	public Usuario validadUsu(String nombre, String contrasenia) {
+		UsuarioDao   usuarioDao = new UsuarioDaoImpl();
+		Usuario usuario = usuarioDao.validarUsuario(nombre, contrasenia);
+		return usuario;
+	}
+
+
     
 }
 

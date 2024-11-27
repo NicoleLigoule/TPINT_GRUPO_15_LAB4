@@ -348,8 +348,6 @@ public class PrestamoDaoImpl implements PrestamoDao {
        
     	return interes;
     }
-
-
     
 }
 

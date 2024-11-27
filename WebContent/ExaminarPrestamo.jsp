@@ -81,8 +81,9 @@
 						value=<%=Interese.getMeses() != -1 ?Interese.getMeses() : ""%>
 						readonly>
 				 <div class="button-group">
-						<button type="button" class="cancel-button">Rechazar</button>
-						<button type="submit" class="submit-button" name="AprobarBtn">Aprobar</button>
+						<button type="submit" class="cancel-button" name="Rechazar">Rechazar</button>
+						<button type="submit" class="submit-button" name="AprobarBtn" onclick="return aprobarPrestamo()">Aprobar</button>
+
 						
 					</div>
 						
@@ -119,6 +120,21 @@
 		</div>
 	</div>
 </div>
+<script>
+    function aprobarPrestamo() {
+     
+        const confirmar = confirm("�Seguro que quiere aprobar el pr�stamo?");
+        
+        if (confirmar) {
+
+            alert("Pr�stamo aprobado");
+            
+
+            document.querySelector("form[action='servletExaminarPrestamo']").submit();
+        }
+    }
+</script>
+
 
 	<script src="JS/MenuAdm.js"></script>
 </body>

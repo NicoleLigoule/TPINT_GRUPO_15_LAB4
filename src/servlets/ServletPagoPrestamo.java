@@ -94,42 +94,6 @@ public class ServletPagoPrestamo extends HttpServlet {
 
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       // Nos llevamos el pago del prestamo y actualizamos cuotas y monto faltante
-      
-      
-        int idCuenta = Integer.parseInt(request.getParameter("idCuenta"));
-
-      
-        List<Prestamo> prestamos = prestamoNegocio.obtenerPrestamoPorCuenta(idCuenta);
-
-    
-        for (Prestamo prestamo : prestamos) {
-        	
-        	// HACER OTRA ENTIDAD PARA PRESTAMOSINFO
-//            int cuotasPagadas = prestamo.obtenerCuotasPagadas(prestamo.getIdPrestamoPt());
-//            
-//            
-//            prestamo.setCuotasPagadas(cuotasPagadas);
-//            prestamo.setMontoRestante(calcularMontoRestante(prestamo));
-
-            System.out.println("Prestamo ID: " + prestamo.getIdPrestamoPt() +
-//                    ", Cuotas Pagadas: " + cuotasPagadas +
-                    ", Monto Restante: " + prestamo.getMontoRestante());
-        }
-
-      
-        request.setAttribute("prestamos", prestamos);
-        request.getRequestDispatcher("/listaPrestamos.jsp").forward(request, response);
+           
     }
-
-    private double calcularMontoRestante(Prestamo prestamo) {
-       
-//        double total = prestamo.getMontoTotal();
-//        double pagado = prestamo.getMontoPagado();
-//        return total - pagado;
-    	return 0;
-    }
-
-    
-    
 }

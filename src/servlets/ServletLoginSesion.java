@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import entidades.Usuario;
 import negocio.NegocioUsuarios;
 
+import negocio.NegocioClientes;
+
 /**
  * Servlet implementation class ServletLoginSesion
  */
@@ -61,7 +63,7 @@ public class ServletLoginSesion extends HttpServlet {
                 response.sendRedirect("servletInformacionCliente"); // Redirige al servlet
             }
         } else {
-            request.setAttribute("errorMessage", "Usuario o contraseña incorrectos.");
+            request.setAttribute("errorMessage", "Usuario o contraseï¿½a incorrectos.");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
     }

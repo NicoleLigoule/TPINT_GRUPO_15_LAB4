@@ -310,7 +310,6 @@ BEGIN
     );
 END$$
 
-DELIMITERÂ ;
 
 DELIMITER $$
 
