@@ -39,7 +39,7 @@
             <div class="form-card">
                 <h2>Seleccionar Préstamo</h2>
                 <p>Seleccione uno de los préstamos disponibles para realizar el pago:</p>   
-
+				<br>
                 <div class="loan-cards-container">
                     <%
                         // Recuperamos la lista de préstamos del request
@@ -85,7 +85,7 @@
     <script>
         function redirigirAPago(idPrestamo) {
             // Redirige a la página PagarPrestamo.jsp con el ID del préstamo seleccionado
-            window.location.href = "PagarPrestamo.jsp?idPrestamo=" + idPrestamo;
+            window.location.href = "PagoPrestamo.jsp?idPrestamo=" + idPrestamo;
         }
     </script>
 </body>
