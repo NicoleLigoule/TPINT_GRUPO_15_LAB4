@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import entidades.Cuenta;
 import entidades.Prestamo;
 import entidades.Usuario;
+import excepciones.ExcepcionesPagoPrestamo;
+import excepcionesImpl.ExePagoPrestamoSaldoInsuficiente;
 import javafx.util.Pair;
 import negocio.NegocioCuentas;
 import entidades.Prestamo;
@@ -77,7 +79,7 @@ public class ServletPagoPrestamo extends HttpServlet {
                 e.printStackTrace();
                 response.getWriter().println("error al obtener los datos: " + e.getMessage());
             }
-        }else if (request.getParameter("idPrestamo") != null) {
+        } else if (request.getParameter("idPrestamo") != null) {
 //        	traer prestamo y meterlo en atributte, despues llamar al jsp que sigue
         	
         	NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
@@ -113,14 +115,17 @@ public class ServletPagoPrestamo extends HttpServlet {
     	
     	NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
 //		request.setParameter("idPrestamo", );
-    	if(negocioPrestamo.realizarPagoPrestamo(idPrestamo, numCuenta)) {
-    		request.setAttribute("Mensaje_exito", "Se realizo el pago con exito de la cuota");
+    	try{
+    		negocioPrestamo.realizarPagoPrestamo(idPrestamo, numCuenta); 
+    		request.setAttribute("Mensaje_exito", "Se realizo el pago de la cuota con exito");
     		System.out.print("SE HIZO BIEN EL PAGO");
 
     		
-    	}else {
-    		request.setAttribute("Mensaje_error", "Fallo al pagar la cuota");
-    		System.out.print("FALLO EL PAGO");
+    	}
+    	catch (ExcepcionesPagoPrestamo ex) {
+    		
+    		ex.printErrorDetails();
+    		request.setAttribute("mensajeError", "Error al realizar el pago");
     	}
     	
 
