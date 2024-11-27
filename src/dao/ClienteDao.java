@@ -12,4 +12,5 @@ public interface ClienteDao {
     public boolean borrarCuil(String cuil);
 	public Cliente obtenerUnoPorCuil(String cuil);    
 	public List<Cliente> obtenerTodosPorProvincia(int idProvincia);
+	public List<Cliente> obtenerTodosPorEdades(int desde, int hasta);
 }
