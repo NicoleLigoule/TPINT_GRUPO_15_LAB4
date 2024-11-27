@@ -1,5 +1,13 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page import="entidades.Usuario"%>
+<%
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -7,15 +15,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmación de Prestamo</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/RegistrarseNuevo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/SolicitarPrestamo.css">
 </head>
 <body>
-    <nav>
-        <div class="nav-content">
-            <a href="#Login.jsp"><img src="img/png_logo.png" class="img_logo" alt="Logo UTN"></a>
-            <h1>BANCO UTN</h1>
-        </div>
-    </nav>
+	<nav class="navbar">
+		<button class="hamburger" onclick="toggleSidebar()">
+			<div class="line"></div>
+			<div class="line"></div>
+			<div class="line"></div>
+		</button>
+		<a href="${pageContext.request.contextPath}/Login.jsp"> <img
+			src="${pageContext.request.contextPath}/img/png_logo.png"
+			class="img_logo" alt="Logo UTN">
+		</a> <span class="username"><%= usuario.getUsuarioUs() %></span>
+	</nav>
+	<jsp:include page="SubMenu_Cliente.jsp" />
 
     <div class="main-container">
         <div class="content">
@@ -48,31 +62,11 @@
                         <button type="submit" class="submit-button" name="confirmar">Confirmar</button>
                     </div>
  				</form>
-                <!-- Mensaje de estado -->
-                <%
-                    //String status = (String) request.getAttribute("status");
-                    String mensajeConfirmacion = (String) request.getAttribute("mensajeConfirmacion");
-                    String mensajeError = (String) request.getAttribute("mensajeError");
 
-                    if (mensajeConfirmacion != null) {
-                %>
-                <div class="alert alert-success">
-                    <%= mensajeConfirmacion %>
-                </div>
-                <%
-                    } else if(mensajeError != null) {
-                    	
-                %>
-                <div class="alert alert-danger">
-                    <%= mensajeError %>
-                </div>
-                <%
-                    }
-                %>
 
             </div>
         </div>
     </div>
-
+<script src="JS/MenuAdm.js"></script>
 </body>
 </html>
