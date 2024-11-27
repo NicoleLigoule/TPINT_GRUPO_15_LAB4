@@ -55,7 +55,7 @@ CREATE TABLE Cuenta (
     Fecha_Creacion_Cu DATE,
     Id_Tipo_Cuenta INT,
     CBU_Cu VARCHAR(22),
-    Saldo_Cu DECIMAL(11,2) DEFAULT 10000
+    Saldo_Cu DECIMAL(11,2) DEFAULT 10000,
     Estado_Cu BOOLEAN DEFAULT 1,
     FOREIGN KEY (Cuil_Cli_Cu) REFERENCES Cliente(cuil_Cli),  
     FOREIGN KEY (Id_Tipo_Cuenta) REFERENCES TipoCuenta(Id_Tipo_Cuenta), 
@@ -290,9 +290,9 @@ DELIMITER ;
 		SET NEW.CBU_Cu = CAST(ultimoCBU AS CHAR(22));
 	END$$
 
-	DELIMITER ;
-    
 
+    
+DELIMITER $$
 CREATE TRIGGER after_cliente_insert
 AFTER INSERT ON Cliente
 FOR EACH ROW
@@ -441,7 +441,7 @@ VALUES
 ('03M', 9, 3),   -- 3 meses
 ('06M', 19, 6),   -- 6 meses, 
 ('09M', 34, 9),  -- 9 meses, 
-('12M', 45, 12),  -- 12 meses
+('12M', 45, 12);  -- 12 meses
 
 
 INSERT INTO Nacionalidad (Id_Nacionalidad_nc, Descripcion_nc) VALUES
