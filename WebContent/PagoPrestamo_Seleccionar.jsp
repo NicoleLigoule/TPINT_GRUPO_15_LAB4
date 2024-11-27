@@ -85,7 +85,7 @@
     <script>
         function redirigirAPago(idPrestamo) {
             // Redirige a la página PagarPrestamo.jsp con el ID del préstamo seleccionado
-            window.location.href = "PagoPrestamo.jsp?idPrestamo=" + idPrestamo;
+            window.location.href = "ServletPagoPrestamo?idPrestamo=" + idPrestamo;
         }
     </script>
 </body>

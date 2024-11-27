@@ -36,7 +36,7 @@
                 <h2>Pago de Préstamos</h2>
 
                 <%
-                    List<Pair<Integer, ArrayList<Prestamo>>> prestamoXCuenta = (List<Pair<Integer, ArrayList<Prestamo>>>) request.getAttribute("prestamosXCuenta");
+                    List<Pair<Integer, ArrayList<Prestamo>>> prestamoXCuenta = (List<Pair<Integer, ArrayList<Prestamo>>>) request.getAttribute("PrestamosXCuenta");
                     boolean hayCuotasImpagas = false; // Para controlar si hay al menos una cuota impaga
                 
                     if (prestamoXCuenta != null && !prestamoXCuenta.isEmpty()) {

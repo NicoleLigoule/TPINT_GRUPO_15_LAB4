@@ -77,7 +77,19 @@ public class ServletPagoPrestamo extends HttpServlet {
                 e.printStackTrace();
                 response.getWriter().println("error al obtener los datos: " + e.getMessage());
             }
+        }else if (request.getParameter("idPrestamo") != null) {
+//        	traer prestamo y meterlo en atributte, despues llamar al jsp que sigue
+        	
+        	NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
+        	Prestamo pr = negocioPrestamo.obtenerPrestamo(Integer.parseInt(request.getParameter("idPrestamo")));
+        	request.setAttribute("Prestamo_seleccionado", pr);
+        	
+        	request.getRequestDispatcher("PagoPrestamo.jsp").forward(request, response);
+        	
+        	
+        	
         }
+        
     }
 
     
