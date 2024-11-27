@@ -98,8 +98,8 @@ CREATE TABLE Usuario(
 CREATE TABLE InteresXCantidadDMeses(
     Plazo_d_Pagos_En_meses_IXM CHAR(3) PRIMARY KEY,
     Interes_IXM DECIMAL(5, 2),
-    Meses INT,
-    CONSTRAINT PK_Meses UNIQUE (Meses)
+    Meses_int INT,
+    CONSTRAINT PK_Meses UNIQUE (Meses_int)
 );
 
 CREATE TABLE Prestamo(
@@ -209,16 +209,40 @@ BEGIN
     DECLARE importe_x_cuotas DECIMAL(11,2);
 
   
-    SELECT Interes_IXM, Meses
-    INTO interes, meses
-    FROM InteresXCantidadDMeses
-    WHERE Plazo_d_Pagos_En_meses_IXM = NEW.Plazo_Pago_Pt;
+	-- Obtener el valor de interes
+	SELECT Interes_IXM
+	INTO interes
+	FROM interesxcantidaddmeses
+	WHERE Plazo_d_Pagos_En_meses_IXM = NEW.Plazo_Pago_Pt;
+    
+    
+	IF interes IS NULL THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: la variable interes es NULL.';
+	END IF;
+
+	-- Obtener el valor de meses
+	SELECT Meses_int
+	INTO meses
+	FROM interesxcantidaddmeses
+	WHERE Plazo_d_Pagos_En_meses_IXM = NEW.Plazo_Pago_Pt;
+
+	IF meses IS NULL THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: la variable meses es NULL.';
+	END IF;
+
+
+
+
 
 
     SET importe_c_interes = NEW.Importe_solicitado_Pt * (1 + (interes / 100));
 
  
     SET importe_x_cuotas = importe_c_interes / meses;
+
+  	IF importe_x_cuotas IS NULL THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: la variable importe_x_cuotas es NULL.';
+	END IF;
 
   
     INSERT INTO DetallesXPrestamo (
@@ -278,7 +302,7 @@ DELIMITER ;
 
 -- INSERTS --
 
-INSERT INTO InteresXCantidadDMeses (Plazo_d_Pagos_En_meses_IXM, Interes_IXM, Meses)
+INSERT INTO InteresXCantidadDMeses (Plazo_d_Pagos_En_meses_IXM, Interes_IXM, Meses_int)
 VALUES
 ('01M', 2, 1),   -- 1 mes
 ('03M', 9, 3),   -- 3 meses
@@ -332,9 +356,9 @@ INSERT INTO Cliente (
     fecha_nacimiento_Cli, direccion_Cli, ID_Localidad_Cli, correo_electronico_Cli, 
     telefono_Cli, estado_Cli
 ) VALUES 
-('20-12345678-9', 12345678, 'Juan', 'PÃ©rez', 1, 'AR', '1990-05-10', 'Av. Siempre Viva 742', 1, 'juan.perez@gmail.com', '341-1234567', TRUE),
-('27-87654321-8', 87654321, 'MarÃ­a', 'GÃ³mez', 2, 'BR', '1985-03-25', 'Calle Principal 123', 3, 'maria.gomez@hotmail.com', '11-87654321', FALSE),
-('30-11223344-7', 11223344, 'Carlos', 'LÃ³pez', 1, 'CL', '1995-08-15', 'Av. Libertador 456', 6, 'carlos.lopez@yahoo.com', '261-1122334', TRUE);
+('20-12345678-9', 12345678, 'Juan', 'Perez', 1, 'AR', '1990-05-10', 'Av. Siempre Viva 742', 1, 'juan.perez@gmail.com', '341-1234567', TRUE),
+('27-87654321-8', 87654321, 'Maria', 'Gomez', 2, 'BR', '1985-03-25', 'Calle Principal 123', 3, 'maria.gomez@hotmail.com', '11-87654321', FALSE),
+('30-11223344-7', 11223344, 'Carlos', 'Lopez', 1, 'CL', '1995-08-15', 'Av. Libertador 456', 6, 'carlos.lopez@yahoo.com', '261-1122334', TRUE);
 
 INSERT INTO TipoCuenta (Nombre_Tipo) 
 VALUES 
@@ -356,6 +380,3 @@ VALUES
 
 
 
-
-
-SELECT * FROM DetallesXPrestamo
