@@ -113,10 +113,14 @@ public class ServletPagoPrestamo extends HttpServlet {
     	
     	NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
     	
-    	negocioPrestamo.pagarCuota(idPrestamo, numCuenta);
+    	if(negocioPrestamo.pagarCuota(idPrestamo, numCuenta)) {
+    		request.setAttribute("Mensaje_exito", "Se realizo el pago con exito de la cuota");
+    	}else {
+    		request.setAttribute("Mensaje_error", "Fallo al pagar la cuota");
+    	}
     	
     	
-    	
+    	request.getRequestDispatcher("PagoPrestamo.jsp").forward(request, response);
     	
     	
     }
