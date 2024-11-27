@@ -22,7 +22,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar Préstamo</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/PagoPrestamo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/PagoPrestamo_Seleccionar.css">
 </head>
 <body>
     <nav class="navbar">

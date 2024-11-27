@@ -71,7 +71,7 @@ CREATE TABLE TipoMovimiento(
 CREATE TABLE Movimiento(
     Id_Movimiento_Mov INT AUTO_INCREMENT,
     FechaMovimiento_Mov DATETIME DEFAULT CURRENT_TIMESTAMP,
-    Detalle_Mov VARCHAR(30),
+    Detalle_Mov VARCHAR(200),
     Importe_Mov DECIMAL(11,2) NOT NULL,
     Id_TipoMov_TM_Mov INT NOT NULL,
     CONSTRAINT PK_Id_Mov PRIMARY KEY (Id_Movimiento_Mov),
@@ -519,4 +519,18 @@ VALUES
 ('30-11223344-7', '2024-11-24', 1, '3456789012345678901234', 500, 1);
 
 
+INSERT INTO Prestamo (
+    Numero_de_Cuenta_Cu_Pt, 
+    Importe_solicitado_Pt, 
+    Plazo_Pago_Pt, 
+    Detalle_solicitud_Pt, 
+    Estado_Pt
+) 
+VALUES (
+    1001,                           -- Número de cuenta existente en la tabla Cuenta
+    50000.00,                        -- Importe solicitado (por ejemplo, 50,000.00)
+    '06M',                           -- Plazo de pago (por ejemplo, 12 meses, debe existir en InteresXCantidadDMeses)
+    'Préstamo para comprar un auto', -- Detalle de la solicitud
+    1                                -- Estado inicial del préstamo (0 = Pendiente, 1 = Aprobado/Rechazado)
+);
 
