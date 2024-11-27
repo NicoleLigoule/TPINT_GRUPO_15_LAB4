@@ -45,7 +45,10 @@ public class servletEditarCliente extends HttpServlet {
 			NegocioClientes negCli = new NegocioClientes();
 			cliente = negCli.obtenerClienteCuil(request.getParameter("cuil"));
 			
-			
+			if(cliente.getCuil() == null) {
+				request.setAttribute("mensaje", "Cliente no encontrado, revise cuil ingresado");
+				request.getRequestDispatcher("SolicitarClienteEditar.jsp").forward(request, response);
+			}
 		}
 		else {
 			System.out.print("ERROR AL TRAER CLIENTE");
