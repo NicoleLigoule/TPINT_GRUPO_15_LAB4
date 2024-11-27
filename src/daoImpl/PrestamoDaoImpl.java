@@ -10,6 +10,7 @@ import java.util.List;
 import entidades.Cuenta;
 import entidades.CuotasXPrestamo;
 import entidades.DetalleXPrestamo;
+import entidades.InteresesXCantidadDeMeses;
 import entidades.Localidad;
 import entidades.Prestamo;
 import dao.PrestamoDao;
@@ -194,7 +195,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
     }
 
     
-   
+    @Override
     public boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago, String motivo) {
     	CuentaDaoImpl cuentaDao = new CuentaDaoImpl();
 
@@ -322,6 +323,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
         }
         return prestamos;
     }
+    
     @Override
     public InteresesXCantidadDeMeses obtenerIntereses(String iDInteres) {
     	InteresesXCantidadDeMeses interes=new InteresesXCantidadDeMeses();
@@ -345,6 +347,8 @@ public class PrestamoDaoImpl implements PrestamoDao {
        
     	return interes;
     }
+
+
     
 }
 

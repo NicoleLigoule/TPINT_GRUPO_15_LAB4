@@ -5,6 +5,7 @@ import java.util.List;
 
 import entidades.CuotasXPrestamo;
 import entidades.DetalleXPrestamo;
+import entidades.InteresesXCantidadDeMeses;
 import entidades.Prestamo;
 
 public interface PrestamoDao {
@@ -15,7 +16,7 @@ public interface PrestamoDao {
     List<Prestamo> obtenerPrestamos();
     List<Prestamo> ListarPrestamosAprobar();
     Prestamo obtenerPrestamoPorId(int idPrestamo);
-	boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago, double montoPorCuota);
+//	boolean guardarPrestamo(String cuentaDestino, double importeSolicitado, double montoConInteres, String plazoPago, double montoPorCuota);
 	boolean comprobarPlazoExistente(String plazoPago);
 	public List<Prestamo> obtenerPrestamoPorCuenta(int numeroCuenta);
 	public DetalleXPrestamo TraerDetalles(int idPrestamoPt);

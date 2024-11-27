@@ -81,7 +81,7 @@ public class ServletPagoPrestamo extends HttpServlet {
     }
 
     
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        // Nos llevamos el pago del prestamo y actualizamos cuotas y monto faltante
       
       
