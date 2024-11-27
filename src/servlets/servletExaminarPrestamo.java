@@ -70,13 +70,20 @@ public class servletExaminarPrestamo extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	if(request.getParameter("agregarBtn") != null) {
+	if(request.getParameter("AprobarBtn") != null) {
 		  try {
-			  
-			  
+			  Prestamo Prest=new Prestamo();
+			  String identificadorStr = request.getParameter("Identificador");
+			  if (identificadorStr != null && !identificadorStr.isEmpty()) {
+				  	  Prest.setIdPrestamoPt(Integer.parseInt(identificadorStr));
+			          Prest.setEstadoPt(true);
+			  }
+			  NegocioPrestamo neg=new NegocioPrestamo();
+			 boolean SeDIoalta= neg.DaraltaPrestamos(Prest);
+			 if(SeDIoalta){
 	        	RequestDispatcher rd = request.getRequestDispatcher("/ServletAutorizarPrestamo");
 	            rd.forward(request, response);
-
+			 }
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            response.getWriter().println("Error al obtener la lista de prestamos: " + e.getMessage());

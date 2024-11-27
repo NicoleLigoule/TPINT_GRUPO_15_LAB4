@@ -85,5 +85,12 @@ public class NegocioPrestamo {
 		
 		return interes;	
 	}
+	
+	public boolean DaraltaPrestamos(Prestamo Pres) {
+		boolean alta=prestamoDao.actualizarPrestamo(Pres);
+
+		return alta;
+		
+	}
 
 }
