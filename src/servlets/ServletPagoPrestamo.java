@@ -112,16 +112,17 @@ public class ServletPagoPrestamo extends HttpServlet {
     	int idPrestamo = Integer.parseInt(request.getParameter("idPrestamo"));
     	
     	NegocioPrestamo negocioPrestamo = new NegocioPrestamo();
-    	
+//		request.setParameter("idPrestamo", );
     	if(negocioPrestamo.pagarCuota(idPrestamo, numCuenta)) {
     		request.setAttribute("Mensaje_exito", "Se realizo el pago con exito de la cuota");
+
+    		
     	}else {
     		request.setAttribute("Mensaje_error", "Fallo al pagar la cuota");
     	}
     	
-    	
-    	request.getRequestDispatcher("ServletPagoPrestamo?idPrestamo=" + request.getParameter("idPrestamo")).forward(request, response);
-    	
+
+    	doGet(request,response);
     	
     }
 
