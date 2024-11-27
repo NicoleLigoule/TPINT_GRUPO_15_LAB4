@@ -21,6 +21,10 @@ import entidades.CuotasXPrestamo;
 import entidades.DetalleXPrestamo;
 import entidades.InteresesXCantidadDeMeses;
 import entidades.Prestamo;
+import excepciones.ExcepcionesPagoPrestamo;
+import excepcionesImpl.ExePagoPrestamoErrorCuota;
+import excepcionesImpl.ExePagoPrestamoErrorMovimientos;
+import excepcionesImpl.ExePagoPrestamoSaldoInsuficiente;
 
 
 public class NegocioPrestamo {
@@ -51,7 +55,7 @@ public class NegocioPrestamo {
     }
 
     
-    public boolean realizarPagoPrestamo(int idPrestamo, int idCuenta) {
+    public boolean realizarPagoPrestamo(int idPrestamo, int idCuenta) throws ExcepcionesPagoPrestamo {
     	boolean exito = false;
     	Cuenta cu =cuentaDao.obtenerUno(idCuenta);
     	Prestamo pr = PrestamoCargado(idPrestamo);
@@ -67,6 +71,9 @@ public class NegocioPrestamo {
 //    		descuenta de cuenta
     		cu.setSaldoCu(saldo);
     		exito = cuentaDao.editar(cu);
+    		if(!exito) {
+    			throw new ExePagoPrestamoErrorCuota();
+    		}
     		
 //    		a�ade registro de movimiento
     		String detalleMov = "se pago cuota del prestamo de la cuenta " + Integer.toString(idCuenta);
@@ -76,7 +83,11 @@ public class NegocioPrestamo {
 //    		(4, 'Pago de prestamo');
 
     		exito = exito && movDao.agregarMovimiento(idCuenta, detalleMov, 4, montoxCuota); //sabemos que el 4 es el pago de un prestamo
-    		
+    		if(!exito) {
+    			throw new ExePagoPrestamoErrorMovimientos();
+    		}
+    	}else {
+    		throw new ExePagoPrestamoSaldoInsuficiente();
     	}
         return exito;
     }
