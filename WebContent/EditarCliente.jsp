@@ -152,14 +152,8 @@
 					
 					<!-- boton agregar, aca enviamos todo con el "agregarBtn" -->
 					<div class="button-group">
-						<button type="button" class="cancel-button">Cancelar</button>
+							<a href="MenuAdm.jsp"><button type="button" class="cancel-button">Volver</button></a>
 						<button type="submit" class="submit-button" name="agregarBtn">Agregar</button>
-						
-						
-						
-						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
-						
-	
 					</div>
 					
 					

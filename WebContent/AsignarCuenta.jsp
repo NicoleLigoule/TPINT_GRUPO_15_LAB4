@@ -54,16 +54,11 @@
 				        <input type="text" id="cuilCliente" name="cuilCliente" placeholder="Ingrese el cuil del Cliente A AGREGAR CUENTA" required>
 				        
 				        <div class="button-group">
-				           <button type="button" class="cancel-button">Cancelar</button>
+				           <a href="MenuAdm.jsp"><button type="button" class="cancel-button">Volver</button></a>
 				          <button type="submit" class="submit-button" name="agregarBtn">Aceptar</button>
 				        </div>
 				        
-				        <div class="button-group">
-						
-						
-						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
-						
-					</div>
+				        
 				    </form>
 					<!-- mensaje de que cargó bien y limpia, sino msj cargó mal -->
 					<%

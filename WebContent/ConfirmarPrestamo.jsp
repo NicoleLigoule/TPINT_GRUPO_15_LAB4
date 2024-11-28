@@ -60,6 +60,8 @@
                     <div class="button-group">
                         <button type="submit" class="cancel-button"name="Volver">Volver</button>
                         <button type="submit" class="submit-button" name="confirmar">Confirmar</button>
+                        <div style="margin-top: 30px;"></div>
+                <button type="button" class="submit-button" onclick="location='/TPINT_GRUPO_15_LAB4/servletInformacionCliente'">Volver al Menú Principal</button>
                     </div>
  				</form>
  				
