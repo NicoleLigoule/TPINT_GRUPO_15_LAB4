@@ -26,15 +26,26 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="${pageContext.request.contextPath}/Login.jsp"> 
+        <button class="hamburger" onclick="toggleSidebar()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </button>
+        <a href="${pageContext.request.contextPath}/Login.jsp">
             <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
-        </a> 
+        </a>
         <span class="username"><%= usuario.getUsuarioUs() %></span>
     </nav>
 
     <div class="main-container">
-        <jsp:include page="SubMenu_Cliente.jsp" />
-
+        <aside class="sidebar" id="sidebar">
+            <ul>
+			<li class="menu-item"><a href="servletTransferencia?Param=1">Transferencias</a></li>
+			<li class="menu-item"><a href="ServletSolicitarPrestamo?Param=1">Solicitudes de prestamos</a></li>
+			<li class="menu-item"><a href="ServletPagoPrestamo?Param=1">Pago de prestamos</a></li>
+			<li class="menu-item"><a href="servletHistorialMovimiento?Param=1">Historial de movimientos</a></li>
+            </ul>
+        </aside>
         <div class="content">
             <div class="form-card">
                 <h2>Seleccionar Préstamo</h2>

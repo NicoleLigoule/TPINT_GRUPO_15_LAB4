@@ -69,6 +69,11 @@
 </head>
 <body>
     <nav class="navbar">
+        <button class="hamburger" onclick="toggleSidebar()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </button>
         <a href="${pageContext.request.contextPath}/Login.jsp">
             <img src="${pageContext.request.contextPath}/img/png_logo.png" class="img_logo" alt="Logo UTN">
         </a>
@@ -78,12 +83,13 @@
     <div class="main-container">
         <aside class="sidebar" id="sidebar">
             <ul>
-                <li><a href="#">Transferencias</a></li>
-                <li><a href="#">Solicitudes de prestamos</a></li>
-                <li><a href="#">Pago de prestamos</a></li>
-                <li><a href="#">Informacion personal</a></li>
+			<li class="menu-item"><a href="servletTransferencia?Param=1">Transferencias</a></li>
+			<li class="menu-item"><a href="ServletSolicitarPrestamo?Param=1">Solicitudes de prestamos</a></li>
+			<li class="menu-item"><a href="ServletPagoPrestamo?Param=1">Pago de prestamos</a></li>
+			<li class="menu-item"><a href="servletHistorialMovimiento?Param=1">Historial de movimientos</a></li>
             </ul>
         </aside>
+
 
         <section class="content">
             <div class="movements-list">
@@ -156,5 +162,6 @@
             </div>
         </section>
     </div>
+    <script src="JS/MenuAdm.js"></script>
 </body>
 </html>
