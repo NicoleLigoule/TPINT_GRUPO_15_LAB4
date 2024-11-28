@@ -108,9 +108,6 @@
 						type="text" id="direccion" name="direccion"
 						placeholder="Dirección"
 						value="<%=request.getParameter("direccion") != null ? request.getParameter("direccion") : ""%>"
-						required> <label for="numero">Número</label> <input
-						type="text" id="numero" name="numero" placeholder="Número"
-						value="<%=request.getParameter("numero") != null ? request.getParameter("numero") : ""%>"
 						required> <label for="telefono">Teléfono</label> <input
 						type="tel" id="telefono" name="telefono" placeholder="Teléfono"
 						value="<%=request.getParameter("telefono") != null ? request.getParameter("telefono") : ""%>"

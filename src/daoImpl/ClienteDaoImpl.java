@@ -167,7 +167,8 @@ public class ClienteDaoImpl implements ClienteDao {
         cn = new Conexion();
         cn.Open();
         String query = "INSERT INTO Cliente (cuil_Cli, dni_Cli, nombre_Clii, apellido_Cli, ID_sexo_Cli, ID_Nacionalidad_Cli, fecha_nacimiento_Cli, direccion_Cli, ID_Localidad_cli, correo_electronico_Cli, telefono_Cli, estado_Cli) " +
-                "VALUES ('" + cliente.getCuil() + "', " + cliente.getDni() + ", '" + cliente.getNombre() + "', '" + cliente.getApellido() + "', " + cliente.getId_sexo() + ", '" + cliente.getId_nacionalidad() + "', '" + cliente.getFechaNacimiento() + "', '" + cliente.getDireccion() + "', " + cliente.getId_localidad() + ", '" + cliente.getCorreo() + "', '" + cliente.getTelefono() + "', " + cliente.isEstado() + ")";
+        		"VALUES ('" + cliente.getCuil() + "', " + cliente.getDni() + ", '" + cliente.getNombre() + "', '" + cliente.getApellido() + "', " + cliente.getId_sexo() + ", '" + cliente.getId_nacionalidad() + "', '" + cliente.getFechaNacimiento() + "', '" + cliente.getDireccion() + "', " + cliente.getId_localidad() + ", '" + cliente.getCorreo() + "', '" + cliente.getTelefono() + "', 1)";
+
         try {
             estado = cn.execute(query);
         } catch (Exception e) {
