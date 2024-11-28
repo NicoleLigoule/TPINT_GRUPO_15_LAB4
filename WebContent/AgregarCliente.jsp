@@ -50,16 +50,23 @@
 
 				<!-- Primer formulario (GET) GUARDAMOS HASTA PROVINCIA -->
 				<form action="servletAgregarCliente" method="GET">
-					<label for="dni">DNI</label> <input type="text" id="dni" name="dni"
+					<label for="dni">DNI</label>
+						<input type="text" id="dni" name="dni"
 						placeholder="DNI"
 						value="<%=request.getParameter("dni") != null ? request.getParameter("dni") : ""%>"
-						required> <label for="cuil">CUIL</label> <input
+						required>
+					<label for="cuil">CUIL</label> 
+						<input
 						type="text" id="cuil" name="cuil" placeholder="CUIL"
 						value="<%=request.getParameter("cuil") != null ? request.getParameter("cuil") : ""%>"
-						required> <label for="nombre">Nombre</label> <input
+						required>
+					<label for="nombre">Nombre</label> 
+						<input
 						type="text" id="nombre" name="nombre" placeholder="Nombre"
 						value="<%=request.getParameter("nombre") != null ? request.getParameter("nombre") : ""%>"
-						required> <label for="apellido">Apellido</label> <input
+						required>
+					<label for="apellido">Apellido</label>
+						<input
 						type="text" id="apellido" name="apellido" placeholder="Apellido"
 						value="<%=request.getParameter("apellido") != null ? request.getParameter("apellido") : ""%>"
 						required>
@@ -82,7 +89,6 @@
 							}
 						%>
 					</select>
-
 					<%
 						ArrayList<Nacionalidad> listaSeguros = (ArrayList<Nacionalidad>) request.getAttribute("listaNacionalidad");
 					%>
@@ -104,25 +110,35 @@
 						type="text" id="fecha-nacimiento" name="fecha-nacimiento"
 						placeholder="YYYY/MM/DD"
 						value="<%=request.getParameter("fecha-nacimiento") != null ? request.getParameter("fecha-nacimiento") : ""%>"
-						required> <label for="direccion">Dirección</label> <input
-						type="text" id="direccion" name="direccion"
-						placeholder="Dirección"
-						value="<%=request.getParameter("direccion") != null ? request.getParameter("direccion") : ""%>"
-						required> <label for="numero">Número</label> <input
-						type="text" id="numero" name="numero" placeholder="Número"
-						value="<%=request.getParameter("numero") != null ? request.getParameter("numero") : ""%>"
-						required> <label for="telefono">Teléfono</label> <input
-						type="tel" id="telefono" name="telefono" placeholder="Teléfono"
-						value="<%=request.getParameter("telefono") != null ? request.getParameter("telefono") : ""%>"
-						required> <label for="email">Correo Electrónico</label> <input
-						type="email" id="email" name="email"
-						placeholder="Correo Electrónico"
-						value="<%=request.getParameter("email") != null ? request.getParameter("email") : ""%>"
-						required> <label for="provincia">Provincia</label> <select
-						id="provincia" name="provincia" onchange="this.form.submit();"
 						required>
-						<option value="" disabled selected>Seleccione su
-							Provincia</option>
+					<label for="direccion">Dirección</label>
+						<input
+							type="text" id="direccion" name="direccion"
+							placeholder="Dirección"
+							value="<%=request.getParameter("direccion") != null ? request.getParameter("direccion") : ""%>"
+							required>
+					<label for="numero">Número</label> 
+						<input
+							type="text" id="numero" name="numero" placeholder="Número"
+							value="<%=request.getParameter("numero") != null ? request.getParameter("numero") : ""%>"
+							required> 
+					<label for="telefono">Teléfono</label>
+						<input
+							type="tel" id="telefono" name="telefono" placeholder="Teléfono"
+							value="<%=request.getParameter("telefono") != null ? request.getParameter("telefono") : ""%>"
+							required> 
+					<label for="email">Correo Electrónico</label>
+						<input
+							type="email" id="email" name="email"
+							placeholder="Correo Electrónico"
+							value="<%=request.getParameter("email") != null ? request.getParameter("email") : ""%>"
+							required> 
+					<label for="provincia">Provincia</label>
+						<select
+							id="provincia" name="provincia" onchange="this.form.submit();"
+							required>
+						
+						<option value="" disabled selected>Seleccione su Provincia</option>
 						<%
 							ArrayList<Provincia> listaProvincias = (ArrayList<Provincia>) request.getAttribute("listaProvincias");
 							String selectedProvincia = request.getParameter("provincia");
@@ -156,8 +172,6 @@
 						type="hidden" name="fecha-nacimiento"
 						value="<%=request.getParameter("fecha-nacimiento")%>"> <input
 						type="hidden" name="direccion"
-						value="<%=request.getParameter("direccion")%>"> <input
-						type="hidden" name="numero"
 						value="<%=request.getParameter("numero")%>"> <input
 						type="hidden" name="telefono"
 						value="<%=request.getParameter("telefono")%>"> <input
@@ -167,8 +181,8 @@
 						value="<%=request.getParameter("provincia")%>"> <label
 						for="localidad">Localidad</label> <select id="localidad"
 						name="localidad" required>
-						<option value="" disabled selected>Seleccione su
-							Localidad</option>
+						
+						<option value="" disabled selected>Seleccione su Localidad</option>
 						<%
 							ArrayList<Localidad> listaLocalidad = (ArrayList<Localidad>) request.getAttribute("listaLocalidad");
 							String selectedLocalidad = request.getParameter("localidad");
@@ -189,8 +203,6 @@
 						<button type="submit" class="submit-button" name="agregarBtn">Agregar</button>
 						
 					</div>
-					
-					
 
 					<!-- mensaje de que cargó bien y limpia, sino msj cargó mal -->
 					<%
