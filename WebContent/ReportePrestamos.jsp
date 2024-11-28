@@ -85,12 +85,15 @@
     out.print("$ "+RendimientosAnualPagado);
 				%></p>
 
-
+				
 			</div>
 		</div>
 	</div>
 </div>
-
+	<div class="button-group">
+                        <button type="button" class="cancel-button" onclick="window.history.back();">Volver</button>
+                       
+                    </div>
 	<script src="JS/MenuAdm.js"></script>
 </body>
 </html>

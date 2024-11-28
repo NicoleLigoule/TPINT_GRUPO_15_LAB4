@@ -99,21 +99,16 @@
 					</select> 
 
 					<div class="button-group">
-					<button type="button" class="cancel-button" onclick="window.history.back();">Volver</button>
+						<a href="MenuAdm.jsp"><button type="button" class="cancel-button">Volver</button></a>
 				        <button 
 				            type="submit" 
 				            class="submit-button"
-				            onclick="return confirm('¿Estás seguro de que deseas eliminar esta cuenta?');">
+				            onclick="return confirm('¿Estas seguro de que deseas eliminar esta cuenta?');">
 				            Solicitar baja
 				        </button>
 					</div>
 
-				<div class="button-group">
-						
-						
-						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
-						
-					</div>
+				
 					<div
 						style="text-align: center; font-size: 18px; padding: 10px; margin-top: 20px;">
 						<%

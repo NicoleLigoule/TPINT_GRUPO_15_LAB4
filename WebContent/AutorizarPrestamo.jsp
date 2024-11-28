@@ -113,6 +113,9 @@ th {
 							<% } }%>
 						</tbody>
 					</table>
+						<div style="margin-top: 30px;"></div>
+                <button type="button" class="submit-button" onclick="location='/TPINT_GRUPO_15_LAB4/MenuAdm.jsp'">Volver al Menú Principal</button>
+		
 				</div>
 			</div>
 		</div>

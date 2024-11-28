@@ -1,8 +1,7 @@
 /dao/
 /daoImpl/
 /entidades/
+/excepciones/
+/excepcionesImpl/
 /negocio/
 /servlets/
-/excepciones/
-/excepcionImpl/
-/excepcionesImpl/

@@ -83,6 +83,9 @@
 				 <div class="button-group">
 						<button type="submit" class="cancel-button" name="Rechazar">Rechazar</button>
 						<button type="submit" class="submit-button" name="AprobarBtn" onclick="return aprobarPrestamo()">Aprobar</button>
+						<div style="margin-top: 30px;"></div>
+                <button type="button" class="submit-button" onclick="location='/TPINT_GRUPO_15_LAB4/MenuAdm.jsp'">Volver al Menú Principal</button>
+		
 
 						
 					</div>
@@ -123,11 +126,11 @@
 <script>
     function aprobarPrestamo() {
      
-        const confirmar = confirm("ï¿½Seguro que quiere aprobar el prï¿½stamo?");
+        const confirmar = confirm("¿Seguro que quiere aprobar el prestamo?");
         
         if (confirmar) {
 
-            alert("Prï¿½stamo aprobado");
+            alert("Prestamo aprobado");
             
 
             document.querySelector("form[action='servletExaminarPrestamo']").submit();
