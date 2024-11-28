@@ -88,7 +88,7 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
         return estado;
     }
 
-    @Override
+  /*  @Override
     public boolean borrar(int id) {
         boolean estado = true;
         cn = new Conexion();
@@ -103,7 +103,8 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
             cn.close();
         }
         return estado;
-    }
+    }*/
+    
     public int ObtenerProvinciaXLocalidad(String localidad) {
     	int idProv=0;
         cn = new Conexion();

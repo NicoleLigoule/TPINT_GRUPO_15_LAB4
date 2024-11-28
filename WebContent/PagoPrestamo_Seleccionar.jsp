@@ -8,7 +8,6 @@
 <%@ page import="java.math.BigDecimal" %>
 
 <%
-    // Obtención del usuario de la sesión
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     if (usuario == null) {
         response.sendRedirect("Login.jsp");
@@ -38,14 +37,7 @@
     </nav>
 
     <div class="main-container">
-        <aside class="sidebar" id="sidebar">
-            <ul>
-			<li class="menu-item"><a href="servletTransferencia?Param=1">Transferencias</a></li>
-			<li class="menu-item"><a href="ServletSolicitarPrestamo?Param=1">Solicitudes de prestamos</a></li>
-			<li class="menu-item"><a href="ServletPagoPrestamo?Param=1">Pago de prestamos</a></li>
-			<li class="menu-item"><a href="servletHistorialMovimiento?Param=1">Historial de movimientos</a></li>
-            </ul>
-        </aside>
+       <jsp:include page="SubMenu_Cliente.jsp" />
         <div class="content">
             <div class="form-card">
                 <h2>Seleccionar Préstamo</h2>
@@ -53,7 +45,7 @@
 				<br>
                 <div class="loan-cards-container">
                     <%
-                        // Recuperamos la lista de préstamos del request
+                        // Recuperamos la lista de prdstamos del request
                         List<Pair<Integer, ArrayList<Prestamo>>> prestamosXCuenta = (List<Pair<Integer, ArrayList<Prestamo>>>) request.getAttribute("PrestamosXCuenta");
                         if (prestamosXCuenta != null && !prestamosXCuenta.isEmpty()) {
                             for (Pair<Integer, ArrayList<Prestamo>> pair : prestamosXCuenta) {
@@ -62,7 +54,6 @@
                                     int cuotasImpagas = 0;
                                     float totalDebt = 0;
 
-                                    // Calcular las cuotas impagas y el total de la deuda
                                     for (CuotasXPrestamo cuota : prestamo.getCuotas()) {
                                     	
                                     	if (!cuota.getPagada()) {
@@ -75,7 +66,7 @@
                                     continue;
                                     }
                     %>
-                                    <!-- Generar tarjeta de préstamo -->
+                                    <!-- Generar tarjeta de prestamo -->
                                     <div class="loan-card" onclick="redirigirAPago(<%= prestamo.getIdPrestamoPt() %>)">
                                         <h3>Préstamo #<%= prestamo.getIdPrestamoPt() %></h3>
                                         <p><strong>Número de Cuenta:</strong> <%= prestamo.getNumeroDeCuentaCuPt() %></p>
@@ -103,7 +94,6 @@
     <script src="${pageContext.request.contextPath}/JS/MenuAdm.js"></script>
     <script>
         function redirigirAPago(idPrestamo) {
-            // Redirige a la página PagarPrestamo.jsp con el ID del préstamo seleccionado
             window.location.href = "ServletPagoPrestamo?idPrestamo=" + idPrestamo;
         }
     </script>

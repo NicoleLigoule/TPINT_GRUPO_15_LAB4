@@ -8,5 +8,5 @@ public interface ProvinciaDao {
     public Provincia obtenerUna(int idProvincia);
     public boolean insertar(Provincia provincia);
     public boolean editar(Provincia provincia);
-    public boolean borrar(int idProvincia);
+    // public boolean borrar(int idProvincia);
 }

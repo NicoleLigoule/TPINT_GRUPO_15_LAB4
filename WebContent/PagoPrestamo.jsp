@@ -72,7 +72,7 @@
                         <% List<Cuenta> cuentas = (List<Cuenta>) request.getAttribute("cuentas_usuario");
                         if (cuentas != null) {
                             for (Cuenta cuenta : cuentas) { %>
-                                <option value="<%= cuenta.getNumeroDeCuentaCu() %>">Cuenta #<%= cuenta.getNumeroDeCuentaCu() %></option>
+                                <option value="<%= cuenta.getNumeroDeCuentaCu() %>">Cuenta #<%= cuenta.getNumeroDeCuentaCu() %> | Saldo: <%= cuenta.getSaldoCu()%></option>
                         <% } } %>
                     </select>
                     <br>

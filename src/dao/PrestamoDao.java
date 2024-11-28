@@ -12,7 +12,7 @@ public interface PrestamoDao {
 	
 	int insertarPrestamo(Prestamo prestamo);
     boolean actualizarPrestamo(Prestamo prestamo);
-    boolean eliminarPrestamo(int idPrestamo);
+ //   boolean eliminarPrestamo(int idPrestamo);
     List<Prestamo> obtenerPrestamos();
     List<Prestamo> ListarPrestamosAprobar();
     Prestamo obtenerPrestamoPorId(int idPrestamo);
@@ -25,10 +25,10 @@ public interface PrestamoDao {
 			String motivo);
 
 	
-	static int obtenerCuotasPagadas(int idPrestamoPt) {
+	/*static int obtenerCuotasPagadas(int idPrestamoPt) {
 		
 		return 0;
-	}
+	}*/
 	public InteresesXCantidadDeMeses obtenerIntereses(String iDInteres);
 	
 

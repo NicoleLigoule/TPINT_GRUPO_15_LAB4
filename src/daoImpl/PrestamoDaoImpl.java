@@ -97,7 +97,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
     }
 
 
-    @Override
+   /* @Override
     public boolean eliminarPrestamo(int idPrestamo) {
         boolean resultado = false;
         String query = "DELETE FROM Prestamo WHERE ID_Prestamo_Pt = ?";
@@ -114,7 +114,7 @@ public class PrestamoDaoImpl implements PrestamoDao {
             e.printStackTrace();
         }
         return resultado;
-    }
+    }*/
 
     @Override
     public List<Prestamo> obtenerPrestamos() {

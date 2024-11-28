@@ -70,7 +70,7 @@ public class CuotasXPrestamoDaoImpl implements CuotasXPrestamoDao {
 		return false;
     }
 
-    @Override
+   /* @Override
     public void eliminarCuota(int idPrestamoPtCp, LocalDate fechaVencimientoCp, int nCuota) {
         String sql = "DELETE FROM CuotasXPrestamos WHERE ID_Prestamo_Pt_Cp = ? AND Fecha_vencimiento_Cp = ? AND N_Cuota = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -81,7 +81,7 @@ public class CuotasXPrestamoDaoImpl implements CuotasXPrestamoDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @Override
     public CuotasXPrestamo obtenerCuota(int idPrestamoPtCp, LocalDate fechaVencimientoCp, int nCuota) {
