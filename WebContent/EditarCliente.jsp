@@ -154,7 +154,6 @@
 					<div class="button-group">
 							<a href="MenuAdm.jsp"><button type="button" class="cancel-button">Volver</button></a>
 						<button type="submit" class="submit-button" name="agregarBtn">Agregar</button>
-						
 					</div>
 					
 					
