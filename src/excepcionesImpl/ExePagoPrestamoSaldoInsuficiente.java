@@ -5,15 +5,16 @@ import excepciones.ExcepcionesPagoPrestamo;
 
 public class ExePagoPrestamoSaldoInsuficiente extends ExcepcionesPagoPrestamo {
 
-
-    public ExePagoPrestamoSaldoInsuficiente() {
-
-    }
+	private String mensajeError = "No posee el SALDO suficiente para realizar esta operacion.";
 
 	@Override
 	public void printErrorDetails() {
-		System.out.print("======EXEPCION SALDO INSUFICIENTE");
-		
+		System.out.print(mensajeError);
+	}
+	
+	@Override
+    public String toString() {
+        return mensajeError;
 	}
 
 }

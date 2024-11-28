@@ -105,7 +105,8 @@
 			<%
 			    }
 			%>
-
+ 			<button type="button" style="background-color: #924b8b;" onclick="location='/TPINT_GRUPO_15_LAB4/servletInformacionCliente'">Volver al Menu Principal</button>
+	
         </div>
     </div>
 </body>

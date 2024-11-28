@@ -125,16 +125,9 @@ public class ServletPagoPrestamo extends HttpServlet {
     	catch (ExcepcionesPagoPrestamo ex) {
     		
     		ex.printErrorDetails();
-    		request.setAttribute("mensajeError", "Error al realizar el pago");
+    		
+    		request.setAttribute("error", ex.toString());
     	}
-    	
-
-    	doGet(request,response);
-    	
-    }
-
-   
-
-    
-    
+    	doGet(request,response);	
+    }   
 }
