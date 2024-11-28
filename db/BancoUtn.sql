@@ -150,11 +150,11 @@ FOR EACH ROW
 BEGIN
     DECLARE ultimoCBU BIGINT;
 
-    -- agarramos el Ãºltimo valor de CBU_Cu como un nÃºmero entero
+    -- agarramos el ultimo valor de CBU_Cu como un numero entero
     SELECT MAX(CAST(CBU_Cu AS UNSIGNED)) INTO ultimoCBU
     FROM Cuenta;
 
-    -- si no hay valores previos en la tabla, se inicia con el nÃºmero base
+    -- si no hay valores previos en la tabla, se inicia con el numero base
     IF ultimoCBU IS NULL THEN
         SET ultimoCBU = 5500990000000001;
     ELSE
@@ -180,10 +180,10 @@ BEGIN
     INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
     VALUES (CONCAT('Alta de cuenta'), 10000, 1);  -- Monto por defecto
 
-    -- Obtener el ID del movimiento reci�n insertado
+    -- Obtener el ID del movimiento recien insertado
     SET @MovimientoID = LAST_INSERT_ID();
 
-    -- Insertar la relaci�n en MovimientoXCuenta
+    -- Insertar la relacion en MovimientoXCuenta
     INSERT INTO MovimientoXCuenta (Id_Movimiento__Mov_MXC, Num_Cuenta_Cu_MXC)
     VALUES (@MovimientoID, NEW.Numero_de_Cuenta_Cu);
 END $$
@@ -208,7 +208,7 @@ BEGIN
     DECLARE MovimientoOrigenID INT;
     DECLARE MovimientoDestinoID INT;
 
-    -- Obtener el n�mero de cuenta basado en el CBU
+    -- Obtener el numero de cuenta basado en el CBU
     SELECT Numero_de_Cuenta_Cu INTO CuentaDestino
     FROM Cuenta
     WHERE CBU_Cu = CBU_CuentaDestino AND Estado_Cu = 1;
@@ -217,11 +217,11 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El CBU proporcionado no corresponde a una cuenta activa.';
     END IF;
 
-    -- Verificar que la cuenta de origen existe y est� activa
+    -- Verificar que la cuenta de origen existe y esta activa
     IF NOT EXISTS (
         SELECT 1 FROM Cuenta WHERE Numero_de_Cuenta_Cu = CuentaOrigen AND Estado_Cu = 1
     ) THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La cuenta de origen no existe o est� inactiva.';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La cuenta de origen no existe o esta inactiva.';
     END IF;
 
     -- Obtener saldo de la cuenta de origen
@@ -244,7 +244,7 @@ BEGIN
     INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
     VALUES (CONCAT('', Detalle), -Monto, 2);
 
-    -- Obtener el ID del movimiento reci�n creado
+    -- Obtener el ID del movimiento recien creado
     SET MovimientoOrigenID = LAST_INSERT_ID();
 
     -- Registrar en MovimientoXCuenta para la cuenta de origen
@@ -255,7 +255,7 @@ BEGIN
     INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
     VALUES (CONCAT('', Detalle), +Monto, 2);
 
-    -- Obtener el ID del movimiento reci�n creado
+    -- Obtener el ID del movimiento recien creado
     SET MovimientoDestinoID = LAST_INSERT_ID();
 
     -- Registrar en MovimientoXCuenta para la cuenta de destino
@@ -275,11 +275,11 @@ DELIMITER ;
 	BEGIN
 		DECLARE ultimoCBU BIGINT;
 
-		-- Obtener el �ltimo valor de CBU_Cu como un n�mero entero
+		-- Obtener el ultimo valor de CBU_Cu como un numero entero
 		SELECT MAX(CAST(CBU_Cu AS UNSIGNED)) INTO ultimoCBU
 		FROM Cuenta;
 
-		-- Si no hay valores previos en la tabla, se inicia con el n�mero base
+		-- Si no hay valores previos en la tabla, se inicia con el numero base
 		IF ultimoCBU IS NULL THEN
 			SET ultimoCBU = 5500990000000001;
 		ELSE
@@ -397,7 +397,7 @@ END$$
 DELIMITER $$
 
 CREATE PROCEDURE GenerarCuotas(
-    IN p_ID_Prestamo INT,       -- ID del préstamo
+    IN p_ID_Prestamo INT,       -- ID del prestamo
     IN p_CantidadMeses INT      -- Cantidad de meses (cuotas)
 )
 BEGIN
@@ -416,9 +416,9 @@ BEGIN
             N_Cuota,
             pagada
         ) VALUES (
-            p_ID_Prestamo,       -- ID del préstamo
+            p_ID_Prestamo,       -- ID del prestamo
             v_FechaVencimiento,  -- Fecha de vencimiento
-            i,                   -- Número de cuota
+            i,                   -- NÃºmero de cuota
             0                    -- Estado inicial: no pagada
         );
 
@@ -455,14 +455,14 @@ FOR EACH ROW
 BEGIN
     DECLARE MovimientoID INT;
 
-    -- Insertar un movimiento asociado al pr�stamo
+    -- Insertar un movimiento asociado al préstamo
     INSERT INTO Movimiento (Detalle_Mov, Importe_Mov, Id_TipoMov_TM_Mov)
-    VALUES (CONCAT('Pr�stamo solicitado: ', NEW.Detalle_solicitud_Pt), NEW.Importe_solicitado_Pt, 3); -- TipoMovimiento 3: Pr�stamo
+    VALUES (CONCAT('Préstamo solicitado: ', NEW.Detalle_solicitud_Pt), NEW.Importe_solicitado_Pt, 3); -- TipoMovimiento 3: Préstamo
 
-    -- Obtener el ID del movimiento reci�n insertado
+    -- Obtener el ID del movimiento recién insertado
     SET MovimientoID = LAST_INSERT_ID();
 
-    -- Asociar el movimiento a la cuenta relacionada con el pr�stamo
+    -- Asociar el movimiento a la cuenta relacionada con el préstamo
     INSERT INTO MovimientoXCuenta (Id_Movimiento__Mov_MXC, Num_Cuenta_Cu_MXC)
     VALUES (MovimientoID, NEW.Numero_de_Cuenta_Cu_Pt);
 END$$
@@ -522,6 +522,8 @@ INSERT INTO Localidad (ID_Provincia_Prv_Lca, Nombre_Loc_Lca) VALUES
 INSERT INTO Usuario (Cuil_us, Usuario_us, Contrasenia_us, Rol_us, Estado_us)
 VALUES ('20304050607', 'Pepe', '123', 1, 1);
 
+
+
 INSERT INTO Cliente (
     cuil_Cli, dni_Cli, nombre_Clii, apellido_Cli, ID_sexo_Cli, ID_Nacionalidad_Cli, 
     fecha_nacimiento_Cli, direccion_Cli, ID_Localidad_Cli, correo_electronico_Cli, 
@@ -529,7 +531,29 @@ INSERT INTO Cliente (
 ) VALUES 
 ('20-12345678-9', 12345678, 'Juan', 'Perez', 1, 'AR', '1990-05-10', 'Av. Siempre Viva 742', 1, 'juan.perez@gmail.com', '341-1234567', TRUE),
 ('27-87654321-8', 87654321, 'Maria', 'Gomez', 2, 'BR', '1985-03-25', 'Calle Principal 123', 3, 'maria.gomez@hotmail.com', '11-87654321', FALSE),
-('30-11223344-7', 11223344, 'Carlos', 'Lopez', 1, 'CL', '1995-08-15', 'Av. Libertador 456', 6, 'carlos.lopez@yahoo.com', '261-1122334', TRUE);
+('30-11223344-7', 11223344, 'Carlos', 'Lopez', 1, 'CL', '1995-08-15', 'Av. Libertador 456', 6, 'carlos.lopez@yahoo.com', '261-1122334', TRUE),
+('20-44556677-1', 44556677, 'Ana', 'Martinez', 2, 'AR', '1992-11-12', 'San Martín 234', 4, 'ana.martinez@gmail.com', '223-4455667', TRUE),
+('23-99887766-2', 99887766, 'Pedro', 'Gonzalez', 1, 'BR', '1988-02-14', 'Mitre 500', 5, 'pedro.gonzalez@outlook.com', '341-9988776', TRUE),
+('27-77665544-3', 77665544, 'Sofia', 'Rodriguez', 2, 'CL', '1993-07-18', 'Belgrano 789', 2, 'sofia.rodriguez@gmail.com', '351-7766554', FALSE),
+('30-66778899-4', 66778899, 'Diego', 'Fernandez', 1, 'CO', '1980-01-20', 'Colón 1010', 1, 'diego.fernandez@yahoo.com', '11-66778899', TRUE),
+('20-11224455-5', 11224455, 'Laura', 'Torres', 2, 'MX', '1987-09-05', 'Alem 550', 3, 'laura.torres@hotmail.com', '381-1122445', FALSE),
+('27-33445566-6', 33445566, 'Lucia', 'Morales', 2, 'US', '1991-06-30', 'Rivadavia 300', 4, 'lucia.morales@gmail.com', '261-3344556', TRUE),
+('20-55443322-7', 55443322, 'Martin', 'Diaz', 1, 'FR', '1998-10-12', 'Las Heras 670', 2, 'martin.diaz@gmail.com', '264-5544332', TRUE),
+('23-44332211-8', 44332211, 'Paula', 'Sanchez', 2, 'DE', '1984-12-24', 'San Juan 121', 6, 'paula.sanchez@gmail.com', '341-4433221', FALSE),
+('27-33221100-9', 33221100, 'Luis', 'Mendez', 1, 'IT', '1990-03-08', 'Maipú 999', 3, 'luis.mendez@hotmail.com', '11-33221100', TRUE),
+('30-99882255-0', 99882255, 'Camila', 'Vega', 2, 'JP', '1995-11-19', 'Sarmiento 432', 5, 'camila.vega@yahoo.com', '381-9988225', TRUE),
+('23-77664433-1', 77664433, 'Jorge', 'Navarro', 1, 'AR', '1983-08-22', 'España 342', 4, 'jorge.navarro@gmail.com', '261-7766443', TRUE),
+('20-88996677-2', 88996677, 'Florencia', 'Ruiz', 2, 'BR', '1992-04-17', 'Independencia 543', 1, 'florencia.ruiz@gmail.com', '351-8899667', FALSE),
+('27-55667788-3', 55667788, 'Alberto', 'Aguilar', 1, 'CL', '1985-09-23', 'Salta 765', 6, 'alberto.aguilar@hotmail.com', '264-5566778', TRUE),
+('30-22334455-4', 22334455, 'Valeria', 'Romero', 2, 'CO', '1996-05-28', 'Entre Ríos 987', 3, 'valeria.romero@gmail.com', '341-2233445', FALSE),
+('23-44556677-5', 44556677, 'Ricardo', 'Peralta', 1, 'MX', '1991-07-15', 'Catamarca 888', 5, 'ricardo.peralta@yahoo.com', '381-4455667', TRUE);
+
+
+
+
+
+
+
 
 INSERT INTO TipoCuenta (Nombre_Tipo) 
 VALUES 
@@ -547,15 +571,26 @@ VALUES  (1, 'Alta de cuenta'),
 -- CUENTAS DE EJEMPLO
 INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
 VALUES
-('20-12345678-9', '2024-11-24', 1, '1234567890123456789012', 10000, 1);
+('20-12345678-9', '2024-11-24', 1, '1234567890123456789012', 10000, 1),
+('27-87654321-8', '2024-11-24', 2, '2345678901234567890123', 15000, 1),
+('30-11223344-7', '2024-11-24', 1, '3456789012345678901234', 500, 1),
+('20-12345678-9', '2024-11-25', 1, '1234567890123456789012', 10000, 1),
+('27-87654321-8', '2024-11-25', 2, '2345678901234567890123', 15000, 1),
+('30-11223344-7', '2024-11-25', 1, '3456789012345678901234', 500, 1),
+('20-12345678-9', '2024-10-01', 2, '4567890123456789012345', 2300, 1),
+('27-87654321-8', '2024-10-15', 2, '5678901234567890123456', 8000, 1),
+('30-11223344-7', '2024-11-20', 1, '6789012345678901234567', 0, 1),
+('20-12345678-9', '2024-09-10', 2, '7890123456789012345678', 50000, 1),
+('27-87654321-8', '2024-11-01', 1, '8901234567890123456789', 12000, 1),
+('30-11223344-7', '2024-11-23', 1, '9012345678901234567890', 750, 1),
+('20-12345678-9', '2024-08-15', 1, '0123456789012345678901', 0, 1),
+('27-87654321-8', '2024-07-18', 2, '1234567890123456789022', 4000, 1),
+('30-11223344-7', '2024-09-22', 2, '2345678901234567890133', 600, 1),
+('20-12345678-9', '2024-06-12', 1, '3456789012345678901244', 30000, 1),
+('27-87654321-8', '2024-05-28', 2, '4567890123456789012355', 2000, 1),
+('30-11223344-7', '2024-11-19', 1, '5678901234567890123466', 15000, 1);
 
-INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
-VALUES
-('27-87654321-8', '2024-11-24', 2, '2345678901234567890123', 15000, 1);
 
-INSERT INTO Cuenta (Cuil_Cli_Cu, Fecha_Creacion_Cu, Id_Tipo_Cuenta, CBU_Cu, Saldo_Cu, Estado_Cu)
-VALUES
-('30-11223344-7', '2024-11-24', 1, '3456789012345678901234', 500, 1);
 
 
 INSERT INTO Prestamo (
@@ -564,14 +599,31 @@ INSERT INTO Prestamo (
     Plazo_Pago_Pt, 
     Detalle_solicitud_Pt, 
     Estado_Pt
-) 
-VALUES (
-    1001,                           -- Número de cuenta existente en la tabla Cuenta
-    50000.00,                        -- Importe solicitado (por ejemplo, 50,000.00)
-    '06M',                           -- Plazo de pago (por ejemplo, 12 meses, debe existir en InteresXCantidadDMeses)
-    'Préstamo para comprar un auto', -- Detalle de la solicitud
-    0                                -- Estado inicial del préstamo (0 = Pendiente, 1 = Aprobado/Rechazado)
-);
+) VALUES 
+(1001, 50000.00, '06M', 'Prestamo para comprar un auto', 0),
+(1002, 150000.00, '12M', 'Prestamo para remodelar la casa', 0),
+(1003, 30000.00, '03M', 'Prestamo para gastos médicos', 0),
+(1004, 45000.00, '09M', 'Prestamo para educación universitaria', 0),
+(1005, 20000.00, '01M', 'Prestamo para vacaciones', 0),
+(1006, 80000.00, '06M', 'Prestamo para ampliar el negocio', 0),
+(1007, 125000.00, '12M', 'Prestamo para comprar electrodomésticos', 0),
+(1008, 10000.00, '03M', 'Prestamo para reparaciones menores', 0),
+(1009, 5000.00, '01M', 'Prestamo para una emergencia', 0),
+(1010, 90000.00, '09M', 'Prestamo para financiar un proyecto', 0),
+(1011, 60000.00, '06M', 'Prestamo para cambiar el auto', 0),
+(1012, 75000.00, '12M', 'Prestamo para pagar una deuda', 0),
+(1013, 35000.00, '03M', 'Prestamo para invertir en un pequeño negocio', 0),
+(1014, 40000.00, '01M', 'Prestamo para organizar un evento', 0),
+(1015, 100000.00, '09M', 'Prestamo para gastos familiares importantes', 0),
+(1016, 45000.00, '06M', 'Prestamo para cubrir gastos inesperados', 0),
+(1017, 70000.00, '12M', 'Prestamo para estudiar en el exterior', 0),
+(1018, 25000.00, '03M', 'Prestamo para pequeñas reparaciones en el hogar', 0);
 
-UPDATE Prestamo SET Estado_Pt = 1 WHERE ID_Prestamo_Pt = 1;
+
+
+
+UPDATE Prestamo 
+SET Estado_Pt = 1 
+WHERE ID_Prestamo_Pt NOT IN (3, 7, 10, 12, 15, 16);
+
 

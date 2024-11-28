@@ -84,7 +84,7 @@
                     %>
                 </div>
                 <div style="margin-top: 30px;"></div>
-                <button type="button" class="submit-button" onclick="location='/TPINT_GRUPO_15_LAB4/servletInformacionCliente'">Volver al Menú Principal</button>
+                <button type="button" class="submit-button" onclick="location='/TPINT_GRUPO_15_LAB4/servletInformacionCliente'">Volver al Menu Principal</button>
 	 </div>
         </div>
     </div>
