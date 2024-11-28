@@ -53,10 +53,15 @@
 
                                     // Calcular las cuotas impagas y el total de la deuda
                                     for (CuotasXPrestamo cuota : prestamo.getCuotas()) {
-                                        if (!cuota.getPagada()) {
+                                    	
+                                    	if (!cuota.getPagada()) {
                                             cuotasImpagas++;
                                             totalDebt += prestamo.getDetalle().getImporteXCuotasDt().floatValue();
                                         }
+                                    }
+                                    
+                                    if (cuotasImpagas == 0) {
+                                    continue;
                                     }
                     %>
                                     <!-- Generar tarjeta de préstamo -->
@@ -68,7 +73,8 @@
                                         <p><strong>Precio por Cuota:</strong> $<%= prestamo.getDetalle().getImporteXCuotasDt() %></p>
                                     </div>
                     <%
-                                }
+                                
+                                    }
                             }
                         } else {
                     %>
