@@ -61,12 +61,24 @@ public class servletInformacionCliente extends HttpServlet {
         		{
         			 ClienteCuentaDTO cliente = infoCliente.get(0);
         			 String nombreApellido = cliente.getNombre() + " " + cliente.getApellido();
+        			 String dni = cliente.getDni();
+        			 String Cuil = cliente.getCuil();
+        			 String fecha = cliente.getFechaNacimiento();
+        			 String localidad = cliente.getLocalidadDescr();
+        			 String provincia = cliente.getProvinciaDescr();
+        			 String nacionalidad = cliente.getNacionalidad();
         			 String correo = cliente.getCorreoElectronico();
                      String telefono = cliente.getTelefono();
                      String direccion = cliente.getDireccion();
                      
                      request.setAttribute("usuario", usuario);
                      request.setAttribute("nombreApellido", nombreApellido);
+                     request.setAttribute("Cuil", Cuil);
+                     request.setAttribute("dni", dni);
+                     request.setAttribute("fecha", fecha);
+                     request.setAttribute("nacionalidad", nacionalidad);
+                     request.setAttribute("localidad", localidad);
+                     request.setAttribute("provincia", provincia);
                      request.setAttribute("correo", correo);
                      request.setAttribute("telefono", telefono);
                      request.setAttribute("direccion", direccion);

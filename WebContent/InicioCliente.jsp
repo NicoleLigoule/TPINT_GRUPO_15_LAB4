@@ -35,11 +35,16 @@
 			<jsp:include page="SubMenu_Cliente.jsp" />
 <%
 String nombreApellido = (String) request.getAttribute("nombreApellido");
+String DNI = (String) request.getAttribute("dni");
+String CUIL = (String) request.getAttribute("Cuil");
 String correo = (String) request.getAttribute("correo");
 String telefono = (String) request.getAttribute("telefono");
 String direccion = (String) request.getAttribute("direccion");
 BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
-
+String Localidad = (String) request.getAttribute("localidad");
+String provincia = (String) request.getAttribute("provincia");
+String fechaNac = (String) request.getAttribute("fecha");
+String nacionalidad = (String) request.getAttribute("nacionalidad");
 %>
 
 		<section class="content">
@@ -51,13 +56,31 @@ BigDecimal saldo= (BigDecimal) request.getAttribute("saldo");
 					<strong>Nombre:</strong> <%=nombreApellido != null ? nombreApellido : ""%>
 				</p>
 				<p>
-					<strong>Correo:</strong> <%=correo != null ? correo : "" %>
+					<strong>DNI:</strong> <%=DNI != null ? DNI : ""%>
 				</p>
+				<p>
+					<strong>CUIL:</strong> <%=CUIL != null ? CUIL : ""%>
+				</p>
+				<p>
+					<strong>Fecha de nacimiento:</strong> <%=fechaNac != null ? fechaNac : "" %>
+				</p>
+				<p>
+					<strong>Nacionalidad:</strong> <%=nacionalidad != null ? nacionalidad : "" %>
+				</p>
+				<p>
+					<strong>Correo:</strong> <%=correo != null ? correo : "" %>
+				</p>				
 				<p>
 					<strong>Telefono:</strong> <%=telefono != null ? telefono : "" %>
 				</p>
 				<p>
 					<strong>Direccion:</strong> <%=direccion != null ? direccion : "" %>
+				</p>
+				<p>
+					 <strong>Localidad:</strong> <%=Localidad != null ? Localidad : "" %> 
+				</p>
+				<p>
+					 <strong>Provincia:</strong> <%=provincia != null ? provincia : "" %> 
 				</p>
 			</div>
 			
