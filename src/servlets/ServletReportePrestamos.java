@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import negocio.NegocioCuentas;
+import negocio.NegocioPrestamo;
 
 /**
  * Servlet implementation class ServletReportePrestamos
@@ -30,7 +31,7 @@ public class ServletReportePrestamos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	try {	NegocioCuentas Neg =new NegocioCuentas();
+	try {	NegocioPrestamo Neg =new NegocioPrestamo();
 			double P_PretamosAprobados = Neg.PorcentajeCreditosAprobados();
 	        request.setAttribute("POrcentajesAporbados", P_PretamosAprobados); 
 	        

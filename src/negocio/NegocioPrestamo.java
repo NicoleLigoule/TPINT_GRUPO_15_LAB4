@@ -13,9 +13,7 @@ import daoImpl.CuentaDaoImpl;
 import daoImpl.CuotasXPrestamoDaoImpl;
 import daoImpl.MovimientoDaoImpl;
 import daoImpl.PrestamoDaoImpl;
-
-
-
+import daoImpl.ProvinciaDaoImpl;
 import entidades.Cuenta;
 import entidades.CuotasXPrestamo;
 import entidades.DetalleXPrestamo;
@@ -156,5 +154,25 @@ public class NegocioPrestamo {
     	return pagada;
     	
     }
-
+	public double PorcentajeCreditosAprobados() {
+		PrestamoDaoImpl dao=new PrestamoDaoImpl();
+	double porcentaje = dao.Porcentajes_p_aprobados();
+	return porcentaje;
+	}
+	public double RendimientosCreditosAprobados() {
+		PrestamoDaoImpl dao=new PrestamoDaoImpl();
+	double porcentaje = dao.Rendimientos_p_aprobados();
+	return porcentaje;
+	}
+	public double RendimientosMEnsualesCreditosAprobados() {
+		PrestamoDaoImpl dao=new PrestamoDaoImpl();
+	double porcentaje = dao.RendimientosMEnsuales_p_aprobados();
+	return porcentaje;
+	}
+	
+	public double RendimientosAnualesCreditosPagados() {
+		PrestamoDaoImpl dao=new PrestamoDaoImpl();
+	double porcentaje = dao.RendimientosAnuales_p_pagados();
+	return porcentaje;
+	}
 }

@@ -70,25 +70,5 @@ public class NegocioCuentas {
 			return cli;
 		}
 		
-	public double PorcentajeCreditosAprobados() {
-		ProvinciaDaoImpl dao=new ProvinciaDaoImpl();
-	double porcentaje = dao.Porcentajes_p_aprobados();
-	return porcentaje;
-	}
-	public double RendimientosCreditosAprobados() {
-		ProvinciaDaoImpl dao=new ProvinciaDaoImpl();
-	double porcentaje = dao.Rendimientos_p_aprobados();
-	return porcentaje;
-	}
-	public double RendimientosMEnsualesCreditosAprobados() {
-		ProvinciaDaoImpl dao=new ProvinciaDaoImpl();
-	double porcentaje = dao.RendimientosMEnsuales_p_aprobados();
-	return porcentaje;
-	}
-	
-	public double RendimientosAnualesCreditosPagados() {
-		ProvinciaDaoImpl dao=new ProvinciaDaoImpl();
-	double porcentaje = dao.RendimientosAnuales_p_pagados();
-	return porcentaje;
-	}
+
 }
