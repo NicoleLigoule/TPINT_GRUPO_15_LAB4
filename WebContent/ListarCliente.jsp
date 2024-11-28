@@ -40,6 +40,11 @@ th, td {
 th {
 	background-color: #f2f2f2;
 }
+
+    h2 {
+        text-align: center;
+    }
+
 </style>
 
 <script type="text/javascript">
@@ -49,9 +54,10 @@ th {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
                 },
                 "aLengthMenu": [
-                    [5, 25, 50, 100, -1],
-                    [5, 25, 50, 100, "Todos"]
-                ]
+                	 [5, 10, 20, 50, -1],
+                     [5, 10, 20, 50, "Todos"]
+                ],
+                "pageLength": 5,
             });
         });
     </script>
@@ -68,18 +74,13 @@ th {
 			class="img_logo" alt="Logo UTN">
 		</a> <span class="username"><%=usuario.getUsuarioUs()%></span>
 	</nav>
-
+            <h2>Listado de Clientes</h2>
 	<div class="main-container">
 		<jsp:include page="SubMenu_Admin.jsp" />
 
 		<div class="content">
-		<div class="button-group">
-						
-						
-						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
-						
-					</div>
-			<h2>Listado de Clientes</h2>
+
+			
 			<%
                 List<Cliente> listaClientes = (List<Cliente>) request.getAttribute("listaClientes");
                 if (listaClientes != null && !listaClientes.isEmpty()) {
@@ -131,7 +132,12 @@ th {
 		
 		
 	</div>
-	
+			<div class="button-group">
+						
+						
+						<a href="MenuAdm.jsp"><button type="button" class="submit-button">Volver al Menú Principal</button></a>
+						
+					</div>
 	
 
 	<script src="${pageContext.request.contextPath}/JS/MenuAdm.js"></script>
